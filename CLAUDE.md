@@ -44,7 +44,7 @@ Before calling work done, run `npm run lint`, `npm run typecheck`, `npm test` an
 - **Text:** never hard-code UI strings. The brand name is the only exception.
 - **Tests:** put `Thing.test.tsx` next to `Thing.tsx`, and test behaviour through roles and visible text.
 
-Use the project skills in `.claude/skills/`: `react`, `typescript`, `testing`, `accessibility` and `design-patterns`.
+Use the project skills in `.claude/skills/`: `react`, `typescript`, `html`, `css`, `testing`, `accessibility` and `design-patterns`.
 
 ## Working with the API
 
