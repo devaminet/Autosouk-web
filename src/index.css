@@ -16,10 +16,6 @@
  *
  * Each "initial" removes Tailwind's default values, so only design values
  * generate utilities. For example, bg-red-500 and p-3 produce no CSS.
- *
- * Differences from Penpot, marked "WCAG" below: three colours are darker, so
- * text reaches 4.5:1 contrast. Penpot values: muted #77756b, warning #b86e00,
- * info #1f6fb8.
  */
 @theme {
   /* Colours */
@@ -27,7 +23,7 @@
 
   --color-ink: #14130f;
   --color-ink-2: #3a3933;
-  --color-muted: #6f6d64; /* WCAG */
+  --color-muted: #6f6d64;
   --color-subtle: #a8a59a; /* Text on night surfaces only: 2.47:1 on surface. */
 
   --color-line: #e6e1d6;
@@ -50,11 +46,11 @@
 
   --color-success: #0f7a55;
   --color-success-soft: #e3f4ec;
-  --color-warning: #9d5e00; /* WCAG */
+  --color-warning: #9d5e00;
   --color-warning-soft: #fcf0da;
   --color-danger: #c2362b;
   --color-danger-soft: #fbe6e3;
-  --color-info: #1f6db5; /* WCAG */
+  --color-info: #1f6db5;
   --color-info-soft: #e4effa;
 
   /* Spacing: the number is the size in pixels, so p-16 is 1rem (16px). */
