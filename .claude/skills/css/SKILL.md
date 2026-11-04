@@ -24,7 +24,7 @@ All colours, sizes and spacing come from the shared theme, in the `@theme` block
 - Use `subtle` for text only on `night` and `night-2`. On light surfaces, including placeholders, use `muted`.
 - Use `muted` for text only on `surface`, `surface-2`, `paper` and `saffron-soft`. On other tinted surfaces, use `ink-2`.
 - Use `shadow-focus` only with `border-brand`, because the shadow alone has too little contrast.
-- Tokens come from the design, which is kept outside this repository. Change them in Penpot first, except for the differences listed at the top of `src/index.css`. Ask the developer for a missing value rather than inventing one.
+- Tokens come from the design, which is kept outside this repository. Change them in Penpot first. Ask the developer for a missing value rather than inventing one.
 - Don't use arbitrary values such as `w-[37px]` or `text-[#c00]`. Add a token, or use the spacing scale.
 
 ## Logical properties only
