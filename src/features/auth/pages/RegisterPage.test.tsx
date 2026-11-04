@@ -22,9 +22,6 @@ const fillForm = async (user: ReturnType<typeof userEvent.setup>) => {
 const submit = (user: ReturnType<typeof userEvent.setup>) =>
   user.click(screen.getByRole("button", { name: "Create account" }));
 
-const accept = (user: ReturnType<typeof userEvent.setup>) =>
-  user.click(screen.getByLabelText("I agree to the Terms and Privacy Policy"));
-
 describe("RegisterPage", () => {
   it("creates the account and asks to check the inbox", async () => {
     const user = userEvent.setup();
@@ -42,7 +39,6 @@ describe("RegisterPage", () => {
 
     await fillForm(user);
     await user.click(screen.getByRole("radio", { name: /Seller/ }));
-    await accept(user);
     await submit(user);
 
     expect(
@@ -75,7 +71,6 @@ describe("RegisterPage", () => {
     renderApp("/register");
 
     await fillForm(user);
-    await accept(user);
     await submit(user);
 
     expect(await screen.findByText("Too short")).toBeInTheDocument();
@@ -94,30 +89,9 @@ describe("RegisterPage", () => {
     renderApp("/register");
 
     await fillForm(user);
-    await accept(user);
     await submit(user);
 
     expect(await screen.findByRole("alert")).toHaveTextContent("Email in use");
-  });
-
-  it("does not send the form until the terms are accepted", async () => {
-    const user = userEvent.setup();
-    let called = false;
-    server.use(
-      http.post("*/api/auth/register", () => {
-        called = true;
-        return HttpResponse.json({ code: "ok", message: "ok" }, { status: 201 });
-      }),
-    );
-    renderApp("/register");
-
-    await fillForm(user);
-    await submit(user);
-
-    expect(
-      await screen.findByText("Accept the Terms and Privacy Policy to continue."),
-    ).toBeInTheDocument();
-    expect(called).toBe(false);
   });
 
   it("uploads the photo with the upload policy from the API", async () => {
@@ -149,7 +123,6 @@ describe("RegisterPage", () => {
       screen.getByLabelText("Profile photo"),
       new File(["photo"], "me.png", { type: "image/png" }),
     );
-    await accept(user);
     await submit(user);
 
     await screen.findByRole("heading", { name: "Check your inbox" });
@@ -179,7 +152,6 @@ describe("RegisterPage", () => {
       screen.getByLabelText("Profile photo"),
       new File(["photo"], "me.png", { type: "image/png" }),
     );
-    await accept(user);
     await submit(user);
 
     expect(

@@ -1,4 +1,4 @@
-import { Trans, useTranslation } from "react-i18next";
+import { useTranslation } from "react-i18next";
 import { Badge } from "../../../components/Badge";
 import { Icon } from "../../../components/Icon";
 import type { IconName } from "../../../components/Icon";
@@ -9,8 +9,6 @@ const points: { id: string; icon: IconName }[] = [
   { id: "report", icon: "file" },
   { id: "city", icon: "map-pin" },
 ];
-
-const stars = [1, 2, 3, 4, 5];
 
 // The signup page's marketing panel, on large screens only.
 export function BrandPanel() {
@@ -52,36 +50,6 @@ export function BrandPanel() {
           ))}
         </ul>
       </div>
-      <figure className="relative flex flex-col gap-16 rounded-xl bg-night-2 p-24 ring-1 ring-brand-ink ring-inset">
-        <div className="flex items-center gap-8">
-          <span aria-hidden="true" className="flex gap-2 text-saffron">
-            {stars.map((star) => (
-              <Icon className="fill-current" key={star} name="star" size={16} />
-            ))}
-          </span>
-          <span className="type-label-s text-subtle">
-            <bdi dir="ltr">5.0</bdi> · {t("brand.review.verified")}
-          </span>
-        </div>
-        <blockquote className="type-body-m text-surface">
-          <Trans
-            components={{ number: <bdi dir="ltr" /> }}
-            i18nKey="brand.review.quote"
-            ns="auth"
-          />
-        </blockquote>
-        <figcaption className="flex items-center gap-12">
-          <span
-            aria-hidden="true"
-            className="flex size-32 shrink-0 items-center justify-center rounded-full bg-brand-soft type-label-s text-brand"
-          >
-            SK
-          </span>
-          <span className="type-label-s text-subtle">
-            {t("brand.review.author")}
-          </span>
-        </figcaption>
-      </figure>
     </aside>
   );
 }

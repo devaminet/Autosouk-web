@@ -3,7 +3,6 @@ import type { FormEvent } from "react";
 import { useTranslation } from "react-i18next";
 import { Link, useNavigate } from "react-router";
 import { Button } from "../../../components/Button";
-import { CheckboxField } from "../../../components/CheckboxField";
 import { FormErrors } from "../../../components/FormErrors";
 import { Icon } from "../../../components/Icon";
 import { LanguageMenu } from "../../../components/LanguageMenu";
@@ -48,20 +47,12 @@ export function RegisterPage() {
   const cities = useCityOptions();
   const [password, setPassword] = useState("");
   const [photo, setPhoto] = useState<File | null>(null);
-  const [termsError, setTermsError] = useState<string>();
 
   useFocusFirstInvalid(form, register.error);
 
   const submit = (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     const values = new FormData(event.currentTarget);
-
-    // The API does not record consent, so only the client can check this.
-    if (values.get("terms") === null) {
-      setTermsError(t("register.termsRequired"));
-      return;
-    }
-    setTermsError(undefined);
 
     const email = textValue(values, "email");
     const userType = textValue(values, "userType");
@@ -189,11 +180,6 @@ export function RegisterPage() {
             error={fieldError(error, "imageName")}
             onChange={setPhoto}
             photo={photo}
-          />
-          <CheckboxField
-            error={termsError}
-            label={t("register.terms")}
-            name="terms"
           />
           <FormErrors error={error} fields={fields} />
           <Button block isPending={register.isPending} size="l" type="submit" variant="primary">
