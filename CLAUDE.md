@@ -17,7 +17,7 @@ Roles, which are always enforced by the API and never by the client:
 
 React 19, Vite, TypeScript (strict), Tailwind CSS, self-hosted Fontsource fonts, Vitest with Testing Library, and Oxlint.
 
-Not installed yet, and added with the first feature that needs them: React Router (routing), TanStack Query (API data), and `react-i18next` with `i18next-http-backend` (translations).
+Also React Router (routing), TanStack Query (API data), Zod (API response validation), `react-i18next` with `i18next-http-backend` (translations in `public/locales/`), and MSW (network mocks in tests).
 
 ## Commands
 

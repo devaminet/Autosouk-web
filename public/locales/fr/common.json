@@ -1,0 +1,27 @@
+{
+  "loading": "Chargement…",
+  "language": { "label": "Langue" },
+  "errors": {
+    "network": "Impossible de joindre AutoSouk pour le moment. Vérifiez votre connexion et réessayez.",
+    "unexpected": "Une erreur est survenue. Veuillez réessayer."
+  },
+  "home": {
+    "pageTitle": "Accueil",
+    "title": "Des voitures inspectées. Des prix honnêtes.",
+    "welcome": "Bienvenue, {{name}}",
+    "description": "La place de marché arrive bientôt.",
+    "logIn": "Se connecter",
+    "signUp": "Créer un compte",
+    "logOut": "Se déconnecter"
+  },
+  "notFound": {
+    "title": "Page introuvable",
+    "description": "Cette page n'existe pas ou a été déplacée.",
+    "home": "Retour à l'accueil"
+  },
+  "errorPage": {
+    "title": "Une erreur est survenue",
+    "description": "Rechargez la page pour réessayer.",
+    "home": "Retour à l'accueil"
+  }
+}

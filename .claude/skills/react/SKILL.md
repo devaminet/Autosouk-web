@@ -23,7 +23,7 @@ Choose the smallest tool that works:
 | Used by one component | `useState` |
 | Several related updates | `useReducer` |
 | Filters, pages, the selected tab | The URL, so links can be shared |
-| Data from the API | TanStack Query, once installed; never copy it into `useState` |
+| Data from the API | TanStack Query; never copy it into `useState` |
 | Rarely changing app-wide values (language, session) | Context |
 
 ## Effects
