@@ -9,18 +9,22 @@ Styling uses Tailwind CSS v4 utility classes in `className`. There is no `tailwi
 
 ## Theme
 
-All colours, sizes and spacing come from the shared theme, in an `@theme` block in `src/index.css`:
+All colours, sizes and spacing come from the shared theme, in the `@theme` block in `src/index.css`. It implements the tokens in the Penpot `autosouk` file, and it removes Tailwind's default colours, spacing, radius, shadow and text sizes.
 
-```css
-@import "tailwindcss";
+| Kind | Names | Example |
+|---|---|---|
+| Colour | Penpot's colour names | `bg-paper`, `text-ink`, `border-line`, `bg-brand` |
+| Spacing | The number is the size in pixels: `2`, `4`, `8`, `12`, `16`, `20`, `24`, `32`, `40`, `48`, `64`, `80`, `96` | `p-16` is 16px, and `gap-4` is 4px |
+| Radius | `xs`, `sm`, `md`, `lg`, `xl`, `2xl`, `full` | `rounded-md` |
+| Elevation | `elevation-1`, `elevation-2`, `elevation-brand`, `overlay`, `focus` | `shadow-elevation-1` |
+| Text style | Penpot's typography names | `type-h1`, `type-body-m`, `type-price-l`, `type-overline` |
 
-@theme {
-  --color-brand: oklch(55% 0.15 250); /* example only */
-}
-```
-
-- A `--color-brand` token generates `bg-brand`, `text-brand`, `border-brand` and others. The `--font-*`, `--text-*` and `--radius-*` namespaces work the same way.
-- Tokens come from the design, which is kept outside this repository. Ask the developer for a value rather than inventing one.
+- Spacing numbers differ from standard Tailwind: `p-4` is 4px, not 16px. Values outside the scale, such as `p-3` or `w-10`, generate no CSS and fail silently, so check them.
+- Use a `type-*` utility for text. It sets the family, size, line height, weight and letter spacing together. Don't combine it with `font-*`, `leading-*` or `tracking-*`.
+- Use `subtle` for text only on `night` and `night-2`. On light surfaces, including placeholders, use `muted`.
+- Use `muted` for text only on `surface`, `surface-2`, `paper` and `saffron-soft`. On other tinted surfaces, use `ink-2`.
+- Use `shadow-focus` only with `border-brand`, because the shadow alone has too little contrast.
+- Tokens come from the design, which is kept outside this repository. Change them in Penpot first, except for the differences listed at the top of `src/index.css`. Ask the developer for a missing value rather than inventing one.
 - Don't use arbitrary values such as `w-[37px]` or `text-[#c00]`. Add a token, or use the spacing scale.
 
 ## Logical properties only
@@ -90,7 +94,7 @@ const statusClass: Record<ListingStatus, string> = {
 
 ## Arabic text
 
-- Don't use `tracking-*` on text that can be Arabic: letter spacing breaks the joined letters.
+- Don't use `tracking-*` on text that can be Arabic: letter spacing breaks the joined letters. The `type-*` utilities already remove their letter spacing and set Arabic line heights when `lang` on `<html>` is `ar`.
 - Don't rely on `uppercase` or `italic` for emphasis, as Arabic has neither. Use weight or colour with a word.
 - Arabic often needs more line height than Latin text, so check it on real content.
 

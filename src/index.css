@@ -1,1 +1,292 @@
-@import "tailwindcss";
+/* Self-hosted fonts. Browsers download a file only when its characters and weight are used. */
+@import "@fontsource-variable/bricolage-grotesque";
+@import "@fontsource-variable/geist";
+@import "@fontsource-variable/geist-mono";
+@import "@fontsource/ibm-plex-sans-arabic/arabic-400.css";
+@import "@fontsource/ibm-plex-sans-arabic/arabic-500.css";
+@import "@fontsource/ibm-plex-sans-arabic/arabic-600.css";
+
+/* Scan only app code. Otherwise class names in the Markdown docs reach the production CSS. */
+@import "tailwindcss" source(".");
+@source "../index.html";
+
+/*
+ * Design tokens. Penpot's "autosouk" file is the source of truth: its token
+ * set "AutoSouk" and the Foundations page. Change values there first.
+ *
+ * Each "initial" removes Tailwind's default values, so only design values
+ * generate utilities. For example, bg-red-500 and p-3 produce no CSS.
+ *
+ * Differences from Penpot, marked "WCAG" below: three colours are darker, so
+ * text reaches 4.5:1 contrast. Penpot values: muted #77756b, warning #b86e00,
+ * info #1f6fb8.
+ */
+@theme {
+  /* Colours */
+  --color-*: initial;
+
+  --color-ink: #14130f;
+  --color-ink-2: #3a3933;
+  --color-muted: #6f6d64; /* WCAG */
+  --color-subtle: #a8a59a; /* Text on night surfaces only: 2.47:1 on surface. */
+
+  --color-line: #e6e1d6;
+  --color-line-strong: #d3ccbd;
+
+  --color-paper: #f6f2ea;
+  --color-surface: #ffffff;
+  --color-surface-2: #fbf9f4;
+  --color-night: #0f0e1c;
+  --color-night-2: #1b1a2e;
+
+  --color-brand: #3f2fd6;
+  --color-brand-hover: #3224b8;
+  --color-brand-soft: #ece9ff;
+  --color-brand-ink: #1d1470;
+  --color-on-brand: #ffffff;
+
+  --color-saffron: #f2a93b;
+  --color-saffron-soft: #fdf1dc;
+
+  --color-success: #0f7a55;
+  --color-success-soft: #e3f4ec;
+  --color-warning: #9d5e00; /* WCAG */
+  --color-warning-soft: #fcf0da;
+  --color-danger: #c2362b;
+  --color-danger-soft: #fbe6e3;
+  --color-info: #1f6db5; /* WCAG */
+  --color-info-soft: #e4effa;
+
+  /* Spacing: the number is the size in pixels, so p-16 is 1rem (16px). */
+  --spacing: initial;
+  --spacing-*: initial;
+
+  /* Not a design token: Tailwind needs it for resets such as m-0 and inset-0. */
+  --spacing-0: 0;
+
+  --spacing-2: 0.125rem;
+  --spacing-4: 0.25rem;
+  --spacing-8: 0.5rem;
+  --spacing-12: 0.75rem;
+  --spacing-16: 1rem;
+  --spacing-20: 1.25rem;
+  --spacing-24: 1.5rem;
+  --spacing-32: 2rem;
+  --spacing-40: 2.5rem;
+  --spacing-48: 3rem;
+  --spacing-64: 4rem;
+  --spacing-80: 5rem;
+  --spacing-96: 6rem;
+
+  /* Radius */
+  --radius-*: initial;
+
+  --radius-xs: 0.375rem;
+  --radius-sm: 0.5rem;
+  --radius-md: 0.75rem;
+  --radius-lg: 1rem;
+  --radius-xl: 1.5rem;
+  --radius-2xl: 2rem;
+  --radius-full: 999px;
+
+  /* Elevation */
+  --shadow-*: initial;
+
+  --shadow-elevation-1: 0 1px 2px 0 rgb(20 18 13 / 0.06), 0 4px 12px -2px rgb(20 18 13 / 0.05);
+  --shadow-elevation-2: 0 2px 6px 0 rgb(20 18 13 / 0.08), 0 20px 48px -8px rgb(20 18 13 / 0.12);
+  --shadow-elevation-brand: 0 8px 24px -6px rgb(63 47 214 / 0.3);
+
+  /* Used in Penpot's screens, but not on the Foundations page. */
+  --shadow-focus: 0 0 0 4px #ece9ff; /* Pair with border-brand, for enough contrast. */
+  --shadow-overlay: 0 30px 80px -20px rgb(0 0 0 / 0.4);
+
+  /* Font families: "Variable" is the name of the variable build of each Penpot font. */
+  --font-serif: initial;
+
+  --font-display: "Bricolage Grotesque Variable", "IBM Plex Sans Arabic", sans-serif;
+  --font-sans: "Geist Variable", "IBM Plex Sans Arabic", sans-serif;
+  --font-mono: "Geist Mono Variable", "IBM Plex Sans Arabic", monospace;
+
+  /*
+   * Type scale. Line heights are design line height / font size.
+   * Letter spacing is design pixels converted to em, and the scale switches
+   * it off for Arabic.
+   */
+  --text-*: initial;
+
+  --text-display-xl: 5rem;
+  --text-display-xl--line-height: calc(84 / 80);
+  --text-display-xl--letter-spacing: calc(-0.03em * var(--letter-spacing-scale));
+  --text-display-xl--font-weight: 600;
+
+  --text-display-l: 3.75rem;
+  --text-display-l--line-height: calc(64 / 60);
+  --text-display-l--letter-spacing: calc(-0.025em * var(--letter-spacing-scale));
+  --text-display-l--font-weight: 600;
+
+  --text-display-m: 2.75rem;
+  --text-display-m--line-height: calc(48 / 44);
+  --text-display-m--letter-spacing: calc(-0.02em * var(--letter-spacing-scale));
+  --text-display-m--font-weight: 600;
+
+  --text-h1: 2.25rem;
+  --text-h1--line-height: calc(42 / 36);
+  --text-h1--letter-spacing: calc(-0.015em * var(--letter-spacing-scale));
+  --text-h1--font-weight: 600;
+
+  --text-h2: 1.75rem;
+  --text-h2--line-height: calc(34 / 28);
+  --text-h2--letter-spacing: calc(-0.01em * var(--letter-spacing-scale));
+  --text-h2--font-weight: 600;
+
+  --text-h3: 1.375rem;
+  --text-h3--line-height: calc(28 / 22);
+  --text-h3--letter-spacing: calc(-0.005em * var(--letter-spacing-scale));
+  --text-h3--font-weight: 600;
+
+  --text-h4: 1.125rem;
+  --text-h4--line-height: calc(24 / 18);
+  --text-h4--letter-spacing: calc(-0.005em * var(--letter-spacing-scale));
+  --text-h4--font-weight: 600;
+
+  --text-h5: 1rem;
+  --text-h5--line-height: calc(22 / 16);
+  --text-h5--letter-spacing: calc(-0.003125em * var(--letter-spacing-scale));
+  --text-h5--font-weight: 600;
+
+  --text-price-l: 2rem;
+  --text-price-l--line-height: calc(36 / 32);
+  --text-price-l--letter-spacing: calc(-0.01em * var(--letter-spacing-scale));
+  --text-price-l--font-weight: 600;
+
+  --text-price-m: 1.375rem;
+  --text-price-m--line-height: calc(26 / 22);
+  --text-price-m--letter-spacing: calc(-0.005em * var(--letter-spacing-scale));
+  --text-price-m--font-weight: 600;
+
+  --text-body-l: 1.125rem;
+  --text-body-l--line-height: calc(28 / 18);
+  --text-body-l--letter-spacing: calc(-0.01em * var(--letter-spacing-scale));
+  --text-body-l--font-weight: 400;
+
+  --text-body-m: 1rem;
+  --text-body-m--line-height: calc(24 / 16);
+  --text-body-m--font-weight: 400;
+
+  --text-body-s: 0.875rem;
+  --text-body-s--line-height: calc(20 / 14);
+  --text-body-s--font-weight: 400;
+
+  --text-body-xs: 0.75rem;
+  --text-body-xs--line-height: calc(16 / 12);
+  --text-body-xs--font-weight: 400;
+
+  --text-label-l: 1rem;
+  --text-label-l--line-height: calc(24 / 16);
+  --text-label-l--font-weight: 500;
+
+  --text-label-m: 0.875rem;
+  --text-label-m--line-height: calc(20 / 14);
+  --text-label-m--font-weight: 500;
+
+  --text-label-s: 0.75rem;
+  --text-label-s--line-height: calc(16 / 12);
+  --text-label-s--font-weight: 500;
+
+  --text-overline: 0.6875rem;
+  --text-overline--line-height: calc(16 / 11);
+  --text-overline--letter-spacing: calc(0.08em * var(--letter-spacing-scale));
+  --text-overline--font-weight: 500;
+
+  --text-mono-m: 0.875rem;
+  --text-mono-m--line-height: calc(20 / 14);
+  --text-mono-m--font-weight: 400;
+
+  --text-mono-s: 0.75rem;
+  --text-mono-s--line-height: calc(16 / 12);
+  --text-mono-s--font-weight: 400;
+}
+
+@layer base {
+  :root {
+    --letter-spacing-scale: 1;
+  }
+
+  /*
+   * Arabic values from Penpot's Languages page. Letter spacing is 0, which
+   * keeps letters joined. Display and body text have more line height.
+   * The display-l value is chosen: the page has no 60px Arabic text.
+   */
+  :root:lang(ar) {
+    --letter-spacing-scale: 0;
+
+    --text-display-xl--line-height: 1.15;
+    --text-display-l--line-height: 1.2;
+    --text-display-m--line-height: 1.2;
+    --text-body-l--line-height: 1.7;
+    --text-body-m--line-height: 1.7;
+    --text-body-s--line-height: 1.7;
+  }
+}
+
+/* The design's text styles: family, size, line height, weight and letter spacing. */
+@utility type-display-xl {
+  @apply font-display text-display-xl;
+}
+@utility type-display-l {
+  @apply font-display text-display-l;
+}
+@utility type-display-m {
+  @apply font-display text-display-m;
+}
+@utility type-h1 {
+  @apply font-display text-h1;
+}
+@utility type-h2 {
+  @apply font-display text-h2;
+}
+@utility type-h3 {
+  @apply font-display text-h3;
+}
+@utility type-h4 {
+  @apply font-sans text-h4;
+}
+@utility type-h5 {
+  @apply font-sans text-h5;
+}
+@utility type-price-l {
+  @apply font-display text-price-l;
+}
+@utility type-price-m {
+  @apply font-display text-price-m;
+}
+@utility type-body-l {
+  @apply font-sans text-body-l;
+}
+@utility type-body-m {
+  @apply font-sans text-body-m;
+}
+@utility type-body-s {
+  @apply font-sans text-body-s;
+}
+@utility type-body-xs {
+  @apply font-sans text-body-xs;
+}
+@utility type-label-l {
+  @apply font-sans text-label-l;
+}
+@utility type-label-m {
+  @apply font-sans text-label-m;
+}
+@utility type-label-s {
+  @apply font-sans text-label-s;
+}
+@utility type-overline {
+  @apply font-mono text-overline uppercase;
+}
+@utility type-mono-m {
+  @apply font-mono text-mono-m;
+}
+@utility type-mono-s {
+  @apply font-mono text-mono-s;
+}

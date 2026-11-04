@@ -15,7 +15,7 @@ Roles, which are always enforced by the API and never by the client:
 
 ## Stack
 
-React 19, Vite, TypeScript (strict), Tailwind CSS, Vitest with Testing Library, and Oxlint.
+React 19, Vite, TypeScript (strict), Tailwind CSS, self-hosted Fontsource fonts, Vitest with Testing Library, and Oxlint.
 
 Not installed yet, and added with the first feature that needs them: React Router (routing), TanStack Query (API data), and `react-i18next` with `i18next-http-backend` (translations).
 
@@ -57,7 +57,7 @@ Use the project skills in `.claude/skills/`: `react`, `typescript`, `html`, `css
 
 ## Design
 
-Never add design files to this repository: no screenshots, no design tokens, no design spec. They are kept outside it, and `design/` is in `.gitignore`. Ask the developer when a task needs the design.
+Never add design files to this repository: no screenshots, no token exports, no design spec. They are kept outside it, and `design/` is in `.gitignore`. The theme in `src/index.css` is code, so it belongs here. Ask the developer when a task needs the design.
 
 Rules for all UI work:
 
