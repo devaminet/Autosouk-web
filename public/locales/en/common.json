@@ -1,0 +1,27 @@
+{
+  "loading": "Loading…",
+  "language": { "label": "Language" },
+  "errors": {
+    "network": "We can't reach AutoSouk right now. Check your connection and try again.",
+    "unexpected": "Something went wrong. Please try again."
+  },
+  "home": {
+    "pageTitle": "Home",
+    "title": "Inspected cars. Honest prices.",
+    "welcome": "Welcome, {{name}}",
+    "description": "The marketplace is coming soon.",
+    "logIn": "Log in",
+    "signUp": "Create account",
+    "logOut": "Log out"
+  },
+  "notFound": {
+    "title": "Page not found",
+    "description": "This page doesn't exist or has moved.",
+    "home": "Back to home"
+  },
+  "errorPage": {
+    "title": "Something went wrong",
+    "description": "Reload the page to try again.",
+    "home": "Back to home"
+  }
+}

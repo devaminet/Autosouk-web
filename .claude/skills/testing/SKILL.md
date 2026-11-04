@@ -53,7 +53,7 @@ describe("FavoriteButton", () => {
 
 - Use `userEvent`, not `fireEvent`, so tests behave like real input.
 - Don't use `waitFor` with a side effect inside, and don't use fixed delays. Prefer `findBy*`.
-- Mock at the network boundary. Add MSW once the API client exists, and don't mock the component's own modules.
+- Mock at the network boundary with MSW (`src/test/handlers.ts`, and `server.use()` per test), and don't mock the component's own modules. Render pages with `renderApp` from `src/test/renderApp.tsx`.
 - Each test sets up its own data and passes alone. Avoid snapshot tests.
 - For a bug fix, write a test that fails first, then fix the bug.
 - Test translated and right-to-left behaviour for logic that depends on the language, such as `dir` and number formatting.

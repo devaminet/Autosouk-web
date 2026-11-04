@@ -74,6 +74,16 @@
   --spacing-80: 5rem;
   --spacing-96: 6rem;
 
+  /* Control heights from Penpot's Button component: min-h-control-l. */
+  --spacing-control-s: 2.125rem;
+  --spacing-control-m: 2.75rem;
+  --spacing-control-l: 3.5rem;
+
+  /* Layout widths from Penpot's auth screens: max-w-auth. */
+  --container-auth: 30rem;
+  --container-auth-wide: 35rem;
+  --container-brand: 37.5rem;
+
   /* Radius */
   --radius-*: initial;
 
@@ -208,6 +218,10 @@
     --letter-spacing-scale: 1;
   }
 
+  body {
+    @apply bg-paper font-sans text-ink;
+  }
+
   /*
    * Arabic values from Penpot's Languages page. Letter spacing is 0, which
    * keeps letters joined. Display and body text have more line height.
@@ -223,6 +237,11 @@
     --text-body-m--line-height: 1.7;
     --text-body-s--line-height: 1.7;
   }
+}
+
+/* The zellige pattern, only for night surfaces. */
+@utility bg-zellige {
+  background-image: url("./assets/zellige.svg");
 }
 
 /* The design's text styles: family, size, line height, weight and letter spacing. */
