@@ -8,7 +8,8 @@
     "retry": "Réessayer",
     "noCar": "Détails de la voiture pas encore ajoutés",
     "rejectedBecause": "Motif du refus :",
-    "deleted": "« {{title}} » a été supprimée."
+    "deleted": "« {{title}} » a été supprimée.",
+    "newListing": "Nouvelle annonce"
   },
   "actions": {
     "menu": "Actions pour {{title}}",
@@ -20,9 +21,18 @@
     "cancel": "Annuler"
   },
   "stats": {
-    "approved": { "label": "Approuvées et en ligne", "hint": "Visibles dans la recherche" },
-    "pending": { "label": "En attente de validation", "hint": "En attente d'une décision" },
-    "draft": { "label": "Brouillons", "hint": "À terminer pour publier" }
+    "approved": {
+      "label": "Approuvées et en ligne",
+      "hint": "Visibles dans la recherche"
+    },
+    "pending": {
+      "label": "En attente de validation",
+      "hint": "En attente d'une décision"
+    },
+    "draft": {
+      "label": "Brouillons",
+      "hint": "À terminer pour publier"
+    }
   },
   "tabs": {
     "label": "Filtrer par statut",
@@ -42,5 +52,31 @@
   "units": {
     "km": "km",
     "mad": "MAD"
+  },
+  "wizard": {
+    "title": "Nouvelle annonce",
+    "back": "Retour à mes annonces",
+    "breadcrumb": "Fil d'Ariane",
+    "discard": "Abandonner",
+    "progress": "Étape {{current}} sur {{total}}",
+    "tipsTitle": "Conseils pour vendre plus vite",
+    "steps": {
+      "listing": "Annonce",
+      "car": "Détails de la voiture",
+      "photos": "Photos",
+      "review": "Vérification"
+    }
+  },
+  "newListing": {
+    "title": "Décrivez votre annonce",
+    "description": "Les acheteurs voient ce titre et cette description sur votre annonce.",
+    "titleLabel": "Titre",
+    "descriptionLabel": "Description",
+    "submit": "Enregistrer le brouillon",
+    "saved": "Votre brouillon est enregistré.",
+    "tips": {
+      "title": "Indiquez la marque, le modèle et la version dans le titre",
+      "description": "Mentionnez l'historique d'entretien et le nombre de clés"
+    }
   }
 }

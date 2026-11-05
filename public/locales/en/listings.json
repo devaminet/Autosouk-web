@@ -8,7 +8,8 @@
     "retry": "Try again",
     "noCar": "Car details not added yet",
     "rejectedBecause": "Why it was rejected:",
-    "deleted": "“{{title}}” was deleted."
+    "deleted": "“{{title}}” was deleted.",
+    "newListing": "New listing"
   },
   "actions": {
     "menu": "Actions for {{title}}",
@@ -20,9 +21,18 @@
     "cancel": "Cancel"
   },
   "stats": {
-    "approved": { "label": "Approved & live", "hint": "Visible in search" },
-    "pending": { "label": "Pending review", "hint": "Waiting for a decision" },
-    "draft": { "label": "Drafts", "hint": "Finish to publish" }
+    "approved": {
+      "label": "Approved & live",
+      "hint": "Visible in search"
+    },
+    "pending": {
+      "label": "Pending review",
+      "hint": "Waiting for a decision"
+    },
+    "draft": {
+      "label": "Drafts",
+      "hint": "Finish to publish"
+    }
   },
   "tabs": {
     "label": "Filter by status",
@@ -41,5 +51,31 @@
   "units": {
     "km": "km",
     "mad": "MAD"
+  },
+  "wizard": {
+    "title": "New listing",
+    "back": "Back to my listings",
+    "breadcrumb": "Breadcrumb",
+    "discard": "Discard",
+    "progress": "Step {{current}} of {{total}}",
+    "tipsTitle": "Tips for a faster sale",
+    "steps": {
+      "listing": "Listing",
+      "car": "Car details",
+      "photos": "Photos",
+      "review": "Review"
+    }
+  },
+  "newListing": {
+    "title": "Describe your listing",
+    "description": "Buyers see this title and description on your listing.",
+    "titleLabel": "Title",
+    "descriptionLabel": "Description",
+    "submit": "Save draft",
+    "saved": "Your draft is saved.",
+    "tips": {
+      "title": "Put the make, model and version in the title",
+      "description": "Mention maintenance history and number of keys"
+    }
   }
 }

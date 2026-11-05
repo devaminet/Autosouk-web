@@ -8,4 +8,5 @@ export const paths = {
   resetPassword: "/reset-password",
   forgotPassword: "/forgot-password",
   myListings: "/my-listings",
+  newListing: "/my-listings/new",
 } as const;

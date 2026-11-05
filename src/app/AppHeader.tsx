@@ -18,7 +18,7 @@ function HeaderLink({ to, children }: HeaderLinkProps) {
       className={({ isActive }) =>
         `flex min-h-control-m flex-col items-center justify-center gap-4 rounded-xs type-label-m focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-brand ${isActive ? "text-ink" : "text-muted hover:text-ink"}`
       }
-      end
+      end={to === paths.home}
       to={to}
     >
       {({ isActive }) => (
@@ -34,12 +34,18 @@ function HeaderLink({ to, children }: HeaderLinkProps) {
   );
 }
 
-export function AppHeader() {
+type AppHeaderProps = {
+  hideOnMobile?: boolean;
+};
+
+export function AppHeader({ hideOnMobile = false }: AppHeaderProps) {
   const { t } = useTranslation();
   const { user, isPending } = useSession();
 
   return (
-    <header className="flex flex-wrap items-center justify-between gap-16 border-b border-line px-20 py-12 md:px-48">
+    <header
+      className={`flex-wrap items-center justify-between gap-16 border-b border-line px-20 py-12 md:px-48 ${hideOnMobile ? "hidden md:flex" : "flex"}`}
+    >
       <div className="flex items-center gap-40">
         <Link
           className="rounded-xs focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-brand"

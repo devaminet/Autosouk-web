@@ -67,6 +67,22 @@ export const getMyListings = ({ status, page }: MyListingsFilter) => {
   return request(`/api/listings/mine?${query}`, { schema: myListingsSchema });
 };
 
+const createdListingSchema = z.object({
+  listing: z.object({ id: z.number() }),
+});
+
+export type NewListingInput = {
+  title: string;
+  description: string;
+};
+
+export const createListing = (input: NewListingInput) =>
+  request("/api/listings", {
+    method: "POST",
+    body: input,
+    schema: createdListingSchema,
+  });
+
 const deletedListingSchema = z.object({
   deleted: z.literal(true),
   listingId: z.number(),

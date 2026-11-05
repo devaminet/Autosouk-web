@@ -1,11 +1,14 @@
 import { useEffect, useRef, useState } from "react";
 import { useTranslation } from "react-i18next";
-import { Navigate, useSearchParams } from "react-router";
+import { Link, Navigate, useLocation, useSearchParams } from "react-router";
+import { z } from "zod";
 import { Alert } from "../../../components/Alert";
 import { Button } from "../../../components/Button";
+import { ButtonLink } from "../../../components/ButtonLink";
 import { Icon } from "../../../components/Icon";
 import { PageTitle } from "../../../components/PageTitle";
 import { Pagination } from "../../../components/Pagination";
+import { paths } from "../../../lib/paths";
 import type { SellerListing } from "../api";
 import { DeleteListingDialog } from "../components/DeleteListingDialog";
 import { ListingCards } from "../components/ListingCards";
@@ -14,6 +17,8 @@ import { ListingsTable } from "../components/ListingsTable";
 import { StatusTabs } from "../components/StatusTabs";
 import { useDeleteListing, useMyListings } from "../hooks";
 import { myListingsSearch, parseMyListingsSearch } from "../myListingsSearch";
+
+const noticeSchema = z.object({ notice: z.string() });
 
 export function MyListingsPage() {
   const { t } = useTranslation("listings");
@@ -24,16 +29,21 @@ export function MyListingsPage() {
   const deletion = useDeleteListing();
   const [listingToDelete, setListingToDelete] = useState<SellerListing | null>(null);
   const [deletedListing, setDeletedListing] = useState<SellerListing | null>(null);
-  const deletedNotice = useRef<HTMLOutputElement>(null);
+  const location = useLocation();
+  const routeNotice = noticeSchema.safeParse(location.state);
+  const notice = deletedListing
+    ? t("myListings.deleted", { title: deletedListing.title })
+    : routeNotice.data?.notice;
+  const noticeElement = useRef<HTMLOutputElement>(null);
 
-  // The deleted row held the focus, so keyboard and screen reader users continue
-  // from the notice. A parent's effect runs after the dialog's, which has closed
-  // by then. An open modal dialog would block this focus.
+  // A deleted row or a left page held the focus, so keyboard and screen reader
+  // users continue from the notice. A parent's effect runs after the dialog's,
+  // which has closed by then. An open modal dialog would block this focus.
   useEffect(() => {
-    if (deletedListing) {
-      deletedNotice.current?.focus();
+    if (notice) {
+      noticeElement.current?.focus();
     }
-  }, [deletedListing]);
+  }, [notice]);
 
   const askToDelete = (listing: SellerListing) => {
     deletion.reset();
@@ -62,20 +72,29 @@ export function MyListingsPage() {
   return (
     <div className="flex flex-col gap-24 px-20 py-24 md:gap-32 md:px-80 md:py-48">
       <PageTitle>{t("myListings.title")}</PageTitle>
-      <header className="flex flex-col gap-4">
-        <p className="hidden type-overline text-brand md:block">{t("myListings.overline")}</p>
-        <h1 className="type-h1 text-ink md:type-display-m">{t("myListings.title")}</h1>
+      <header className="flex items-center justify-between gap-16">
+        <div className="flex min-w-0 flex-col gap-4">
+          <p className="hidden type-overline text-brand md:block">{t("myListings.overline")}</p>
+          <h1 className="type-h1 text-ink md:type-display-m">{t("myListings.title")}</h1>
+        </div>
+        <div className="hidden shrink-0 md:block">
+          <ButtonLink size="l" to={paths.newListing} variant="primary">
+            <Icon name="plus" size={20} />
+            {t("myListings.newListing")}
+          </ButtonLink>
+        </div>
+        <Link
+          aria-label={t("myListings.newListing")}
+          className="flex size-control-m shrink-0 items-center justify-center rounded-full bg-brand text-on-brand shadow-elevation-brand hover:bg-brand-hover focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-brand md:hidden"
+          to={paths.newListing}
+        >
+          <Icon name="plus" size={20} />
+        </Link>
       </header>
 
-      {deletedListing && (
-        <output
-          className="block focus:outline-none"
-          ref={deletedNotice}
-          tabIndex={-1}
-        >
-          <Alert tone="success">
-            {t("myListings.deleted", { title: deletedListing.title })}
-          </Alert>
+      {notice && (
+        <output className="block focus:outline-none" ref={noticeElement} tabIndex={-1}>
+          <Alert tone="success">{notice}</Alert>
         </output>
       )}
 

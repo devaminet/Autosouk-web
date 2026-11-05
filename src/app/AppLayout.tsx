@@ -3,17 +3,21 @@ import { useSession } from "../features/auth/hooks";
 import { AppHeader } from "./AppHeader";
 import { MobileTabBar } from "./MobileTabBar";
 
+type AppLayoutProps = {
+  focusedOnMobile?: boolean;
+};
+
 // The header and navigation around every page outside the auth screens.
-export function AppLayout() {
+export function AppLayout({ focusedOnMobile = false }: AppLayoutProps) {
   const { user } = useSession();
 
   return (
     <div className="flex min-h-dvh flex-col">
-      <AppHeader />
+      <AppHeader hideOnMobile={focusedOnMobile} />
       <main className="flex flex-1 flex-col outline-none" tabIndex={-1}>
         <Outlet />
       </main>
-      {user?.role === "seller" && <MobileTabBar />}
+      {user?.role === "seller" && !focusedOnMobile && <MobileTabBar />}
     </div>
   );
 }

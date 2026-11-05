@@ -9,6 +9,7 @@ import { ResetPasswordPage } from "../features/auth/pages/ResetPasswordPage";
 import { VerifyEmailPage } from "../features/auth/pages/VerifyEmailPage";
 import { HomePage } from "../features/home/pages/HomePage";
 import { MyListingsPage } from "../features/listings/pages/MyListingsPage";
+import { NewListingPage } from "../features/listings/pages/NewListingPage";
 import { paths } from "../lib/paths";
 import { AppLayout } from "./AppLayout";
 import { ErrorPage } from "./ErrorPage";
@@ -27,6 +28,16 @@ export const routes: RouteObject[] = [
           {
             element: <RequireRole allowed="seller" />,
             children: [{ path: paths.myListings, element: <MyListingsPage /> }],
+          },
+        ],
+      },
+      {
+        // The wizard has its own header and actions on small screens.
+        element: <AppLayout focusedOnMobile />,
+        children: [
+          {
+            element: <RequireRole allowed="seller" />,
+            children: [{ path: paths.newListing, element: <NewListingPage /> }],
           },
         ],
       },

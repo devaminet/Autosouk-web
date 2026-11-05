@@ -4,7 +4,7 @@ import {
   useQuery,
   useQueryClient,
 } from "@tanstack/react-query";
-import { deleteListing, getMyListings } from "./api";
+import { createListing, deleteListing, getMyListings } from "./api";
 import type { MyListingsFilter } from "./api";
 
 const myListingsKey = ["listings", "mine"];
@@ -16,6 +16,14 @@ export const useMyListings = (filter: MyListingsFilter) =>
     queryFn: () => getMyListings(filter),
     placeholderData: keepPreviousData,
   });
+
+export const useCreateListing = () => {
+  const queryClient = useQueryClient();
+  return useMutation({
+    mutationFn: createListing,
+    onSuccess: () => queryClient.invalidateQueries({ queryKey: myListingsKey }),
+  });
+};
 
 // Refreshes after a failure too: a 404 means the list on screen is out of date.
 // Returning the promise keeps the mutation pending until the new list arrives.
