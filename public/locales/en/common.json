@@ -27,6 +27,12 @@
     "description": "This page isn't available for your account.",
     "home": "Back to home"
   },
+  "pagination": {
+    "label": "Pagination",
+    "previous": "Previous page",
+    "next": "Next page",
+    "page": "Page {{page}}"
+  },
   "notFound": {
     "title": "Page not found",
     "description": "This page doesn't exist or has moved.",

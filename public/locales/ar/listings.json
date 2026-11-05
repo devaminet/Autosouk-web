@@ -1,6 +1,38 @@
 {
   "myListings": {
     "overline": "لوحة البائع",
-    "title": "إعلاناتي"
+    "title": "إعلاناتي",
+    "visibility": "تظهر الإعلانات المقبولة فقط في البحث. المسودات والإعلانات قيد المراجعة أو المرفوضة مرئية لك فقط.",
+    "empty": "ليس لديك أي إعلان بعد.",
+    "emptyFilter": "ليس لديك إعلانات بهذه الحالة.",
+    "retry": "حاول مرة أخرى",
+    "noCar": "لم تتم إضافة تفاصيل السيارة بعد",
+    "rejectedBecause": "سبب الرفض:"
+  },
+  "stats": {
+    "approved": { "label": "مقبولة ومعروضة", "hint": "تظهر في البحث" },
+    "pending": { "label": "قيد المراجعة", "hint": "في انتظار القرار" },
+    "draft": { "label": "المسودات", "hint": "أكملها للنشر" }
+  },
+  "tabs": {
+    "label": "التصفية حسب الحالة",
+    "all": "الكل"
+  },
+  "table": {
+    "listing": "الإعلان",
+    "price": "السعر",
+    "status": "الحالة",
+    "inspections": "الفحوصات",
+    "updated": "آخر تحديث",
+    "inspectionsCompleted_zero": "لا توجد فحوصات مكتملة",
+    "inspectionsCompleted_one": "فحص واحد مكتمل",
+    "inspectionsCompleted_two": "فحصان مكتملان",
+    "inspectionsCompleted_few": "{{count}} فحوصات مكتملة",
+    "inspectionsCompleted_many": "{{count}} فحصًا مكتملًا",
+    "inspectionsCompleted_other": "{{count}} فحص مكتمل"
+  },
+  "units": {
+    "km": "كم",
+    "mad": "درهم"
   }
 }

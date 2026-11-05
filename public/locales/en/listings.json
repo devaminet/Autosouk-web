@@ -1,6 +1,34 @@
 {
   "myListings": {
     "overline": "Seller dashboard",
-    "title": "My listings"
+    "title": "My listings",
+    "visibility": "Only approved listings appear in search. Drafts, pending and rejected listings are visible to you only.",
+    "empty": "You have no listings yet.",
+    "emptyFilter": "You have no listings with this status.",
+    "retry": "Try again",
+    "noCar": "Car details not added yet",
+    "rejectedBecause": "Why it was rejected:"
+  },
+  "stats": {
+    "approved": { "label": "Approved & live", "hint": "Visible in search" },
+    "pending": { "label": "Pending review", "hint": "Waiting for a decision" },
+    "draft": { "label": "Drafts", "hint": "Finish to publish" }
+  },
+  "tabs": {
+    "label": "Filter by status",
+    "all": "All"
+  },
+  "table": {
+    "listing": "Listing",
+    "price": "Price",
+    "status": "Status",
+    "inspections": "Inspections",
+    "updated": "Updated",
+    "inspectionsCompleted_one": "{{count}} completed",
+    "inspectionsCompleted_other": "{{count}} completed"
+  },
+  "units": {
+    "km": "km",
+    "mad": "MAD"
   }
 }

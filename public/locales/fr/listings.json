@@ -1,6 +1,35 @@
 {
   "myListings": {
     "overline": "Espace vendeur",
-    "title": "Mes annonces"
+    "title": "Mes annonces",
+    "visibility": "Seules les annonces approuvées apparaissent dans la recherche. Les brouillons et les annonces en attente ou refusées ne sont visibles que par vous.",
+    "empty": "Vous n'avez pas encore d'annonce.",
+    "emptyFilter": "Vous n'avez aucune annonce avec ce statut.",
+    "retry": "Réessayer",
+    "noCar": "Détails de la voiture pas encore ajoutés",
+    "rejectedBecause": "Motif du refus :"
+  },
+  "stats": {
+    "approved": { "label": "Approuvées et en ligne", "hint": "Visibles dans la recherche" },
+    "pending": { "label": "En attente de validation", "hint": "En attente d'une décision" },
+    "draft": { "label": "Brouillons", "hint": "À terminer pour publier" }
+  },
+  "tabs": {
+    "label": "Filtrer par statut",
+    "all": "Toutes"
+  },
+  "table": {
+    "listing": "Annonce",
+    "price": "Prix",
+    "status": "Statut",
+    "inspections": "Inspections",
+    "updated": "Mise à jour",
+    "inspectionsCompleted_one": "{{count}} terminée",
+    "inspectionsCompleted_many": "{{count}} terminées",
+    "inspectionsCompleted_other": "{{count}} terminées"
+  },
+  "units": {
+    "km": "km",
+    "mad": "MAD"
   }
 }

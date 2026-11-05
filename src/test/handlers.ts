@@ -25,6 +25,14 @@ const apiCatalogs: Record<string, unknown> = {
   enums: {
     role: { buyer: "Buyer", seller: "Seller", mechanic: "Mechanic" },
     city: { casablanca: "Casablanca", agadir: "Agadir" },
+    listing_status: {
+      draft: "Draft",
+      pending: "Pending review",
+      approved: "Approved",
+      withdrawn: "Withdrawn",
+      rejected: "Rejected",
+      sold: "Sold",
+    },
   },
   errors: { unexpected: "An unexpected error occurred" },
   messages: {},
@@ -63,6 +71,25 @@ export const defaultHandlers = [
         { id: 1, slug: "casablanca", name: "Casablanca" },
         { id: 2, slug: "agadir", name: "Agadir" },
       ],
+    }),
+  ),
+  http.get("*/api/listings/mine", () =>
+    HttpResponse.json({
+      listings: [],
+      meta: {
+        total: 0,
+        page: 1,
+        limit: 10,
+        totalPages: 0,
+        statusCounts: {
+          draft: 0,
+          pending: 0,
+          approved: 0,
+          withdrawn: 0,
+          rejected: 0,
+          sold: 0,
+        },
+      },
     }),
   ),
   // No session by default: the API answers 400 when the cookie is missing.
