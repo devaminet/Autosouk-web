@@ -33,6 +33,12 @@ const apiCatalogs: Record<string, unknown> = {
       rejected: "Rejected",
       sold: "Sold",
     },
+    carburant: { diesel: "Diesel", petrol: "Petrol" },
+    car_state: { very_good: "Very good", good: "Good" },
+    car_origin: { customs_clearance: "Customs cleared" },
+    transmission: { manual: "Manual", automatic: "Automatic" },
+    equipment_category: { safety: "Safety", multimedia: "Multimedia" },
+    equipment: { abs: "ABS", esp: "ESP", apple_carplay: "Apple CarPlay" },
   },
   errors: { unexpected: "An unexpected error occurred" },
   messages: {},
@@ -70,6 +76,52 @@ export const defaultHandlers = [
       cities: [
         { id: 1, slug: "casablanca", name: "Casablanca" },
         { id: 2, slug: "agadir", name: "Agadir" },
+      ],
+      carburants: [
+        { id: 1, slug: "diesel" },
+        { id: 3, slug: "petrol" },
+      ],
+      states: [
+        { id: 2, slug: "very_good" },
+        { id: 3, slug: "good" },
+      ],
+      origins: [{ id: 1, slug: "customs_clearance" }],
+    }),
+  ),
+  http.get("*/api/makes", () =>
+    HttpResponse.json({
+      makes: [
+        { id: 482, name: "VOLKSWAGEN" },
+        { id: 499, name: "KIA" },
+      ],
+    }),
+  ),
+  http.get("*/api/models/:makeId", ({ params }) =>
+    HttpResponse.json({
+      models:
+        params.makeId === "482"
+          ? [{ id: 10, name: "Golf" }]
+          : [{ id: 20, name: "Sportage" }],
+    }),
+  ),
+  http.get("*/api/equipment", () =>
+    HttpResponse.json({
+      categories: [
+        {
+          id: 1,
+          slug: "safety",
+          name: "Safety",
+          equipment: [
+            { id: 1, slug: "abs", name: "ABS" },
+            { id: 2, slug: "esp", name: "ESP" },
+          ],
+        },
+        {
+          id: 4,
+          slug: "multimedia",
+          name: "Multimedia",
+          equipment: [{ id: 30, slug: "apple_carplay", name: "Apple CarPlay" }],
+        },
       ],
     }),
   ),

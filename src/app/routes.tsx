@@ -9,6 +9,8 @@ import { ResetPasswordPage } from "../features/auth/pages/ResetPasswordPage";
 import { VerifyEmailPage } from "../features/auth/pages/VerifyEmailPage";
 import { HomePage } from "../features/home/pages/HomePage";
 import { MyListingsPage } from "../features/listings/pages/MyListingsPage";
+import { CarDetailsPage } from "../features/listings/pages/CarDetailsPage";
+import { DraftListingPage } from "../features/listings/pages/DraftListingPage";
 import { NewListingPage } from "../features/listings/pages/NewListingPage";
 import { paths } from "../lib/paths";
 import { AppLayout } from "./AppLayout";
@@ -37,7 +39,11 @@ export const routes: RouteObject[] = [
         children: [
           {
             element: <RequireRole allowed="seller" />,
-            children: [{ path: paths.newListing, element: <NewListingPage /> }],
+            children: [
+              { path: paths.newListing, element: <NewListingPage /> },
+              { path: paths.draftListing, element: <DraftListingPage /> },
+              { path: paths.draftCar, element: <CarDetailsPage /> },
+            ],
           },
         ],
       },

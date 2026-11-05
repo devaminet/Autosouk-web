@@ -186,6 +186,10 @@ describe("MyListingsPage", () => {
 
     expect(within(row).getByText("Car details not added yet")).toBeInTheDocument();
     expect(within(row).getByText("Draft")).toBeInTheDocument();
+    expect(within(row).getByRole("link", { name: "Continue My new car" })).toHaveAttribute(
+      "href",
+      "/my-listings/3/car",
+    );
   });
 
   it("explains an empty account and an empty filter differently", async () => {

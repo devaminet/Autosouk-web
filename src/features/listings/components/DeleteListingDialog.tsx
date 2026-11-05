@@ -2,11 +2,10 @@ import { useEffect, useId, useRef } from "react";
 import { useTranslation } from "react-i18next";
 import { Alert } from "../../../components/Alert";
 import { Button } from "../../../components/Button";
-import type { SellerListing } from "../api";
 
 type DeleteListingDialogProps = {
   // The listing to confirm. The dialog is closed while this is null.
-  listing: SellerListing | null;
+  listing: { title: string } | null;
   isPending: boolean;
   error: string | null;
   onConfirm: () => void;

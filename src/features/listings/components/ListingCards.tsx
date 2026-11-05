@@ -1,3 +1,4 @@
+import { draftStepPath } from "../../../lib/paths";
 import type { SellerListing } from "../api";
 import { ListingActionsMenu } from "./ListingActionsMenu";
 import { ListingPrice } from "./ListingPrice";
@@ -31,6 +32,7 @@ export function ListingCards({ listings, onDelete }: ListingCardsProps) {
             )}
           </div>
           <ListingActionsMenu
+            continueTo={listing.status === "draft" ? draftStepPath(listing.id, "car") : undefined}
             onDelete={() => onDelete(listing)}
             title={listing.title}
           />

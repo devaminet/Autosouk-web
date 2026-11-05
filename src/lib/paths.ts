@@ -9,4 +9,12 @@ export const paths = {
   forgotPassword: "/forgot-password",
   myListings: "/my-listings",
   newListing: "/my-listings/new",
+  // Route patterns. Build links to them with draftStepPath.
+  draftListing: "/my-listings/:listingId/listing",
+  draftCar: "/my-listings/:listingId/car",
 } as const;
+
+export type DraftStep = "listing" | "car";
+
+export const draftStepPath = (listingId: number, step: DraftStep): string =>
+  `/my-listings/${listingId}/${step}`;

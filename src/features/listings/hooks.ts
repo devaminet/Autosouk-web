@@ -4,10 +4,22 @@ import {
   useQuery,
   useQueryClient,
 } from "@tanstack/react-query";
-import { createListing, deleteListing, getMyListings } from "./api";
+import {
+  attachCar,
+  createListing,
+  deleteListing,
+  getEquipment,
+  getListing,
+  getLookups,
+  getMakes,
+  getModels,
+  getMyListings,
+  updateListing,
+} from "./api";
 import type { MyListingsFilter } from "./api";
 
-const myListingsKey = ["listings", "mine"];
+const listingsKey = ["listings"];
+const myListingsKey = [...listingsKey, "mine"];
 
 // Keeps the current page on screen while another status or page loads.
 export const useMyListings = (filter: MyListingsFilter) =>
@@ -17,11 +29,55 @@ export const useMyListings = (filter: MyListingsFilter) =>
     placeholderData: keepPreviousData,
   });
 
+export const useListing = (id: number | null) =>
+  useQuery({
+    queryKey: [...listingsKey, "detail", id],
+    queryFn: () => getListing(id ?? 0),
+    enabled: id !== null,
+  });
+
+// Reference data changes with deployments, not while someone fills a form.
+const reference = { staleTime: Infinity };
+
+export const useLookups = () =>
+  useQuery({ queryKey: ["lookups"], queryFn: getLookups, ...reference });
+
+export const useMakes = () =>
+  useQuery({ queryKey: ["makes"], queryFn: getMakes, ...reference });
+
+export const useModels = (makeId: number | null) =>
+  useQuery({
+    queryKey: ["models", makeId],
+    queryFn: () => getModels(makeId ?? 0),
+    enabled: makeId !== null,
+    ...reference,
+  });
+
+export const useEquipment = () =>
+  useQuery({ queryKey: ["equipment"], queryFn: getEquipment, ...reference });
+
 export const useCreateListing = () => {
   const queryClient = useQueryClient();
   return useMutation({
     mutationFn: createListing,
     onSuccess: () => queryClient.invalidateQueries({ queryKey: myListingsKey }),
+  });
+};
+
+// The next step reads the listing, so wait until the cache is fresh.
+export const useUpdateListing = () => {
+  const queryClient = useQueryClient();
+  return useMutation({
+    mutationFn: updateListing,
+    onSuccess: () => queryClient.invalidateQueries({ queryKey: listingsKey }),
+  });
+};
+
+export const useAttachCar = () => {
+  const queryClient = useQueryClient();
+  return useMutation({
+    mutationFn: attachCar,
+    onSuccess: () => queryClient.invalidateQueries({ queryKey: listingsKey }),
   });
 };
 

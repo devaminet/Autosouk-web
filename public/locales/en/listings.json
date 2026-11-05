@@ -13,7 +13,9 @@
   },
   "actions": {
     "menu": "Actions for {{title}}",
-    "delete": "Delete listing"
+    "delete": "Delete listing",
+    "continue": "Continue",
+    "continueListing": "Continue {{title}}"
   },
   "deleteDialog": {
     "title": "Delete this listing?",
@@ -50,7 +52,8 @@
   },
   "units": {
     "km": "km",
-    "mad": "MAD"
+    "mad": "MAD",
+    "cv": "CV"
   },
   "wizard": {
     "title": "New listing",
@@ -64,18 +67,59 @@
       "car": "Car details",
       "photos": "Photos",
       "review": "Review"
-    }
+    },
+    "previous": "Previous step"
   },
   "newListing": {
     "title": "Describe your listing",
     "description": "Buyers see this title and description on your listing.",
     "titleLabel": "Title",
     "descriptionLabel": "Description",
-    "submit": "Save draft",
+    "submit": "Continue to car details",
     "saved": "Your draft is saved.",
     "tips": {
       "title": "Put the make, model and version in the title",
       "description": "Mention maintenance history and number of keys"
     }
+  },
+  "carDetails": {
+    "title": "Car details",
+    "description": "These fields power search filters and the inspection checklist.",
+    "choose": "Choose",
+    "chooseMakeFirst": "Choose a make first",
+    "make": "Make",
+    "model": "Model",
+    "year": "Year",
+    "price": "Price",
+    "mileage": "Mileage",
+    "city": "City",
+    "fuel": "Fuel",
+    "transmission": "Transmission",
+    "doors": "Doors",
+    "fiscalPower": "Fiscal power",
+    "owners": "Previous owners",
+    "fewer": "Fewer: {{label}}",
+    "more": "More: {{label}}",
+    "origin": "Origin",
+    "condition": "Condition",
+    "conditionHelper": "Be honest, the inspector will grade it too.",
+    "preview": "Live preview",
+    "back": "Back",
+    "submit": "Save draft",
+    "tips": {
+      "mileage": "Exact mileage: inspectors check it against the dashboard and service history",
+      "fiscalPower": "Fiscal power (CV) as shown on the carte grise",
+      "history": "Mention maintenance history and number of keys in the description"
+    }
+  },
+  "equipment": {
+    "title": "Equipment",
+    "description": "Optional. Buyers filter by equipment, so tick only what the car really has.",
+    "search": "Search equipment",
+    "searchPlaceholder": "For example, CarPlay",
+    "expandAll": "Expand all",
+    "collapseAll": "Collapse all",
+    "count": "{{selected}} of {{total}}",
+    "noMatch": "No equipment matches “{{query}}”."
   }
 }

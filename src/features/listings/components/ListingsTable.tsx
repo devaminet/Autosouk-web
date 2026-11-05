@@ -1,5 +1,8 @@
 import { useTranslation } from "react-i18next";
+import { ButtonLink } from "../../../components/ButtonLink";
+import { Icon } from "../../../components/Icon";
 import { formatDay } from "../../../lib/format";
+import { draftStepPath } from "../../../lib/paths";
 import type { SellerListing } from "../api";
 import { ListingActionsMenu } from "./ListingActionsMenu";
 import { ListingMeta } from "./ListingMeta";
@@ -77,7 +80,18 @@ export function ListingsTable({ listings, onDelete }: ListingsTableProps) {
               {formatDay(listing.updatedAt, i18n.language)}
             </td>
             <td className="py-16">
-              <div className="flex justify-end">
+              <div className="flex items-center justify-end gap-8">
+                {listing.status === "draft" && (
+                  <ButtonLink
+                    aria-label={t("actions.continueListing", { title: listing.title })}
+                    size="s"
+                    to={draftStepPath(listing.id, "car")}
+                    variant="dark"
+                  >
+                    <Icon name="arrow-right" size={16} />
+                    {t("actions.continue")}
+                  </ButtonLink>
+                )}
                 <ListingActionsMenu
                   onDelete={() => onDelete(listing)}
                   title={listing.title}

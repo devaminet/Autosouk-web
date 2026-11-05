@@ -13,7 +13,9 @@
   },
   "actions": {
     "menu": "Actions pour {{title}}",
-    "delete": "Supprimer l'annonce"
+    "delete": "Supprimer l'annonce",
+    "continue": "Continuer",
+    "continueListing": "Continuer {{title}}"
   },
   "deleteDialog": {
     "title": "Supprimer cette annonce ?",
@@ -51,7 +53,8 @@
   },
   "units": {
     "km": "km",
-    "mad": "MAD"
+    "mad": "MAD",
+    "cv": "CV"
   },
   "wizard": {
     "title": "Nouvelle annonce",
@@ -65,18 +68,59 @@
       "car": "Détails de la voiture",
       "photos": "Photos",
       "review": "Vérification"
-    }
+    },
+    "previous": "Étape précédente"
   },
   "newListing": {
     "title": "Décrivez votre annonce",
     "description": "Les acheteurs voient ce titre et cette description sur votre annonce.",
     "titleLabel": "Titre",
     "descriptionLabel": "Description",
-    "submit": "Enregistrer le brouillon",
+    "submit": "Continuer vers la voiture",
     "saved": "Votre brouillon est enregistré.",
     "tips": {
       "title": "Indiquez la marque, le modèle et la version dans le titre",
       "description": "Mentionnez l'historique d'entretien et le nombre de clés"
     }
+  },
+  "carDetails": {
+    "title": "Détails de la voiture",
+    "description": "Ces informations alimentent les filtres de recherche et la liste de contrôle de l'inspection.",
+    "choose": "Choisir",
+    "chooseMakeFirst": "Choisissez d'abord une marque",
+    "make": "Marque",
+    "model": "Modèle",
+    "year": "Année",
+    "price": "Prix",
+    "mileage": "Kilométrage",
+    "city": "Ville",
+    "fuel": "Carburant",
+    "transmission": "Boîte de vitesses",
+    "doors": "Portes",
+    "fiscalPower": "Puissance fiscale",
+    "owners": "Propriétaires précédents",
+    "fewer": "Moins : {{label}}",
+    "more": "Plus : {{label}}",
+    "origin": "Origine",
+    "condition": "État",
+    "conditionHelper": "Soyez honnête, l'inspecteur l'évaluera aussi.",
+    "preview": "Aperçu en direct",
+    "back": "Retour",
+    "submit": "Enregistrer le brouillon",
+    "tips": {
+      "mileage": "Kilométrage exact : les inspecteurs le comparent au tableau de bord et à l'historique d'entretien",
+      "fiscalPower": "Puissance fiscale (CV) indiquée sur la carte grise",
+      "history": "Mentionnez l'historique d'entretien et le nombre de clés dans la description"
+    }
+  },
+  "equipment": {
+    "title": "Équipements",
+    "description": "Facultatif. Les acheteurs filtrent par équipement, ne cochez que ce que la voiture possède vraiment.",
+    "search": "Rechercher un équipement",
+    "searchPlaceholder": "Par exemple, CarPlay",
+    "expandAll": "Tout déplier",
+    "collapseAll": "Tout replier",
+    "count": "{{selected}} sur {{total}}",
+    "noMatch": "Aucun équipement ne correspond à « {{query}} »."
   }
 }

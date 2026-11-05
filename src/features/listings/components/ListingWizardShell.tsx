@@ -5,24 +5,34 @@ import { ButtonLink } from "../../../components/ButtonLink";
 import { Icon } from "../../../components/Icon";
 import { paths } from "../../../lib/paths";
 import type { WizardStep } from "../wizardSteps";
+import { DiscardDraftButton } from "./DiscardDraftButton";
 import { WizardStepper } from "./WizardStepper";
 
 type ListingWizardShellProps = {
   step: WizardStep;
+  // A saved draft is deleted on discard. Before that, discard just leaves.
+  draft?: { id: number; title: string };
+  // Where the small screens' back button goes. My listings by default.
+  backTo?: string;
   children: ReactNode;
 };
 
 // What every step of creating a listing shares: the way out and the progress.
-export function ListingWizardShell({ step, children }: ListingWizardShellProps) {
+export function ListingWizardShell({
+  step,
+  draft,
+  backTo = paths.myListings,
+  children,
+}: ListingWizardShellProps) {
   const { t } = useTranslation("listings");
 
   return (
     <div className="flex flex-1 flex-col gap-24 pt-16 md:px-80 md:py-32">
       <div className="relative flex min-h-40 items-center justify-center px-20 md:hidden">
         <Link
-          aria-label={t("wizard.back")}
+          aria-label={t("wizard.previous")}
           className="absolute inset-s-20 flex size-40 items-center justify-center rounded-full border border-line bg-surface text-ink focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-brand"
-          to={paths.myListings}
+          to={backTo}
         >
           <Icon name="arrow-left" size={18} />
         </Link>
@@ -49,10 +59,14 @@ export function ListingWizardShell({ step, children }: ListingWizardShellProps) 
             </li>
           </ol>
         </nav>
-        <ButtonLink to={paths.myListings}>
-          <Icon name="x" size={16} />
-          {t("wizard.discard")}
-        </ButtonLink>
+        {draft ? (
+          <DiscardDraftButton draft={draft} />
+        ) : (
+          <ButtonLink to={paths.myListings}>
+            <Icon name="x" size={16} />
+            {t("wizard.discard")}
+          </ButtonLink>
+        )}
       </div>
 
       <div className="px-20 md:px-0">

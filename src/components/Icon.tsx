@@ -2,6 +2,14 @@ import type { ReactNode } from "react";
 
 // Line icons from the design's icon set: 24px grid, 2px stroke.
 const icons = {
+  armchair: (
+    <>
+      <path d="M19 9V6a2 2 0 0 0-2-2H7a2 2 0 0 0-2 2v3" />
+      <path d="M3 16a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-5a2 2 0 0 0-4 0v1.5a.5.5 0 0 1-.5.5h-9a.5.5 0 0 1-.5-.5V11a2 2 0 0 0-4 0z" />
+      <path d="M5 18v2" />
+      <path d="M19 18v2" />
+    </>
+  ),
   "alert-triangle": (
     <>
       <path d="m21.73 18-8-14a2 2 0 0 0-3.48 0l-8 14A2 2 0 0 0 4 21h16a2 2 0 0 0 1.73-3Z" />
@@ -126,6 +134,7 @@ const icons = {
       <circle cx="12" cy="10" r="3" />
     </>
   ),
+  minus: <path d="M5 12h14" />,
   "more-horizontal": (
     <>
       <circle cx="12" cy="12" r="1" />
@@ -133,6 +142,14 @@ const icons = {
       <circle cx="5" cy="12" r="1" />
     </>
   ),
+  music: (
+    <>
+      <path d="M9 18V5l12-2v13" />
+      <circle cx="6" cy="18" r="3" />
+      <circle cx="18" cy="16" r="3" />
+    </>
+  ),
+  navigation: <polygon points="3 11 22 2 13 21 11 13 3 11" />,
   pencil: (
     <>
       <path d="M17 3a2.85 2.83 0 1 1 4 4L7.5 20.5 2 22l1.5-5.5Z" />
@@ -154,6 +171,12 @@ const icons = {
     <>
       <path d="M5 12h14" />
       <path d="M12 5v14" />
+    </>
+  ),
+  search: (
+    <>
+      <circle cx="11" cy="11" r="8" />
+      <path d="m21 21-4.3-4.3" />
     </>
   ),
   shield: (

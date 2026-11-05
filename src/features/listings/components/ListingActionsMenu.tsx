@@ -1,15 +1,18 @@
 import { useRef } from "react";
 import { useTranslation } from "react-i18next";
+import { Link } from "react-router";
 import { Icon } from "../../../components/Icon";
 import { useMenu } from "../../../hooks/useMenu";
 
 type ListingActionsMenuProps = {
   title: string;
+  // Where to continue a draft. The table shows its own button for this.
+  continueTo?: string;
   onDelete: () => void;
 };
 
 // The "…" button on a listing, for actions that don't need their own button.
-export function ListingActionsMenu({ title, onDelete }: ListingActionsMenuProps) {
+export function ListingActionsMenu({ title, continueTo, onDelete }: ListingActionsMenuProps) {
   const { t } = useTranslation("listings");
   const { open, setOpen, root } = useMenu();
   const trigger = useRef<HTMLButtonElement>(null);
@@ -27,7 +30,16 @@ export function ListingActionsMenu({ title, onDelete }: ListingActionsMenuProps)
         <Icon name="more-horizontal" size={16} />
       </button>
       {open && (
-        <div className="absolute inset-e-0 top-full z-10 mt-8 min-w-max rounded-md bg-surface p-4 shadow-elevation-2">
+        <div className="absolute inset-e-0 top-full z-10 mt-8 flex min-w-max flex-col gap-4 rounded-md bg-surface p-4 shadow-elevation-2">
+          {continueTo && (
+            <Link
+              className="flex min-h-control-s items-center gap-8 rounded-sm px-12 type-label-m text-ink hover:bg-paper focus-visible:outline-2 focus-visible:outline-brand"
+              to={continueTo}
+            >
+              <Icon name="arrow-right" size={16} />
+              {t("actions.continue")}
+            </Link>
+          )}
           <button
             className="flex min-h-control-s w-full cursor-pointer items-center gap-8 rounded-sm px-12 text-start type-label-m text-danger hover:bg-paper focus-visible:outline-2 focus-visible:outline-brand"
             onClick={() => {

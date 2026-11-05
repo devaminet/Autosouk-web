@@ -1,4 +1,4 @@
-import { screen, within } from "@testing-library/react";
+import { screen } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 import { http, HttpResponse } from "msw";
 import { describe, expect, it } from "vitest";
@@ -27,46 +27,18 @@ describe("NewListingPage", () => {
     expect(current).toHaveTextContent("Listing");
   });
 
-  it("saves the draft and returns to my listings with a notice", async () => {
+  it("creates the draft and moves on to the car step", async () => {
     const user = userEvent.setup();
     signInAs("seller");
     let sent: unknown;
-    let saved = false;
     server.use(
       http.post("*/api/listings", async ({ request }) => {
         sent = await request.json();
-        saved = true;
         return HttpResponse.json({ listing: { id: 7 } }, { status: 201 });
       }),
-      http.get("*/api/listings/mine", () =>
+      http.get("*/api/listings/7", () =>
         HttpResponse.json({
-          listings: saved
-            ? [
-                {
-                  id: 7,
-                  title: "Golf 8",
-                  status: "draft",
-                  rejectionReason: null,
-                  updatedAt: "2026-11-05",
-                  completedInspectionsCount: 0,
-                  car: null,
-                },
-              ]
-            : [],
-          meta: {
-            total: saved ? 1 : 0,
-            page: 1,
-            limit: 10,
-            totalPages: saved ? 1 : 0,
-            statusCounts: {
-              draft: saved ? 1 : 0,
-              pending: 0,
-              approved: 0,
-              withdrawn: 0,
-              rejected: 0,
-              sold: 0,
-            },
-          },
+          listing: { id: 7, title: "Golf 8", description: "Clean car", status: "draft", car: null },
         }),
       ),
     );
@@ -74,14 +46,11 @@ describe("NewListingPage", () => {
 
     await user.type(await screen.findByLabelText("Title"), "Golf 8");
     await user.type(screen.getByLabelText("Description"), "Clean car");
-    await user.click(screen.getByRole("button", { name: "Save draft" }));
+    await user.click(screen.getByRole("button", { name: "Continue to car details" }));
 
-    // The list is still loading here, and its loading text is a status too.
-    const notice = (await screen.findByText("Your draft is saved.")).closest("output");
-    expect(notice).toHaveFocus();
+    expect(await screen.findByRole("heading", { name: "Car details", level: 1 })).toBeInTheDocument();
     expect(sent).toEqual({ title: "Golf 8", description: "Clean car" });
-    expect(router.state.location.pathname).toBe("/my-listings");
-    expect(await within(await screen.findByRole("table")).findByText("Golf 8")).toBeInTheDocument();
+    expect(router.state.location.pathname).toBe("/my-listings/7/car");
   });
 
   it("shows the API's errors next to their inputs and focuses the first", async () => {
@@ -98,7 +67,7 @@ describe("NewListingPage", () => {
     );
     const router = renderApp("/my-listings/new");
 
-    await user.click(await screen.findByRole("button", { name: "Save draft" }));
+    await user.click(await screen.findByRole("button", { name: "Continue to car details" }));
 
     const title = await screen.findByLabelText("Title");
     expect(await screen.findByText("Title is required")).toBeInTheDocument();
@@ -118,7 +87,7 @@ describe("NewListingPage", () => {
     );
     renderApp("/my-listings/new");
 
-    await user.click(await screen.findByRole("button", { name: "Save draft" }));
+    await user.click(await screen.findByRole("button", { name: "Continue to car details" }));
 
     expect(await screen.findByRole("alert")).toHaveTextContent("The server had a problem");
   });
