@@ -283,4 +283,129 @@ describe("MyListingsPage", () => {
     expect(screen.queryByText("Volkswagen Golf 8 Life")).not.toBeInTheDocument();
     expect(router.state.location.pathname).toBe("/my-listings");
   });
+
+  describe("deleting a listing", () => {
+    const openDialog = async (user: ReturnType<typeof userEvent.setup>) => {
+      const table = await screen.findByRole("table");
+      await user.click(
+        within(table).getByRole("button", { name: "Actions for Volkswagen Golf 8 Life" }),
+      );
+      await user.click(within(table).getByRole("button", { name: "Delete listing" }));
+      return screen.findByRole("dialog", { name: "Delete this listing?" });
+    };
+
+    it("deletes the listing after the seller confirms", async () => {
+      const user = userEvent.setup();
+      let current = [approved, rejected];
+      const deleted: string[] = [];
+      server.use(
+        http.get("*/api/listings/mine", () => HttpResponse.json(page(current))),
+        http.delete("*/api/listings/:id", ({ params }) => {
+          deleted.push(String(params.id));
+          current = [rejected];
+          return HttpResponse.json({ deleted: true, listingId: 1 });
+        }),
+      );
+      renderPage();
+
+      const dialog = await openDialog(user);
+      expect(within(dialog).getByText("Volkswagen Golf 8 Life")).toBeInTheDocument();
+      await user.click(within(dialog).getByRole("button", { name: "Delete listing" }));
+
+      const notice = await screen.findByRole("status");
+      expect(notice).toHaveTextContent("“Volkswagen Golf 8 Life” was deleted.");
+      expect(notice).toHaveFocus();
+      expect(deleted).toEqual(["1"]);
+      expect(within(screen.getByRole("table")).queryByText("Volkswagen Golf 8 Life")).not.toBeInTheDocument();
+      expect(screen.queryByRole("dialog")).not.toBeInTheDocument();
+    });
+
+    it("keeps the listing when the seller cancels", async () => {
+      const user = userEvent.setup();
+      let deleteCalled = false;
+      respondWith([approved]);
+      server.use(
+        http.delete("*/api/listings/:id", () => {
+          deleteCalled = true;
+          return HttpResponse.json({ deleted: true, listingId: 1 });
+        }),
+      );
+      renderPage();
+
+      const dialog = await openDialog(user);
+      await user.click(within(dialog).getByRole("button", { name: "Cancel" }));
+
+      expect(screen.queryByRole("dialog")).not.toBeInTheDocument();
+      expect(deleteCalled).toBe(false);
+      expect(within(screen.getByRole("table")).getByText("Volkswagen Golf 8 Life")).toBeInTheDocument();
+    });
+
+    it("shows the API's error in the dialog and allows another try", async () => {
+      const user = userEvent.setup();
+      respondWith([approved]);
+      server.use(
+        http.delete("*/api/listings/:id", () =>
+          apiErrors(500, { code: "unexpected", message: "The server had a problem" }),
+        ),
+      );
+      renderPage();
+
+      const dialog = await openDialog(user);
+      await user.click(within(dialog).getByRole("button", { name: "Delete listing" }));
+
+      expect(await within(dialog).findByRole("alert")).toHaveTextContent("The server had a problem");
+      expect(within(dialog).getByRole("button", { name: "Delete listing" })).toBeEnabled();
+      expect(screen.queryByRole("status")).not.toBeInTheDocument();
+    });
+
+    it("forgets an earlier error when the dialog opens again", async () => {
+      const user = userEvent.setup();
+      respondWith([approved]);
+      server.use(
+        http.delete("*/api/listings/:id", () =>
+          apiErrors(500, { code: "unexpected", message: "The server had a problem" }),
+        ),
+      );
+      renderPage();
+
+      const dialog = await openDialog(user);
+      await user.click(within(dialog).getByRole("button", { name: "Delete listing" }));
+      await within(dialog).findByRole("alert");
+      await user.click(within(dialog).getByRole("button", { name: "Cancel" }));
+
+      const reopened = await openDialog(user);
+
+      expect(within(reopened).queryByRole("alert")).not.toBeInTheDocument();
+    });
+
+    it("moves to the previous page when the last listing of the last page goes", async () => {
+      const user = userEvent.setup();
+      let isDeleted = false;
+      server.use(
+        http.get("*/api/listings/mine", ({ request }) => {
+          const current = Number(new URL(request.url).searchParams.get("page"));
+          return HttpResponse.json(
+            isDeleted
+              ? page(current === 1 ? [rejected] : [], { page: current, totalPages: 1 })
+              : page([approved], { page: current, totalPages: 2 }),
+          );
+        }),
+        http.delete("*/api/listings/:id", () => {
+          isDeleted = true;
+          return HttpResponse.json({ deleted: true, listingId: 1 });
+        }),
+      );
+      const router = renderPage("/my-listings?page=2");
+
+      const dialog = await openDialog(user);
+      await user.click(within(dialog).getByRole("button", { name: "Delete listing" }));
+
+      expect(await within(await screen.findByRole("table")).findByText("Peugeot 208 Allure")).toBeInTheDocument();
+      expect(router.state.location.search).toBe("");
+      expect(screen.queryByRole("dialog")).not.toBeInTheDocument();
+      const notice = screen.getByRole("status");
+      expect(notice).toHaveTextContent("“Volkswagen Golf 8 Life” was deleted.");
+      expect(notice).toHaveFocus();
+    });
+  });
 });

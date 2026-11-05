@@ -1,6 +1,7 @@
 import { useTranslation } from "react-i18next";
 import { formatDay } from "../../../lib/format";
 import type { SellerListing } from "../api";
+import { ListingActionsMenu } from "./ListingActionsMenu";
 import { ListingMeta } from "./ListingMeta";
 import { ListingPrice } from "./ListingPrice";
 import { ListingThumb } from "./ListingThumb";
@@ -11,10 +12,11 @@ const headerCell = "pe-16 pb-12 text-start type-overline font-normal text-muted"
 
 type ListingsTableProps = {
   listings: SellerListing[];
+  onDelete: (listing: SellerListing) => void;
 };
 
 // The layout for wide screens. ListingCards is the one for small screens.
-export function ListingsTable({ listings }: ListingsTableProps) {
+export function ListingsTable({ listings, onDelete }: ListingsTableProps) {
   const { t, i18n } = useTranslation("listings");
 
   return (
@@ -35,6 +37,9 @@ export function ListingsTable({ listings }: ListingsTableProps) {
           </th>
           <th className={headerCell} scope="col">
             {t("table.updated")}
+          </th>
+          <th className="pb-12 text-end type-overline font-normal text-muted" scope="col">
+            {t("table.actions")}
           </th>
         </tr>
       </thead>
@@ -58,7 +63,7 @@ export function ListingsTable({ listings }: ListingsTableProps) {
             <td className="py-16 pe-16">
               <ListingPrice car={listing.car} />
             </td>
-            <td className="py-16 pe-16">
+            <td className="py-16 pe-16 whitespace-nowrap">
               <StatusBadge status={listing.status} />
             </td>
             <td className="py-16 pe-16 type-body-s text-ink-2">
@@ -70,6 +75,14 @@ export function ListingsTable({ listings }: ListingsTableProps) {
             </td>
             <td className="py-16 pe-16 type-body-s whitespace-nowrap text-muted">
               {formatDay(listing.updatedAt, i18n.language)}
+            </td>
+            <td className="py-16">
+              <div className="flex justify-end">
+                <ListingActionsMenu
+                  onDelete={() => onDelete(listing)}
+                  title={listing.title}
+                />
+              </div>
             </td>
           </tr>
         ))}

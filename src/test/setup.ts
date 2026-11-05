@@ -6,6 +6,15 @@ import { setAccessToken } from "../lib/api/client";
 import i18n from "../lib/i18n";
 import { queryClient } from "../lib/queryClient";
 
+// jsdom has the dialog element but not these methods.
+HTMLDialogElement.prototype.showModal = function showModal() {
+  this.open = true;
+};
+HTMLDialogElement.prototype.close = function close() {
+  this.open = false;
+  this.dispatchEvent(new Event("close"));
+};
+
 beforeEach(async () => {
   await i18n.changeLanguage("en");
 });

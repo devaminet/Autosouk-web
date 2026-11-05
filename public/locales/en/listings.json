@@ -7,7 +7,17 @@
     "emptyFilter": "You have no listings with this status.",
     "retry": "Try again",
     "noCar": "Car details not added yet",
-    "rejectedBecause": "Why it was rejected:"
+    "rejectedBecause": "Why it was rejected:",
+    "deleted": "“{{title}}” was deleted."
+  },
+  "actions": {
+    "menu": "Actions for {{title}}",
+    "delete": "Delete listing"
+  },
+  "deleteDialog": {
+    "title": "Delete this listing?",
+    "description": "Its photos, videos and inspections are deleted too. You can't undo this.",
+    "cancel": "Cancel"
   },
   "stats": {
     "approved": { "label": "Approved & live", "hint": "Visible in search" },
@@ -24,6 +34,7 @@
     "status": "Status",
     "inspections": "Inspections",
     "updated": "Updated",
+    "actions": "Actions",
     "inspectionsCompleted_one": "{{count}} completed",
     "inspectionsCompleted_other": "{{count}} completed"
   },

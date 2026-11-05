@@ -1,4 +1,5 @@
 import type { SellerListing } from "../api";
+import { ListingActionsMenu } from "./ListingActionsMenu";
 import { ListingPrice } from "./ListingPrice";
 import { ListingThumb } from "./ListingThumb";
 import { RejectionNote } from "./RejectionNote";
@@ -6,10 +7,11 @@ import { StatusBadge } from "./StatusBadge";
 
 type ListingCardsProps = {
   listings: SellerListing[];
+  onDelete: (listing: SellerListing) => void;
 };
 
 // The layout for small screens. ListingsTable is the one for wide screens.
-export function ListingCards({ listings }: ListingCardsProps) {
+export function ListingCards({ listings, onDelete }: ListingCardsProps) {
   return (
     <ul className="flex flex-col gap-12 md:hidden">
       {listings.map((listing) => (
@@ -28,6 +30,10 @@ export function ListingCards({ listings }: ListingCardsProps) {
               <RejectionNote reason={listing.rejectionReason} />
             )}
           </div>
+          <ListingActionsMenu
+            onDelete={() => onDelete(listing)}
+            title={listing.title}
+          />
         </li>
       ))}
     </ul>

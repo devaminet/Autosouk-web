@@ -1,3 +1,4 @@
+import { useEffect, useRef, useState } from "react";
 import { useTranslation } from "react-i18next";
 import { Navigate, useSearchParams } from "react-router";
 import { Alert } from "../../../components/Alert";
@@ -5,11 +6,13 @@ import { Button } from "../../../components/Button";
 import { Icon } from "../../../components/Icon";
 import { PageTitle } from "../../../components/PageTitle";
 import { Pagination } from "../../../components/Pagination";
+import type { SellerListing } from "../api";
+import { DeleteListingDialog } from "../components/DeleteListingDialog";
 import { ListingCards } from "../components/ListingCards";
 import { ListingStats } from "../components/ListingStats";
 import { ListingsTable } from "../components/ListingsTable";
 import { StatusTabs } from "../components/StatusTabs";
-import { useMyListings } from "../hooks";
+import { useDeleteListing, useMyListings } from "../hooks";
 import { myListingsSearch, parseMyListingsSearch } from "../myListingsSearch";
 
 export function MyListingsPage() {
@@ -18,16 +21,43 @@ export function MyListingsPage() {
   const { status, page } = parseMyListingsSearch(searchParams);
   const query = useMyListings({ status, page });
   const data = query.data;
+  const deletion = useDeleteListing();
+  const [listingToDelete, setListingToDelete] = useState<SellerListing | null>(null);
+  const [deletedListing, setDeletedListing] = useState<SellerListing | null>(null);
+  const deletedNotice = useRef<HTMLOutputElement>(null);
+
+  // The deleted row held the focus, so keyboard and screen reader users continue
+  // from the notice. A parent's effect runs after the dialog's, which has closed
+  // by then. An open modal dialog would block this focus.
+  useEffect(() => {
+    if (deletedListing) {
+      deletedNotice.current?.focus();
+    }
+  }, [deletedListing]);
+
+  const askToDelete = (listing: SellerListing) => {
+    deletion.reset();
+    setDeletedListing(null);
+    setListingToDelete(listing);
+  };
+
+  const confirmDelete = () => {
+    if (!listingToDelete) {
+      return;
+    }
+    deletion.mutate(listingToDelete.id, {
+      onSuccess: () => {
+        setDeletedListing(listingToDelete);
+        setListingToDelete(null);
+      },
+    });
+  };
 
   // The last listing of a page can disappear, which leaves a page that is gone.
-  if (data && !query.isPlaceholderData && data.meta.totalPages > 0 && page > data.meta.totalPages) {
-    return (
-      <Navigate
-        replace
-        to={{ search: myListingsSearch({ status, page: data.meta.totalPages }) }}
-      />
-    );
-  }
+  const lastPage =
+    data && !query.isPlaceholderData && data.meta.totalPages > 0 && page > data.meta.totalPages
+      ? data.meta.totalPages
+      : null;
 
   return (
     <div className="flex flex-col gap-24 px-20 py-24 md:gap-32 md:px-80 md:py-48">
@@ -36,6 +66,18 @@ export function MyListingsPage() {
         <p className="hidden type-overline text-brand md:block">{t("myListings.overline")}</p>
         <h1 className="type-h1 text-ink md:type-display-m">{t("myListings.title")}</h1>
       </header>
+
+      {deletedListing && (
+        <output
+          className="block focus:outline-none"
+          ref={deletedNotice}
+          tabIndex={-1}
+        >
+          <Alert tone="success">
+            {t("myListings.deleted", { title: deletedListing.title })}
+          </Alert>
+        </output>
+      )}
 
       {query.isPending && (
         <output className="block type-body-m text-muted">{t("common:loading")}</output>
@@ -60,7 +102,11 @@ export function MyListingsPage() {
         </div>
       )}
 
-      {data && (
+      {lastPage !== null && (
+        <Navigate replace to={{ search: myListingsSearch({ status, page: lastPage }) }} />
+      )}
+
+      {data && lastPage === null && (
         <>
           <ListingStats counts={data.meta.statusCounts} />
           <section
@@ -75,8 +121,8 @@ export function MyListingsPage() {
             </p>
             {data.listings.length > 0 ? (
               <>
-                <ListingsTable listings={data.listings} />
-                <ListingCards listings={data.listings} />
+                <ListingsTable listings={data.listings} onDelete={askToDelete} />
+                <ListingCards listings={data.listings} onDelete={askToDelete} />
                 <Pagination
                   hrefFor={(target) => myListingsSearch({ status, page: target })}
                   page={page}
@@ -91,6 +137,14 @@ export function MyListingsPage() {
           </section>
         </>
       )}
+
+      <DeleteListingDialog
+        error={deletion.error?.message ?? null}
+        isPending={deletion.isPending}
+        listing={listingToDelete}
+        onClose={() => setListingToDelete(null)}
+        onConfirm={confirmDelete}
+      />
     </div>
   );
 }

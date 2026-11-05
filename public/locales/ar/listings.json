@@ -7,7 +7,17 @@
     "emptyFilter": "ليس لديك إعلانات بهذه الحالة.",
     "retry": "حاول مرة أخرى",
     "noCar": "لم تتم إضافة تفاصيل السيارة بعد",
-    "rejectedBecause": "سبب الرفض:"
+    "rejectedBecause": "سبب الرفض:",
+    "deleted": "تم حذف «{{title}}»."
+  },
+  "actions": {
+    "menu": "إجراءات {{title}}",
+    "delete": "حذف الإعلان"
+  },
+  "deleteDialog": {
+    "title": "هل تريد حذف هذا الإعلان؟",
+    "description": "سيتم أيضًا حذف صوره وفيديوهاته وفحوصاته. لا يمكن التراجع عن هذا الإجراء.",
+    "cancel": "إلغاء"
   },
   "stats": {
     "approved": { "label": "مقبولة ومعروضة", "hint": "تظهر في البحث" },
@@ -24,6 +34,7 @@
     "status": "الحالة",
     "inspections": "الفحوصات",
     "updated": "آخر تحديث",
+    "actions": "الإجراءات",
     "inspectionsCompleted_zero": "لا توجد فحوصات مكتملة",
     "inspectionsCompleted_one": "فحص واحد مكتمل",
     "inspectionsCompleted_two": "فحصان مكتملان",

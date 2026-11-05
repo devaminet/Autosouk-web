@@ -7,7 +7,17 @@
     "emptyFilter": "Vous n'avez aucune annonce avec ce statut.",
     "retry": "Réessayer",
     "noCar": "Détails de la voiture pas encore ajoutés",
-    "rejectedBecause": "Motif du refus :"
+    "rejectedBecause": "Motif du refus :",
+    "deleted": "« {{title}} » a été supprimée."
+  },
+  "actions": {
+    "menu": "Actions pour {{title}}",
+    "delete": "Supprimer l'annonce"
+  },
+  "deleteDialog": {
+    "title": "Supprimer cette annonce ?",
+    "description": "Ses photos, vidéos et inspections seront aussi supprimées. Cette action est irréversible.",
+    "cancel": "Annuler"
   },
   "stats": {
     "approved": { "label": "Approuvées et en ligne", "hint": "Visibles dans la recherche" },
@@ -24,6 +34,7 @@
     "status": "Statut",
     "inspections": "Inspections",
     "updated": "Mise à jour",
+    "actions": "Actions",
     "inspectionsCompleted_one": "{{count}} terminée",
     "inspectionsCompleted_many": "{{count}} terminées",
     "inspectionsCompleted_other": "{{count}} terminées"

@@ -66,3 +66,14 @@ export const getMyListings = ({ status, page }: MyListingsFilter) => {
   }
   return request(`/api/listings/mine?${query}`, { schema: myListingsSchema });
 };
+
+const deletedListingSchema = z.object({
+  deleted: z.literal(true),
+  listingId: z.number(),
+});
+
+export const deleteListing = (id: number) =>
+  request(`/api/listings/${id}`, {
+    method: "DELETE",
+    schema: deletedListingSchema,
+  });
