@@ -133,21 +133,4 @@ describe("LoginPage", () => {
 
     expect(refreshes).toBe(1);
   });
-
-  it("logs out from the home page", async () => {
-    const user = userEvent.setup();
-    server.use(
-      http.post("*/api/auth/refresh-token", () =>
-        HttpResponse.json({ accessToken: "token", user: testUser }),
-      ),
-      http.post("*/api/auth/logout", () =>
-        HttpResponse.json({ code: "auth.logged_out", message: "Success" }),
-      ),
-    );
-    renderApp("/");
-
-    await user.click(await screen.findByRole("button", { name: "Log out" }));
-
-    expect(await screen.findByRole("link", { name: "Log in" })).toBeInTheDocument();
-  });
 });

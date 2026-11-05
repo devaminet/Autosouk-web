@@ -1,18 +1,24 @@
 import { http, HttpResponse } from "msw";
 import arAuth from "../../public/locales/ar/auth.json";
 import arCommon from "../../public/locales/ar/common.json";
+import arListings from "../../public/locales/ar/listings.json";
 import enAuth from "../../public/locales/en/auth.json";
 import enCommon from "../../public/locales/en/common.json";
+import enListings from "../../public/locales/en/listings.json";
 import frAuth from "../../public/locales/fr/auth.json";
 import frCommon from "../../public/locales/fr/common.json";
+import frListings from "../../public/locales/fr/listings.json";
 
 const translations: Record<string, unknown> = {
   "en/common": enCommon,
   "en/auth": enAuth,
+  "en/listings": enListings,
   "fr/common": frCommon,
   "fr/auth": frAuth,
+  "fr/listings": frListings,
   "ar/common": arCommon,
   "ar/auth": arAuth,
+  "ar/listings": arListings,
 };
 
 const apiCatalogs: Record<string, unknown> = {

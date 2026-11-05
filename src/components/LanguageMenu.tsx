@@ -1,5 +1,5 @@
-import { useEffect, useRef, useState } from "react";
 import { useTranslation } from "react-i18next";
+import { useMenu } from "../hooks/useMenu";
 import { directionOf, isLocale, localeNames, locales } from "../lib/locale";
 import { Icon } from "./Icon";
 
@@ -10,34 +10,8 @@ type LanguageMenuProps = {
 // The header's language switch: a globe, the current code and a list.
 export function LanguageMenu({ tone = "light" }: LanguageMenuProps) {
   const { t, i18n } = useTranslation();
-  const [open, setOpen] = useState(false);
-  const root = useRef<HTMLDivElement>(null);
+  const { open, setOpen, root } = useMenu();
   const current = isLocale(i18n.language) ? i18n.language : "fr";
-
-  useEffect(() => {
-    if (!open) {
-      return;
-    }
-    const closeOnOutsidePress = (event: PointerEvent) => {
-      if (
-        event.target instanceof Node &&
-        !root.current?.contains(event.target)
-      ) {
-        setOpen(false);
-      }
-    };
-    const closeOnEscape = (event: KeyboardEvent) => {
-      if (event.key === "Escape") {
-        setOpen(false);
-      }
-    };
-    document.addEventListener("pointerdown", closeOnOutsidePress);
-    document.addEventListener("keydown", closeOnEscape);
-    return () => {
-      document.removeEventListener("pointerdown", closeOnOutsidePress);
-      document.removeEventListener("keydown", closeOnEscape);
-    };
-  }, [open]);
 
   const trigger =
     tone === "dark"
