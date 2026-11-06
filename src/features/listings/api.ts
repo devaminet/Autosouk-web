@@ -194,10 +194,16 @@ export type CarInput = {
 export const attachCar = ({ id, car }: { id: number; car: CarInput }) =>
   request(`/api/listings/${id}/car`, { method: "POST", body: car, schema: z.unknown() });
 
+// A field left out keeps its value. Null clears a number, which the API refuses
+// by name, so an emptied input gets its own error message.
+export type CarChanges = {
+  [Field in keyof CarInput]?: CarInput[Field] | null;
+};
+
 export type ListingChanges = {
   title?: string;
   description?: string;
-  car?: CarInput;
+  car?: CarChanges;
 };
 
 export const updateListing = ({ id, changes }: { id: number; changes: ListingChanges }) =>

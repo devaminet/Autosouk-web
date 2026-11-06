@@ -68,10 +68,13 @@ export const useCreateListing = () => {
   });
 };
 
+export const updateListingKey = [...listingsKey, "update"];
+
 // The next step reads the listing, so wait until the cache is fresh.
 export const useUpdateListing = () => {
   const queryClient = useQueryClient();
   return useMutation({
+    mutationKey: updateListingKey,
     mutationFn: updateListing,
     onSuccess: () => queryClient.invalidateQueries({ queryKey: listingsKey }),
   });

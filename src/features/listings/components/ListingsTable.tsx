@@ -3,6 +3,7 @@ import { ButtonLink } from "../../../components/ButtonLink";
 import { Icon } from "../../../components/Icon";
 import { formatDay } from "../../../lib/format";
 import type { SellerListing } from "../api";
+import { editActionFor } from "../editAction";
 import { resumeDraftPath } from "../wizardSteps";
 import { ListingActionsMenu } from "./ListingActionsMenu";
 import { ListingMeta } from "./ListingMeta";
@@ -15,11 +16,13 @@ const headerCell = "pe-16 pb-12 text-start type-overline font-normal text-muted"
 
 type ListingsTableProps = {
   listings: SellerListing[];
+  // The link that opens a listing in the edit drawer.
+  editTo: (listing: SellerListing) => string;
   onDelete: (listing: SellerListing) => void;
 };
 
 // The layout for wide screens. ListingCards is the one for small screens.
-export function ListingsTable({ listings, onDelete }: ListingsTableProps) {
+export function ListingsTable({ listings, editTo, onDelete }: ListingsTableProps) {
   const { t, i18n } = useTranslation("listings");
 
   return (
@@ -47,7 +50,9 @@ export function ListingsTable({ listings, onDelete }: ListingsTableProps) {
         </tr>
       </thead>
       <tbody>
-        {listings.map((listing) => (
+        {listings.map((listing) => {
+          const edit = editActionFor(listing.status);
+          return (
           <tr className="border-b border-line last:border-b-0" key={listing.id}>
             <td className="py-16 pe-16">
               <div className="flex items-center gap-16">
@@ -92,6 +97,18 @@ export function ListingsTable({ listings, onDelete }: ListingsTableProps) {
                     {t("actions.continue")}
                   </ButtonLink>
                 )}
+                {edit && (
+                  <ButtonLink
+                    aria-label={t(`actions.${edit.label}Listing`, { title: listing.title })}
+                    preventScrollReset
+                    size="s"
+                    to={editTo(listing)}
+                    variant={edit.variant}
+                  >
+                    <Icon name="pencil" size={16} />
+                    {t(`actions.${edit.label}`)}
+                  </ButtonLink>
+                )}
                 <ListingActionsMenu
                   onDelete={() => onDelete(listing)}
                   title={listing.title}
@@ -99,7 +116,8 @@ export function ListingsTable({ listings, onDelete }: ListingsTableProps) {
               </div>
             </td>
           </tr>
-        ))}
+          );
+        })}
       </tbody>
     </table>
   );

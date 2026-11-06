@@ -15,7 +15,11 @@
     "menu": "Actions pour {{title}}",
     "delete": "Supprimer l'annonce",
     "continue": "Continuer",
-    "continueListing": "Continuer {{title}}"
+    "continueListing": "Continuer {{title}}",
+    "edit": "Modifier",
+    "editResubmit": "Modifier et renvoyer",
+    "editListing": "Modifier {{title}}",
+    "editResubmitListing": "Modifier et renvoyer {{title}}"
   },
   "deleteDialog": {
     "title": "Supprimer cette annonce ?",
@@ -188,5 +192,14 @@
     "description": "Notre équipe vérifie chaque annonce, généralement en moins de 24 heures. Elle apparaît dans la recherche une fois approuvée.",
     "myListings": "Voir mes annonces",
     "another": "Vendre une autre voiture"
+  },
+  "edit": {
+    "overline": "Modifier l’annonce",
+    "close": "Fermer",
+    "warningApproved": "Enregistrer des modifications renvoie l’annonce en validation et la retire de la recherche jusqu’à sa nouvelle approbation.",
+    "warning": "Enregistrer des modifications renvoie l’annonce en validation.",
+    "cancel": "Annuler",
+    "save": "Enregistrer",
+    "saved": "Vos modifications sont enregistrées. L’annonce est de nouveau en validation."
   }
 }

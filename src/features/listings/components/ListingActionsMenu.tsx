@@ -8,11 +8,13 @@ type ListingActionsMenuProps = {
   title: string;
   // Where to continue a draft. The table shows its own button for this.
   continueTo?: string;
+  // Where to edit the listing. The table shows its own button for this too.
+  edit?: { to: string; label: "edit" | "editResubmit" };
   onDelete: () => void;
 };
 
 // The "…" button on a listing, for actions that don't need their own button.
-export function ListingActionsMenu({ title, continueTo, onDelete }: ListingActionsMenuProps) {
+export function ListingActionsMenu({ title, continueTo, edit, onDelete }: ListingActionsMenuProps) {
   const { t } = useTranslation("listings");
   const { open, setOpen, root } = useMenu();
   const trigger = useRef<HTMLButtonElement>(null);
@@ -38,6 +40,17 @@ export function ListingActionsMenu({ title, continueTo, onDelete }: ListingActio
             >
               <Icon name="arrow-right" size={16} />
               {t("actions.continue")}
+            </Link>
+          )}
+          {edit && (
+            <Link
+              className="flex min-h-control-s items-center gap-8 rounded-sm px-12 type-label-m text-ink hover:bg-paper focus-visible:outline-2 focus-visible:outline-brand"
+              onClick={() => setOpen(false)}
+              preventScrollReset
+              to={edit.to}
+            >
+              <Icon name="pencil" size={16} />
+              {t(`actions.${edit.label}`)}
             </Link>
           )}
           <button

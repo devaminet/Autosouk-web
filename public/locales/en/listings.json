@@ -15,7 +15,11 @@
     "menu": "Actions for {{title}}",
     "delete": "Delete listing",
     "continue": "Continue",
-    "continueListing": "Continue {{title}}"
+    "continueListing": "Continue {{title}}",
+    "edit": "Edit",
+    "editResubmit": "Edit & resubmit",
+    "editListing": "Edit {{title}}",
+    "editResubmitListing": "Edit and resubmit {{title}}"
   },
   "deleteDialog": {
     "title": "Delete this listing?",
@@ -187,5 +191,14 @@
     "description": "Our team checks every listing, usually in under 24 hours. It appears in search once approved.",
     "myListings": "Go to my listings",
     "another": "List another car"
+  },
+  "edit": {
+    "overline": "Edit listing",
+    "close": "Close",
+    "warningApproved": "Saving changes sends the listing back to review and hides it from search until it is approved again.",
+    "warning": "Saving changes sends the listing back to review.",
+    "cancel": "Cancel",
+    "save": "Save changes",
+    "saved": "Your changes are saved. The listing is back in review."
   }
 }

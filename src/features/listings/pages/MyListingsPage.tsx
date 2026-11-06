@@ -1,6 +1,6 @@
 import { useEffect, useRef, useState } from "react";
 import { useTranslation } from "react-i18next";
-import { Link, Navigate, useLocation, useSearchParams } from "react-router";
+import { Link, Navigate, useLocation, useNavigate, useSearchParams } from "react-router";
 import { z } from "zod";
 import { Alert } from "../../../components/Alert";
 import { Button } from "../../../components/Button";
@@ -11,24 +11,29 @@ import { Pagination } from "../../../components/Pagination";
 import { paths } from "../../../lib/paths";
 import type { SellerListing } from "../api";
 import { DeleteListingDialog } from "../components/DeleteListingDialog";
+import { EditListingDrawer } from "../components/EditListingDrawer";
 import { ListingCards } from "../components/ListingCards";
 import { ListingStats } from "../components/ListingStats";
 import { ListingsTable } from "../components/ListingsTable";
 import { StatusTabs } from "../components/StatusTabs";
 import { useDeleteListing, useMyListings } from "../hooks";
-import { myListingsSearch, parseMyListingsSearch } from "../myListingsSearch";
+import { myListingsSearch, parseEditParam, parseMyListingsSearch } from "../myListingsSearch";
 
 const noticeSchema = z.object({ notice: z.string() });
+
+type ListingRef = { id: number; title: string };
 
 export function MyListingsPage() {
   const { t } = useTranslation("listings");
   const [searchParams] = useSearchParams();
   const { status, page } = parseMyListingsSearch(searchParams);
+  const editId = parseEditParam(searchParams);
+  const navigate = useNavigate();
   const query = useMyListings({ status, page });
   const data = query.data;
   const deletion = useDeleteListing();
-  const [listingToDelete, setListingToDelete] = useState<SellerListing | null>(null);
-  const [deletedListing, setDeletedListing] = useState<SellerListing | null>(null);
+  const [listingToDelete, setListingToDelete] = useState<ListingRef | null>(null);
+  const [deletedListing, setDeletedListing] = useState<ListingRef | null>(null);
   const location = useLocation();
   const routeNotice = noticeSchema.safeParse(location.state);
   const notice = deletedListing
@@ -45,7 +50,18 @@ export function MyListingsPage() {
     }
   }, [notice]);
 
-  const askToDelete = (listing: SellerListing) => {
+  // The drawer lives in the URL, so a link opens it and Back closes it.
+  const editTo = (listing: SellerListing) => myListingsSearch({ status, page, edit: listing.id });
+  const closeEdit = (state?: { notice: string }) => {
+    if (editId !== null) {
+      void navigate(
+        { search: myListingsSearch({ status, page }) },
+        { replace: true, preventScrollReset: true, state },
+      );
+    }
+  };
+
+  const askToDelete = (listing: ListingRef) => {
     deletion.reset();
     setDeletedListing(null);
     setListingToDelete(listing);
@@ -59,6 +75,8 @@ export function MyListingsPage() {
       onSuccess: () => {
         setDeletedListing(listingToDelete);
         setListingToDelete(null);
+        // Deleting from the drawer closes it too.
+        closeEdit();
       },
     });
   };
@@ -140,8 +158,8 @@ export function MyListingsPage() {
             </p>
             {data.listings.length > 0 ? (
               <>
-                <ListingsTable listings={data.listings} onDelete={askToDelete} />
-                <ListingCards listings={data.listings} onDelete={askToDelete} />
+                <ListingsTable editTo={editTo} listings={data.listings} onDelete={askToDelete} />
+                <ListingCards editTo={editTo} listings={data.listings} onDelete={askToDelete} />
                 <Pagination
                   hrefFor={(target) => myListingsSearch({ status, page: target })}
                   page={page}
@@ -157,6 +175,16 @@ export function MyListingsPage() {
         </>
       )}
 
+      <EditListingDrawer
+        listingId={editId}
+        onClose={() => closeEdit()}
+        onDelete={askToDelete}
+        onSaved={() => {
+          setDeletedListing(null);
+          closeEdit({ notice: t("edit.saved") });
+        }}
+      />
+      {/* Opened later than the drawer, so it shows on top of it. */}
       <DeleteListingDialog
         error={deletion.error?.message ?? null}
         isPending={deletion.isPending}

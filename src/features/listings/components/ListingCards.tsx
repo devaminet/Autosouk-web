@@ -1,4 +1,5 @@
 import type { SellerListing } from "../api";
+import { editActionFor } from "../editAction";
 import { resumeDraftPath } from "../wizardSteps";
 import { ListingActionsMenu } from "./ListingActionsMenu";
 import { ListingPrice } from "./ListingPrice";
@@ -8,11 +9,17 @@ import { StatusBadge } from "./StatusBadge";
 
 type ListingCardsProps = {
   listings: SellerListing[];
+  editTo: (listing: SellerListing) => string;
   onDelete: (listing: SellerListing) => void;
 };
 
 // The layout for small screens. ListingsTable is the one for wide screens.
-export function ListingCards({ listings, onDelete }: ListingCardsProps) {
+export function ListingCards({ listings, editTo, onDelete }: ListingCardsProps) {
+  const editFor = (listing: SellerListing) => {
+    const action = editActionFor(listing.status);
+    return action ? { to: editTo(listing), label: action.label } : undefined;
+  };
+
   return (
     <ul className="flex flex-col gap-12 md:hidden">
       {listings.map((listing) => (
@@ -33,6 +40,7 @@ export function ListingCards({ listings, onDelete }: ListingCardsProps) {
           </div>
           <ListingActionsMenu
             continueTo={listing.status === "draft" ? resumeDraftPath(listing) : undefined}
+            edit={editFor(listing)}
             onDelete={() => onDelete(listing)}
             title={listing.title}
           />
