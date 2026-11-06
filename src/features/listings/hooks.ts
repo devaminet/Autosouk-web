@@ -34,11 +34,12 @@ export const useMyListings = (filter: MyListingsFilter) =>
     placeholderData: keepPreviousData,
   });
 
-export const useListing = (id: number | null) =>
+// Waits while `ready` is false, such as until the session is known.
+export const useListing = (id: number | null, ready = true) =>
   useQuery({
     queryKey: listingKey(id),
     queryFn: () => getListing(id ?? 0),
-    enabled: id !== null,
+    enabled: id !== null && ready,
   });
 
 // Reference data changes with deployments, not while someone fills a form.

@@ -4,7 +4,7 @@ import { http, HttpResponse } from "msw";
 import { describe, expect, it } from "vitest";
 import { server } from "../../../test/bootstrap";
 import { testCar, testMedia } from "../../../test/fixtures";
-import { apiErrors } from "../../../test/handlers";
+import { apiErrors, testUser } from "../../../test/handlers";
 import { renderApp } from "../../../test/renderApp";
 
 const media = [testMedia(1, { isPrimary: true }), testMedia(2), testMedia(3, { type: "video" })];
@@ -93,6 +93,28 @@ describe("ListingPage", () => {
     renderListing({ status: "pending" });
 
     expect(await screen.findByText(/Only you can see this listing/u)).toBeInTheDocument();
+  });
+
+  it("waits for the session before asking for a listing only its seller can see", async () => {
+    server.use(
+      // The page loads before the session is restored, as after a refresh.
+      http.post("*/api/auth/refresh-token", async () => {
+        await new Promise((resolve) => setTimeout(resolve, 50));
+        return HttpResponse.json({ accessToken: "token", user: { ...testUser, role: "seller" } });
+      }),
+      // Like the API, a pending listing is only found with its seller's token.
+      http.get("*/api/listings/7", ({ request }) =>
+        request.headers.get("Authorization") === "Bearer token"
+          ? HttpResponse.json({
+              listing: { id: 7, title: "My Golf", description: "Clean car", status: "pending", car: testCar },
+            })
+          : apiErrors(404, { code: "listing.not_found", message: "Listing not found" }),
+      ),
+    );
+    renderApp("/listings/7");
+
+    expect(await screen.findByRole("heading", { level: 1, name: "My Golf" })).toBeInTheDocument();
+    expect(screen.queryByText("Listing not found")).not.toBeInTheDocument();
   });
 
   it("shows the API's message for a listing that isn't public", async () => {
