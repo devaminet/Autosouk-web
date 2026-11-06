@@ -12,10 +12,13 @@ type MediaTileProps = {
   busy: boolean;
   onMakeCover: () => void;
   onDelete: () => void;
+  // A published listing keeps a minimum of photos. The button then explains
+  // why it can't delete, instead of deleting.
+  onLockedDelete?: () => void;
 };
 
 // One uploaded photo or video. Only a photo can be the cover.
-export function MediaTile({ media, number, busy, onMakeCover, onDelete }: MediaTileProps) {
+export function MediaTile({ media, number, busy, onMakeCover, onDelete, onLockedDelete }: MediaTileProps) {
   const { t } = useTranslation("listings");
   const isImage = media.type === "image";
   const name = t(isImage ? "photos.photo" : "photos.video", { number });
@@ -58,15 +61,27 @@ export function MediaTile({ media, number, busy, onMakeCover, onDelete }: MediaT
             <Icon name="star" size={16} />
           </button>
         )}
-        <button
-          aria-label={t("photos.delete", { name })}
-          className={`${roundButton} text-danger`}
-          disabled={busy}
-          onClick={onDelete}
-          type="button"
-        >
-          <Icon name="trash" size={16} />
-        </button>
+        {onLockedDelete ? (
+          <button
+            aria-label={t("media.locked", { name })}
+            className={`${roundButton} text-muted`}
+            disabled={busy}
+            onClick={onLockedDelete}
+            type="button"
+          >
+            <Icon name="lock" size={16} />
+          </button>
+        ) : (
+          <button
+            aria-label={t("photos.delete", { name })}
+            className={`${roundButton} text-danger`}
+            disabled={busy}
+            onClick={onDelete}
+            type="button"
+          >
+            <Icon name="trash" size={16} />
+          </button>
+        )}
       </div>
     </li>
   );

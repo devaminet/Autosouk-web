@@ -240,6 +240,12 @@
       "limit_many": "Jusqu’à {{count}} fichiers par voiture, vidéos comprises. Les fichiers en cours d’envoi comptent aussi.",
       "limit_other": "Jusqu’à {{count}} fichiers par voiture, vidéos comprises. Les fichiers en cours d’envoi comptent aussi.",
       "confirmed": "Seuls les fichiers confirmés apparaissent sur l’annonce."
-    }
+    },
+    "locked": "Pourquoi {{name}} ne peut pas être supprimée",
+    "lockedTitle": "Impossible de supprimer cette photo",
+    "lockedText_one": "Une annonce doit avoir au moins {{count}} photo. Envoyez et confirmez d’abord une nouvelle photo, puis supprimez celle-ci.",
+    "lockedText_many": "Une annonce doit avoir au moins {{count}} photos. Envoyez et confirmez d’abord une nouvelle photo, puis supprimez celle-ci.",
+    "lockedText_other": "Une annonce doit avoir au moins {{count}} photos. Envoyez et confirmez d’abord une nouvelle photo, puis supprimez celle-ci.",
+    "replace": "Envoyer une photo de remplacement"
   }
 }

@@ -157,6 +157,25 @@ describe("ListingMediaPage", () => {
     await expect.poll(() => deleted).toEqual({ mediaIds: [4] });
   });
 
+  it("keeps the minimum of photos and explains why", async () => {
+    const user = userEvent.setup();
+    let requested = false;
+    server.use(
+      http.delete("*/api/listings/7/media", () => {
+        requested = true;
+        return HttpResponse.json({ deleted: [], carMedias: [] });
+      }),
+    );
+    renderPage({ current: [...threePhotos(), testMedia(4, { type: "video" })] });
+
+    expect(await screen.findByRole("button", { name: "Delete Video 4" })).toBeInTheDocument();
+    expect(screen.queryByRole("button", { name: "Delete Photo 2" })).not.toBeInTheDocument();
+    await user.click(screen.getByRole("button", { name: "Why Photo 2 can't be deleted" }));
+
+    expect(await screen.findByRole("alert")).toHaveTextContent("Can't delete this photo");
+    expect(requested).toBe(false);
+  });
+
   it("shows why the API refuses to delete a photo", async () => {
     const user = userEvent.setup();
     server.use(
@@ -164,7 +183,7 @@ describe("ListingMediaPage", () => {
         apiErrors(400, { code: "media.min_images", message: "A car needs at least 3 images.", field: "mediaIds" }),
       ),
     );
-    renderPage({ current: threePhotos() });
+    renderPage({ current: [...threePhotos(), testMedia(4)] });
 
     await user.click(await screen.findByRole("button", { name: "Delete Photo 2" }));
 

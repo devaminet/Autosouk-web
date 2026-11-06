@@ -234,6 +234,11 @@
       "limit_one": "Up to {{count}} file per car, videos included. Files still uploading count too.",
       "limit_other": "Up to {{count}} files per car, videos included. Files still uploading count too.",
       "confirmed": "Only confirmed files appear on the listing."
-    }
+    },
+    "locked": "Why {{name}} can't be deleted",
+    "lockedTitle": "Can't delete this photo",
+    "lockedText_one": "A listing needs at least {{count}} photo. Upload and confirm a new one first, then delete this one.",
+    "lockedText_other": "A listing needs at least {{count}} photos. Upload and confirm a new one first, then delete this one.",
+    "replace": "Upload a replacement"
   }
 }
