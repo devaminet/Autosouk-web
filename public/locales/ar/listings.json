@@ -392,7 +392,8 @@
       "empty": "لا توجد سيارات منشورة بعد. عد قريبًا.",
       "noMatch": "لا توجد سيارات تطابق بحثك.",
       "clear": "مسح البحث",
-      "retry": "أعد المحاولة"
+      "retry": "أعد المحاولة",
+      "viewAll": "عرض الكل"
     },
     "sort": {
       "label": "ترتيب حسب",
@@ -407,13 +408,13 @@
       "under": "أقل من {{price}} درهم"
     },
     "card": {
-      "listed": "نُشرت {{day}}",
       "media_zero": "لا صور ولا فيديوهات",
       "media_one": "صورة أو فيديو واحد",
       "media_two": "صورتان أو فيديوهان",
       "media_few": "{{count}} صور وفيديوهات",
       "media_many": "{{count}} صورة وفيديو",
-      "media_other": "{{count}} صورة وفيديو"
+      "media_other": "{{count}} صورة وفيديو",
+      "inspected": "مفحوصة"
     },
     "how": {
       "overline": "كيف يعمل AutoSouk",
@@ -439,6 +440,75 @@
       "title": "الإعلانات المفحوصة تُباع أسرع.",
       "description": "انشر سيارتك في دقائق. يحجز المشترون الفحص مباشرة، وما عليك إلا تسليم المفاتيح.",
       "cta": "انشر سيارتك"
+    }
+  },
+  "search": {
+    "breadcrumb": "مسار التنقل",
+    "explore": "استكشف",
+    "resultsLabel": "النتائج",
+    "title": {
+      "all": "كل السيارات",
+      "inCity": "سيارات في {{city}}",
+      "carInCity": "{{car}} في {{city}}"
+    },
+    "showing": "<n>{{from}}–{{to}}</n> من <n>{{total}}</n>",
+    "filters": {
+      "title": "الفلاتر",
+      "reset": "إعادة الضبط",
+      "close": "إغلاق الفلاتر",
+      "activeCount_zero": "لا فلاتر مستخدمة",
+      "activeCount_one": "فلتر واحد مستخدم",
+      "activeCount_two": "فلتران مستخدمان",
+      "activeCount_few": "{{count}} فلاتر مستخدمة",
+      "activeCount_many": "{{count}} فلترًا مستخدمًا",
+      "activeCount_other": "{{count}} فلتر مستخدم",
+      "price": "السعر (درهم)",
+      "minPrice": "من",
+      "maxPrice": "إلى",
+      "noMin": "بلا حد أدنى",
+      "priceOrder": "أدخل سعرًا أقصى أعلى من الحد الأدنى.",
+      "transmission": "ناقل الحركة",
+      "anyTransmission": "الكل",
+      "fuel": "الوقود",
+      "fuelCount_zero": "لا سيارات",
+      "fuelCount_one": "سيارة واحدة",
+      "fuelCount_two": "سيارتان",
+      "fuelCount_few": "{{formatted}} سيارات",
+      "fuelCount_many": "{{formatted}} سيارة",
+      "fuelCount_other": "{{formatted}} سيارة",
+      "equipment": "التجهيزات",
+      "mustHaveAll": "يجب أن تتوفر كلها",
+      "anyEquipment": "أي تجهيزات",
+      "browse_zero": "تصفح التجهيزات",
+      "browse_one": "تصفح التجهيز الوحيد",
+      "browse_two": "تصفح التجهيزين",
+      "browse_few": "تصفح {{formatted}} تجهيزات",
+      "browse_many": "تصفح {{formatted}} تجهيزًا",
+      "browse_other": "تصفح {{formatted}} تجهيز",
+      "show_zero": "لا توجد سيارات",
+      "show_one": "عرض سيارة واحدة",
+      "show_two": "عرض سيارتين",
+      "show_few": "عرض <n>{{formatted}}</n> سيارات",
+      "show_many": "عرض <n>{{formatted}}</n> سيارة",
+      "show_other": "عرض <n>{{formatted}}</n> سيارة",
+      "showAny": "عرض السيارات",
+      "anyPrice": "أي سعر",
+      "minThumb": "أدنى سعر",
+      "maxThumb": "أعلى سعر"
+    },
+    "equipment": {
+      "title": "التجهيزات",
+      "back": "العودة إلى الفلاتر",
+      "hint": "تظهر فقط السيارات التي تتوفر فيها كل التجهيزات المختارة.",
+      "selected": "التجهيزات المختارة",
+      "clear": "مسح"
+    },
+    "active": {
+      "label": "الفلاتر المستخدمة",
+      "remove": "إزالة الفلتر {{name}}",
+      "clearAll": "مسح الكل",
+      "from": "من",
+      "upTo": "حتى"
     }
   }
 }

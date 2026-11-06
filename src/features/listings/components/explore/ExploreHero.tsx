@@ -1,7 +1,7 @@
 import { useTranslation } from "react-i18next";
 import carImage from "../../../../assets/car.svg";
 import { formatNumber } from "../../../../lib/format";
-import type { ExploreSearch } from "../../exploreSearch";
+import type { ListingSearch } from "../../listingSearch";
 import { useMakes } from "../../hooks";
 import { QuickSearch } from "./QuickSearch";
 
@@ -9,8 +9,8 @@ import { QuickSearch } from "./QuickSearch";
 const popularMakes = ["DACIA", "RENAULT", "PEUGEOT", "VOLKSWAGEN", "TOYOTA"];
 
 type ExploreHeroProps = {
-  search: ExploreSearch;
-  onSearch: (changes: Partial<ExploreSearch>) => void;
+  search: ListingSearch;
+  onSearch: (changes: Partial<ListingSearch>) => void;
   // How many approved listings there are, once known.
   total?: number;
   firstName?: string;

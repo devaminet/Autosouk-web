@@ -299,22 +299,35 @@ export type PublicListingsFilter = {
   makeId?: number;
   modelId?: number;
   cityId?: number;
+  minPrice?: number;
   maxPrice?: number;
+  // Cars must have every item.
+  equipmentIds?: number[];
+  transmission?: Transmission;
+  // Cars with any of these fuels.
+  carburantIds?: number[];
   sort?: ListingSort;
 };
 
-// What GET /api/listings returns for each approved listing. It has no price
-// or car specs, only the photos and the city.
+// What GET /api/listings returns for each approved listing: what its card shows.
 const publicListingSchema = z.object({
   id: z.number(),
   title: z.string(),
   createdAt: z.string(),
   car: z
     .object({
+      price: z.number(),
+      year: z.number(),
+      distance: z.string(),
+      transmission: z.enum(transmissions),
+      // The fuel's slug, in a field of the same name.
+      carburant: z.object({ carburant: z.string() }).nullable(),
       carMedias: z.array(carMediaSchema.omit({ id: true })),
       city: z.object({ name: z.string(), slug: z.string() }).nullable(),
     })
     .nullable(),
+  // The 0-100 score of the car's latest completed inspection.
+  inspectionScore: z.number().nullable(),
 });
 
 export type PublicListing = z.infer<typeof publicListingSchema>;
@@ -336,7 +349,7 @@ export const getPublicListings = (filter: PublicListingsFilter) => {
   const query = new URLSearchParams();
   for (const [name, value] of Object.entries(filter)) {
     if (value !== undefined) {
-      query.set(name, String(value));
+      query.set(name, Array.isArray(value) ? value.join(",") : String(value));
     }
   }
   return request(`/api/listings?${query}`, { schema: publicListingsSchema, anonymous: true });

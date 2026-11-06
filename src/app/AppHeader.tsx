@@ -1,5 +1,5 @@
 import { useTranslation } from "react-i18next";
-import { Link, NavLink } from "react-router";
+import { Link, NavLink, useMatch } from "react-router";
 import { ButtonLink } from "../components/ButtonLink";
 import { LanguageMenu } from "../components/LanguageMenu";
 import { Logo } from "../components/Logo";
@@ -9,24 +9,29 @@ import { UserMenu } from "./UserMenu";
 
 type HeaderLinkProps = {
   to: string;
+  // Another page that belongs to this link, such as search results under Explore.
+  alsoActiveOn?: string;
   children: string;
 };
 
-function HeaderLink({ to, children }: HeaderLinkProps) {
+function HeaderLink({ to, alsoActiveOn, children }: HeaderLinkProps) {
+  const otherMatch = useMatch(alsoActiveOn ?? to);
+  const onOther = alsoActiveOn !== undefined && otherMatch !== null;
   return (
     <NavLink
-      className={({ isActive }) =>
-        `flex min-h-control-m flex-col items-center justify-center gap-4 rounded-xs type-label-m focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-brand ${isActive ? "text-ink" : "text-muted hover:text-ink"}`
-      }
+      className={({ isActive: isOwn }) => {
+        const isActive = isOwn || onOther;
+        return `flex min-h-control-m flex-col items-center justify-center gap-4 rounded-xs type-label-m focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-brand ${isActive ? "text-ink" : "text-muted hover:text-ink"}`;
+      }}
       end={to === paths.home}
       to={to}
     >
-      {({ isActive }) => (
+      {({ isActive: isOwn }) => (
         <>
           {children}
           <span
             aria-hidden="true"
-            className={`size-4 rounded-full ${isActive ? "bg-brand" : ""}`}
+            className={`size-4 rounded-full ${isOwn || onOther ? "bg-brand" : ""}`}
           />
         </>
       )}
@@ -54,7 +59,9 @@ export function AppHeader({ hideOnMobile = false }: AppHeaderProps) {
           <Logo />
         </Link>
         <nav aria-label={t("nav.main")} className="hidden items-center gap-32 md:flex">
-          <HeaderLink to={paths.home}>{t("nav.explore")}</HeaderLink>
+          <HeaderLink alsoActiveOn={paths.search} to={paths.home}>
+            {t("nav.explore")}
+          </HeaderLink>
           {user?.role === "seller" && (
             <HeaderLink to={paths.myListings}>{t("nav.sell")}</HeaderLink>
           )}

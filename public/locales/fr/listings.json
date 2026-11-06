@@ -325,7 +325,8 @@
       "empty": "Aucune voiture n'est encore publiée. Revenez bientôt.",
       "noMatch": "Aucune voiture ne correspond à votre recherche.",
       "clear": "Effacer la recherche",
-      "retry": "Réessayer"
+      "retry": "Réessayer",
+      "viewAll": "Tout voir"
     },
     "sort": {
       "label": "Trier par",
@@ -340,10 +341,10 @@
       "under": "Moins de {{price}} MAD"
     },
     "card": {
-      "listed": "Publiée {{day}}",
       "media_one": "{{count}} photo ou vidéo",
       "media_many": "{{count}} photos et vidéos",
-      "media_other": "{{count}} photos et vidéos"
+      "media_other": "{{count}} photos et vidéos",
+      "inspected": "Inspectée"
     },
     "how": {
       "overline": "Comment fonctionne AutoSouk",
@@ -369,6 +370,62 @@
       "title": "Les annonces inspectées se vendent plus vite.",
       "description": "Publiez votre voiture en quelques minutes. Les acheteurs réservent une inspection directement, vous n'avez qu'à remettre les clés.",
       "cta": "Publier votre voiture"
+    }
+  },
+  "search": {
+    "breadcrumb": "Fil d'Ariane",
+    "explore": "Explorer",
+    "resultsLabel": "Résultats",
+    "title": {
+      "all": "Toutes les voitures",
+      "inCity": "Voitures à {{city}}",
+      "carInCity": "{{car}} à {{city}}"
+    },
+    "showing": "<n>{{from}}–{{to}}</n> sur <n>{{total}}</n>",
+    "filters": {
+      "title": "Filtres",
+      "reset": "Réinitialiser",
+      "close": "Fermer les filtres",
+      "activeCount_one": "{{count}} filtre actif",
+      "activeCount_many": "{{count}} filtres actifs",
+      "activeCount_other": "{{count}} filtres actifs",
+      "price": "Prix (MAD)",
+      "minPrice": "De",
+      "maxPrice": "À",
+      "noMin": "Sans minimum",
+      "priceOrder": "Saisissez un prix maximum supérieur au minimum.",
+      "transmission": "Boîte de vitesses",
+      "anyTransmission": "Toutes",
+      "fuel": "Carburant",
+      "fuelCount_one": "{{formatted}} voiture",
+      "fuelCount_other": "{{formatted}} voitures",
+      "equipment": "Équipements",
+      "mustHaveAll": "La voiture doit tout avoir",
+      "anyEquipment": "Tous les équipements",
+      "browse_one": "Voir les {{formatted}} équipements",
+      "browse_many": "Voir les {{formatted}} équipements",
+      "browse_other": "Voir les {{formatted}} équipements",
+      "show_one": "Voir <n>{{formatted}}</n> voiture",
+      "show_many": "Voir <n>{{formatted}}</n> voitures",
+      "show_other": "Voir <n>{{formatted}}</n> voitures",
+      "showAny": "Voir les voitures",
+      "anyPrice": "Tous les prix",
+      "minThumb": "Prix minimum",
+      "maxThumb": "Prix maximum"
+    },
+    "equipment": {
+      "title": "Équipements",
+      "back": "Retour aux filtres",
+      "hint": "Seules les voitures qui ont tous les équipements choisis sont affichées.",
+      "selected": "Équipements choisis",
+      "clear": "Effacer"
+    },
+    "active": {
+      "label": "Filtres actifs",
+      "remove": "Retirer le filtre {{name}}",
+      "clearAll": "Tout effacer",
+      "from": "À partir de",
+      "upTo": "Jusqu'à"
     }
   }
 }

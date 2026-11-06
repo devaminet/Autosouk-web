@@ -12,7 +12,13 @@ const publicListing = (id: number, title: string) => ({
   description: "Clean car",
   createdAt: "2024-03-02T10:00:00.000Z",
   user: { firstName: "Karim", lastName: "El Idrissi", phone: "0600000000", imageUrl: null },
+  inspectionScore: id === 7 ? 92 : null,
   car: {
+    price: 265000,
+    year: 2020,
+    distance: "54000",
+    transmission: "automatic",
+    carburant: { carburant: "diesel" },
     carMedias: [
       { type: "image", link: `http://storage.test/cars/${id}.jpg`, isPrimary: true },
       { type: "video", link: `http://storage.test/cars/${id}.mp4`, isPrimary: false },
@@ -54,6 +60,19 @@ describe("ExplorePage", () => {
     expect(await screen.findByText("1 248 cars on AutoSouk")).toBeInTheDocument();
   });
 
+  it("shows each car's price, specs and inspection score", async () => {
+    listingsApi();
+    renderApp("/");
+
+    const card = within((await screen.findByRole("link", { name: "Volkswagen Golf 8" })).closest("li") ?? document.body);
+    expect(card.getByText(/^265.000$/u)).toBeInTheDocument();
+    expect(card.getByText((_, element) => element?.tagName === "P" && /^2020 · 54.000 km · Diesel · Automatic$/u.test(element.textContent ?? ""))).toBeInTheDocument();
+    expect(card.getByText((_, element) => element?.tagName === "SPAN" && element.textContent === "Inspected · 92")).toBeInTheDocument();
+    // A car never inspected has no score.
+    const other = within(screen.getByRole("link", { name: "Dacia Duster" }).closest("li") ?? document.body);
+    expect(other.queryByText(/Inspected/u)).not.toBeInTheDocument();
+  });
+
   it("searches by make, model and price, and keeps the search in the address", async () => {
     const user = userEvent.setup();
     const queries = listingsApi();
@@ -80,6 +99,8 @@ describe("ExplorePage", () => {
 
     expect(await screen.findByText("In Casablanca")).toBeInTheDocument();
     expect(queries.some((query) => query.get("cityId") === "1")).toBe(true);
+    // The full search page keeps the same search.
+    expect(results().getByRole("link", { name: "View all" })).toHaveAttribute("href", "/cars?cityId=1");
   });
 
   it("sorts and applies the budget chip", async () => {
