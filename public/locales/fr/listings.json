@@ -283,6 +283,11 @@
     "description": "Description",
     "seller": "Vendeur",
     "privateSeller": "Particulier",
-    "verified": "Vendeur vérifié"
+    "verified": "Vendeur vérifié",
+    "carousel": "carrousel",
+    "slideRole": "diapositive",
+    "slide": "{{current}} sur {{total}}",
+    "previousMedia": "Photo ou vidéo précédente",
+    "nextMedia": "Photo ou vidéo suivante"
   }
 }

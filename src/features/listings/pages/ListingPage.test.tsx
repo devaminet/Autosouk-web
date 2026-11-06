@@ -44,7 +44,9 @@ describe("ListingPage", () => {
     const user = userEvent.setup();
     renderListing();
 
-    await user.click(await screen.findByRole("button", { name: "View Photo 2" }));
+    // The grid for wide screens. Small screens get the carousel.
+    const grid = await screen.findByRole("list", { name: "Photos and videos" });
+    await user.click(within(grid).getByRole("button", { name: "View Photo 2" }));
 
     const viewer = screen.getByRole("dialog", { name: "Photos and videos of My Golf" });
     expect(within(viewer).getByRole("img", { name: "Photo 2" })).toBeInTheDocument();
@@ -64,6 +66,27 @@ describe("ListingPage", () => {
 
     await user.click(within(viewer).getByRole("button", { name: "Close" }));
     expect(screen.queryByRole("dialog")).not.toBeInTheDocument();
+  });
+
+  it("cycles through the media in place on small screens, and opens one full screen", async () => {
+    const user = userEvent.setup();
+    renderListing();
+
+    const carousel = await screen.findByRole("region", { name: "Photos and videos" });
+    expect(within(carousel).getByText("1 / 3")).toBeInTheDocument();
+
+    await user.click(within(carousel).getByRole("button", { name: "Next photo or video" }));
+    expect(within(carousel).getByText("2 / 3")).toBeInTheDocument();
+    expect(screen.queryByRole("dialog")).not.toBeInTheDocument();
+
+    // The first item leads back to the last.
+    await user.click(within(carousel).getByRole("button", { name: "Previous photo or video" }));
+    await user.click(within(carousel).getByRole("button", { name: "Previous photo or video" }));
+    expect(within(carousel).getByText("3 / 3")).toBeInTheDocument();
+
+    await user.click(within(carousel).getByRole("button", { name: "View Video 3" }));
+    const viewer = screen.getByRole("dialog", { name: "Photos and videos of My Golf" });
+    expect(within(viewer).getByLabelText("Video 3")).toBeInTheDocument();
   });
 
   it("tells the seller a listing in review isn't public yet", async () => {
