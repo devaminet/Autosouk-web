@@ -278,5 +278,83 @@
     "slide": "{{current}} of {{total}}",
     "previousMedia": "Previous photo or video",
     "nextMedia": "Next photo or video"
+  },
+  "explore": {
+    "pageTitle": "Find a car you can trust",
+    "hero": {
+      "greeting": "Salam, {{name}}",
+      "count_one": "{{formatted}} car on AutoSouk",
+      "count_other": "{{formatted}} cars on AutoSouk",
+      "titleStart": "Find a car you can",
+      "titleEnd": "trust.",
+      "description": "Browse listings across Morocco and book an independent inspection with a top-rated mechanic in the car's city.",
+      "popular": "Popular:"
+    },
+    "search": {
+      "label": "Search cars",
+      "make": "Make",
+      "anyMake": "Any make",
+      "model": "Model",
+      "anyModel": "Any model",
+      "city": "City",
+      "anyCity": "Any city",
+      "maxPrice": "Max price",
+      "noLimit": "No limit",
+      "submit": "Search"
+    },
+    "results": {
+      "overline": "Fresh on AutoSouk",
+      "inCity": "In {{city}}",
+      "title": "Recently listed cars",
+      "matching": "Cars matching your search",
+      "count_one": "{{formatted}} car",
+      "count_other": "{{formatted}} cars",
+      "empty": "No cars are listed yet. Check back soon.",
+      "noMatch": "No cars match your search.",
+      "clear": "Clear the search",
+      "retry": "Try again"
+    },
+    "sort": {
+      "label": "Sort by",
+      "newest": "Newest first",
+      "oldest": "Oldest first",
+      "price_asc": "Price: low to high",
+      "price_desc": "Price: high to low"
+    },
+    "chips": {
+      "label": "Quick filters",
+      "all": "All cars",
+      "under": "Under {{price}} MAD"
+    },
+    "card": {
+      "listed": "Listed {{day}}",
+      "media_one": "{{count}} photo or video",
+      "media_other": "{{count}} photos and videos"
+    },
+    "how": {
+      "overline": "How AutoSouk works",
+      "title": "From listing to keys, with proof at every step.",
+      "description": "Sellers list, buyers request an inspection, an independent garage in the same city delivers a signed PDF report. Everyone sees the same facts.",
+      "steps": {
+        "find": {
+          "title": "Find the car",
+          "description": "Filter by make, model, city and price."
+        },
+        "inspect": {
+          "title": "Request an inspection",
+          "description": "Pick a verified garage near the car. The price is fixed upfront — no surprises."
+        },
+        "report": {
+          "title": "Read the report",
+          "description": "Matricule, VIN, mileage consistency, CT, vignette and a 0–100 score."
+        }
+      }
+    },
+    "sellers": {
+      "overline": "For sellers",
+      "title": "Inspected listings sell faster.",
+      "description": "List your car in a few minutes. Buyers can book an inspection directly — you just hand over the keys.",
+      "cta": "List your car"
+    }
   }
 }

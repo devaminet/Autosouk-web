@@ -15,6 +15,9 @@ HTMLDialogElement.prototype.close = function close() {
   this.dispatchEvent(new Event("close"));
 };
 
+// jsdom has no layout, so nothing to scroll to.
+Element.prototype.scrollIntoView = () => undefined;
+
 // jsdom has no object URLs. Previews only need a unique string.
 let objectUrls = 0;
 URL.createObjectURL = () => {

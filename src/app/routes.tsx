@@ -8,10 +8,10 @@ import { LoginPage } from "../features/auth/pages/LoginPage";
 import { RegisterPage } from "../features/auth/pages/RegisterPage";
 import { ResetPasswordPage } from "../features/auth/pages/ResetPasswordPage";
 import { VerifyEmailPage } from "../features/auth/pages/VerifyEmailPage";
-import { HomePage } from "../features/home/pages/HomePage";
 import { MyListingsPage } from "../features/listings/pages/MyListingsPage";
 import { CarDetailsPage } from "../features/listings/pages/CarDetailsPage";
 import { DraftListingPage } from "../features/listings/pages/DraftListingPage";
+import { ExplorePage } from "../features/listings/pages/ExplorePage";
 import { ListingMediaPage } from "../features/listings/pages/ListingMediaPage";
 import { ListingPage } from "../features/listings/pages/ListingPage";
 import { NewListingPage } from "../features/listings/pages/NewListingPage";
@@ -31,7 +31,7 @@ export const routes: RouteObject[] = [
       {
         element: <AppLayout />,
         children: [
-          { path: paths.home, element: <HomePage /> },
+          { path: paths.home, element: <ExplorePage /> },
           { path: paths.listing, element: <ListingPage /> },
           {
             element: <RequireRole allowed="seller" />,

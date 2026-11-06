@@ -289,5 +289,86 @@
     "slide": "{{current}} sur {{total}}",
     "previousMedia": "Photo ou vidéo précédente",
     "nextMedia": "Photo ou vidéo suivante"
+  },
+  "explore": {
+    "pageTitle": "Trouvez une voiture de confiance",
+    "hero": {
+      "greeting": "Salam, {{name}}",
+      "count_one": "{{formatted}} voiture sur AutoSouk",
+      "count_many": "{{formatted}} voitures sur AutoSouk",
+      "count_other": "{{formatted}} voitures sur AutoSouk",
+      "titleStart": "Trouvez une voiture de",
+      "titleEnd": "confiance.",
+      "description": "Parcourez les annonces partout au Maroc et réservez une inspection indépendante chez un mécanicien bien noté dans la ville de la voiture.",
+      "popular": "Populaires :"
+    },
+    "search": {
+      "label": "Rechercher des voitures",
+      "make": "Marque",
+      "anyMake": "Toutes les marques",
+      "model": "Modèle",
+      "anyModel": "Tous les modèles",
+      "city": "Ville",
+      "anyCity": "Toutes les villes",
+      "maxPrice": "Prix max",
+      "noLimit": "Sans limite",
+      "submit": "Rechercher"
+    },
+    "results": {
+      "overline": "Nouveautés sur AutoSouk",
+      "inCity": "À {{city}}",
+      "title": "Voitures récemment publiées",
+      "matching": "Voitures correspondant à votre recherche",
+      "count_one": "{{formatted}} voiture",
+      "count_many": "{{formatted}} voitures",
+      "count_other": "{{formatted}} voitures",
+      "empty": "Aucune voiture n'est encore publiée. Revenez bientôt.",
+      "noMatch": "Aucune voiture ne correspond à votre recherche.",
+      "clear": "Effacer la recherche",
+      "retry": "Réessayer"
+    },
+    "sort": {
+      "label": "Trier par",
+      "newest": "Plus récentes",
+      "oldest": "Plus anciennes",
+      "price_asc": "Prix croissant",
+      "price_desc": "Prix décroissant"
+    },
+    "chips": {
+      "label": "Filtres rapides",
+      "all": "Toutes les voitures",
+      "under": "Moins de {{price}} MAD"
+    },
+    "card": {
+      "listed": "Publiée {{day}}",
+      "media_one": "{{count}} photo ou vidéo",
+      "media_many": "{{count}} photos et vidéos",
+      "media_other": "{{count}} photos et vidéos"
+    },
+    "how": {
+      "overline": "Comment fonctionne AutoSouk",
+      "title": "De l'annonce aux clés, avec des preuves à chaque étape.",
+      "description": "Les vendeurs publient, les acheteurs demandent une inspection, un garage indépendant de la même ville remet un rapport PDF signé. Tout le monde voit les mêmes faits.",
+      "steps": {
+        "find": {
+          "title": "Trouvez la voiture",
+          "description": "Filtrez par marque, modèle, ville et prix."
+        },
+        "inspect": {
+          "title": "Demandez une inspection",
+          "description": "Choisissez un garage vérifié près de la voiture. Le prix est fixé à l'avance, sans surprise."
+        },
+        "report": {
+          "title": "Lisez le rapport",
+          "description": "Matricule, VIN, cohérence du kilométrage, contrôle technique, vignette et une note sur 100."
+        }
+      }
+    },
+    "sellers": {
+      "overline": "Pour les vendeurs",
+      "title": "Les annonces inspectées se vendent plus vite.",
+      "description": "Publiez votre voiture en quelques minutes. Les acheteurs réservent une inspection directement, vous n'avez qu'à remettre les clés.",
+      "cta": "Publier votre voiture"
+    }
   }
 }

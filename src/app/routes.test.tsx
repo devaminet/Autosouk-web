@@ -13,7 +13,7 @@ describe("routes", () => {
     expect(router.state.location.pathname).toBe("/login");
 
     await router.navigate("/");
-    await screen.findByRole("heading", { name: "Inspected cars. Honest prices." });
+    await screen.findByRole("heading", { name: "Find a car you can trust." });
     await user.click(screen.getByRole("link", { name: "Create account" }));
     await screen.findByRole("heading", { name: "Create your account" });
     expect(router.state.location.pathname).toBe("/register");

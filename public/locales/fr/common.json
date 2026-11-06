@@ -17,12 +17,6 @@
     "signUp": "Créer un compte",
     "logOut": "Se déconnecter"
   },
-  "home": {
-    "pageTitle": "Accueil",
-    "title": "Des voitures inspectées. Des prix honnêtes.",
-    "welcome": "Bienvenue, {{name}}",
-    "description": "La place de marché arrive bientôt."
-  },
   "noAccess": {
     "title": "Vous ne pouvez pas ouvrir cette page",
     "description": "Cette page n'est pas disponible pour votre compte.",
