@@ -7,7 +7,8 @@ import type { AuthUser } from "../api";
 import { useSession } from "../hooks";
 
 type RequireRoleProps = {
-  allowed: AuthUser["role"];
+  // Without it, any signed-in user may open the page.
+  allowed?: AuthUser["role"];
 };
 
 // Only decides what to show. The API enforces the role on every request.
@@ -26,7 +27,7 @@ export function RequireRole({ allowed }: RequireRoleProps) {
       <Navigate replace state={{ from: `${pathname}${search}` }} to={paths.login} />
     );
   }
-  if (user.role !== allowed) {
+  if (allowed && user.role !== allowed) {
     return (
       <div className="flex flex-1 flex-col items-center justify-center gap-16 p-24 text-center">
         <PageTitle>{t("noAccess.title")}</PageTitle>

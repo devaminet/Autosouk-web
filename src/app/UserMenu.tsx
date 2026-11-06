@@ -1,14 +1,16 @@
 import { useTranslation } from "react-i18next";
+import { Link } from "react-router";
 import { Icon } from "../components/Icon";
 import type { AuthUser } from "../features/auth/api";
 import { useLogout } from "../features/auth/hooks";
 import { useMenu } from "../hooks/useMenu";
+import { paths } from "../lib/paths";
 
 type UserMenuProps = {
   user: AuthUser;
 };
 
-// The avatar in the header. Log out lives here until the account page exists.
+// The avatar in the header, with the way to the account page and to log out.
 export function UserMenu({ user }: UserMenuProps) {
   const { t } = useTranslation();
   const { open, setOpen, root } = useMenu();
@@ -35,6 +37,14 @@ export function UserMenu({ user }: UserMenuProps) {
           <p className="px-12 py-8 type-label-m text-ink">
             {user.firstName} {user.lastName}
           </p>
+          <Link
+            className="flex min-h-control-s w-full items-center gap-8 rounded-sm px-12 type-label-m text-ink hover:bg-paper focus-visible:outline-2 focus-visible:outline-brand"
+            onClick={() => setOpen(false)}
+            to={paths.account}
+          >
+            <Icon name="user" size={16} />
+            {t("nav.settings")}
+          </Link>
           <button
             aria-busy={logout.isPending}
             className="flex min-h-control-s w-full cursor-pointer items-center gap-8 rounded-sm px-12 text-start type-label-m text-danger hover:bg-paper focus-visible:outline-2 focus-visible:outline-brand disabled:cursor-not-allowed"

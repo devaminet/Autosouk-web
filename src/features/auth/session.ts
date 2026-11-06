@@ -24,6 +24,13 @@ export const endSession = () => {
   queryClient.setQueryData(sessionKey, null);
 };
 
+// Changes the signed-in user's details that the session holds, such as the photo.
+export const updateSessionUser = (changes: Partial<AuthUser>) => {
+  queryClient.setQueryData<AuthUser | null>(sessionKey, (user) =>
+    user ? { ...user, ...changes } : user,
+  );
+};
+
 let refreshing: Promise<AuthUser | null> | null = null;
 
 // The API rotates refresh tokens and treats a reused one as theft, which ends

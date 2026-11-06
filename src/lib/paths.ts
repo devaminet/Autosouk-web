@@ -7,6 +7,7 @@ export const paths = {
   verifyEmail: "/verify-email",
   resetPassword: "/reset-password",
   forgotPassword: "/forgot-password",
+  account: "/account",
   // A listing as buyers see it. Build links with listingPath.
   listing: "/listings/:listingId",
   myListings: "/my-listings",

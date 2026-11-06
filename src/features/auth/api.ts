@@ -133,3 +133,46 @@ export const setNewPassword = (input: { token: string; password: string }) =>
     schema: messageSchema,
     anonymous: true,
   });
+
+export type ChangePasswordInput = {
+  email: string;
+  oldPassword: string;
+  password: string;
+  confirmPassword: string;
+};
+
+// The API finds the account by the email in the body, so it must be the
+// signed-in user's own.
+export const changePassword = (input: ChangePasswordInput) =>
+  request("/api/auth/reset-password", {
+    method: "PUT",
+    body: input,
+    schema: messageSchema,
+  });
+
+const profileImageUploadSchema = z.object({ imageUpload: presignedPostSchema });
+
+const profileImageSchema = z.object({ imageUrl: z.string() });
+
+// Reserves a new photo, uploads it to storage, then confirms it. The answer
+// is the photo's new address. Returns null when the upload fails or stops.
+export const replaceProfileImage = async (
+  photo: File,
+  onProgress: (fraction: number) => void,
+  signal: AbortSignal,
+): Promise<string | null> => {
+  const { imageUpload } = await request("/api/auth/profile-image", {
+    method: "POST",
+    body: { imageName: photo.name },
+    schema: profileImageUploadSchema,
+  });
+  const uploaded = await uploadToPresignedPost(imageUpload, photo, onProgress, signal);
+  if (!uploaded) {
+    return null;
+  }
+  const { imageUrl } = await request("/api/auth/profile-image/confirm", {
+    method: "POST",
+    schema: profileImageSchema,
+  });
+  return imageUrl;
+};

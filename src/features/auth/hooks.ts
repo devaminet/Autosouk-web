@@ -1,6 +1,7 @@
 import { useMutation, useQuery } from "@tanstack/react-query";
 import { useTranslation } from "react-i18next";
 import {
+  changePassword,
   getCities,
   login,
   logout,
@@ -40,6 +41,9 @@ export const useResendVerification = () =>
 
 export const useRequestPasswordReset = () =>
   useMutation({ mutationFn: requestPasswordReset });
+
+export const useChangePassword = () =>
+  useMutation({ mutationFn: changePassword });
 
 export const useSetNewPassword = () =>
   useMutation({ mutationFn: setNewPassword });
