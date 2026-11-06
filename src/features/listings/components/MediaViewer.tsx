@@ -1,11 +1,16 @@
 import { useEffect, useRef } from "react";
-import type { KeyboardEvent } from "react";
+import type { KeyboardEvent, PointerEvent } from "react";
 import { useTranslation } from "react-i18next";
 import { Icon } from "../../../components/Icon";
 import type { CarMedia } from "../api";
 
 const roundButton =
   "flex size-control-m shrink-0 cursor-pointer items-center justify-center rounded-full bg-night-2 text-on-brand hover:bg-ink focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-surface";
+
+// In px: how far a finger must travel sideways to change item, and the
+// height of a video's controls, where a drag scrubs instead.
+const minSwipe = 50;
+const videoControls = 64;
 
 type MediaViewerProps = {
   media: CarMedia[];
@@ -23,6 +28,7 @@ type MediaViewerProps = {
 export function MediaViewer({ media, index, title, onIndexChange, onClose }: MediaViewerProps) {
   const { t, i18n } = useTranslation("listings");
   const dialog = useRef<HTMLDialogElement>(null);
+  const swipeStart = useRef<{ x: number; y: number } | null>(null);
   const current = index === null ? undefined : media[index];
   const isOpen = current !== undefined;
 
@@ -51,6 +57,29 @@ export function MediaViewer({ media, index, title, onIndexChange, onClose }: Med
       go(index + step);
     } else if (event.key === "ArrowLeft") {
       go(index - step);
+    }
+  };
+
+  const onPointerDown = (event: PointerEvent<HTMLDivElement>) => {
+    const { target, clientX, clientY } = event;
+    if (target instanceof HTMLVideoElement && clientY > target.getBoundingClientRect().bottom - videoControls) {
+      return;
+    }
+    swipeStart.current = { x: clientX, y: clientY };
+  };
+
+  // A mostly sideways swipe moves like the arrow keys: towards the left shows
+  // what comes next in left to right reading, and the opposite in right to left.
+  const onPointerUp = (event: PointerEvent<HTMLDivElement>) => {
+    const start = swipeStart.current;
+    swipeStart.current = null;
+    if (!start || index === null) {
+      return;
+    }
+    const dx = event.clientX - start.x;
+    const dy = event.clientY - start.y;
+    if (Math.abs(dx) >= minSwipe && Math.abs(dx) > Math.abs(dy)) {
+      go(dx < 0 ? index + step : index - step);
     }
   };
 
@@ -84,9 +113,22 @@ export function MediaViewer({ media, index, title, onIndexChange, onClose }: Med
             >
               <Icon name="chevron-left" size={20} />
             </button>
-            <div className="flex size-full min-w-0 items-center justify-center">
+            {/* Vertical panning stays with the browser; sideways moves are swipes. */}
+            <div
+              className="flex size-full min-w-0 touch-pan-y items-center justify-center"
+              onPointerCancel={() => {
+                swipeStart.current = null;
+              }}
+              onPointerDown={onPointerDown}
+              onPointerUp={onPointerUp}
+            >
               {current.type === "image" ? (
-                <img alt={nameOf(current, index)} className="size-full object-contain" src={current.link} />
+                <img
+                  alt={nameOf(current, index)}
+                  className="size-full object-contain select-none"
+                  draggable={false}
+                  src={current.link}
+                />
               ) : (
                 // Sellers upload videos without captions, and the API has nowhere to keep them.
                 // oxlint-disable-next-line jsx-a11y/media-has-caption
