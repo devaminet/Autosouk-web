@@ -40,6 +40,9 @@ export function MobileTabBar() {
       <Tab icon="car" to={paths.myListings}>
         {t("nav.myListings")}
       </Tab>
+      <Tab icon="user" to={paths.account}>
+        {t("nav.account")}
+      </Tab>
     </nav>
   );
 }

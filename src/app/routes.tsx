@@ -1,6 +1,7 @@
 import type { RouteObject } from "react-router";
 import { GuestRoute } from "../features/auth/components/GuestRoute";
 import { RequireRole } from "../features/auth/components/RequireRole";
+import { AccountPage } from "../features/auth/pages/AccountPage";
 import { CheckEmailPage } from "../features/auth/pages/CheckEmailPage";
 import { ForgotPasswordPage } from "../features/auth/pages/ForgotPasswordPage";
 import { LoginPage } from "../features/auth/pages/LoginPage";
@@ -35,6 +36,10 @@ export const routes: RouteObject[] = [
           {
             element: <RequireRole allowed="seller" />,
             children: [{ path: paths.myListings, element: <MyListingsPage /> }],
+          },
+          {
+            element: <RequireRole />,
+            children: [{ path: paths.account, element: <AccountPage /> }],
           },
         ],
       },
