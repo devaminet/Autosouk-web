@@ -1,10 +1,6 @@
 import { useTranslation } from "react-i18next";
-import { formatNumber } from "../../../lib/format";
 import type { SellerListing } from "../api";
-
-// The API stores distance as text, so only format it when it is a plain number.
-const distanceLabel = (distance: string) =>
-  /^\d+$/u.test(distance) ? formatNumber(Number(distance)) : distance;
+import { distanceLabel } from "../distance";
 
 type ListingMetaProps = {
   car: SellerListing["car"];

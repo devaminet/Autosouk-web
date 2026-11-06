@@ -1,22 +1,42 @@
+import { Fragment } from "react";
+import type { ReactNode } from "react";
 import { useTranslation } from "react-i18next";
 import { Link } from "react-router";
 import carImage from "../../../../assets/car.svg";
 import { Icon } from "../../../../components/Icon";
-import { formatDay } from "../../../../lib/format";
+import { formatNumber } from "../../../../lib/format";
 import { listingPath } from "../../../../lib/paths";
 import type { PublicListing } from "../../api";
+import { distanceLabel } from "../../distance";
 
 type PublicListingCardProps = {
   listing: PublicListing;
 };
 
-// A listing in the explore grid. The API sends no price or specs for it yet.
+// An approved listing in a grid of results.
 export function PublicListingCard({ listing }: PublicListingCardProps) {
-  const { t, i18n } = useTranslation(["listings", "enums"]);
-  const media = listing.car?.carMedias ?? [];
+  const { t } = useTranslation(["listings", "enums"]);
+  const car = listing.car;
+  const media = car?.carMedias ?? [];
   // The API lists the primary media first, and a video can't be a thumbnail.
   const image = media.find(({ type }) => type === "image");
-  const city = listing.car?.city;
+  const city = car?.city;
+  const fuel = car?.carburant?.carburant;
+  const specs: { key: string; value: ReactNode }[] = car
+    ? [
+        { key: "year", value: <bdi dir="ltr">{car.year}</bdi> },
+        {
+          key: "distance",
+          value: (
+            <>
+              <bdi dir="ltr">{distanceLabel(car.distance)}</bdi> {t("units.km")}
+            </>
+          ),
+        },
+        ...(fuel ? [{ key: "fuel", value: t(`enums:carburant.${fuel}`, { defaultValue: fuel }) }] : []),
+        { key: "transmission", value: t(`enums:transmission.${car.transmission}`) },
+      ]
+    : [];
 
   return (
     <li className="relative flex flex-col gap-12 rounded-2xl bg-surface p-8 pb-16 shadow-elevation-1 hover:shadow-elevation-2">
@@ -26,6 +46,12 @@ export function PublicListingCard({ listing }: PublicListingCardProps) {
         ) : (
           <span className="flex size-full items-center justify-center bg-linear-to-br from-brand to-brand-ink px-32">
             <img alt="" className="w-full" src={carImage} />
+          </span>
+        )}
+        {listing.inspectionScore !== null && (
+          <span className="absolute top-12 inset-s-12 flex items-center gap-4 rounded-full bg-surface px-8 py-2 type-label-s text-success">
+            <Icon name="shield" size={12} />
+            {t("explore.card.inspected")} · <bdi dir="ltr">{listing.inspectionScore}</bdi>
           </span>
         )}
         {media.length > 0 && (
@@ -48,10 +74,27 @@ export function PublicListingCard({ listing }: PublicListingCardProps) {
             {listing.title}
           </Link>
         </h3>
-        <div className="flex flex-wrap items-center justify-between gap-8 type-label-s text-muted">
-          <span>{t("explore.card.listed", { day: formatDay(listing.createdAt, i18n.language) })}</span>
+        {specs.length > 0 && (
+          <p className="type-body-s text-muted">
+            {specs.map(({ key, value }, index) => (
+              <Fragment key={key}>
+                {index > 0 && " · "}
+                {value}
+              </Fragment>
+            ))}
+          </p>
+        )}
+        <div className="flex flex-wrap items-center justify-between gap-8">
+          {car && (
+            <p className="whitespace-nowrap">
+              <bdi className="type-price-m text-ink" dir="ltr">
+                {formatNumber(car.price)}
+              </bdi>{" "}
+              <span className="type-mono-s text-muted">{t("units.mad")}</span>
+            </p>
+          )}
           {city && (
-            <span className="flex items-center gap-4">
+            <span className="flex items-center gap-4 type-label-s text-muted">
               <Icon name="map-pin" size={12} />
               {t(`enums:city.${city.slug}`, { defaultValue: city.name })}
             </span>
