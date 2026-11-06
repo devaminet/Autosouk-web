@@ -69,7 +69,8 @@
       "photos": "Photos",
       "review": "Vérification"
     },
-    "previous": "Étape précédente"
+    "previous": "Étape précédente",
+    "saveDraft": "Enregistrer le brouillon"
   },
   "newListing": {
     "title": "Décrivez votre annonce",
@@ -106,7 +107,7 @@
     "conditionHelper": "Soyez honnête, l'inspecteur l'évaluera aussi.",
     "preview": "Aperçu en direct",
     "back": "Retour",
-    "submit": "Enregistrer le brouillon",
+    "submit": "Continuer vers les photos",
     "tips": {
       "mileage": "Kilométrage exact : les inspecteurs le comparent au tableau de bord et à l'historique d'entretien",
       "fiscalPower": "Puissance fiscale (CV) indiquée sur la carte grise",
@@ -122,5 +123,70 @@
     "collapseAll": "Tout replier",
     "count": "{{selected}} sur {{total}}",
     "noMatch": "Aucun équipement ne correspond à « {{query}} »."
+  },
+  "photos": {
+    "title": "Photos et vidéos",
+    "description": "Au moins 3 photos, jusqu’à 20 fichiers avec les vidéos. La photo de couverture s’affiche en premier dans la recherche.",
+    "photoCount_one": "{{count}} photo",
+    "photoCount_other": "{{count}} photos",
+    "videoCount_one": "{{count}} vidéo",
+    "videoCount_other": "{{count}} vidéos",
+    "uploadingCount_one": "{{count}} en cours d’envoi",
+    "uploadingCount_other": "{{count}} en cours d’envoi",
+    "files": "fichiers",
+    "checks": {
+      "minPhotos_one": "Au moins {{count}} photo",
+      "minPhotos_other": "Au moins {{count}} photos",
+      "morePhotos_one": "Ajoutez encore {{count}} photo (min. {{min}})",
+      "morePhotos_other": "Ajoutez encore {{count}} photos (min. {{min}})",
+      "cover": "La couverture est une photo",
+      "noCover": "Choisissez une photo de couverture",
+      "filesLeft_one": "{{count}} fichier restant",
+      "filesLeft_other": "{{count}} fichiers restants"
+    },
+    "drop": "Déposez vos photos ici ou",
+    "browse": "parcourez",
+    "formats": "JPG, PNG, WEBP jusqu’à 10 Mo · vidéos MP4 jusqu’à 50 Mo",
+    "add": "Ajouter une photo ou une vidéo",
+    "camera": "Appareil photo",
+    "cover": "Couverture",
+    "photo": "Photo {{number}}",
+    "video": "Vidéo {{number}}",
+    "makeCover": "Choisir la photo {{number}} comme couverture",
+    "delete": "Supprimer : {{name}}",
+    "uploading": "Envoi",
+    "uploadingFile": "Envoi de {{name}}",
+    "storageNote": "Les photos sont envoyées directement vers un stockage sécurisé. Masquez la plaque d’immatriculation et les numéros de la carte grise : l’inspecteur les vérifie sur place.",
+    "tips": {
+      "angles": "Vues trois-quarts avant et arrière, à la lumière du jour",
+      "interior": "L’intérieur, et le tableau de bord avec le kilométrage",
+      "engine": "Le compartiment moteur et les pneus"
+    },
+    "addMore_one": "Ajoutez encore {{count}} photo",
+    "addMore_other": "Ajoutez encore {{count}} photos",
+    "review": "Vérifier l’annonce",
+    "problems": {
+      "title": "Certains fichiers n’ont pas été ajoutés",
+      "type": "{{name}} : seuls les fichiers JPG, PNG, WEBP et MP4 sont acceptés.",
+      "size": "{{name}} : trop volumineux. Photos jusqu’à 10 Mo, vidéos jusqu’à 50 Mo.",
+      "limit": "{{name}} : une annonce contient au maximum 20 fichiers.",
+      "failed": "{{name}} : l’envoi a échoué. Réessayez.",
+      "rejected": "{{name}} : refusé à cause de son type ou de sa taille."
+    }
+  },
+  "review": {
+    "title": "Vérifier et envoyer",
+    "description": "Vérifiez tout avant l’envoi. Notre équipe examine chaque annonce avant qu’elle apparaisse dans la recherche.",
+    "edit": "Modifier",
+    "editSection": "Modifier : {{section}}",
+    "makeModel": "Marque et modèle",
+    "note": "Notre équipe vérifie chaque annonce, généralement en moins de 24 heures.",
+    "submit": "Envoyer pour validation"
+  },
+  "submitted": {
+    "title": "Envoyée pour validation",
+    "description": "Notre équipe vérifie chaque annonce, généralement en moins de 24 heures. Elle apparaît dans la recherche une fois approuvée.",
+    "myListings": "Voir mes annonces",
+    "another": "Vendre une autre voiture"
   }
 }

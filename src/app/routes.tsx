@@ -12,6 +12,8 @@ import { MyListingsPage } from "../features/listings/pages/MyListingsPage";
 import { CarDetailsPage } from "../features/listings/pages/CarDetailsPage";
 import { DraftListingPage } from "../features/listings/pages/DraftListingPage";
 import { NewListingPage } from "../features/listings/pages/NewListingPage";
+import { PhotosPage } from "../features/listings/pages/PhotosPage";
+import { ReviewPage } from "../features/listings/pages/ReviewPage";
 import { paths } from "../lib/paths";
 import { AppLayout } from "./AppLayout";
 import { ErrorPage } from "./ErrorPage";
@@ -43,6 +45,8 @@ export const routes: RouteObject[] = [
               { path: paths.newListing, element: <NewListingPage /> },
               { path: paths.draftListing, element: <DraftListingPage /> },
               { path: paths.draftCar, element: <CarDetailsPage /> },
+              { path: paths.draftPhotos, element: <PhotosPage /> },
+              { path: paths.draftReview, element: <ReviewPage /> },
             ],
           },
         ],

@@ -7,10 +7,14 @@ type CarPreviewProps = {
   details: string[];
   price?: number;
   city?: string;
+  // The cover photo's link.
+  image?: string;
+  // Photos and videos, shown on the image.
+  mediaCount?: number;
 };
 
 // How the listing card will look in search, with what is filled in so far.
-export function CarPreview({ title, details, price, city }: CarPreviewProps) {
+export function CarPreview({ title, details, price, city, image, mediaCount = 0 }: CarPreviewProps) {
   const { t } = useTranslation("listings");
 
   return (
@@ -19,8 +23,15 @@ export function CarPreview({ title, details, price, city }: CarPreviewProps) {
         {t("carDetails.preview")}
       </p>
       <div className="flex flex-col gap-12 rounded-xl border border-line bg-surface p-8 pb-16">
-        <div className="flex aspect-video items-center justify-center rounded-lg bg-night text-subtle">
-          <Icon name="car" size={48} />
+        <div className="relative flex aspect-video items-center justify-center overflow-hidden rounded-lg bg-night text-subtle">
+          {image ? <img alt="" className="size-full object-cover" src={image} /> : <Icon name="car" size={48} />}
+          {mediaCount > 0 && (
+            <span className="absolute bottom-8 inset-s-8 flex items-center gap-4 rounded-full bg-ink px-8 py-2 type-label-s text-surface">
+              <Icon name="camera" size={12} />
+              <bdi dir="ltr">{mediaCount}</bdi>
+              <span className="sr-only">{t("photos.files")}</span>
+            </span>
+          )}
         </div>
         <div className="flex flex-col gap-4 px-8">
           <p className="type-h5 text-ink" dir="auto">

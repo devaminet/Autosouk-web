@@ -8,18 +8,22 @@ import {
   attachCar,
   createListing,
   deleteListing,
+  deleteMedia,
   getEquipment,
   getListing,
   getLookups,
   getMakes,
   getModels,
   getMyListings,
+  setCover,
+  submitListing,
   updateListing,
 } from "./api";
 import type { MyListingsFilter } from "./api";
 
 const listingsKey = ["listings"];
 const myListingsKey = [...listingsKey, "mine"];
+export const listingKey = (id: number | null) => [...listingsKey, "detail", id];
 
 // Keeps the current page on screen while another status or page loads.
 export const useMyListings = (filter: MyListingsFilter) =>
@@ -31,7 +35,7 @@ export const useMyListings = (filter: MyListingsFilter) =>
 
 export const useListing = (id: number | null) =>
   useQuery({
-    queryKey: [...listingsKey, "detail", id],
+    queryKey: listingKey(id),
     queryFn: () => getListing(id ?? 0),
     enabled: id !== null,
   });
@@ -88,5 +92,30 @@ export const useDeleteListing = () => {
   return useMutation({
     mutationFn: deleteListing,
     onSettled: () => queryClient.invalidateQueries({ queryKey: myListingsKey }),
+  });
+};
+
+// Media changes show on the draft's own page, so only that listing is refreshed.
+export const useDeleteMedia = () => {
+  const queryClient = useQueryClient();
+  return useMutation({
+    mutationFn: deleteMedia,
+    onSettled: (_data, _error, { id }) => queryClient.invalidateQueries({ queryKey: listingKey(id) }),
+  });
+};
+
+export const useSetCover = () => {
+  const queryClient = useQueryClient();
+  return useMutation({
+    mutationFn: setCover,
+    onSettled: (_data, _error, { id }) => queryClient.invalidateQueries({ queryKey: listingKey(id) }),
+  });
+};
+
+export const useSubmitListing = () => {
+  const queryClient = useQueryClient();
+  return useMutation({
+    mutationFn: submitListing,
+    onSuccess: () => queryClient.invalidateQueries({ queryKey: listingsKey }),
   });
 };

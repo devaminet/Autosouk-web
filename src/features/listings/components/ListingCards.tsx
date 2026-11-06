@@ -1,5 +1,5 @@
-import { draftStepPath } from "../../../lib/paths";
 import type { SellerListing } from "../api";
+import { resumeDraftPath } from "../wizardSteps";
 import { ListingActionsMenu } from "./ListingActionsMenu";
 import { ListingPrice } from "./ListingPrice";
 import { ListingThumb } from "./ListingThumb";
@@ -32,7 +32,7 @@ export function ListingCards({ listings, onDelete }: ListingCardsProps) {
             )}
           </div>
           <ListingActionsMenu
-            continueTo={listing.status === "draft" ? draftStepPath(listing.id, "car") : undefined}
+            continueTo={listing.status === "draft" ? resumeDraftPath(listing) : undefined}
             onDelete={() => onDelete(listing)}
             title={listing.title}
           />

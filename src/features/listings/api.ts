@@ -14,19 +14,22 @@ export const listingStatusSchema = z.enum(listingStatuses);
 
 export type ListingStatus = z.infer<typeof listingStatusSchema>;
 
+// Uploaded media only, the primary first.
+const carMediaSchema = z.object({
+  id: z.number(),
+  type: z.enum(["image", "video"]),
+  link: z.string(),
+  isPrimary: z.boolean(),
+});
+
+export type CarMedia = z.infer<typeof carMediaSchema>;
+
 const carSummarySchema = z.object({
   id: z.number(),
   price: z.number(),
   year: z.number(),
   distance: z.string(),
-  carMedias: z.array(
-    z.object({
-      id: z.number(),
-      type: z.enum(["image", "video"]),
-      link: z.string(),
-      isPrimary: z.boolean(),
-    }),
-  ),
+  carMedias: z.array(carMediaSchema),
 });
 
 const sellerListingSchema = z.object({
@@ -146,7 +149,11 @@ const listingCarSchema = z.object({
   fiscalPower: z.number(),
   transmission: z.enum(transmissions),
   ownersCount: z.number(),
+  make: z.object({ name: z.string() }),
+  model: z.object({ name: z.string() }),
+  city: z.object({ name: z.string(), slug: z.string() }),
   equipment: z.array(z.object({ id: z.number() })),
+  carMedias: z.array(carMediaSchema),
 });
 
 export type ListingCar = z.infer<typeof listingCarSchema>;
@@ -195,6 +202,58 @@ export type ListingChanges = {
 
 export const updateListing = ({ id, changes }: { id: number; changes: ListingChanges }) =>
   request(`/api/listings/${id}`, { method: "PATCH", body: changes, schema: z.unknown() });
+
+const presignedPostSchema = z.object({
+  url: z.string(),
+  fields: z.record(z.string(), z.string()),
+});
+
+const addedMediaSchema = z.object({
+  carMedia: z.array(
+    z.object({ id: z.number(), filename: z.string(), originalName: z.string(), upload: presignedPostSchema }),
+  ),
+});
+
+// Reserves storage for each file. Names must be unique within one request.
+export const addMedia = async ({ id, names }: { id: number; names: string[] }) =>
+  (
+    await request(`/api/listings/${id}/media`, {
+      method: "POST",
+      body: { files: names.map((name) => ({ name })) },
+      schema: addedMediaSchema,
+    })
+  ).carMedia;
+
+const confirmedMediaSchema = z.object({
+  uploaded: z.array(z.string()),
+  rejected: z.array(z.string()),
+  pending: z.array(z.object({ id: z.number(), filename: z.string() })),
+});
+
+export type ConfirmedMedia = z.infer<typeof confirmedMediaSchema>;
+
+// Makes uploaded files visible, and removes those of the wrong type or size.
+export const confirmMedia = (id: number) =>
+  request(`/api/listings/${id}/media/confirm`, { method: "POST", schema: confirmedMediaSchema });
+
+export const deleteMedia = ({ id, mediaIds }: { id: number; mediaIds: number[] }) =>
+  request(`/api/listings/${id}/media`, {
+    method: "DELETE",
+    body: { mediaIds },
+    schema: z.object({ deleted: z.array(z.number()) }),
+  });
+
+export const setCover = ({ id, mediaId }: { id: number; mediaId: number }) =>
+  request(`/api/listings/${id}/media/${mediaId}/primary`, {
+    method: "PATCH",
+    schema: z.object({ carMedias: z.array(carMediaSchema) }),
+  });
+
+export const submitListing = (id: number) =>
+  request(`/api/listings/${id}/submit`, {
+    method: "POST",
+    schema: z.object({ listing: z.object({ id: z.number(), status: listingStatusSchema }) }),
+  });
 
 const deletedListingSchema = z.object({
   deleted: z.literal(true),

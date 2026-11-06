@@ -14,6 +14,8 @@ type ListingWizardShellProps = {
   draft?: { id: number; title: string };
   // Where the small screens' back button goes. My listings by default.
   backTo?: string;
+  // Wide screens only: more actions before Discard, such as Save draft.
+  actions?: ReactNode;
   children: ReactNode;
 };
 
@@ -22,6 +24,7 @@ export function ListingWizardShell({
   step,
   draft,
   backTo = paths.myListings,
+  actions,
   children,
 }: ListingWizardShellProps) {
   const { t } = useTranslation("listings");
@@ -59,14 +62,17 @@ export function ListingWizardShell({
             </li>
           </ol>
         </nav>
-        {draft ? (
-          <DiscardDraftButton draft={draft} />
-        ) : (
-          <ButtonLink to={paths.myListings}>
-            <Icon name="x" size={16} />
-            {t("wizard.discard")}
-          </ButtonLink>
-        )}
+        <div className="flex items-center gap-8">
+          {actions}
+          {draft ? (
+            <DiscardDraftButton draft={draft} />
+          ) : (
+            <ButtonLink to={paths.myListings}>
+              <Icon name="x" size={16} />
+              {t("wizard.discard")}
+            </ButtonLink>
+          )}
+        </div>
       </div>
 
       <div className="px-20 md:px-0">

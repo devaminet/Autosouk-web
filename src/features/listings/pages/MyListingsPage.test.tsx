@@ -192,6 +192,18 @@ describe("MyListingsPage", () => {
     );
   });
 
+  it("continues a draft that has a car at its photos", async () => {
+    respondWith([{ ...carlessDraft, car: approved.car }]);
+    renderPage();
+
+    const table = await screen.findByRole("table");
+
+    expect(within(table).getByRole("link", { name: "Continue My new car" })).toHaveAttribute(
+      "href",
+      "/my-listings/3/photos",
+    );
+  });
+
   it("explains an empty account and an empty filter differently", async () => {
     const user = userEvent.setup();
     server.use(

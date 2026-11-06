@@ -62,7 +62,18 @@ export const apiErrors = (
   ...errors: { code: string; message: string; field?: string }[]
 ) => HttpResponse.json({ errors }, { status });
 
+// Storage is on another origin. Upload progress makes the browser ask first.
+const cors = {
+  "Access-Control-Allow-Origin": "*",
+  "Access-Control-Allow-Methods": "POST",
+  "Access-Control-Allow-Headers": "*",
+};
+
+// What storage answers to an upload, with the headers a cross-origin request needs.
+export const storageResponse = (status: number) => new HttpResponse(null, { status, headers: cors });
+
 export const defaultHandlers = [
+  http.options("http://storage.test/*", () => storageResponse(204)),
   http.get("*/locales/:lng/:ns.json", ({ params }) =>
     HttpResponse.json(
       translations[`${String(params.lng)}/${String(params.ns)}`] ?? {},

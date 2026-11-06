@@ -35,6 +35,8 @@ const unit = (text: string) => (
 );
 
 type CarDetailsFormProps = {
+  // Lets a button outside the form, such as Save draft, submit it.
+  id: string;
   title: string;
   initial: CarFormValues;
   lookups: Lookups;
@@ -47,6 +49,7 @@ type CarDetailsFormProps = {
 };
 
 export function CarDetailsForm({
+  id,
   title,
   initial,
   lookups,
@@ -120,6 +123,7 @@ export function CarDetailsForm({
           {t("carDetails.back")}
         </ButtonLink>
       }
+      id={id}
       onSubmit={submit}
       ref={form}
       submit={
@@ -132,6 +136,7 @@ export function CarDetailsForm({
           variant="primary"
         >
           {t("carDetails.submit")}
+          <Icon name="arrow-right" size={18} />
         </Button>
       }
     >

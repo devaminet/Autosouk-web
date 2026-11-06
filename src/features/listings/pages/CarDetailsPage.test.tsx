@@ -3,28 +3,12 @@ import userEvent from "@testing-library/user-event";
 import { http, HttpResponse } from "msw";
 import { describe, expect, it } from "vitest";
 import { server } from "../../../test/bootstrap";
+import { testCar, testDraft } from "../../../test/fixtures";
 import { apiErrors, testUser } from "../../../test/handlers";
 import { renderApp } from "../../../test/renderApp";
 
-const draft = { id: 7, title: "My Golf", description: "Clean car", status: "draft", car: null };
-
-const savedCar = {
-  id: 70,
-  makeId: 482,
-  modelId: 10,
-  cityId: 1,
-  carburantId: 1,
-  originId: 1,
-  stateId: 2,
-  price: 265000,
-  year: 2020,
-  distance: "54000",
-  doorsNumber: 5,
-  fiscalPower: 8,
-  transmission: "automatic",
-  ownersCount: 1,
-  equipment: [{ id: 1 }],
-};
+const draft = testDraft;
+const savedCar = testCar;
 
 const renderStep = (listing: unknown, entry = "/my-listings/7/car") => {
   server.use(
@@ -85,7 +69,7 @@ describe("CarDetailsPage", () => {
     });
   });
 
-  it("shows the saved car and sends changes as an update", async () => {
+  it("shows the saved car, sends changes as an update and continues to photos", async () => {
     const user = userEvent.setup();
     let sent: unknown;
     server.use(
@@ -94,7 +78,7 @@ describe("CarDetailsPage", () => {
         return HttpResponse.json({ listing: draft });
       }),
     );
-    renderStep({ ...draft, car: savedCar });
+    const router = renderStep({ ...draft, car: savedCar });
 
     const price = await screen.findByLabelText("Price");
     expect(price).toHaveValue("265000");
@@ -104,9 +88,10 @@ describe("CarDetailsPage", () => {
 
     await user.clear(price);
     await user.type(price, "259000");
-    await user.click(screen.getByRole("button", { name: "Save draft" }));
+    await user.click(screen.getByRole("button", { name: "Continue to photos" }));
 
-    expect(await screen.findByText("Your draft is saved.")).toBeInTheDocument();
+    expect(await screen.findByRole("heading", { name: "Photos & videos", level: 1 })).toBeInTheDocument();
+    expect(router.state.location.pathname).toBe("/my-listings/7/photos");
     expect(sent).toMatchObject({ car: { price: 259000, makeId: 482, equipmentIds: [1] } });
   });
 
@@ -123,7 +108,7 @@ describe("CarDetailsPage", () => {
     );
     renderStep({ ...draft, car: savedCar });
 
-    await user.click(await screen.findByRole("button", { name: "Save draft" }));
+    await user.click(await screen.findByRole("button", { name: "Continue to photos" }));
 
     const price = screen.getByLabelText("Price");
     expect(await screen.findByText("Price must be positive")).toBeInTheDocument();

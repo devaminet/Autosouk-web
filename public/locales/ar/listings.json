@@ -72,7 +72,8 @@
       "photos": "الصور",
       "review": "المراجعة"
     },
-    "previous": "الخطوة السابقة"
+    "previous": "الخطوة السابقة",
+    "saveDraft": "حفظ المسودة"
   },
   "newListing": {
     "title": "صف إعلانك",
@@ -109,7 +110,7 @@
     "conditionHelper": "كن صادقًا، فالفاحص سيقيّمها أيضًا.",
     "preview": "معاينة مباشرة",
     "back": "رجوع",
-    "submit": "حفظ المسودة",
+    "submit": "المتابعة إلى الصور",
     "tips": {
       "mileage": "عدد كيلومترات دقيق: يقارنه الفاحصون بلوحة العدادات وسجل الصيانة",
       "fiscalPower": "القوة الجبائية (CV) كما هي في البطاقة الرمادية",
@@ -125,5 +126,98 @@
     "collapseAll": "طي الكل",
     "count": "{{selected}} من {{total}}",
     "noMatch": "لا يوجد تجهيز يطابق «{{query}}»."
+  },
+  "photos": {
+    "title": "الصور والفيديوهات",
+    "description": "3 صور على الأقل، وحتى 20 ملفًا مع الفيديوهات. تظهر صورة الغلاف أولًا في البحث ويجب أن تكون صورة.",
+    "photoCount_zero": "لا صور",
+    "photoCount_one": "صورة واحدة",
+    "photoCount_two": "صورتان",
+    "photoCount_few": "{{count}} صور",
+    "photoCount_many": "{{count}} صورة",
+    "photoCount_other": "{{count}} صورة",
+    "videoCount_zero": "لا فيديو",
+    "videoCount_one": "فيديو واحد",
+    "videoCount_two": "فيديوهان",
+    "videoCount_few": "{{count}} فيديوهات",
+    "videoCount_many": "{{count}} فيديو",
+    "videoCount_other": "{{count}} فيديو",
+    "uploadingCount_zero": "{{count}} قيد الرفع",
+    "uploadingCount_one": "{{count}} قيد الرفع",
+    "uploadingCount_two": "{{count}} قيد الرفع",
+    "uploadingCount_few": "{{count}} قيد الرفع",
+    "uploadingCount_many": "{{count}} قيد الرفع",
+    "uploadingCount_other": "{{count}} قيد الرفع",
+    "files": "ملفات",
+    "checks": {
+      "minPhotos_zero": "{{count}} صور على الأقل",
+      "minPhotos_one": "صورة واحدة على الأقل",
+      "minPhotos_two": "صورتان على الأقل",
+      "minPhotos_few": "{{count}} صور على الأقل",
+      "minPhotos_many": "{{count}} صورة على الأقل",
+      "minPhotos_other": "{{count}} صورة على الأقل",
+      "morePhotos_zero": "أضف {{count}} صور أخرى (الحد الأدنى {{min}})",
+      "morePhotos_one": "أضف صورة أخرى (الحد الأدنى {{min}})",
+      "morePhotos_two": "أضف صورتين أخريين (الحد الأدنى {{min}})",
+      "morePhotos_few": "أضف {{count}} صور أخرى (الحد الأدنى {{min}})",
+      "morePhotos_many": "أضف {{count}} صورة أخرى (الحد الأدنى {{min}})",
+      "morePhotos_other": "أضف {{count}} صورة أخرى (الحد الأدنى {{min}})",
+      "cover": "الغلاف صورة",
+      "noCover": "اختر صورة الغلاف",
+      "filesLeft_zero": "لم يتبقَّ أي ملف",
+      "filesLeft_one": "يتبقى ملف واحد",
+      "filesLeft_two": "يتبقى ملفان",
+      "filesLeft_few": "تتبقى {{count}} ملفات",
+      "filesLeft_many": "يتبقى {{count}} ملفًا",
+      "filesLeft_other": "يتبقى {{count}} ملف"
+    },
+    "drop": "اسحب الصور إلى هنا أو",
+    "browse": "تصفّح",
+    "formats": "JPG وPNG وWEBP حتى 10 ميغابايت · فيديو MP4 حتى 50 ميغابايت",
+    "add": "إضافة صورة أو فيديو",
+    "camera": "الكاميرا",
+    "cover": "الغلاف",
+    "photo": "الصورة {{number}}",
+    "video": "الفيديو {{number}}",
+    "makeCover": "جعل الصورة {{number}} غلافًا",
+    "delete": "حذف {{name}}",
+    "uploading": "جارٍ الرفع",
+    "uploadingFile": "جارٍ رفع {{name}}",
+    "storageNote": "تُرفع الصور مباشرة إلى تخزين آمن. أخفِ رقم اللوحة وأرقام البطاقة الرمادية: يتحقق منها الفاحص بنفسه.",
+    "tips": {
+      "angles": "صور أمامية وخلفية جانبية في ضوء النهار",
+      "interior": "المقصورة، ولوحة القيادة مع عدد الكيلومترات",
+      "engine": "حجرة المحرك والإطارات"
+    },
+    "addMore_zero": "أضف {{count}} صور أخرى",
+    "addMore_one": "أضف صورة أخرى",
+    "addMore_two": "أضف صورتين أخريين",
+    "addMore_few": "أضف {{count}} صور أخرى",
+    "addMore_many": "أضف {{count}} صورة أخرى",
+    "addMore_other": "أضف {{count}} صورة أخرى",
+    "review": "مراجعة الإعلان",
+    "problems": {
+      "title": "لم تُضف بعض الملفات",
+      "type": "{{name}}: تُقبل ملفات JPG وPNG وWEBP وMP4 فقط.",
+      "size": "{{name}}: الملف كبير جدًا. الصور حتى 10 ميغابايت، والفيديو حتى 50 ميغابايت.",
+      "limit": "{{name}}: يتسع الإعلان لـ 20 ملفًا كحد أقصى.",
+      "failed": "{{name}}: فشل الرفع. حاول مرة أخرى.",
+      "rejected": "{{name}}: رُفض بسبب نوعه أو حجمه."
+    }
+  },
+  "review": {
+    "title": "المراجعة والإرسال",
+    "description": "تحقق من كل شيء قبل الإرسال. يراجع فريقنا كل إعلان قبل ظهوره في البحث.",
+    "edit": "تعديل",
+    "editSection": "تعديل {{section}}",
+    "makeModel": "الماركة والطراز",
+    "note": "يراجع فريقنا كل إعلان، عادةً في أقل من 24 ساعة.",
+    "submit": "إرسال للمراجعة"
+  },
+  "submitted": {
+    "title": "أُرسل للمراجعة",
+    "description": "يراجع فريقنا كل إعلان، عادةً في أقل من 24 ساعة. يظهر في البحث بعد الموافقة عليه.",
+    "myListings": "الذهاب إلى إعلاناتي",
+    "another": "بيع سيارة أخرى"
   }
 }

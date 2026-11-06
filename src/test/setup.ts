@@ -15,6 +15,14 @@ HTMLDialogElement.prototype.close = function close() {
   this.dispatchEvent(new Event("close"));
 };
 
+// jsdom has no object URLs. Previews only need a unique string.
+let objectUrls = 0;
+URL.createObjectURL = () => {
+  objectUrls += 1;
+  return `blob:test/${objectUrls}`;
+};
+URL.revokeObjectURL = () => undefined;
+
 beforeEach(async () => {
   await i18n.changeLanguage("en");
 });

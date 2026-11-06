@@ -68,7 +68,8 @@
       "photos": "Photos",
       "review": "Review"
     },
-    "previous": "Previous step"
+    "previous": "Previous step",
+    "saveDraft": "Save draft"
   },
   "newListing": {
     "title": "Describe your listing",
@@ -105,7 +106,7 @@
     "conditionHelper": "Be honest, the inspector will grade it too.",
     "preview": "Live preview",
     "back": "Back",
-    "submit": "Save draft",
+    "submit": "Continue to photos",
     "tips": {
       "mileage": "Exact mileage: inspectors check it against the dashboard and service history",
       "fiscalPower": "Fiscal power (CV) as shown on the carte grise",
@@ -121,5 +122,70 @@
     "collapseAll": "Collapse all",
     "count": "{{selected}} of {{total}}",
     "noMatch": "No equipment matches “{{query}}”."
+  },
+  "photos": {
+    "title": "Photos & videos",
+    "description": "At least 3 photos, up to 20 files with videos. The cover is shown first in search and must be a photo.",
+    "photoCount_one": "{{count}} photo",
+    "photoCount_other": "{{count}} photos",
+    "videoCount_one": "{{count}} video",
+    "videoCount_other": "{{count}} videos",
+    "uploadingCount_one": "{{count}} uploading",
+    "uploadingCount_other": "{{count}} uploading",
+    "files": "files",
+    "checks": {
+      "minPhotos_one": "At least {{count}} photo",
+      "minPhotos_other": "At least {{count}} photos",
+      "morePhotos_one": "Add {{count}} more photo (min. {{min}})",
+      "morePhotos_other": "Add {{count}} more photos (min. {{min}})",
+      "cover": "Cover is a photo",
+      "noCover": "Choose a cover photo",
+      "filesLeft_one": "{{count}} file left",
+      "filesLeft_other": "{{count}} files left"
+    },
+    "drop": "Drop photos here or",
+    "browse": "browse",
+    "formats": "JPG, PNG, WEBP up to 10 MB · videos MP4 up to 50 MB",
+    "add": "Add photo or video",
+    "camera": "Camera",
+    "cover": "Cover",
+    "photo": "Photo {{number}}",
+    "video": "Video {{number}}",
+    "makeCover": "Make photo {{number}} the cover",
+    "delete": "Delete {{name}}",
+    "uploading": "Uploading",
+    "uploadingFile": "Uploading {{name}}",
+    "storageNote": "Photos upload straight to secure storage. Hide your number plate and carte grise numbers: the inspector checks them in person.",
+    "tips": {
+      "angles": "Front and rear three-quarter views, in daylight",
+      "interior": "The interior, and the dashboard showing the mileage",
+      "engine": "The engine bay and the tyres"
+    },
+    "addMore_one": "Add {{count}} more photo",
+    "addMore_other": "Add {{count}} more photos",
+    "review": "Review listing",
+    "problems": {
+      "title": "Some files were not added",
+      "type": "{{name}}: only JPG, PNG, WEBP and MP4 files are accepted.",
+      "size": "{{name}}: too large. Photos can be up to 10 MB, videos up to 50 MB.",
+      "limit": "{{name}}: a listing holds up to 20 files.",
+      "failed": "{{name}}: the upload failed. Try again.",
+      "rejected": "{{name}}: refused because of its type or size."
+    }
+  },
+  "review": {
+    "title": "Review and submit",
+    "description": "Check everything before you send it. Our team reviews every listing before it appears in search.",
+    "edit": "Edit",
+    "editSection": "Edit {{section}}",
+    "makeModel": "Make and model",
+    "note": "Our team checks every listing, usually in under 24 hours.",
+    "submit": "Submit for review"
+  },
+  "submitted": {
+    "title": "Submitted for review",
+    "description": "Our team checks every listing, usually in under 24 hours. It appears in search once approved.",
+    "myListings": "Go to my listings",
+    "another": "List another car"
   }
 }
