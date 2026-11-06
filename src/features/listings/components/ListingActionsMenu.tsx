@@ -1,4 +1,5 @@
-import { useRef } from "react";
+import { useEffect, useRef, useState } from "react";
+import type { CSSProperties } from "react";
 import { useTranslation } from "react-i18next";
 import { Link } from "react-router";
 import { Icon } from "../../../components/Icon";
@@ -12,14 +13,52 @@ type ListingActionsMenuProps = {
   edit?: { to: string; label: "edit" | "editResubmit" };
   // Where to manage its photos and videos. The table shows its own button too.
   mediaTo?: string;
+  // The listing as buyers see it.
+  viewTo?: string;
   onDelete: () => void;
 };
 
+// In px: the space between the button and the panel, and the room the panel needs.
+const gap = 8;
+const roomBelow = 200;
+
 // The "…" button on a listing, for actions that don't need their own button.
-export function ListingActionsMenu({ title, continueTo, edit, mediaTo, onDelete }: ListingActionsMenuProps) {
+export function ListingActionsMenu({ title, continueTo, edit, mediaTo, viewTo, onDelete }: ListingActionsMenuProps) {
   const { t } = useTranslation("listings");
   const { open, setOpen, root } = useMenu();
   const trigger = useRef<HTMLButtonElement>(null);
+  const [position, setPosition] = useState<CSSProperties>({});
+
+  // The panel is fixed to the window, so a scrolling table can't clip it. It
+  // would drift from its button on scroll, so scrolling closes it.
+  useEffect(() => {
+    if (!open) {
+      return undefined;
+    }
+    const close = () => setOpen(false);
+    window.addEventListener("scroll", close, { capture: true, passive: true });
+    window.addEventListener("resize", close);
+    return () => {
+      window.removeEventListener("scroll", close, { capture: true });
+      window.removeEventListener("resize", close);
+    };
+  }, [open, setOpen]);
+
+  const toggle = () => {
+    const button = trigger.current;
+    if (!open && button) {
+      const rect = button.getBoundingClientRect();
+      const isRtl = getComputedStyle(button).direction === "rtl";
+      // Opens upwards when the window has little room below the button.
+      const below = window.innerHeight - rect.bottom > roomBelow;
+      setPosition({
+        // The client width leaves out the page's scrollbar, which the window width counts.
+        insetInlineEnd: isRtl ? rect.left : document.documentElement.clientWidth - rect.right,
+        ...(below ? { top: rect.bottom + gap } : { bottom: window.innerHeight - rect.top + gap }),
+      });
+    }
+    setOpen((value) => !value);
+  };
 
   return (
     <div className="relative shrink-0" ref={root}>
@@ -27,14 +66,18 @@ export function ListingActionsMenu({ title, continueTo, edit, mediaTo, onDelete 
         aria-expanded={open}
         aria-label={t("actions.menu", { title })}
         className="flex size-40 cursor-pointer items-center justify-center rounded-full text-ink hover:bg-line focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-brand md:size-control-s md:bg-surface md:ring-1 md:ring-line-strong md:ring-inset md:hover:bg-surface-2"
-        onClick={() => setOpen((value) => !value)}
+        onClick={toggle}
         ref={trigger}
         type="button"
       >
         <Icon name="more-horizontal" size={16} />
       </button>
       {open && (
-        <div className="absolute inset-e-0 top-full z-10 mt-8 flex min-w-max flex-col gap-4 rounded-md bg-surface p-4 shadow-elevation-2">
+        // The position comes from the button's place on screen, so it can't be a class.
+        <div
+          className="fixed z-20 flex min-w-max flex-col gap-4 rounded-md bg-surface p-4 shadow-elevation-2"
+          style={position}
+        >
           {continueTo && (
             <Link
               className="flex min-h-control-s items-center gap-8 rounded-sm px-12 type-label-m text-ink hover:bg-paper focus-visible:outline-2 focus-visible:outline-brand"
@@ -57,6 +100,15 @@ export function ListingActionsMenu({ title, continueTo, edit, mediaTo, onDelete 
             >
               <Icon name="pencil" size={16} />
               {t(`actions.${edit.label}`)}
+            </Link>
+          )}
+          {viewTo && (
+            <Link
+              className="flex min-h-control-s items-center gap-8 rounded-sm px-12 type-label-m text-ink hover:bg-paper focus-visible:outline-2 focus-visible:outline-brand"
+              to={viewTo}
+            >
+              <Icon name="eye" size={16} />
+              {t("actions.viewListing", { title })}
             </Link>
           )}
           {mediaTo && (

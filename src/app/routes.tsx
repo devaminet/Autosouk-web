@@ -12,6 +12,7 @@ import { MyListingsPage } from "../features/listings/pages/MyListingsPage";
 import { CarDetailsPage } from "../features/listings/pages/CarDetailsPage";
 import { DraftListingPage } from "../features/listings/pages/DraftListingPage";
 import { ListingMediaPage } from "../features/listings/pages/ListingMediaPage";
+import { ListingPage } from "../features/listings/pages/ListingPage";
 import { NewListingPage } from "../features/listings/pages/NewListingPage";
 import { PhotosPage } from "../features/listings/pages/PhotosPage";
 import { ReviewPage } from "../features/listings/pages/ReviewPage";
@@ -30,6 +31,7 @@ export const routes: RouteObject[] = [
         element: <AppLayout />,
         children: [
           { path: paths.home, element: <HomePage /> },
+          { path: paths.listing, element: <ListingPage /> },
           {
             element: <RequireRole allowed="seller" />,
             children: [{ path: paths.myListings, element: <MyListingsPage /> }],

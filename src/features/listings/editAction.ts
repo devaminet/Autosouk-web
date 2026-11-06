@@ -1,5 +1,5 @@
 import type { ButtonVariant } from "../../components/buttonStyles";
-import { listingMediaPath } from "../../lib/paths";
+import { listingMediaPath, listingPath } from "../../lib/paths";
 import type { ListingStatus } from "./api";
 import { resumeDraftPath } from "./wizardSteps";
 
@@ -29,3 +29,8 @@ export const mediaPathFor = (listing: { id: number; status: ListingStatus; car: 
   }
   return listing.status === "sold" ? null : listingMediaPath(listing.id);
 };
+
+// Where a row of My listings leads. A draft has nothing to show buyers yet,
+// so it continues in the wizard.
+export const rowPathFor = (listing: { id: number; status: ListingStatus; car: unknown }): string =>
+  listing.status === "draft" ? resumeDraftPath(listing) : listingPath(listing.id);

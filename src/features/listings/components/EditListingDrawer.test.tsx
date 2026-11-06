@@ -133,7 +133,7 @@ describe("EditListingDrawer", () => {
     expect(router.state.location.search).toBe("");
   });
 
-  it("names the action per status, and offers none for a sold car", async () => {
+  it("names the action per status, and only offers to view a sold car", async () => {
     renderList([
       { ...row, id: 2, title: "Rejected car", status: "rejected" },
       { ...row, id: 3, title: "Sold car", status: "sold" },
@@ -145,7 +145,9 @@ describe("EditListingDrawer", () => {
       "href",
       "/my-listings?edit=2",
     );
-    expect(within(table).queryByRole("link", { name: /Sold car/u })).not.toBeInTheDocument();
+    expect(within(table).queryByRole("link", { name: /Edit.*Sold car/u })).not.toBeInTheDocument();
+    expect(within(table).queryByRole("link", { name: /Photos and videos of Sold car/u })).not.toBeInTheDocument();
+    expect(within(table).getByRole("link", { name: "View Sold car" })).toHaveAttribute("href", "/listings/3");
     expect(within(table).getByRole("link", { name: "Photos and videos of Rejected car" })).toHaveAttribute(
       "href",
       "/my-listings/2/media",
@@ -164,6 +166,22 @@ describe("EditListingDrawer", () => {
 
     expect(await screen.findByRole("dialog", { name: "My Golf" })).toBeInTheDocument();
     expect(trigger).toHaveFocus();
+  });
+
+  it("opens a listing from its row, and a draft in the wizard", async () => {
+    const user = userEvent.setup();
+    renderList([row, { ...row, id: 11, title: "Draft car", status: "draft", car: null }]);
+
+    const table = await screen.findByRole("table");
+    expect(within(table).getByRole("link", { name: "My Golf" })).toHaveAttribute("href", "/listings/7");
+    expect(within(table).getByRole("link", { name: "Draft car" })).toHaveAttribute("href", "/my-listings/11/car");
+
+    // Only the cards' menu, for small screens, offers to view the listing.
+    const [tableMenu, cardMenu] = screen.getAllByRole("button", { name: "Actions for My Golf" });
+    await user.click(tableMenu ?? table);
+    expect(screen.queryByRole("link", { name: "View My Golf" })).not.toBeInTheDocument();
+    await user.click(cardMenu ?? table);
+    expect(screen.getByRole("link", { name: "View My Golf" })).toHaveAttribute("href", "/listings/7");
   });
 
   it("links to the page that manages photos and videos", async () => {

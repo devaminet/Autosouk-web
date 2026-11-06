@@ -21,7 +21,9 @@
     "editListing": "تعديل {{title}}",
     "editResubmitListing": "تعديل وإعادة إرسال {{title}}",
     "media": "الصور والفيديوهات",
-    "mediaListing": "صور وفيديوهات {{title}}"
+    "mediaListing": "صور وفيديوهات {{title}}",
+    "view": "عرض",
+    "viewListing": "عرض {{title}}"
   },
   "deleteDialog": {
     "title": "هل تريد حذف هذا الإعلان؟",
@@ -296,5 +298,52 @@
     "lockedText_few": "يجب أن يحتوي الإعلان على {{count}} صور على الأقل. ارفع صورة جديدة وأكدها أولًا، ثم احذف هذه الصورة.",
     "lockedText_many": "يجب أن يحتوي الإعلان على {{count}} صور على الأقل. ارفع صورة جديدة وأكدها أولًا، ثم احذف هذه الصورة.",
     "lockedText_other": "يجب أن يحتوي الإعلان على {{count}} صور على الأقل. ارفع صورة جديدة وأكدها أولًا، ثم احذف هذه الصورة."
+  },
+  "viewer": {
+    "title": "صور وفيديوهات {{title}}",
+    "open": "عرض {{name}}",
+    "close": "إغلاق",
+    "previous": "السابق",
+    "next": "التالي",
+    "show": "إظهار {{name}}"
+  },
+  "listing": {
+    "back": "رجوع",
+    "home": "تصفح السيارات",
+    "notFound": "هذا الإعلان غير موجود أو غير منشور.",
+    "loadingTitle": "إعلان",
+    "notApproved": "أنت فقط ترى هذا الإعلان. سيظهر في البحث بعد الموافقة عليه.",
+    "gallery": "الصور والفيديوهات",
+    "noMedia": "لا توجد صور بعد",
+    "showAllMedia_zero": "عرض كل الصور والفيديوهات ({{count}})",
+    "showAllMedia_one": "عرض كل الصور والفيديوهات ({{count}})",
+    "showAllMedia_two": "عرض كل الصور والفيديوهات ({{count}})",
+    "showAllMedia_few": "عرض كل الصور والفيديوهات ({{count}})",
+    "showAllMedia_many": "عرض كل الصور والفيديوهات ({{count}})",
+    "showAllMedia_other": "عرض كل الصور والفيديوهات ({{count}})",
+    "specs": "المواصفات الرئيسية",
+    "equipmentCount_zero": "{{count}} تجهيزًا، حسب تصريح البائع",
+    "equipmentCount_one": "{{count}} تجهيزًا، حسب تصريح البائع",
+    "equipmentCount_two": "{{count}} تجهيزًا، حسب تصريح البائع",
+    "equipmentCount_few": "{{count}} تجهيزًا، حسب تصريح البائع",
+    "equipmentCount_many": "{{count}} تجهيزًا، حسب تصريح البائع",
+    "equipmentCount_other": "{{count}} تجهيزًا، حسب تصريح البائع",
+    "moreEquipment_zero": "+ {{count}} أخرى",
+    "moreEquipment_one": "+ {{count}} أخرى",
+    "moreEquipment_two": "+ {{count}} أخرى",
+    "moreEquipment_few": "+ {{count}} أخرى",
+    "moreEquipment_many": "+ {{count}} أخرى",
+    "moreEquipment_other": "+ {{count}} أخرى",
+    "showAllEquipment_zero": "عرض كل التجهيزات ({{count}})",
+    "showAllEquipment_one": "عرض كل التجهيزات ({{count}})",
+    "showAllEquipment_two": "عرض كل التجهيزات ({{count}})",
+    "showAllEquipment_few": "عرض كل التجهيزات ({{count}})",
+    "showAllEquipment_many": "عرض كل التجهيزات ({{count}})",
+    "showAllEquipment_other": "عرض كل التجهيزات ({{count}})",
+    "showFewer": "عرض أقل",
+    "description": "الوصف",
+    "seller": "البائع",
+    "privateSeller": "بائع خاص",
+    "verified": "بائع موثّق"
   }
 }

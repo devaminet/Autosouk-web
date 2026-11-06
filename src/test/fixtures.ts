@@ -27,7 +27,7 @@ export const testCar = {
   make: { name: "VOLKSWAGEN" },
   model: { name: "Golf" },
   city: { name: "Casablanca", slug: "casablanca" },
-  equipment: [{ id: 1 }],
+  equipment: [{ id: 1, slug: "abs", name: "ABS", category: { slug: "safety", name: "Safety" } }],
   carMedias: [] as CarMedia[],
 };
 

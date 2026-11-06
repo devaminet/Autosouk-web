@@ -21,7 +21,9 @@
     "editListing": "Edit {{title}}",
     "editResubmitListing": "Edit and resubmit {{title}}",
     "media": "Photos & videos",
-    "mediaListing": "Photos and videos of {{title}}"
+    "mediaListing": "Photos and videos of {{title}}",
+    "view": "View",
+    "viewListing": "View {{title}}"
   },
   "deleteDialog": {
     "title": "Delete this listing?",
@@ -240,5 +242,36 @@
     "lockedText_one": "A listing needs at least {{count}} photo. Upload and confirm a new one first, then delete this one.",
     "lockedText_other": "A listing needs at least {{count}} photos. Upload and confirm a new one first, then delete this one.",
     "replace": "Upload a replacement"
+  },
+  "viewer": {
+    "title": "Photos and videos of {{title}}",
+    "open": "View {{name}}",
+    "close": "Close",
+    "previous": "Previous",
+    "next": "Next",
+    "show": "Show {{name}}"
+  },
+  "listing": {
+    "back": "Back",
+    "home": "Explore cars",
+    "notFound": "This listing doesn't exist or isn't public.",
+    "loadingTitle": "Listing",
+    "notApproved": "Only you can see this listing. It appears in search once it is approved.",
+    "gallery": "Photos and videos",
+    "noMedia": "No photos yet",
+    "showAllMedia_one": "Show all {{count}} photo and video",
+    "showAllMedia_other": "Show all {{count}} photos and videos",
+    "specs": "Key specs",
+    "equipmentCount_one": "{{count}} item, declared by the seller",
+    "equipmentCount_other": "{{count}} items, declared by the seller",
+    "moreEquipment_one": "+ {{count}} more",
+    "moreEquipment_other": "+ {{count}} more",
+    "showAllEquipment_one": "Show all {{count}} item",
+    "showAllEquipment_other": "Show all {{count}} items",
+    "showFewer": "Show fewer",
+    "description": "Description",
+    "seller": "Seller",
+    "privateSeller": "Private seller",
+    "verified": "Verified seller"
   }
 }

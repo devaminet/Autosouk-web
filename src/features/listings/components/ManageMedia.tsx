@@ -14,6 +14,7 @@ import { MediaProblems } from "./MediaProblems";
 import { MediaRules } from "./MediaRules";
 import { MediaSummary } from "./MediaSummary";
 import { MediaTile } from "./MediaTile";
+import { MediaViewer } from "./MediaViewer";
 import { StagedMediaTile } from "./StagedMediaTile";
 import { UploadTile } from "./UploadTile";
 
@@ -30,6 +31,8 @@ export function ManageMedia({ listingId, status, car }: ManageMediaProps) {
   const { t } = useTranslation("listings");
   const staged = useStagedMedia(listingId);
   const actions = useMediaActions(listingId);
+  // The media item shown in the viewer, if any.
+  const [viewing, setViewing] = useState<number | null>(null);
   const [confirmed, setConfirmed] = useState(false);
   // Shown after the seller tries to delete a photo the listing can't lose.
   const [showLocked, setShowLocked] = useState(false);
@@ -124,6 +127,7 @@ export function ManageMedia({ listingId, status, car }: ManageMediaProps) {
                 onDelete={() => actions.remove(item.id)}
                 onLockedDelete={atMinimum && item.type === "image" ? () => setShowLocked(true) : undefined}
                 onMakeCover={() => actions.makeCover(item.id)}
+                onOpen={() => setViewing(index)}
               />
             ))}
             {staged.files.map((file) =>
@@ -149,6 +153,13 @@ export function ManageMedia({ listingId, status, car }: ManageMediaProps) {
           <MediaRules />
         </aside>
       </div>
+      <MediaViewer
+        index={viewing}
+        media={media}
+        onClose={() => setViewing(null)}
+        onIndexChange={setViewing}
+        title={`${car.make.name} ${car.model.name}`}
+      />
       {!hasNewFiles && atMinimum && filesLeft > 0 && (
         <div className="sticky bottom-0 -mx-20 -mb-24 border-t border-line bg-surface px-20 py-16 md:hidden">
           <label className="flex min-h-control-l cursor-pointer items-center justify-center gap-8 rounded-full bg-brand px-24 type-label-l text-on-brand shadow-elevation-brand has-focus-visible:outline-2 has-focus-visible:outline-offset-2 has-focus-visible:outline-brand">

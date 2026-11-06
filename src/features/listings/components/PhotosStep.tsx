@@ -1,3 +1,4 @@
+import { useState } from "react";
 import { useTranslation } from "react-i18next";
 import { Alert } from "../../../components/Alert";
 import { Button } from "../../../components/Button";
@@ -15,6 +16,7 @@ import { MediaFileInput } from "./MediaFileInput";
 import { MediaProblems } from "./MediaProblems";
 import { MediaSummary } from "./MediaSummary";
 import { MediaTile } from "./MediaTile";
+import { MediaViewer } from "./MediaViewer";
 import { UploadTile } from "./UploadTile";
 import { WizardCard } from "./WizardCard";
 import { WizardStepLayout } from "./WizardStepLayout";
@@ -29,6 +31,8 @@ export function PhotosStep({ listingId, car }: PhotosStepProps) {
   const { t } = useTranslation("listings");
   const { uploads, problems, error, upload } = useMediaUploads(listingId);
   const actions = useMediaActions(listingId);
+  // The media item shown in the viewer, if any.
+  const [viewing, setViewing] = useState<number | null>(null);
   const media = car.carMedias;
   const photos = media.filter(({ type }) => type === "image").length;
   const hasCover = media.some(({ isPrimary, type }) => isPrimary && type === "image");
@@ -92,6 +96,7 @@ export function PhotosStep({ listingId, car }: PhotosStepProps) {
               number={index + 1}
               onDelete={() => actions.remove(item.id)}
               onMakeCover={() => actions.makeCover(item.id)}
+              onOpen={() => setViewing(index)}
             />
           ))}
           {uploads.map((item) => (
@@ -100,6 +105,13 @@ export function PhotosStep({ listingId, car }: PhotosStepProps) {
           <AddMediaTile filesLeft={filesLeft} onFiles={addFiles} />
         </ul>
       </WizardCard>
+      <MediaViewer
+        index={viewing}
+        media={media}
+        onClose={() => setViewing(null)}
+        onIndexChange={setViewing}
+        title={`${car.make.name} ${car.model.name}`}
+      />
     </WizardStepLayout>
   );
 }

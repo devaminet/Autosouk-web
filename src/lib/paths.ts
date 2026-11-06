@@ -7,6 +7,8 @@ export const paths = {
   verifyEmail: "/verify-email",
   resetPassword: "/reset-password",
   forgotPassword: "/forgot-password",
+  // A listing as buyers see it. Build links with listingPath.
+  listing: "/listings/:listingId",
   myListings: "/my-listings",
   newListing: "/my-listings/new",
   // Route patterns. Build links to them with draftStepPath.
@@ -24,3 +26,5 @@ export const draftStepPath = (listingId: number, step: DraftStep): string =>
   `/my-listings/${listingId}/${step}`;
 
 export const listingMediaPath = (listingId: number): string => `/my-listings/${listingId}/media`;
+
+export const listingPath = (listingId: number): string => `/listings/${listingId}`;

@@ -21,7 +21,9 @@
     "editListing": "Modifier {{title}}",
     "editResubmitListing": "Modifier et renvoyer {{title}}",
     "media": "Photos et vidéos",
-    "mediaListing": "Photos et vidéos de {{title}}"
+    "mediaListing": "Photos et vidéos de {{title}}",
+    "view": "Voir",
+    "viewListing": "Voir {{title}}"
   },
   "deleteDialog": {
     "title": "Supprimer cette annonce ?",
@@ -247,5 +249,40 @@
     "lockedText_many": "Une annonce doit avoir au moins {{count}} photos. Envoyez et confirmez d’abord une nouvelle photo, puis supprimez celle-ci.",
     "lockedText_other": "Une annonce doit avoir au moins {{count}} photos. Envoyez et confirmez d’abord une nouvelle photo, puis supprimez celle-ci.",
     "replace": "Envoyer une photo de remplacement"
+  },
+  "viewer": {
+    "title": "Photos et vidéos de {{title}}",
+    "open": "Voir {{name}}",
+    "close": "Fermer",
+    "previous": "Précédent",
+    "next": "Suivant",
+    "show": "Afficher {{name}}"
+  },
+  "listing": {
+    "back": "Retour",
+    "home": "Explorer les voitures",
+    "notFound": "Cette annonce n’existe pas ou n’est pas publique.",
+    "loadingTitle": "Annonce",
+    "notApproved": "Vous seul voyez cette annonce. Elle apparaîtra dans la recherche une fois approuvée.",
+    "gallery": "Photos et vidéos",
+    "noMedia": "Pas encore de photos",
+    "showAllMedia_one": "Voir {{count}} photo ou vidéo",
+    "showAllMedia_many": "Voir les {{count}} photos et vidéos",
+    "showAllMedia_other": "Voir les {{count}} photos et vidéos",
+    "specs": "Caractéristiques",
+    "equipmentCount_one": "{{count}} équipement, déclaré par le vendeur",
+    "equipmentCount_many": "{{count}} équipements, déclarés par le vendeur",
+    "equipmentCount_other": "{{count}} équipements, déclarés par le vendeur",
+    "moreEquipment_one": "+ {{count}} autre",
+    "moreEquipment_many": "+ {{count}} autres",
+    "moreEquipment_other": "+ {{count}} autres",
+    "showAllEquipment_one": "Voir {{count}} équipement",
+    "showAllEquipment_many": "Voir les {{count}} équipements",
+    "showAllEquipment_other": "Voir les {{count}} équipements",
+    "showFewer": "Voir moins",
+    "description": "Description",
+    "seller": "Vendeur",
+    "privateSeller": "Particulier",
+    "verified": "Vendeur vérifié"
   }
 }

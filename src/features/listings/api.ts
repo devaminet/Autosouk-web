@@ -152,7 +152,15 @@ const listingCarSchema = z.object({
   make: z.object({ name: z.string() }),
   model: z.object({ name: z.string() }),
   city: z.object({ name: z.string(), slug: z.string() }),
-  equipment: z.array(z.object({ id: z.number() })),
+  // In catalog display order.
+  equipment: z.array(
+    z.object({
+      id: z.number(),
+      slug: z.string(),
+      name: z.string(),
+      category: z.object({ slug: z.string(), name: z.string() }),
+    }),
+  ),
   carMedias: z.array(carMediaSchema),
 });
 
@@ -165,6 +173,15 @@ const listingDetailSchema = z.object({
     description: z.string(),
     status: listingStatusSchema,
     car: listingCarSchema.nullable(),
+    // The seller, as buyers see them.
+    user: z
+      .object({
+        firstName: z.string(),
+        lastName: z.string(),
+        isVerified: z.boolean().nullable(),
+        city: z.object({ name: z.string(), slug: z.string() }).nullable(),
+      })
+      .nullish(),
   }),
 });
 

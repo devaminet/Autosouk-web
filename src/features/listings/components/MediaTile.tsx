@@ -10,6 +10,8 @@ type MediaTileProps = {
   // Its position in the grid, to name it.
   number: number;
   busy: boolean;
+  // Shows it in the media viewer.
+  onOpen: () => void;
   onMakeCover: () => void;
   onDelete: () => void;
   // A published listing keeps a minimum of photos. The button then explains
@@ -18,7 +20,7 @@ type MediaTileProps = {
 };
 
 // One uploaded photo or video. Only a photo can be the cover.
-export function MediaTile({ media, number, busy, onMakeCover, onDelete, onLockedDelete }: MediaTileProps) {
+export function MediaTile({ media, number, busy, onOpen, onMakeCover, onDelete, onLockedDelete }: MediaTileProps) {
   const { t } = useTranslation("listings");
   const isImage = media.type === "image";
   const name = t(isImage ? "photos.photo" : "photos.video", { number });
@@ -30,21 +32,28 @@ export function MediaTile({ media, number, busy, onMakeCover, onDelete, onLocked
         media.isPrimary ? "ring-2 ring-brand ring-offset-2 ring-offset-surface" : ""
       } ${busy ? "opacity-45" : ""}`}
     >
-      {isImage ? (
-        <img alt={name} className="size-full object-cover" loading="lazy" src={media.link} />
-      ) : (
-        <>
-          <video aria-label={name} className="size-full object-cover" muted playsInline preload="metadata" src={media.link} />
-          <span
-            aria-hidden="true"
-            className="absolute inset-0 m-auto flex size-40 items-center justify-center rounded-full bg-surface text-ink"
-          >
-            <Icon className="fill-current" name="play" size={16} />
-          </span>
-        </>
-      )}
+      <button
+        aria-label={t("viewer.open", { name })}
+        className="block size-full cursor-zoom-in focus-visible:outline-2 focus-visible:-outline-offset-2 focus-visible:outline-surface"
+        onClick={onOpen}
+        type="button"
+      >
+        {isImage ? (
+          <img alt={name} className="size-full object-cover" loading="lazy" src={media.link} />
+        ) : (
+          <>
+            <video aria-label={name} className="size-full object-cover" muted playsInline preload="metadata" src={media.link} />
+            <span
+              aria-hidden="true"
+              className="absolute inset-0 m-auto flex size-40 items-center justify-center rounded-full bg-surface text-ink"
+            >
+              <Icon className="fill-current" name="play" size={16} />
+            </span>
+          </>
+        )}
+      </button>
       {media.isPrimary && (
-        <span className="absolute bottom-8 inset-s-8 flex items-center gap-4 rounded-full bg-ink px-8 py-2 type-label-s text-surface">
+        <span className="pointer-events-none absolute bottom-8 inset-s-8 flex items-center gap-4 rounded-full bg-ink px-8 py-2 type-label-s text-surface">
           <Icon className="fill-current text-saffron" name="star" size={12} />
           {t("photos.cover")}
         </span>

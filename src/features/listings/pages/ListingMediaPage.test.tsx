@@ -190,6 +190,16 @@ describe("ListingMediaPage", () => {
     expect(await screen.findByRole("alert")).toHaveTextContent("A car needs at least 3 images.");
   });
 
+  it("opens a photo in the viewer", async () => {
+    const user = userEvent.setup();
+    renderPage({ current: threePhotos() });
+
+    await user.click(await screen.findByRole("button", { name: "View Photo 3" }));
+
+    const viewer = screen.getByRole("dialog", { name: "Photos and videos of VOLKSWAGEN Golf" });
+    expect(within(viewer).getByRole("img", { name: "Photo 3" })).toBeInTheDocument();
+  });
+
   it("sends a draft to the wizard and a sold car back to my listings", async () => {
     const draft = renderPage({ current: threePhotos() }, "draft");
     await expect.poll(() => draft.state.location.pathname).toBe("/my-listings/7/photos");

@@ -1,5 +1,7 @@
+import { Link } from "react-router";
+import { listingPath } from "../../../lib/paths";
 import type { SellerListing } from "../api";
-import { editActionFor, mediaPathFor } from "../editAction";
+import { editActionFor, mediaPathFor, rowPathFor } from "../editAction";
 import { resumeDraftPath } from "../wizardSteps";
 import { ListingActionsMenu } from "./ListingActionsMenu";
 import { ListingPrice } from "./ListingPrice";
@@ -24,13 +26,16 @@ export function ListingCards({ listings, editTo, onDelete }: ListingCardsProps) 
     <ul className="flex flex-col gap-12 md:hidden">
       {listings.map((listing) => (
         <li
-          className="flex items-center gap-12 rounded-lg bg-surface p-8 shadow-elevation-1"
+          // The title's link covers the card. The menu comes later and stays above it.
+          className="relative flex items-center gap-12 rounded-lg bg-surface p-8 shadow-elevation-1"
           key={listing.id}
         >
           <ListingThumb listing={listing} />
           <div className="flex min-w-0 flex-1 flex-col gap-4">
-            <p className="type-h5 text-ink" dir="auto">
-              {listing.title}
+            <p className="type-h5" dir="auto">
+              <Link className="rounded-xs text-ink after:absolute after:inset-0 hover:underline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-brand" to={rowPathFor(listing)}>
+                {listing.title}
+              </Link>
             </p>
             <ListingPrice car={listing.car} />
             <StatusBadge status={listing.status} />
@@ -41,6 +46,7 @@ export function ListingCards({ listings, editTo, onDelete }: ListingCardsProps) 
           <ListingActionsMenu
             continueTo={listing.status === "draft" ? resumeDraftPath(listing) : undefined}
             edit={editFor(listing)}
+            viewTo={listing.status === "draft" ? undefined : listingPath(listing.id)}
             mediaTo={listing.status === "draft" ? undefined : (mediaPathFor(listing) ?? undefined)}
             onDelete={() => onDelete(listing)}
             title={listing.title}
