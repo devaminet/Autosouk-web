@@ -344,7 +344,9 @@
       "media_one": "{{count}} photo ou vidéo",
       "media_many": "{{count}} photos et vidéos",
       "media_other": "{{count}} photos et vidéos",
-      "inspected": "Inspectée"
+      "inspected": "Inspectée",
+      "save": "Ajouter {{title}} aux favoris",
+      "loginToSave": "Se connecter pour ajouter {{title}} aux favoris"
     },
     "how": {
       "overline": "Comment fonctionne AutoSouk",

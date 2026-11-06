@@ -5,6 +5,7 @@ import { Link } from "react-router";
 import carImage from "../../../../assets/car.svg";
 import { Icon } from "../../../../components/Icon";
 import { formatNumber } from "../../../../lib/format";
+import { FavoriteButton } from "../../../favorites/components/FavoriteButton";
 import { listingPath } from "../../../../lib/paths";
 import type { PublicListing } from "../../api";
 import { distanceLabel } from "../../distance";
@@ -54,6 +55,10 @@ export function PublicListingCard({ listing }: PublicListingCardProps) {
             {t("explore.card.inspected")} · <bdi dir="ltr">{listing.inspectionScore}</bdi>
           </span>
         )}
+        {/* Above the link that covers the card. */}
+        <div className="absolute top-12 inset-e-12 z-10">
+          <FavoriteButton listingId={listing.id} title={listing.title} />
+        </div>
         {media.length > 0 && (
           <span className="absolute bottom-12 inset-s-12 flex items-center gap-4 rounded-full bg-ink px-8 py-2 type-label-s text-surface">
             <Icon name="camera" size={12} />

@@ -414,7 +414,9 @@
       "media_few": "{{count}} صور وفيديوهات",
       "media_many": "{{count}} صورة وفيديو",
       "media_other": "{{count}} صورة وفيديو",
-      "inspected": "مفحوصة"
+      "inspected": "مفحوصة",
+      "save": "حفظ {{title}} في المفضلة",
+      "loginToSave": "سجّل الدخول لحفظ {{title}} في المفضلة"
     },
     "how": {
       "overline": "كيف يعمل AutoSouk",

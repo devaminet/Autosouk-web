@@ -330,7 +330,9 @@
     "card": {
       "media_one": "{{count}} photo or video",
       "media_other": "{{count}} photos and videos",
-      "inspected": "Inspected"
+      "inspected": "Inspected",
+      "save": "Save {{title}} to favourites",
+      "loginToSave": "Log in to save {{title}} to favourites"
     },
     "how": {
       "overline": "How AutoSouk works",
