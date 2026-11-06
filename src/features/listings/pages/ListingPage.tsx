@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { useTranslation } from "react-i18next";
-import { Link, useLocation, useNavigate } from "react-router";
+import { Link, useLocation, useNavigate, useParams } from "react-router";
 import { Alert } from "../../../components/Alert";
 import { ButtonLink } from "../../../components/ButtonLink";
 import { Icon } from "../../../components/Icon";
@@ -13,8 +13,9 @@ import { ListingSpecs } from "../components/ListingSpecs";
 import { MediaViewer } from "../components/MediaViewer";
 import { SellerCard } from "../components/SellerCard";
 import { StatusBadge } from "../components/StatusBadge";
-import { useLookups } from "../hooks";
-import { useDraftFromRoute } from "../useDraftFromRoute";
+import { useSession } from "../../auth/hooks";
+import { useListing, useLookups } from "../hooks";
+import { listingIdFrom } from "../useDraftFromRoute";
 
 const backClass =
   "flex w-fit cursor-pointer items-center gap-8 rounded-xs type-label-m text-ink hover:underline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-brand";
@@ -22,7 +23,11 @@ const backClass =
 // A listing as buyers see it. Its seller also sees it before approval.
 export function ListingPage() {
   const { t } = useTranslation(["listings", "enums"]);
-  const { id, query } = useDraftFromRoute();
+  const id = listingIdFrom(useParams());
+  // A listing in review is found only with its seller's token, which is
+  // restored after a page load. Asking before then would answer not found.
+  const session = useSession();
+  const query = useListing(id, !session.isPending);
   const lookups = useLookups();
   const navigate = useNavigate();
   const location = useLocation();
