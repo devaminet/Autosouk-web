@@ -288,3 +288,56 @@ export const deleteListing = (id: number) =>
     method: "DELETE",
     schema: deletedListingSchema,
   });
+
+export const listingSorts = ["newest", "oldest", "price_asc", "price_desc"] as const;
+
+export type ListingSort = (typeof listingSorts)[number];
+
+export type PublicListingsFilter = {
+  page?: number;
+  limit?: number;
+  makeId?: number;
+  modelId?: number;
+  cityId?: number;
+  maxPrice?: number;
+  sort?: ListingSort;
+};
+
+// What GET /api/listings returns for each approved listing. It has no price
+// or car specs, only the photos and the city.
+const publicListingSchema = z.object({
+  id: z.number(),
+  title: z.string(),
+  createdAt: z.string(),
+  car: z
+    .object({
+      carMedias: z.array(carMediaSchema.omit({ id: true })),
+      city: z.object({ name: z.string(), slug: z.string() }).nullable(),
+    })
+    .nullable(),
+});
+
+export type PublicListing = z.infer<typeof publicListingSchema>;
+
+const publicListingsSchema = z.object({
+  listings: z.array(publicListingSchema),
+  meta: z.object({
+    total: z.number(),
+    page: z.number(),
+    limit: z.number(),
+    totalPages: z.number(),
+  }),
+});
+
+export type PublicListings = z.infer<typeof publicListingsSchema>;
+
+// Approved listings only. The API never needs the visitor's token for them.
+export const getPublicListings = (filter: PublicListingsFilter) => {
+  const query = new URLSearchParams();
+  for (const [name, value] of Object.entries(filter)) {
+    if (value !== undefined) {
+      query.set(name, String(value));
+    }
+  }
+  return request(`/api/listings?${query}`, { schema: publicListingsSchema, anonymous: true });
+};

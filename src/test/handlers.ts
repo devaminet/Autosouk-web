@@ -136,6 +136,9 @@ export const defaultHandlers = [
       ],
     }),
   ),
+  http.get("*/api/listings", () =>
+    HttpResponse.json({ listings: [], meta: { total: 0, page: 1, limit: 8, totalPages: 0 } }),
+  ),
   http.get("*/api/listings/mine", () =>
     HttpResponse.json({
       listings: [],

@@ -17,12 +17,6 @@
     "signUp": "Create account",
     "logOut": "Log out"
   },
-  "home": {
-    "pageTitle": "Home",
-    "title": "Inspected cars. Honest prices.",
-    "welcome": "Welcome, {{name}}",
-    "description": "The marketplace is coming soon."
-  },
   "noAccess": {
     "title": "You can't open this page",
     "description": "This page isn't available for your account.",

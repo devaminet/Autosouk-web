@@ -25,7 +25,7 @@ describe("LoginPage", () => {
     await logIn(user);
 
     expect(
-      await screen.findByRole("heading", { name: "Welcome, Amine" }),
+      await screen.findByText("Salam, Amine"),
     ).toBeInTheDocument();
     expect(router.state.location.pathname).toBe("/");
   });
@@ -114,7 +114,7 @@ describe("LoginPage", () => {
     const router = renderApp("/login");
 
     expect(
-      await screen.findByRole("heading", { name: "Welcome, Amine" }),
+      await screen.findByText("Salam, Amine"),
     ).toBeInTheDocument();
     expect(router.state.location.pathname).toBe("/");
   });
@@ -129,7 +129,7 @@ describe("LoginPage", () => {
     );
     renderApp("/");
 
-    await screen.findByRole("heading", { name: "Welcome, Amine" });
+    await screen.findByText("Salam, Amine");
 
     expect(refreshes).toBe(1);
   });

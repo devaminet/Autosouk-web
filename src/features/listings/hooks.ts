@@ -16,11 +16,12 @@ import {
   getMakes,
   getModels,
   getMyListings,
+  getPublicListings,
   setCover,
   submitListing,
   updateListing,
 } from "./api";
-import type { MyListingsFilter } from "./api";
+import type { MyListingsFilter, PublicListingsFilter } from "./api";
 
 const listingsKey = ["listings"];
 const myListingsKey = [...listingsKey, "mine"];
@@ -31,6 +32,14 @@ export const useMyListings = (filter: MyListingsFilter) =>
   useQuery({
     queryKey: [...myListingsKey, filter],
     queryFn: () => getMyListings(filter),
+    placeholderData: keepPreviousData,
+  });
+
+// Keeps the current results on screen while the next ones load.
+export const usePublicListings = (filter: PublicListingsFilter) =>
+  useQuery({
+    queryKey: [...listingsKey, "public", filter],
+    queryFn: () => getPublicListings(filter),
     placeholderData: keepPreviousData,
   });
 
