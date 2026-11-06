@@ -1,6 +1,7 @@
 import {
   keepPreviousData,
   useMutation,
+  useQueries,
   useQuery,
   useQueryClient,
 } from "@tanstack/react-query";
@@ -22,6 +23,7 @@ import {
   updateListing,
 } from "./api";
 import type { MyListingsFilter, PublicListingsFilter } from "./api";
+import { priceBuckets } from "./priceRange";
 
 const listingsKey = ["listings"];
 const myListingsKey = [...listingsKey, "mine"];
@@ -41,6 +43,27 @@ export const usePublicListings = (filter: PublicListingsFilter) =>
     queryKey: [...listingsKey, "public", filter],
     queryFn: () => getPublicListings(filter),
     placeholderData: keepPreviousData,
+  });
+
+// How many cars each bar of the price histogram holds, for the other filters.
+// The API has no price statistics, so each bar is a search that asks only for
+// its count. Undefined until every bar is known.
+export const usePriceHistogram = (filter: Omit<PublicListingsFilter, "minPrice" | "maxPrice">, enabled: boolean) =>
+  useQueries({
+    queries: priceBuckets.map(({ min, max }) => {
+      const bucket: PublicListingsFilter = { ...filter, minPrice: min, maxPrice: max, page: 1, limit: 1 };
+      return {
+        queryKey: [...listingsKey, "public", bucket],
+        queryFn: () => getPublicListings(bucket),
+        enabled,
+        // Prices move slowly, and each change of filter asks again for every bar.
+        staleTime: 5 * 60_000,
+      };
+    }),
+    combine: (results) => {
+      const totals = results.map(({ data }) => data?.meta.total);
+      return totals.every((total) => total !== undefined) ? totals : undefined;
+    },
   });
 
 // Waits while `ready` is false, such as until the session is known.

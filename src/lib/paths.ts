@@ -1,5 +1,7 @@
 export const paths = {
   home: "/",
+  // Approved listings with every filter. Its search lives in the query string.
+  search: "/cars",
   login: "/login",
   register: "/register",
   checkEmail: "/check-email",

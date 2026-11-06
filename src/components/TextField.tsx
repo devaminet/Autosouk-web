@@ -11,6 +11,7 @@ type TextFieldProps = {
   icon?: IconName;
   // Shown at the end of the box, such as a unit.
   trailing?: ReactNode;
+  hideLabel?: boolean;
   fieldClassName?: string;
 } & ComponentProps<"input">;
 
@@ -20,6 +21,7 @@ export function TextField({
   helper,
   icon,
   trailing,
+  hideLabel,
   fieldClassName,
   ...inputProps
 }: TextFieldProps) {
@@ -35,6 +37,7 @@ export function TextField({
       id={id}
       label={label}
       trailing={trailing}
+      hideLabel={hideLabel}
     >
       <input
         aria-describedby={describedBy}

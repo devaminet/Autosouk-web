@@ -3,6 +3,10 @@ const numberFormat = new Intl.NumberFormat("fr");
 
 export const formatNumber = (value: number): string => numberFormat.format(value);
 
+// A short price for tight spaces, such as "80k" or "1.2M", in the language's words.
+export const formatCompact = (value: number, locale: string): string =>
+  new Intl.NumberFormat(locale, { notation: "compact", numberingSystem: "latn" }).format(value);
+
 // The API sends calendar dates. Read as local, so the day never shifts by time zone.
 const localDay = (value: string) => new Date(`${value.slice(0, 10)}T00:00:00`);
 

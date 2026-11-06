@@ -10,6 +10,8 @@ type FieldProps = {
   helper?: ReactNode;
   icon?: IconName;
   trailing?: ReactNode;
+  // Keeps the label for screen readers only, when the layout already says what the box is.
+  hideLabel?: boolean;
   className?: string;
   children: ReactNode;
 };
@@ -22,6 +24,7 @@ export function Field({
   helper,
   icon,
   trailing,
+  hideLabel = false,
   className = "",
   children,
 }: FieldProps) {
@@ -31,7 +34,7 @@ export function Field({
 
   return (
     <div className={`flex min-w-0 flex-col gap-8 ${className}`}>
-      <label className="type-label-m text-ink" htmlFor={id}>
+      <label className={hideLabel ? "sr-only" : "type-label-m text-ink"} htmlFor={id}>
         {label}
       </label>
       <div

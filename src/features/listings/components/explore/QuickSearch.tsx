@@ -2,12 +2,12 @@ import { useState } from "react";
 import type { FormEvent, ReactNode } from "react";
 import { useTranslation } from "react-i18next";
 import { Icon } from "../../../../components/Icon";
-import type { ExploreSearch } from "../../exploreSearch";
+import type { ListingSearch } from "../../listingSearch";
 import { useLookups, useMakes, useModels } from "../../hooks";
 
 type QuickSearchProps = {
-  search: ExploreSearch;
-  onSearch: (changes: Partial<ExploreSearch>) => void;
+  search: ListingSearch;
+  onSearch: (changes: Partial<ListingSearch>) => void;
 };
 
 type CellProps = {

@@ -312,7 +312,8 @@
       "empty": "No cars are listed yet. Check back soon.",
       "noMatch": "No cars match your search.",
       "clear": "Clear the search",
-      "retry": "Try again"
+      "retry": "Try again",
+      "viewAll": "View all"
     },
     "sort": {
       "label": "Sort by",
@@ -327,9 +328,9 @@
       "under": "Under {{price}} MAD"
     },
     "card": {
-      "listed": "Listed {{day}}",
       "media_one": "{{count}} photo or video",
-      "media_other": "{{count}} photos and videos"
+      "media_other": "{{count}} photos and videos",
+      "inspected": "Inspected"
     },
     "how": {
       "overline": "How AutoSouk works",
@@ -355,6 +356,54 @@
       "title": "Inspected listings sell faster.",
       "description": "List your car in a few minutes. Buyers can book an inspection directly — you just hand over the keys.",
       "cta": "List your car"
+    }
+  },
+  "search": {
+    "breadcrumb": "Breadcrumb",
+    "explore": "Explore",
+    "resultsLabel": "Results",
+    "title": {
+      "all": "All cars",
+      "inCity": "Cars in {{city}}",
+      "carInCity": "{{car}} in {{city}}"
+    },
+    "showing": "Showing <n>{{from}}–{{to}}</n> of <n>{{total}}</n>",
+    "filters": {
+      "title": "Filters",
+      "reset": "Reset",
+      "close": "Close the filters",
+      "activeCount_one": "{{count}} filter in use",
+      "activeCount_other": "{{count}} filters in use",
+      "price": "Price (MAD)",
+      "minPrice": "From",
+      "maxPrice": "To",
+      "noMin": "No minimum",
+      "priceOrder": "Enter a maximum price above the minimum.",
+      "equipment": "Equipment",
+      "mustHaveAll": "Car must have all",
+      "anyEquipment": "Any equipment",
+      "browse_one": "Browse all {{formatted}} item",
+      "browse_other": "Browse all {{formatted}} items",
+      "show_one": "Show <n>{{formatted}}</n> car",
+      "show_other": "Show <n>{{formatted}}</n> cars",
+      "showAny": "Show cars",
+      "anyPrice": "Any price",
+      "minThumb": "Minimum price",
+      "maxThumb": "Maximum price"
+    },
+    "equipment": {
+      "title": "Equipment",
+      "back": "Back to the filters",
+      "hint": "Only cars that have every item you pick are shown.",
+      "selected": "Chosen equipment",
+      "clear": "Clear"
+    },
+    "active": {
+      "label": "Filters in use",
+      "remove": "Remove the filter {{name}}",
+      "clearAll": "Clear all",
+      "from": "From",
+      "upTo": "Up to"
     }
   }
 }
