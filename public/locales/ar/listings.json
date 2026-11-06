@@ -344,6 +344,11 @@
     "description": "الوصف",
     "seller": "البائع",
     "privateSeller": "بائع خاص",
-    "verified": "بائع موثّق"
+    "verified": "بائع موثّق",
+    "carousel": "عرض متتابع",
+    "slideRole": "شريحة",
+    "slide": "{{current}} من {{total}}",
+    "previousMedia": "الصورة أو الفيديو السابق",
+    "nextMedia": "الصورة أو الفيديو التالي"
   }
 }

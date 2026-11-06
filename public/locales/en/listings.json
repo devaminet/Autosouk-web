@@ -272,6 +272,11 @@
     "description": "Description",
     "seller": "Seller",
     "privateSeller": "Private seller",
-    "verified": "Verified seller"
+    "verified": "Verified seller",
+    "carousel": "carousel",
+    "slideRole": "slide",
+    "slide": "{{current}} of {{total}}",
+    "previousMedia": "Previous photo or video",
+    "nextMedia": "Next photo or video"
   }
 }
