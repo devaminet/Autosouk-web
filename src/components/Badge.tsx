@@ -1,13 +1,20 @@
 import type { ReactNode } from "react";
 
-type BadgeProps = {
-  tone: "brand" | "success";
-  children: ReactNode;
-};
-
 const tones = {
   brand: "bg-brand-soft text-brand",
   success: "bg-success-soft text-success",
+  warning: "bg-warning-soft text-warning",
+  danger: "bg-danger-soft text-danger",
+  info: "bg-info-soft text-info",
+  neutral: "bg-line text-ink-2",
+  dark: "bg-ink text-surface",
+};
+
+export type BadgeTone = keyof typeof tones;
+
+type BadgeProps = {
+  tone: BadgeTone;
+  children: ReactNode;
 };
 
 export function Badge({ tone, children }: BadgeProps) {

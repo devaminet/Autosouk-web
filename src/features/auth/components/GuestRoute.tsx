@@ -1,12 +1,17 @@
 import { useTranslation } from "react-i18next";
-import { Navigate, Outlet } from "react-router";
+import { Navigate, Outlet, useLocation } from "react-router";
+import { z } from "zod";
 import { paths } from "../../../lib/paths";
 import { useSession } from "../hooks";
+
+// RequireRole sends this when it redirects someone to log in.
+const returnSchema = z.object({ from: z.string() });
 
 // Pages for people who are not signed in, such as log in and sign up.
 export function GuestRoute() {
   const { t } = useTranslation();
   const { user, isPending } = useSession();
+  const location = useLocation();
 
   if (isPending) {
     return (
@@ -14,7 +19,8 @@ export function GuestRoute() {
     );
   }
   if (user) {
-    return <Navigate replace to={paths.home} />;
+    const target = returnSchema.safeParse(location.state);
+    return <Navigate replace to={target.success ? target.data.from : paths.home} />;
   }
   return <Outlet />;
 }

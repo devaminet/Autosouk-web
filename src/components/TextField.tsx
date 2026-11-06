@@ -9,6 +9,8 @@ type TextFieldProps = {
   error?: string;
   helper?: ReactNode;
   icon?: IconName;
+  // Shown at the end of the box, such as a unit.
+  trailing?: ReactNode;
   fieldClassName?: string;
 } & ComponentProps<"input">;
 
@@ -17,6 +19,7 @@ export function TextField({
   error,
   helper,
   icon,
+  trailing,
   fieldClassName,
   ...inputProps
 }: TextFieldProps) {
@@ -31,6 +34,7 @@ export function TextField({
       icon={icon}
       id={id}
       label={label}
+      trailing={trailing}
     >
       <input
         aria-describedby={describedBy}

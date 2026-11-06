@@ -1,0 +1,288 @@
+{
+  "myListings": {
+    "overline": "Espace vendeur",
+    "title": "Mes annonces",
+    "visibility": "Seules les annonces approuvées apparaissent dans la recherche. Les brouillons et les annonces en attente ou refusées ne sont visibles que par vous.",
+    "empty": "Vous n'avez pas encore d'annonce.",
+    "emptyFilter": "Vous n'avez aucune annonce avec ce statut.",
+    "retry": "Réessayer",
+    "noCar": "Détails de la voiture pas encore ajoutés",
+    "rejectedBecause": "Motif du refus :",
+    "deleted": "« {{title}} » a été supprimée.",
+    "newListing": "Nouvelle annonce"
+  },
+  "actions": {
+    "menu": "Actions pour {{title}}",
+    "delete": "Supprimer l'annonce",
+    "continue": "Continuer",
+    "continueListing": "Continuer {{title}}",
+    "edit": "Modifier",
+    "editResubmit": "Modifier et renvoyer",
+    "editListing": "Modifier {{title}}",
+    "editResubmitListing": "Modifier et renvoyer {{title}}",
+    "media": "Photos et vidéos",
+    "mediaListing": "Photos et vidéos de {{title}}",
+    "view": "Voir",
+    "viewListing": "Voir {{title}}"
+  },
+  "deleteDialog": {
+    "title": "Supprimer cette annonce ?",
+    "description": "Ses photos, vidéos et inspections seront aussi supprimées. Cette action est irréversible.",
+    "cancel": "Annuler"
+  },
+  "stats": {
+    "approved": {
+      "label": "Approuvées et en ligne",
+      "hint": "Visibles dans la recherche"
+    },
+    "pending": {
+      "label": "En attente de validation",
+      "hint": "En attente d'une décision"
+    },
+    "draft": {
+      "label": "Brouillons",
+      "hint": "À terminer pour publier"
+    }
+  },
+  "tabs": {
+    "label": "Filtrer par statut",
+    "all": "Toutes"
+  },
+  "table": {
+    "listing": "Annonce",
+    "price": "Prix",
+    "status": "Statut",
+    "inspections": "Inspections",
+    "updated": "Mise à jour",
+    "actions": "Actions",
+    "inspectionsCompleted_one": "{{count}} terminée",
+    "inspectionsCompleted_many": "{{count}} terminées",
+    "inspectionsCompleted_other": "{{count}} terminées"
+  },
+  "units": {
+    "km": "km",
+    "mad": "MAD",
+    "cv": "CV"
+  },
+  "wizard": {
+    "title": "Nouvelle annonce",
+    "back": "Retour à mes annonces",
+    "breadcrumb": "Fil d'Ariane",
+    "discard": "Abandonner",
+    "progress": "Étape {{current}} sur {{total}}",
+    "tipsTitle": "Conseils pour vendre plus vite",
+    "steps": {
+      "listing": "Annonce",
+      "car": "Détails de la voiture",
+      "photos": "Photos",
+      "review": "Vérification"
+    },
+    "previous": "Étape précédente",
+    "saveDraft": "Enregistrer le brouillon"
+  },
+  "newListing": {
+    "title": "Décrivez votre annonce",
+    "description": "Les acheteurs voient ce titre et cette description sur votre annonce.",
+    "titleLabel": "Titre",
+    "descriptionLabel": "Description",
+    "submit": "Continuer vers la voiture",
+    "saved": "Votre brouillon est enregistré.",
+    "tips": {
+      "title": "Indiquez la marque, le modèle et la version dans le titre",
+      "description": "Mentionnez l'historique d'entretien et le nombre de clés"
+    }
+  },
+  "carDetails": {
+    "title": "Détails de la voiture",
+    "description": "Ces informations alimentent les filtres de recherche et la liste de contrôle de l'inspection.",
+    "choose": "Choisir",
+    "chooseMakeFirst": "Choisissez d'abord une marque",
+    "make": "Marque",
+    "model": "Modèle",
+    "year": "Année",
+    "price": "Prix",
+    "mileage": "Kilométrage",
+    "city": "Ville",
+    "fuel": "Carburant",
+    "transmission": "Boîte de vitesses",
+    "doors": "Portes",
+    "fiscalPower": "Puissance fiscale",
+    "owners": "Propriétaires précédents",
+    "fewer": "Moins : {{label}}",
+    "more": "Plus : {{label}}",
+    "origin": "Origine",
+    "condition": "État",
+    "conditionHelper": "Soyez honnête, l'inspecteur l'évaluera aussi.",
+    "preview": "Aperçu en direct",
+    "back": "Retour",
+    "submit": "Continuer vers les photos",
+    "tips": {
+      "mileage": "Kilométrage exact : les inspecteurs le comparent au tableau de bord et à l'historique d'entretien",
+      "fiscalPower": "Puissance fiscale (CV) indiquée sur la carte grise",
+      "history": "Mentionnez l'historique d'entretien et le nombre de clés dans la description"
+    }
+  },
+  "equipment": {
+    "title": "Équipements",
+    "description": "Facultatif. Les acheteurs filtrent par équipement, ne cochez que ce que la voiture possède vraiment.",
+    "search": "Rechercher un équipement",
+    "searchPlaceholder": "Par exemple, CarPlay",
+    "expandAll": "Tout déplier",
+    "collapseAll": "Tout replier",
+    "count": "{{selected}} sur {{total}}",
+    "noMatch": "Aucun équipement ne correspond à « {{query}} »."
+  },
+  "photos": {
+    "title": "Photos et vidéos",
+    "description": "Au moins 3 photos, jusqu’à 20 fichiers avec les vidéos. La photo de couverture s’affiche en premier dans la recherche.",
+    "photoCount_one": "{{count}} photo",
+    "photoCount_other": "{{count}} photos",
+    "videoCount_one": "{{count}} vidéo",
+    "videoCount_other": "{{count}} vidéos",
+    "uploadingCount_one": "{{count}} en cours d’envoi",
+    "uploadingCount_other": "{{count}} en cours d’envoi",
+    "files": "fichiers",
+    "checks": {
+      "minPhotos_one": "Au moins {{count}} photo",
+      "minPhotos_other": "Au moins {{count}} photos",
+      "morePhotos_one": "Ajoutez encore {{count}} photo (min. {{min}})",
+      "morePhotos_other": "Ajoutez encore {{count}} photos (min. {{min}})",
+      "cover": "La couverture est une photo",
+      "noCover": "Choisissez une photo de couverture",
+      "filesLeft_one": "{{count}} fichier restant",
+      "filesLeft_other": "{{count}} fichiers restants"
+    },
+    "drop": "Déposez vos photos ici ou",
+    "browse": "parcourez",
+    "formats": "JPG, PNG, WEBP jusqu’à 10 Mo · vidéos MP4 jusqu’à 50 Mo",
+    "add": "Ajouter une photo ou une vidéo",
+    "camera": "Appareil photo",
+    "cover": "Couverture",
+    "photo": "Photo {{number}}",
+    "video": "Vidéo {{number}}",
+    "makeCover": "Choisir la photo {{number}} comme couverture",
+    "delete": "Supprimer : {{name}}",
+    "uploading": "Envoi",
+    "uploadingFile": "Envoi de {{name}}",
+    "storageNote": "Les photos sont envoyées directement vers un stockage sécurisé. Masquez la plaque d’immatriculation et les numéros de la carte grise : l’inspecteur les vérifie sur place.",
+    "tips": {
+      "angles": "Vues trois-quarts avant et arrière, à la lumière du jour",
+      "interior": "L’intérieur, et le tableau de bord avec le kilométrage",
+      "engine": "Le compartiment moteur et les pneus"
+    },
+    "addMore_one": "Ajoutez encore {{count}} photo",
+    "addMore_other": "Ajoutez encore {{count}} photos",
+    "review": "Vérifier l’annonce",
+    "problems": {
+      "title": "Certains fichiers n’ont pas été ajoutés",
+      "type": "{{name}} : seuls les fichiers JPG, PNG, WEBP et MP4 sont acceptés.",
+      "size": "{{name}} : trop volumineux. Photos jusqu’à 10 Mo, vidéos jusqu’à 50 Mo.",
+      "limit": "{{name}} : une annonce contient au maximum 20 fichiers.",
+      "failed": "{{name}} : l’envoi a échoué. Réessayez.",
+      "rejected": "{{name}} : refusé à cause de son type ou de sa taille."
+    },
+    "readyCount_one": "{{count}} prête à confirmer",
+    "readyCount_many": "{{count}} prêtes à confirmer",
+    "readyCount_other": "{{count}} prêtes à confirmer"
+  },
+  "review": {
+    "title": "Vérifier et envoyer",
+    "description": "Vérifiez tout avant l’envoi. Notre équipe examine chaque annonce avant qu’elle apparaisse dans la recherche.",
+    "edit": "Modifier",
+    "editSection": "Modifier : {{section}}",
+    "makeModel": "Marque et modèle",
+    "note": "Notre équipe vérifie chaque annonce, généralement en moins de 24 heures.",
+    "submit": "Envoyer pour validation"
+  },
+  "submitted": {
+    "title": "Envoyée pour validation",
+    "description": "Notre équipe vérifie chaque annonce, généralement en moins de 24 heures. Elle apparaît dans la recherche une fois approuvée.",
+    "myListings": "Voir mes annonces",
+    "another": "Vendre une autre voiture"
+  },
+  "edit": {
+    "overline": "Modifier l’annonce",
+    "close": "Fermer",
+    "warningApproved": "Enregistrer des modifications renvoie l’annonce en validation et la retire de la recherche jusqu’à sa nouvelle approbation.",
+    "warning": "Enregistrer des modifications renvoie l’annonce en validation.",
+    "cancel": "Annuler",
+    "save": "Enregistrer",
+    "saved": "Vos modifications sont enregistrées. L’annonce est de nouveau en validation."
+  },
+  "media": {
+    "overline": "Médias de l’annonce",
+    "warningApproved": "Les nouveaux fichiers restent masqués jusqu’à leur confirmation. Confirmer renvoie l’annonce en vérification et la retire de la recherche jusqu’à sa nouvelle approbation. Supprimer des fichiers ou changer la couverture la laisse en ligne.",
+    "warning": "Les nouveaux fichiers restent masqués jusqu’à leur confirmation. Confirmer renvoie l’annonce en vérification. Supprimer des fichiers ou changer la couverture ne le fait pas.",
+    "leaveNote": "Les nouveaux fichiers non confirmés sont supprimés si vous quittez cette page.",
+    "readyBadge": "Prêt à confirmer",
+    "failed": "Échec de l’envoi",
+    "retry": "Réessayer",
+    "retryFile": "Réessayer {{name}}",
+    "remove": "Retirer {{name}}",
+    "newFile": "Nouveau fichier {{name}}",
+    "readyFiles_one": "{{count}} fichier prêt",
+    "readyFiles_many": "{{count}} fichiers prêts",
+    "readyFiles_other": "{{count}} fichiers prêts",
+    "failedFiles_one": "{{count}} en échec",
+    "failedFiles_many": "{{count}} en échec",
+    "failedFiles_other": "{{count}} en échec",
+    "discard": "Supprimer les nouveaux fichiers",
+    "confirm": "Confirmer et envoyer en vérification",
+    "confirmed": "Vos nouveaux fichiers sont enregistrés. L’annonce est de nouveau en vérification.",
+    "manageAll": "Tout gérer",
+    "manageAllLabel": "Gérer toutes les photos et vidéos",
+    "add": "Ajouter",
+    "rules": {
+      "title": "Règles",
+      "minPhotos_one": "Gardez au moins {{count}} photo. Ajoutez une remplaçante avant d’en supprimer une.",
+      "minPhotos_many": "Gardez au moins {{count}} photos. Ajoutez une remplaçante avant d’en supprimer une.",
+      "minPhotos_other": "Gardez au moins {{count}} photos. Ajoutez une remplaçante avant d’en supprimer une.",
+      "cover": "La couverture est toujours une photo. Si vous la supprimez, votre plus ancienne photo devient la couverture.",
+      "limit_one": "Jusqu’à {{count}} fichier par voiture, vidéos comprises. Les fichiers en cours d’envoi comptent aussi.",
+      "limit_many": "Jusqu’à {{count}} fichiers par voiture, vidéos comprises. Les fichiers en cours d’envoi comptent aussi.",
+      "limit_other": "Jusqu’à {{count}} fichiers par voiture, vidéos comprises. Les fichiers en cours d’envoi comptent aussi.",
+      "confirmed": "Seuls les fichiers confirmés apparaissent sur l’annonce."
+    },
+    "locked": "Pourquoi {{name}} ne peut pas être supprimée",
+    "lockedTitle": "Impossible de supprimer cette photo",
+    "lockedText_one": "Une annonce doit avoir au moins {{count}} photo. Envoyez et confirmez d’abord une nouvelle photo, puis supprimez celle-ci.",
+    "lockedText_many": "Une annonce doit avoir au moins {{count}} photos. Envoyez et confirmez d’abord une nouvelle photo, puis supprimez celle-ci.",
+    "lockedText_other": "Une annonce doit avoir au moins {{count}} photos. Envoyez et confirmez d’abord une nouvelle photo, puis supprimez celle-ci.",
+    "replace": "Envoyer une photo de remplacement"
+  },
+  "viewer": {
+    "title": "Photos et vidéos de {{title}}",
+    "open": "Voir {{name}}",
+    "close": "Fermer",
+    "previous": "Précédent",
+    "next": "Suivant",
+    "show": "Afficher {{name}}"
+  },
+  "listing": {
+    "back": "Retour",
+    "home": "Explorer les voitures",
+    "notFound": "Cette annonce n’existe pas ou n’est pas publique.",
+    "loadingTitle": "Annonce",
+    "notApproved": "Vous seul voyez cette annonce. Elle apparaîtra dans la recherche une fois approuvée.",
+    "gallery": "Photos et vidéos",
+    "noMedia": "Pas encore de photos",
+    "showAllMedia_one": "Voir {{count}} photo ou vidéo",
+    "showAllMedia_many": "Voir les {{count}} photos et vidéos",
+    "showAllMedia_other": "Voir les {{count}} photos et vidéos",
+    "specs": "Caractéristiques",
+    "equipmentCount_one": "{{count}} équipement, déclaré par le vendeur",
+    "equipmentCount_many": "{{count}} équipements, déclarés par le vendeur",
+    "equipmentCount_other": "{{count}} équipements, déclarés par le vendeur",
+    "moreEquipment_one": "+ {{count}} autre",
+    "moreEquipment_many": "+ {{count}} autres",
+    "moreEquipment_other": "+ {{count}} autres",
+    "showAllEquipment_one": "Voir {{count}} équipement",
+    "showAllEquipment_many": "Voir les {{count}} équipements",
+    "showAllEquipment_other": "Voir les {{count}} équipements",
+    "showFewer": "Voir moins",
+    "description": "Description",
+    "seller": "Vendeur",
+    "privateSeller": "Particulier",
+    "verified": "Vendeur vérifié"
+  }
+}

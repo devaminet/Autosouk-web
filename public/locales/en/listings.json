@@ -1,0 +1,277 @@
+{
+  "myListings": {
+    "overline": "Seller dashboard",
+    "title": "My listings",
+    "visibility": "Only approved listings appear in search. Drafts, pending and rejected listings are visible to you only.",
+    "empty": "You have no listings yet.",
+    "emptyFilter": "You have no listings with this status.",
+    "retry": "Try again",
+    "noCar": "Car details not added yet",
+    "rejectedBecause": "Why it was rejected:",
+    "deleted": "“{{title}}” was deleted.",
+    "newListing": "New listing"
+  },
+  "actions": {
+    "menu": "Actions for {{title}}",
+    "delete": "Delete listing",
+    "continue": "Continue",
+    "continueListing": "Continue {{title}}",
+    "edit": "Edit",
+    "editResubmit": "Edit & resubmit",
+    "editListing": "Edit {{title}}",
+    "editResubmitListing": "Edit and resubmit {{title}}",
+    "media": "Photos & videos",
+    "mediaListing": "Photos and videos of {{title}}",
+    "view": "View",
+    "viewListing": "View {{title}}"
+  },
+  "deleteDialog": {
+    "title": "Delete this listing?",
+    "description": "Its photos, videos and inspections are deleted too. You can't undo this.",
+    "cancel": "Cancel"
+  },
+  "stats": {
+    "approved": {
+      "label": "Approved & live",
+      "hint": "Visible in search"
+    },
+    "pending": {
+      "label": "Pending review",
+      "hint": "Waiting for a decision"
+    },
+    "draft": {
+      "label": "Drafts",
+      "hint": "Finish to publish"
+    }
+  },
+  "tabs": {
+    "label": "Filter by status",
+    "all": "All"
+  },
+  "table": {
+    "listing": "Listing",
+    "price": "Price",
+    "status": "Status",
+    "inspections": "Inspections",
+    "updated": "Updated",
+    "actions": "Actions",
+    "inspectionsCompleted_one": "{{count}} completed",
+    "inspectionsCompleted_other": "{{count}} completed"
+  },
+  "units": {
+    "km": "km",
+    "mad": "MAD",
+    "cv": "CV"
+  },
+  "wizard": {
+    "title": "New listing",
+    "back": "Back to my listings",
+    "breadcrumb": "Breadcrumb",
+    "discard": "Discard",
+    "progress": "Step {{current}} of {{total}}",
+    "tipsTitle": "Tips for a faster sale",
+    "steps": {
+      "listing": "Listing",
+      "car": "Car details",
+      "photos": "Photos",
+      "review": "Review"
+    },
+    "previous": "Previous step",
+    "saveDraft": "Save draft"
+  },
+  "newListing": {
+    "title": "Describe your listing",
+    "description": "Buyers see this title and description on your listing.",
+    "titleLabel": "Title",
+    "descriptionLabel": "Description",
+    "submit": "Continue to car details",
+    "saved": "Your draft is saved.",
+    "tips": {
+      "title": "Put the make, model and version in the title",
+      "description": "Mention maintenance history and number of keys"
+    }
+  },
+  "carDetails": {
+    "title": "Car details",
+    "description": "These fields power search filters and the inspection checklist.",
+    "choose": "Choose",
+    "chooseMakeFirst": "Choose a make first",
+    "make": "Make",
+    "model": "Model",
+    "year": "Year",
+    "price": "Price",
+    "mileage": "Mileage",
+    "city": "City",
+    "fuel": "Fuel",
+    "transmission": "Transmission",
+    "doors": "Doors",
+    "fiscalPower": "Fiscal power",
+    "owners": "Previous owners",
+    "fewer": "Fewer: {{label}}",
+    "more": "More: {{label}}",
+    "origin": "Origin",
+    "condition": "Condition",
+    "conditionHelper": "Be honest, the inspector will grade it too.",
+    "preview": "Live preview",
+    "back": "Back",
+    "submit": "Continue to photos",
+    "tips": {
+      "mileage": "Exact mileage: inspectors check it against the dashboard and service history",
+      "fiscalPower": "Fiscal power (CV) as shown on the carte grise",
+      "history": "Mention maintenance history and number of keys in the description"
+    }
+  },
+  "equipment": {
+    "title": "Equipment",
+    "description": "Optional. Buyers filter by equipment, so tick only what the car really has.",
+    "search": "Search equipment",
+    "searchPlaceholder": "For example, CarPlay",
+    "expandAll": "Expand all",
+    "collapseAll": "Collapse all",
+    "count": "{{selected}} of {{total}}",
+    "noMatch": "No equipment matches “{{query}}”."
+  },
+  "photos": {
+    "title": "Photos & videos",
+    "description": "At least 3 photos, up to 20 files with videos. The cover is shown first in search and must be a photo.",
+    "photoCount_one": "{{count}} photo",
+    "photoCount_other": "{{count}} photos",
+    "videoCount_one": "{{count}} video",
+    "videoCount_other": "{{count}} videos",
+    "uploadingCount_one": "{{count}} uploading",
+    "uploadingCount_other": "{{count}} uploading",
+    "files": "files",
+    "checks": {
+      "minPhotos_one": "At least {{count}} photo",
+      "minPhotos_other": "At least {{count}} photos",
+      "morePhotos_one": "Add {{count}} more photo (min. {{min}})",
+      "morePhotos_other": "Add {{count}} more photos (min. {{min}})",
+      "cover": "Cover is a photo",
+      "noCover": "Choose a cover photo",
+      "filesLeft_one": "{{count}} file left",
+      "filesLeft_other": "{{count}} files left"
+    },
+    "drop": "Drop photos here or",
+    "browse": "browse",
+    "formats": "JPG, PNG, WEBP up to 10 MB · videos MP4 up to 50 MB",
+    "add": "Add photo or video",
+    "camera": "Camera",
+    "cover": "Cover",
+    "photo": "Photo {{number}}",
+    "video": "Video {{number}}",
+    "makeCover": "Make photo {{number}} the cover",
+    "delete": "Delete {{name}}",
+    "uploading": "Uploading",
+    "uploadingFile": "Uploading {{name}}",
+    "storageNote": "Photos upload straight to secure storage. Hide your number plate and carte grise numbers: the inspector checks them in person.",
+    "tips": {
+      "angles": "Front and rear three-quarter views, in daylight",
+      "interior": "The interior, and the dashboard showing the mileage",
+      "engine": "The engine bay and the tyres"
+    },
+    "addMore_one": "Add {{count}} more photo",
+    "addMore_other": "Add {{count}} more photos",
+    "review": "Review listing",
+    "problems": {
+      "title": "Some files were not added",
+      "type": "{{name}}: only JPG, PNG, WEBP and MP4 files are accepted.",
+      "size": "{{name}}: too large. Photos can be up to 10 MB, videos up to 50 MB.",
+      "limit": "{{name}}: a listing holds up to 20 files.",
+      "failed": "{{name}}: the upload failed. Try again.",
+      "rejected": "{{name}}: refused because of its type or size."
+    },
+    "readyCount_one": "{{count}} ready to confirm",
+    "readyCount_other": "{{count}} ready to confirm"
+  },
+  "review": {
+    "title": "Review and submit",
+    "description": "Check everything before you send it. Our team reviews every listing before it appears in search.",
+    "edit": "Edit",
+    "editSection": "Edit {{section}}",
+    "makeModel": "Make and model",
+    "note": "Our team checks every listing, usually in under 24 hours.",
+    "submit": "Submit for review"
+  },
+  "submitted": {
+    "title": "Submitted for review",
+    "description": "Our team checks every listing, usually in under 24 hours. It appears in search once approved.",
+    "myListings": "Go to my listings",
+    "another": "List another car"
+  },
+  "edit": {
+    "overline": "Edit listing",
+    "close": "Close",
+    "warningApproved": "Saving changes sends the listing back to review and hides it from search until it is approved again.",
+    "warning": "Saving changes sends the listing back to review.",
+    "cancel": "Cancel",
+    "save": "Save changes",
+    "saved": "Your changes are saved. The listing is back in review."
+  },
+  "media": {
+    "overline": "Listing media",
+    "warningApproved": "New files stay hidden until you confirm them. Confirming sends the listing back to review and hides it from search until it is approved again. Deleting files or changing the cover keeps it live.",
+    "warning": "New files stay hidden until you confirm them. Confirming sends the listing back to review. Deleting files or changing the cover doesn't.",
+    "leaveNote": "New files you don't confirm are discarded when you leave this page.",
+    "readyBadge": "Ready to confirm",
+    "failed": "Upload failed",
+    "retry": "Retry",
+    "retryFile": "Retry {{name}}",
+    "remove": "Remove {{name}}",
+    "newFile": "New file {{name}}",
+    "readyFiles_one": "{{count}} file ready",
+    "readyFiles_other": "{{count}} files ready",
+    "failedFiles_one": "{{count}} failed",
+    "failedFiles_other": "{{count}} failed",
+    "discard": "Discard new files",
+    "confirm": "Confirm and send to review",
+    "confirmed": "Your new files are saved. The listing is back in review.",
+    "manageAll": "Manage all",
+    "manageAllLabel": "Manage all photos and videos",
+    "add": "Add",
+    "rules": {
+      "title": "Rules",
+      "minPhotos_one": "Keep at least {{count}} photo. Add a replacement before deleting one.",
+      "minPhotos_other": "Keep at least {{count}} photos. Add a replacement before deleting one.",
+      "cover": "The cover is always a photo. If you delete it, your oldest photo becomes the cover.",
+      "limit_one": "Up to {{count}} file per car, videos included. Files still uploading count too.",
+      "limit_other": "Up to {{count}} files per car, videos included. Files still uploading count too.",
+      "confirmed": "Only confirmed files appear on the listing."
+    },
+    "locked": "Why {{name}} can't be deleted",
+    "lockedTitle": "Can't delete this photo",
+    "lockedText_one": "A listing needs at least {{count}} photo. Upload and confirm a new one first, then delete this one.",
+    "lockedText_other": "A listing needs at least {{count}} photos. Upload and confirm a new one first, then delete this one.",
+    "replace": "Upload a replacement"
+  },
+  "viewer": {
+    "title": "Photos and videos of {{title}}",
+    "open": "View {{name}}",
+    "close": "Close",
+    "previous": "Previous",
+    "next": "Next",
+    "show": "Show {{name}}"
+  },
+  "listing": {
+    "back": "Back",
+    "home": "Explore cars",
+    "notFound": "This listing doesn't exist or isn't public.",
+    "loadingTitle": "Listing",
+    "notApproved": "Only you can see this listing. It appears in search once it is approved.",
+    "gallery": "Photos and videos",
+    "noMedia": "No photos yet",
+    "showAllMedia_one": "Show all {{count}} photo and video",
+    "showAllMedia_other": "Show all {{count}} photos and videos",
+    "specs": "Key specs",
+    "equipmentCount_one": "{{count}} item, declared by the seller",
+    "equipmentCount_other": "{{count}} items, declared by the seller",
+    "moreEquipment_one": "+ {{count}} more",
+    "moreEquipment_other": "+ {{count}} more",
+    "showAllEquipment_one": "Show all {{count}} item",
+    "showAllEquipment_other": "Show all {{count}} items",
+    "showFewer": "Show fewer",
+    "description": "Description",
+    "seller": "Seller",
+    "privateSeller": "Private seller",
+    "verified": "Verified seller"
+  }
+}

@@ -244,6 +244,11 @@
   background-image: url("./assets/zellige.svg");
 }
 
+/* For a row that scrolls sideways, such as filter chips on small screens. */
+@utility no-scrollbar {
+  scrollbar-width: none;
+}
+
 /* The design's text styles: family, size, line height, weight and letter spacing. */
 @utility type-display-xl {
   @apply font-display text-display-xl;

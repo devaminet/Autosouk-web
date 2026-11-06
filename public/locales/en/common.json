@@ -5,14 +5,33 @@
     "network": "We can't reach AutoSouk right now. Check your connection and try again.",
     "unexpected": "Something went wrong. Please try again."
   },
+  "nav": {
+    "main": "Main navigation",
+    "explore": "Explore cars",
+    "exploreShort": "Explore",
+    "sell": "Sell a car",
+    "myListings": "My listings",
+    "account": "Account",
+    "logIn": "Log in",
+    "signUp": "Create account",
+    "logOut": "Log out"
+  },
   "home": {
     "pageTitle": "Home",
     "title": "Inspected cars. Honest prices.",
     "welcome": "Welcome, {{name}}",
-    "description": "The marketplace is coming soon.",
-    "logIn": "Log in",
-    "signUp": "Create account",
-    "logOut": "Log out"
+    "description": "The marketplace is coming soon."
+  },
+  "noAccess": {
+    "title": "You can't open this page",
+    "description": "This page isn't available for your account.",
+    "home": "Back to home"
+  },
+  "pagination": {
+    "label": "Pagination",
+    "previous": "Previous page",
+    "next": "Next page",
+    "page": "Page {{page}}"
   },
   "notFound": {
     "title": "Page not found",

@@ -5,13 +5,22 @@ import type { AuthUser, Session } from "./api";
 
 export const sessionKey = ["session"];
 
+// One person's data must never show for the next person on this browser.
+const clearUserData = () => {
+  queryClient.removeQueries({
+    predicate: ({ queryKey }) => queryKey[0] !== sessionKey[0],
+  });
+};
+
 export const startSession = ({ accessToken, user }: Session) => {
   setAccessToken(accessToken);
+  clearUserData();
   queryClient.setQueryData(sessionKey, user);
 };
 
 export const endSession = () => {
   setAccessToken(null);
+  clearUserData();
   queryClient.setQueryData(sessionKey, null);
 };
 

@@ -3,7 +3,7 @@ import userEvent from "@testing-library/user-event";
 import { http, HttpResponse } from "msw";
 import { describe, expect, it } from "vitest";
 import { server } from "../../../test/bootstrap";
-import { apiErrors } from "../../../test/handlers";
+import { apiErrors, storageResponse } from "../../../test/handlers";
 import { renderApp } from "../../../test/renderApp";
 import i18n from "../../../lib/i18n";
 
@@ -113,7 +113,7 @@ describe("RegisterPage", () => {
       }),
       http.post("http://storage.test/users", () => {
         uploaded = true;
-        return new HttpResponse(null, { status: 204 });
+        return storageResponse(204);
       }),
     );
     renderApp("/register");
@@ -143,7 +143,7 @@ describe("RegisterPage", () => {
           { status: 201 },
         ),
       ),
-      http.post("http://storage.test/users", () => new HttpResponse(null, { status: 403 })),
+      http.post("http://storage.test/users", () => storageResponse(403)),
     );
     renderApp("/register");
 
