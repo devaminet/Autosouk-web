@@ -181,14 +181,12 @@ describe("ExplorePage", () => {
       const kept = new Set([8]);
       const sent: string[] = [];
       server.use(
-        http.get("*/api/favorite_listings", () =>
-          HttpResponse.json({ listings: [...kept].map((listingId) => ({ listingId })) }),
-        ),
+        http.get("*/api/favorite_listings/ids", () => HttpResponse.json({ listingIds: [...kept] })),
         http.post("*/api/favorite_listings", async ({ request }) => {
           const body = await request.json();
           sent.push(`add ${JSON.stringify(body)}`);
           kept.add(7);
-          return HttpResponse.json({ buyerId: 1, listingId: 7 }, { status: 201 });
+          return HttpResponse.json({ listingId: 7, created: true }, { status: 201 });
         }),
         http.delete("*/api/favorite_listings/:listingId", ({ params }) => {
           sent.push(`remove ${String(params.listingId)}`);
