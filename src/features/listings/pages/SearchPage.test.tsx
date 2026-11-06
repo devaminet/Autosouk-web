@@ -93,6 +93,30 @@ describe("SearchPage", () => {
     expect(queries.at(-1)?.get("equipmentIds")).toBe("30");
   });
 
+  it("filters by transmission and fuel, with the cars each fuel finds", async () => {
+    const user = userEvent.setup();
+    const queries = listingsApi();
+    const router = renderApp("/cars?cityId=1");
+
+    await screen.findByRole("form", { name: "Filters" });
+    await user.click(await filters().findByRole("radio", { name: "Manual" }));
+    await user.click(await filters().findByRole("checkbox", { name: "Diesel 5 cars" }));
+    await user.click(await filters().findByRole("button", { name: "Show 5 cars" }));
+
+    expect(router.state.location.search).toBe("?cityId=1&transmission=manual&carburantIds=1");
+    // Each fuel's count keeps the other filters.
+    expect(
+      queries.some(
+        (query) =>
+          query.get("carburantIds") === "3" && query.get("transmission") === "manual" && query.get("cityId") === "1",
+      ),
+    ).toBe(true);
+    const active = within(screen.getByRole("list", { name: "Filters in use" }));
+    expect(await active.findByRole("button", { name: "Remove the filter Manual" })).toBeInTheDocument();
+    await user.click(await active.findByRole("button", { name: "Remove the filter Diesel" }));
+    expect(router.state.location.search).toBe("?cityId=1&transmission=manual");
+  });
+
   it("refuses a minimum price above the maximum", async () => {
     const user = userEvent.setup();
     listingsApi();

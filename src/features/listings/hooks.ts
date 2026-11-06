@@ -166,3 +166,19 @@ export const useSubmitListing = () => {
     onSuccess: () => queryClient.invalidateQueries({ queryKey: listingsKey }),
   });
 };
+
+// How many cars each fuel would find, with the other filters: the filter's
+// own fuels are replaced. One count search for each fuel, as for the price
+// histogram.
+export const useFuelCounts = (filter: PublicListingsFilter, carburantIds: number[]) =>
+  useQueries({
+    queries: carburantIds.map((id) => {
+      const query: PublicListingsFilter = { ...filter, carburantIds: [id], page: 1, limit: 1 };
+      return {
+        queryKey: [...listingsKey, "public", query],
+        queryFn: () => getPublicListings(query),
+        staleTime: 5 * 60_000,
+      };
+    }),
+    combine: (results) => new Map(carburantIds.map((id, index) => [id, results[index]?.data?.meta.total])),
+  });

@@ -8,11 +8,13 @@ import { TextField } from "../../../../components/TextField";
 import { useDebouncedValue } from "../../../../hooks/useDebouncedValue";
 import { formatNumber } from "../../../../lib/format";
 import type { EquipmentCategory } from "../../api";
-import { useLookups, useMakes, useModels, usePriceHistogram, usePublicListings } from "../../hooks";
+import { useFuelCounts, useLookups, useMakes, useModels, usePriceHistogram, usePublicListings } from "../../hooks";
 import { toListingsFilter } from "../../listingSearch";
 import type { ListingSearch } from "../../listingSearch";
 import { EquipmentDialog } from "./EquipmentDialog";
+import { FuelFilter } from "./FuelFilter";
 import { PriceRange } from "./PriceRange";
+import { TransmissionFilter } from "./TransmissionFilter";
 
 // Common equipment offered as one-tap filters, when the catalog has them.
 const suggestedEquipment = [
@@ -56,6 +58,8 @@ export function SearchFilters({ search, onApply, categories, compact = false, on
   const [minPrice, setMinPrice] = useState(search.minPrice?.toString() ?? "");
   const [maxPrice, setMaxPrice] = useState(search.maxPrice?.toString() ?? "");
   const [equipmentIds, setEquipmentIds] = useState(search.equipmentIds);
+  const [transmission, setTransmission] = useState(search.transmission);
+  const [carburantIds, setCarburantIds] = useState(search.carburantIds);
   const [browsing, setBrowsing] = useState(false);
   const [showPriceError, setShowPriceError] = useState(false);
   const makes = useMakes();
@@ -69,6 +73,8 @@ export function SearchFilters({ search, onApply, categories, compact = false, on
     minPrice: price(minPrice),
     maxPrice: price(maxPrice),
     equipmentIds,
+    transmission,
+    carburantIds,
   };
   const priceOrderWrong =
     filters.minPrice !== undefined && filters.maxPrice !== undefined && filters.minPrice > filters.maxPrice;
@@ -86,9 +92,17 @@ export function SearchFilters({ search, onApply, categories, compact = false, on
       modelId: filters.modelId,
       cityId: filters.cityId,
       equipmentIds: equipmentIds.length > 0 ? equipmentIds : undefined,
+      transmission,
+      carburantIds: carburantIds.length > 0 ? carburantIds : undefined,
       sort: "newest",
     },
     !compact,
+  );
+  // How many cars each fuel would find, with the other filters.
+  const fuels = lookups.data?.carburants ?? [];
+  const fuelCounts = useFuelCounts(
+    toListingsFilter({ ...filters, minPrice: price(previewMin), maxPrice: price(previewMax), sort: "newest", page: 1 }, 1),
+    fuels.map(({ id }) => id),
   );
   const total = preview.data?.meta.total;
   const applyLabel =
@@ -145,6 +159,8 @@ export function SearchFilters({ search, onApply, categories, compact = false, on
     setMinPrice("");
     setMaxPrice("");
     setEquipmentIds([]);
+    setTransmission(undefined);
+    setCarburantIds([]);
     setShowPriceError(false);
   };
 
@@ -255,6 +271,10 @@ export function SearchFilters({ search, onApply, categories, compact = false, on
             />
           </div>
         </PriceRange>
+        <TransmissionFilter onChange={setTransmission} value={transmission} />
+        {fuels.length > 0 && (
+          <FuelFilter counts={fuelCounts} fuels={fuels} onChange={setCarburantIds} selected={carburantIds} />
+        )}
         {compact ? (
           <button
             className="flex cursor-pointer items-center gap-12 rounded-lg bg-surface p-16 text-start ring-1 ring-line ring-inset hover:bg-surface-2 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-brand"

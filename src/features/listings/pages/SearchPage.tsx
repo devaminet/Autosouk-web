@@ -100,11 +100,30 @@ export function SearchPage() {
   };
 
   const items = categories.flatMap((category) => category.equipment);
+  const { transmission } = search;
+  const fuels = (lookups.data?.carburants ?? []).filter(({ id }) => search.carburantIds.includes(id));
   const active: ActiveFilter[] = [
     make ? { id: "make", label: make, name: make, onRemove: () => change({ makeId: undefined, modelId: undefined }) } : null,
     model ? { id: "model", label: model, name: model, onRemove: () => change({ modelId: undefined }) } : null,
     city ? { id: "city", label: city, name: city, onRemove: () => change({ cityId: undefined }) } : null,
     priceFilter(),
+    transmission
+      ? {
+          id: "transmission",
+          label: t(`enums:transmission.${transmission}`),
+          name: t(`enums:transmission.${transmission}`),
+          onRemove: () => change({ transmission: undefined }),
+        }
+      : null,
+    ...fuels.map(({ id, slug }) => {
+      const name = t(`enums:carburant.${slug}`, { defaultValue: slug });
+      return {
+        id: `fuel-${id}`,
+        label: name,
+        name,
+        onRemove: () => change({ carburantIds: search.carburantIds.filter((item) => item !== id) }),
+      };
+    }),
     ...items
       .filter(({ id }) => search.equipmentIds.includes(id))
       .map((item) => {

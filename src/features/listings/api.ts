@@ -303,6 +303,9 @@ export type PublicListingsFilter = {
   maxPrice?: number;
   // Cars must have every item.
   equipmentIds?: number[];
+  transmission?: Transmission;
+  // Cars with any of these fuels.
+  carburantIds?: number[];
   sort?: ListingSort;
 };
 
