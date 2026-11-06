@@ -89,10 +89,25 @@ const icons = {
       <rect width="7" height="7" x="3" y="14" rx="1" />
     </>
   ),
+  hash: (
+    <>
+      <path d="M4 9h16" />
+      <path d="M4 15h16" />
+      <path d="M10 3 8 21" />
+      <path d="M16 3l-2 18" />
+    </>
+  ),
   home: (
     <>
       <path d="m3 9 9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z" />
       <polyline points="9 22 9 12 15 12 15 22" />
+    </>
+  ),
+  image: (
+    <>
+      <rect height="18" rx="2" width="18" x="3" y="3" />
+      <circle cx="9" cy="9" r="2" />
+      <path d="m21 15-3.1-3.1a2 2 0 0 0-2.8 0L6 21" />
     </>
   ),
   info: (

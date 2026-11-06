@@ -1,5 +1,7 @@
 import type { ButtonVariant } from "../../components/buttonStyles";
+import { listingMediaPath } from "../../lib/paths";
 import type { ListingStatus } from "./api";
+import { resumeDraftPath } from "./wizardSteps";
 
 export type EditAction = {
   label: "edit" | "editResubmit";
@@ -19,3 +21,11 @@ const actions: Record<ListingStatus, EditAction | null> = {
 };
 
 export const editActionFor = (status: ListingStatus): EditAction | null => actions[status];
+
+// Where to manage a listing's photos and videos. A draft does it in the wizard.
+export const mediaPathFor = (listing: { id: number; status: ListingStatus; car: unknown }): string | null => {
+  if (listing.status === "draft") {
+    return resumeDraftPath(listing);
+  }
+  return listing.status === "sold" ? null : listingMediaPath(listing.id);
+};

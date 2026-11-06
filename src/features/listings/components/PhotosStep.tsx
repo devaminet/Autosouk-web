@@ -5,8 +5,8 @@ import { ButtonLink } from "../../../components/ButtonLink";
 import { Icon } from "../../../components/Icon";
 import { draftStepPath } from "../../../lib/paths";
 import type { ListingCar } from "../api";
-import { useDeleteMedia, useSetCover } from "../hooks";
 import { maxMediaCount, minImageCount } from "../media";
+import { useMediaActions } from "../useMediaActions";
 import { useMediaUploads } from "../useMediaUploads";
 import { AddMediaTile } from "./AddMediaTile";
 import { ListingCarPreview } from "./ListingCarPreview";
@@ -28,22 +28,15 @@ type PhotosStepProps = {
 export function PhotosStep({ listingId, car }: PhotosStepProps) {
   const { t } = useTranslation("listings");
   const { uploads, problems, error, upload } = useMediaUploads(listingId);
-  const deletion = useDeleteMedia();
-  const cover = useSetCover();
+  const actions = useMediaActions(listingId);
   const media = car.carMedias;
   const photos = media.filter(({ type }) => type === "image").length;
   const hasCover = media.some(({ isPrimary, type }) => isPrimary && type === "image");
   const filesLeft = maxMediaCount - media.length - uploads.length;
   const missing = minImageCount - photos;
   const isReady = missing <= 0 && hasCover && uploads.length === 0;
-  const busyIds = [
-    ...(deletion.isPending ? (deletion.variables?.mediaIds ?? []) : []),
-    ...(cover.isPending && cover.variables ? [cover.variables.mediaId] : []),
-  ];
   const addFiles = (files: File[]) => void upload(files, filesLeft);
-  const errors = [error, deletion.error, cover.error].flatMap((item) =>
-    item instanceof Error ? [item.message] : [],
-  );
+  const errors = [...(error instanceof Error ? [error.message] : []), ...actions.errors];
   const reviewLabel = missing > 0 ? t("photos.addMore", { count: missing }) : t("photos.review");
 
   return (
@@ -93,12 +86,12 @@ export function PhotosStep({ listingId, car }: PhotosStepProps) {
         <ul aria-label={t("photos.title")} className="grid grid-cols-2 gap-16 lg:grid-cols-3 xl:grid-cols-4">
           {media.map((item, index) => (
             <MediaTile
-              busy={busyIds.includes(item.id)}
+              busy={actions.busyIds.includes(item.id)}
               key={item.id}
               media={item}
               number={index + 1}
-              onDelete={() => deletion.mutate({ id: listingId, mediaIds: [item.id] })}
-              onMakeCover={() => cover.mutate({ id: listingId, mediaId: item.id })}
+              onDelete={() => actions.remove(item.id)}
+              onMakeCover={() => actions.makeCover(item.id)}
             />
           ))}
           {uploads.map((item) => (

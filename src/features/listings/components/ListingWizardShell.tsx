@@ -6,6 +6,7 @@ import { Icon } from "../../../components/Icon";
 import { paths } from "../../../lib/paths";
 import type { WizardStep } from "../wizardSteps";
 import { DiscardDraftButton } from "./DiscardDraftButton";
+import { ListingBreadcrumb } from "./ListingBreadcrumb";
 import { WizardStepper } from "./WizardStepper";
 
 type ListingWizardShellProps = {
@@ -43,25 +44,7 @@ export function ListingWizardShell({
       </div>
 
       <div className="hidden items-center justify-between gap-16 md:flex">
-        <nav aria-label={t("wizard.breadcrumb")}>
-          <ol className="flex items-center gap-8 type-label-m">
-            <li>
-              <Link
-                className="flex items-center gap-8 rounded-xs text-ink hover:underline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-brand"
-                to={paths.myListings}
-              >
-                <Icon name="arrow-left" size={16} />
-                {t("myListings.title")}
-              </Link>
-            </li>
-            <li aria-hidden="true" className="text-muted">
-              /
-            </li>
-            <li aria-current="page" className="text-muted">
-              {t("wizard.title")}
-            </li>
-          </ol>
-        </nav>
+        <ListingBreadcrumb current={t("wizard.title")} />
         <div className="flex items-center gap-8">
           {actions}
           {draft ? (

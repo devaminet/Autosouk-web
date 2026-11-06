@@ -1,10 +1,10 @@
 import { useQueryClient } from "@tanstack/react-query";
 import { useEffect, useRef, useState } from "react";
-import { uploadToPresignedPost } from "../../lib/api/upload";
-import { addMedia, confirmMedia, deleteMedia } from "./api";
+import { confirmMedia } from "./api";
 import { listingKey } from "./hooks";
-import { checkFiles, mediaKind, uniqueNames } from "./media";
+import { checkFiles, mediaKind } from "./media";
 import type { MediaKind, RefusedFile } from "./media";
+import { reserveAndUpload } from "./uploadMedia";
 
 export type Upload = {
   key: number;
@@ -21,9 +21,8 @@ export type MediaProblem = {
   reason: RefusedFile["reason"] | "failed" | "rejected";
 };
 
-// Uploads picked files to a draft's car: reserve storage, upload each file,
-// then confirm. Files that fail to upload are deleted, so they don't count
-// towards the limit. The listing is refreshed after each batch.
+// Uploads picked files to a draft's car and confirms them at once, which keeps
+// a draft a draft. The listing is refreshed after each batch.
 export const useMediaUploads = (listingId: number) => {
   const queryClient = useQueryClient();
   const [uploads, setUploads] = useState<Upload[]>([]);
@@ -61,26 +60,17 @@ export const useMediaUploads = (listingId: number) => {
     setUploads((current) => [...current, ...batch]);
 
     try {
-      const reserved = await addMedia({ id: listingId, names: uniqueNames(accepted.map(({ name }) => name)) });
-      // The API answers in the order of the request.
-      const results = await Promise.all(
-        reserved.map((media, index) => {
-          const file = accepted[index];
-          const item = batch[index];
-          return file && item
-            ? uploadToPresignedPost(media.upload, file, (progress) => setProgress(item.key, progress))
-            : Promise.resolve(false);
-        }),
-      );
-      const failed = reserved.filter((_, index) => !results[index]);
-      if (failed.length > 0) {
-        await deleteMedia({ id: listingId, mediaIds: failed.map(({ id }) => id) }).catch(() => undefined);
-      }
-      const confirmed = results.some(Boolean) ? await confirmMedia(listingId) : null;
+      const files = await reserveAndUpload(listingId, accepted, (index, progress) => {
+        const item = batch[index];
+        if (item) {
+          setProgress(item.key, progress);
+        }
+      });
+      const confirmed = files.some(({ uploaded }) => uploaded) ? await confirmMedia(listingId) : null;
       // Problems name the file as the seller picked it.
-      const outcomes = reserved.map(({ filename }, index) => ({
-        name: accepted[index]?.name ?? filename,
-        reason: !results[index]
+      const outcomes = files.map(({ name, filename, uploaded }) => ({
+        name,
+        reason: !uploaded
           ? ("failed" as const)
           : confirmed?.rejected.includes(filename)
             ? ("rejected" as const)

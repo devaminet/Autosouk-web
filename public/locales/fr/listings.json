@@ -19,7 +19,9 @@
     "edit": "Modifier",
     "editResubmit": "Modifier et renvoyer",
     "editListing": "Modifier {{title}}",
-    "editResubmitListing": "Modifier et renvoyer {{title}}"
+    "editResubmitListing": "Modifier et renvoyer {{title}}",
+    "media": "Photos et vidéos",
+    "mediaListing": "Photos et vidéos de {{title}}"
   },
   "deleteDialog": {
     "title": "Supprimer cette annonce ?",
@@ -176,7 +178,10 @@
       "limit": "{{name}} : une annonce contient au maximum 20 fichiers.",
       "failed": "{{name}} : l’envoi a échoué. Réessayez.",
       "rejected": "{{name}} : refusé à cause de son type ou de sa taille."
-    }
+    },
+    "readyCount_one": "{{count}} prête à confirmer",
+    "readyCount_many": "{{count}} prêtes à confirmer",
+    "readyCount_other": "{{count}} prêtes à confirmer"
   },
   "review": {
     "title": "Vérifier et envoyer",
@@ -201,5 +206,40 @@
     "cancel": "Annuler",
     "save": "Enregistrer",
     "saved": "Vos modifications sont enregistrées. L’annonce est de nouveau en validation."
+  },
+  "media": {
+    "overline": "Médias de l’annonce",
+    "warningApproved": "Les nouveaux fichiers restent masqués jusqu’à leur confirmation. Confirmer renvoie l’annonce en vérification et la retire de la recherche jusqu’à sa nouvelle approbation. Supprimer des fichiers ou changer la couverture la laisse en ligne.",
+    "warning": "Les nouveaux fichiers restent masqués jusqu’à leur confirmation. Confirmer renvoie l’annonce en vérification. Supprimer des fichiers ou changer la couverture ne le fait pas.",
+    "leaveNote": "Les nouveaux fichiers non confirmés sont supprimés si vous quittez cette page.",
+    "readyBadge": "Prêt à confirmer",
+    "failed": "Échec de l’envoi",
+    "retry": "Réessayer",
+    "retryFile": "Réessayer {{name}}",
+    "remove": "Retirer {{name}}",
+    "newFile": "Nouveau fichier {{name}}",
+    "readyFiles_one": "{{count}} fichier prêt",
+    "readyFiles_many": "{{count}} fichiers prêts",
+    "readyFiles_other": "{{count}} fichiers prêts",
+    "failedFiles_one": "{{count}} en échec",
+    "failedFiles_many": "{{count}} en échec",
+    "failedFiles_other": "{{count}} en échec",
+    "discard": "Supprimer les nouveaux fichiers",
+    "confirm": "Confirmer et envoyer en vérification",
+    "confirmed": "Vos nouveaux fichiers sont enregistrés. L’annonce est de nouveau en vérification.",
+    "manageAll": "Tout gérer",
+    "manageAllLabel": "Gérer toutes les photos et vidéos",
+    "add": "Ajouter",
+    "rules": {
+      "title": "Règles",
+      "minPhotos_one": "Gardez au moins {{count}} photo. Ajoutez une remplaçante avant d’en supprimer une.",
+      "minPhotos_many": "Gardez au moins {{count}} photos. Ajoutez une remplaçante avant d’en supprimer une.",
+      "minPhotos_other": "Gardez au moins {{count}} photos. Ajoutez une remplaçante avant d’en supprimer une.",
+      "cover": "La couverture est toujours une photo. Si vous la supprimez, votre plus ancienne photo devient la couverture.",
+      "limit_one": "Jusqu’à {{count}} fichier par voiture, vidéos comprises. Les fichiers en cours d’envoi comptent aussi.",
+      "limit_many": "Jusqu’à {{count}} fichiers par voiture, vidéos comprises. Les fichiers en cours d’envoi comptent aussi.",
+      "limit_other": "Jusqu’à {{count}} fichiers par voiture, vidéos comprises. Les fichiers en cours d’envoi comptent aussi.",
+      "confirmed": "Seuls les fichiers confirmés apparaissent sur l’annonce."
+    }
   }
 }

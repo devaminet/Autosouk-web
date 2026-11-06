@@ -6,6 +6,7 @@ import {
 } from "@tanstack/react-query";
 import {
   attachCar,
+  confirmMedia,
   createListing,
   deleteListing,
   deleteMedia,
@@ -112,6 +113,16 @@ export const useSetCover = () => {
   return useMutation({
     mutationFn: setCover,
     onSettled: (_data, _error, { id }) => queryClient.invalidateQueries({ queryKey: listingKey(id) }),
+  });
+};
+
+// Confirming new media sends a published listing back to review, so the list
+// changes too.
+export const useConfirmMedia = () => {
+  const queryClient = useQueryClient();
+  return useMutation({
+    mutationFn: confirmMedia,
+    onSettled: () => queryClient.invalidateQueries({ queryKey: listingsKey }),
   });
 };
 

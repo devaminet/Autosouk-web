@@ -14,6 +14,7 @@ import type { EquipmentCategory, ListingChanges, ListingDetail, Lookups } from "
 import { carErrorFields, carFieldError, digitsOnly } from "../carForm";
 import { editFormFrom, listingChanges } from "../editListing";
 import type { EditFormValues } from "../editListing";
+import { EditListingMedia } from "./EditListingMedia";
 import { EquipmentPicker } from "./EquipmentPicker";
 
 const errorFields = ["title", "description", ...carErrorFields];
@@ -143,6 +144,7 @@ export function EditListingForm({
                 selected={values.equipmentIds}
               />
             </section>
+            <EditListingMedia car={car} listingId={listing.id} />
           </>
         )}
       </div>

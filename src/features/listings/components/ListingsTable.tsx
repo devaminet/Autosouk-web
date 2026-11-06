@@ -1,9 +1,10 @@
 import { useTranslation } from "react-i18next";
 import { ButtonLink } from "../../../components/ButtonLink";
+import { Link } from "react-router";
 import { Icon } from "../../../components/Icon";
 import { formatDay } from "../../../lib/format";
 import type { SellerListing } from "../api";
-import { editActionFor } from "../editAction";
+import { editActionFor, mediaPathFor } from "../editAction";
 import { resumeDraftPath } from "../wizardSteps";
 import { ListingActionsMenu } from "./ListingActionsMenu";
 import { ListingMeta } from "./ListingMeta";
@@ -52,6 +53,7 @@ export function ListingsTable({ listings, editTo, onDelete }: ListingsTableProps
       <tbody>
         {listings.map((listing) => {
           const edit = editActionFor(listing.status);
+          const mediaTo = mediaPathFor(listing);
           return (
           <tr className="border-b border-line last:border-b-0" key={listing.id}>
             <td className="py-16 pe-16">
@@ -108,6 +110,15 @@ export function ListingsTable({ listings, editTo, onDelete }: ListingsTableProps
                     <Icon name="pencil" size={16} />
                     {t(`actions.${edit.label}`)}
                   </ButtonLink>
+                )}
+                {mediaTo && (
+                  <Link
+                    aria-label={t("actions.mediaListing", { title: listing.title })}
+                    className="flex size-control-s shrink-0 items-center justify-center rounded-full bg-surface text-brand ring-1 ring-line-strong ring-inset hover:bg-surface-2 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-brand"
+                    to={mediaTo}
+                  >
+                    <Icon name="image" size={16} />
+                  </Link>
                 )}
                 <ListingActionsMenu
                   onDelete={() => onDelete(listing)}

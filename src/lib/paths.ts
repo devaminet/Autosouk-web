@@ -14,9 +14,13 @@ export const paths = {
   draftCar: "/my-listings/:listingId/car",
   draftPhotos: "/my-listings/:listingId/photos",
   draftReview: "/my-listings/:listingId/review",
+  // The photos and videos of a published listing. Build links with listingMediaPath.
+  listingMedia: "/my-listings/:listingId/media",
 } as const;
 
 export type DraftStep = "listing" | "car" | "photos" | "review";
 
 export const draftStepPath = (listingId: number, step: DraftStep): string =>
   `/my-listings/${listingId}/${step}`;
+
+export const listingMediaPath = (listingId: number): string => `/my-listings/${listingId}/media`;

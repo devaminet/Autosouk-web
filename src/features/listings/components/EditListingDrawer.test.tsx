@@ -146,5 +146,21 @@ describe("EditListingDrawer", () => {
       "/my-listings?edit=2",
     );
     expect(within(table).queryByRole("link", { name: /Sold car/u })).not.toBeInTheDocument();
+    expect(within(table).getByRole("link", { name: "Photos and videos of Rejected car" })).toHaveAttribute(
+      "href",
+      "/my-listings/2/media",
+    );
+  });
+
+  it("links to the page that manages photos and videos", async () => {
+    const user = userEvent.setup();
+    renderList([row]);
+
+    const dialog = await openDrawer(user);
+
+    expect(within(dialog).getByRole("link", { name: "Manage all photos and videos" })).toHaveAttribute(
+      "href",
+      "/my-listings/7/media",
+    );
   });
 });

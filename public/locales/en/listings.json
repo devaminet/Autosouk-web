@@ -19,7 +19,9 @@
     "edit": "Edit",
     "editResubmit": "Edit & resubmit",
     "editListing": "Edit {{title}}",
-    "editResubmitListing": "Edit and resubmit {{title}}"
+    "editResubmitListing": "Edit and resubmit {{title}}",
+    "media": "Photos & videos",
+    "mediaListing": "Photos and videos of {{title}}"
   },
   "deleteDialog": {
     "title": "Delete this listing?",
@@ -175,7 +177,9 @@
       "limit": "{{name}}: a listing holds up to 20 files.",
       "failed": "{{name}}: the upload failed. Try again.",
       "rejected": "{{name}}: refused because of its type or size."
-    }
+    },
+    "readyCount_one": "{{count}} ready to confirm",
+    "readyCount_other": "{{count}} ready to confirm"
   },
   "review": {
     "title": "Review and submit",
@@ -200,5 +204,36 @@
     "cancel": "Cancel",
     "save": "Save changes",
     "saved": "Your changes are saved. The listing is back in review."
+  },
+  "media": {
+    "overline": "Listing media",
+    "warningApproved": "New files stay hidden until you confirm them. Confirming sends the listing back to review and hides it from search until it is approved again. Deleting files or changing the cover keeps it live.",
+    "warning": "New files stay hidden until you confirm them. Confirming sends the listing back to review. Deleting files or changing the cover doesn't.",
+    "leaveNote": "New files you don't confirm are discarded when you leave this page.",
+    "readyBadge": "Ready to confirm",
+    "failed": "Upload failed",
+    "retry": "Retry",
+    "retryFile": "Retry {{name}}",
+    "remove": "Remove {{name}}",
+    "newFile": "New file {{name}}",
+    "readyFiles_one": "{{count}} file ready",
+    "readyFiles_other": "{{count}} files ready",
+    "failedFiles_one": "{{count}} failed",
+    "failedFiles_other": "{{count}} failed",
+    "discard": "Discard new files",
+    "confirm": "Confirm and send to review",
+    "confirmed": "Your new files are saved. The listing is back in review.",
+    "manageAll": "Manage all",
+    "manageAllLabel": "Manage all photos and videos",
+    "add": "Add",
+    "rules": {
+      "title": "Rules",
+      "minPhotos_one": "Keep at least {{count}} photo. Add a replacement before deleting one.",
+      "minPhotos_other": "Keep at least {{count}} photos. Add a replacement before deleting one.",
+      "cover": "The cover is always a photo. If you delete it, your oldest photo becomes the cover.",
+      "limit_one": "Up to {{count}} file per car, videos included. Files still uploading count too.",
+      "limit_other": "Up to {{count}} files per car, videos included. Files still uploading count too.",
+      "confirmed": "Only confirmed files appear on the listing."
+    }
   }
 }

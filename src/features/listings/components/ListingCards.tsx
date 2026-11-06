@@ -1,5 +1,5 @@
 import type { SellerListing } from "../api";
-import { editActionFor } from "../editAction";
+import { editActionFor, mediaPathFor } from "../editAction";
 import { resumeDraftPath } from "../wizardSteps";
 import { ListingActionsMenu } from "./ListingActionsMenu";
 import { ListingPrice } from "./ListingPrice";
@@ -41,6 +41,7 @@ export function ListingCards({ listings, editTo, onDelete }: ListingCardsProps) 
           <ListingActionsMenu
             continueTo={listing.status === "draft" ? resumeDraftPath(listing) : undefined}
             edit={editFor(listing)}
+            mediaTo={listing.status === "draft" ? undefined : (mediaPathFor(listing) ?? undefined)}
             onDelete={() => onDelete(listing)}
             title={listing.title}
           />

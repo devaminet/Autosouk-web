@@ -10,11 +10,13 @@ type ListingActionsMenuProps = {
   continueTo?: string;
   // Where to edit the listing. The table shows its own button for this too.
   edit?: { to: string; label: "edit" | "editResubmit" };
+  // Where to manage its photos and videos. The table shows its own button too.
+  mediaTo?: string;
   onDelete: () => void;
 };
 
 // The "…" button on a listing, for actions that don't need their own button.
-export function ListingActionsMenu({ title, continueTo, edit, onDelete }: ListingActionsMenuProps) {
+export function ListingActionsMenu({ title, continueTo, edit, mediaTo, onDelete }: ListingActionsMenuProps) {
   const { t } = useTranslation("listings");
   const { open, setOpen, root } = useMenu();
   const trigger = useRef<HTMLButtonElement>(null);
@@ -51,6 +53,15 @@ export function ListingActionsMenu({ title, continueTo, edit, onDelete }: Listin
             >
               <Icon name="pencil" size={16} />
               {t(`actions.${edit.label}`)}
+            </Link>
+          )}
+          {mediaTo && (
+            <Link
+              className="flex min-h-control-s items-center gap-8 rounded-sm px-12 type-label-m text-ink hover:bg-paper focus-visible:outline-2 focus-visible:outline-brand"
+              to={mediaTo}
+            >
+              <Icon name="image" size={16} />
+              {t("actions.media")}
             </Link>
           )}
           <button
