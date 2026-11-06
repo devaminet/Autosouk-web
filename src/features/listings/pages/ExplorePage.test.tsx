@@ -1,4 +1,4 @@
-import { screen, within } from "@testing-library/react";
+import { screen, waitFor, within } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 import { http, HttpResponse } from "msw";
 import { describe, expect, it } from "vitest";
@@ -164,5 +164,88 @@ describe("ExplorePage", () => {
 
     expect(await screen.findByText("Salam, Amine")).toBeInTheDocument();
     expect(screen.queryByRole("link", { name: "List your car" })).not.toBeInTheDocument();
+  });
+  describe("favourites", () => {
+    const signIn = (role: string) =>
+      server.use(
+        http.post("*/api/auth/refresh-token", () =>
+          HttpResponse.json({ accessToken: "token", user: { ...testUser, role } }),
+        ),
+      );
+
+    it("keeps a listing in the buyer's favourites", async () => {
+      const user = userEvent.setup();
+      listingsApi();
+      signIn("buyer");
+      // The buyer keeps the Dacia Duster. The API remembers each change.
+      const kept = new Set([8]);
+      const sent: string[] = [];
+      server.use(
+        http.get("*/api/favorite_listings", () =>
+          HttpResponse.json({ listings: [...kept].map((listingId) => ({ listingId })) }),
+        ),
+        http.post("*/api/favorite_listings", async ({ request }) => {
+          const body = await request.json();
+          sent.push(`add ${JSON.stringify(body)}`);
+          kept.add(7);
+          return HttpResponse.json({ buyerId: 1, listingId: 7 }, { status: 201 });
+        }),
+        http.delete("*/api/favorite_listings/:listingId", ({ params }) => {
+          sent.push(`remove ${String(params.listingId)}`);
+          kept.delete(Number(params.listingId));
+          return HttpResponse.json({ count: 1 });
+        }),
+      );
+      renderApp("/");
+
+      const golf = await screen.findByRole("button", { name: "Save Volkswagen Golf 8 to favourites" });
+      const duster = screen.getByRole("button", { name: "Save Dacia Duster to favourites" });
+      expect(await screen.findByRole("button", { name: "Save Dacia Duster to favourites", pressed: true })).toBe(duster);
+      expect(golf).toHaveAttribute("aria-pressed", "false");
+
+      await user.click(golf);
+      await waitFor(() => expect(golf).toHaveAttribute("aria-pressed", "true"));
+      await user.click(duster);
+      await waitFor(() => expect(duster).toHaveAttribute("aria-pressed", "false"));
+      await waitFor(() => expect(golf).toHaveAttribute("aria-pressed", "true"));
+      expect(sent).toEqual(['add {"listingId":7}', "remove 8"]);
+    });
+
+    it("takes the heart back when the API refuses", async () => {
+      const user = userEvent.setup();
+      listingsApi();
+      signIn("buyer");
+      server.use(
+        http.post("*/api/favorite_listings", () =>
+          apiErrors(500, { code: "favorite.add_failed", message: "Could not add the favourite." }),
+        ),
+      );
+      renderApp("/");
+
+      const golf = await screen.findByRole("button", { name: "Save Volkswagen Golf 8 to favourites" });
+      await waitFor(() => expect(golf).toBeEnabled());
+      await user.click(golf);
+      await waitFor(() => expect(golf).toHaveAttribute("aria-pressed", "false"));
+    });
+
+    it("asks visitors to log in first", async () => {
+      const user = userEvent.setup();
+      listingsApi();
+      const router = renderApp("/?cityId=1");
+
+      await user.click(await screen.findByRole("link", { name: "Log in to save Dacia Duster to favourites" }));
+      expect(router.state.location.pathname).toBe("/login");
+      expect(router.state.location.state).toEqual({ from: "/?cityId=1" });
+    });
+
+    it("shows no heart to sellers", async () => {
+      listingsApi();
+      signIn("seller");
+      renderApp("/");
+
+      expect(await screen.findByRole("link", { name: "Volkswagen Golf 8" })).toBeInTheDocument();
+      expect(screen.queryByRole("button", { name: /favourites/u })).not.toBeInTheDocument();
+      expect(screen.queryByRole("link", { name: /favourites/u })).not.toBeInTheDocument();
+    });
   });
 });

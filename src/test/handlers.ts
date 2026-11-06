@@ -158,6 +158,7 @@ export const defaultHandlers = [
       },
     }),
   ),
+  http.get("*/api/favorite_listings", () => HttpResponse.json({ listings: [] })),
   // No session by default: the API answers 400 when the cookie is missing.
   http.post("*/api/auth/refresh-token", () =>
     apiErrors(400, {
