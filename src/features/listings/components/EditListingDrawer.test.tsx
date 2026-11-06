@@ -152,6 +152,20 @@ describe("EditListingDrawer", () => {
     );
   });
 
+  it("gives the focus back to the menu when opened from it", async () => {
+    const user = userEvent.setup();
+    renderList([row]);
+
+    // The cards' menu, for small screens, holds the edit action.
+    const cards = (await screen.findAllByRole("list")).find((list) => list.tagName === "UL" && within(list).queryByText("My Golf"));
+    const trigger = within(cards ?? document.body).getByRole("button", { name: "Actions for My Golf" });
+    await user.click(trigger);
+    await user.click(screen.getByRole("link", { name: "Edit" }));
+
+    expect(await screen.findByRole("dialog", { name: "My Golf" })).toBeInTheDocument();
+    expect(trigger).toHaveFocus();
+  });
+
   it("links to the page that manages photos and videos", async () => {
     const user = userEvent.setup();
     renderList([row]);

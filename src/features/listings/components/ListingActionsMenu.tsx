@@ -47,7 +47,11 @@ export function ListingActionsMenu({ title, continueTo, edit, mediaTo, onDelete 
           {edit && (
             <Link
               className="flex min-h-control-s items-center gap-8 rounded-sm px-12 type-label-m text-ink hover:bg-paper focus-visible:outline-2 focus-visible:outline-brand"
-              onClick={() => setOpen(false)}
+              onClick={() => {
+                setOpen(false);
+                // The drawer returns focus to what had it when it opened, and this link is about to go.
+                trigger.current?.focus();
+              }}
               preventScrollReset
               to={edit.to}
             >
