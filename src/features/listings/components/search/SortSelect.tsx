@@ -1,7 +1,7 @@
 import { useTranslation } from "react-i18next";
 import { listingSorts } from "../../api";
 import type { ListingSort } from "../../api";
-import { chip, chipIdle } from "./chipStyles";
+import { chip, chipIdle } from "../../../../components/chipStyles";
 
 type SortSelectProps = {
   value: ListingSort;

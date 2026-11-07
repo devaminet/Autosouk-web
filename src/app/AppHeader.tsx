@@ -1,6 +1,7 @@
 import { useTranslation } from "react-i18next";
 import { Link, NavLink, useMatch } from "react-router";
 import { ButtonLink } from "../components/ButtonLink";
+import { Icon } from "../components/Icon";
 import { LanguageMenu } from "../components/LanguageMenu";
 import { Logo } from "../components/Logo";
 import { useSession } from "../features/auth/hooks";
@@ -65,10 +66,22 @@ export function AppHeader({ hideOnMobile = false }: AppHeaderProps) {
           {user?.role === "seller" && (
             <HeaderLink to={paths.myListings}>{t("nav.sell")}</HeaderLink>
           )}
+          {user?.role === "buyer" && <HeaderLink to={paths.saved}>{t("nav.saved")}</HeaderLink>}
         </nav>
       </div>
       <div className="flex items-center gap-8">
         <LanguageMenu />
+        {user?.role === "buyer" && (
+          <NavLink
+            aria-label={t("nav.saved")}
+            className={({ isActive }) =>
+              `flex size-40 items-center justify-center rounded-full ring-1 ring-line ring-inset hover:bg-surface-2 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-brand ${isActive ? "bg-brand-soft text-brand" : "bg-surface text-ink"}`
+            }
+            to={paths.saved}
+          >
+            <Icon name="heart" size={18} />
+          </NavLink>
+        )}
         {user && <UserMenu user={user} />}
         {!user && !isPending && (
           <>

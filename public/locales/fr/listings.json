@@ -429,5 +429,43 @@
       "from": "À partir de",
       "upTo": "Jusqu'à"
     }
+  },
+  "saved": {
+    "overline": "Votre sélection",
+    "title": "Voitures enregistrées",
+    "count_one": "{{formatted}} voiture",
+    "count_many": "{{formatted}} voitures",
+    "count_other": "{{formatted}} voitures",
+    "inspectedCount_one": "{{formatted}} déjà inspectée",
+    "inspectedCount_many": "{{formatted}} déjà inspectées",
+    "inspectedCount_other": "{{formatted}} déjà inspectées",
+    "hint": "touchez le cœur pour retirer",
+    "filters": {
+      "label": "Afficher les voitures enregistrées",
+      "all": "Toutes",
+      "inspected": "Inspectées",
+      "notInspected": "Non inspectées"
+    },
+    "sort": {
+      "recent": "Enregistrées récemment",
+      "priceAsc": "Prix : croissant",
+      "priceDesc": "Prix : décroissant"
+    },
+    "status": {
+      "sold": "Vendue",
+      "unavailable": "Plus en ligne"
+    },
+    "remove": "Retirer",
+    "removeLabel": "Retirer {{title}} des voitures enregistrées",
+    "findSimilar": "Voir des similaires",
+    "findSimilarLabel": "Voir des voitures comme {{title}}",
+    "end": "Vous avez vu toutes vos voitures enregistrées",
+    "noMatch": "Aucune voiture enregistrée ne correspond à ce filtre.",
+    "showAll": "Voir toutes les voitures enregistrées",
+    "empty": {
+      "title": "Aucune voiture enregistrée",
+      "description": "Touchez le cœur sur une annonce pour la garder ici et comparer plus tard.",
+      "explore": "Explorer les voitures"
+    }
   }
 }

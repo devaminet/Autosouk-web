@@ -1,7 +1,7 @@
 import type { ReactNode } from "react";
 import { useTranslation } from "react-i18next";
 import { Icon } from "../../../../components/Icon";
-import { chip, chipIdle } from "./chipStyles";
+import { chip, chipIdle } from "../../../../components/chipStyles";
 
 export type ActiveFilter = {
   id: string;

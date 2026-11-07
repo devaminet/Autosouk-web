@@ -1,7 +1,18 @@
-import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
-import { addFavorite, getFavoriteIds, removeFavorite } from "./api";
+import { keepPreviousData, useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
+import { addFavorite, getFavoriteIds, getSavedListings, removeFavorite } from "./api";
+import type { SavedListingsFilter } from "./api";
 
-const favoriteIdsKey = ["favorites", "ids"];
+const favoritesKey = ["favorites"];
+const favoriteIdsKey = [...favoritesKey, "ids"];
+
+// A page of the buyer's saved listings. Keeps the current page on screen while
+// another filter or page loads.
+export const useSavedListings = (filter: SavedListingsFilter) =>
+  useQuery({
+    queryKey: [...favoritesKey, "list", filter],
+    queryFn: () => getSavedListings(filter),
+    placeholderData: keepPreviousData,
+  });
 
 // The listings the buyer keeps. Only buyers have favourites.
 export const useFavoriteIds = (enabled: boolean) =>
@@ -30,6 +41,7 @@ export const useToggleFavorite = () => {
     onError: (_error, _variables, context) => {
       queryClient.setQueryData(favoriteIdsKey, context?.previous);
     },
-    onSettled: () => queryClient.invalidateQueries({ queryKey: favoriteIdsKey }),
+    // The hearts, and the saved list, which loses or gains the listing.
+    onSettled: () => queryClient.invalidateQueries({ queryKey: favoritesKey }),
   });
 };

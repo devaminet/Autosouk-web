@@ -6,7 +6,7 @@ import { paths } from "../../../../lib/paths";
 import type { PublicListings } from "../../api";
 import { budgetPrice, hasFilters, writeListingSearch } from "../../listingSearch";
 import type { ListingSearch } from "../../listingSearch";
-import { chip, chipActive, chipIdle } from "../search/chipStyles";
+import { chip, chipActive, chipIdle } from "../../../../components/chipStyles";
 import { ListingResults } from "../search/ListingResults";
 import { SortSelect } from "../search/SortSelect";
 

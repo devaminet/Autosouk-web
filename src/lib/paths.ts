@@ -10,6 +10,8 @@ export const paths = {
   resetPassword: "/reset-password",
   forgotPassword: "/forgot-password",
   account: "/account",
+  // The buyer's saved listings. Its filter lives in the query string.
+  saved: "/saved",
   // A listing as buyers see it. Build links with listingPath.
   listing: "/listings/:listingId",
   myListings: "/my-listings",

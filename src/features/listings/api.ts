@@ -309,11 +309,11 @@ export type PublicListingsFilter = {
   sort?: ListingSort;
 };
 
-// What GET /api/listings returns for each approved listing: what its card shows.
-const publicListingSchema = z.object({
+// What a listing card shows. GET /api/listings and the buyer's saved listings
+// both return it.
+export const listingCardSchema = z.object({
   id: z.number(),
   title: z.string(),
-  createdAt: z.string(),
   car: z
     .object({
       price: z.number(),
@@ -330,7 +330,10 @@ const publicListingSchema = z.object({
   inspectionScore: z.number().nullable(),
 });
 
-export type PublicListing = z.infer<typeof publicListingSchema>;
+export type ListingCard = z.infer<typeof listingCardSchema>;
+
+// What GET /api/listings returns for each approved listing.
+const publicListingSchema = listingCardSchema.extend({ createdAt: z.string() });
 
 const publicListingsSchema = z.object({
   listings: z.array(publicListingSchema),
