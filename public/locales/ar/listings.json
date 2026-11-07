@@ -512,5 +512,49 @@
       "from": "من",
       "upTo": "حتى"
     }
+  },
+  "saved": {
+    "overline": "قائمتك المختصرة",
+    "title": "السيارات المحفوظة",
+    "count_zero": "لا سيارات",
+    "count_one": "سيارة واحدة",
+    "count_two": "سيارتان",
+    "count_few": "{{formatted}} سيارات",
+    "count_many": "{{formatted}} سيارة",
+    "count_other": "{{formatted}} سيارة",
+    "inspectedCount_zero": "لا سيارة مفحوصة",
+    "inspectedCount_one": "سيارة واحدة مفحوصة",
+    "inspectedCount_two": "سيارتان مفحوصتان",
+    "inspectedCount_few": "{{formatted}} سيارات مفحوصة",
+    "inspectedCount_many": "{{formatted}} سيارة مفحوصة",
+    "inspectedCount_other": "{{formatted}} سيارة مفحوصة",
+    "hint": "اضغط على القلب للإزالة",
+    "filters": {
+      "label": "عرض السيارات المحفوظة",
+      "all": "الكل",
+      "inspected": "مفحوصة",
+      "notInspected": "غير مفحوصة"
+    },
+    "sort": {
+      "recent": "المحفوظة مؤخرًا",
+      "priceAsc": "السعر: من الأقل إلى الأعلى",
+      "priceDesc": "السعر: من الأعلى إلى الأقل"
+    },
+    "status": {
+      "sold": "مباعة",
+      "unavailable": "لم تعد معروضة"
+    },
+    "remove": "إزالة",
+    "removeLabel": "إزالة {{title}} من السيارات المحفوظة",
+    "findSimilar": "سيارات مشابهة",
+    "findSimilarLabel": "البحث عن سيارات مثل {{title}}",
+    "end": "وصلت إلى نهاية سياراتك المحفوظة",
+    "noMatch": "لا توجد سيارة محفوظة تطابق هذا الفلتر.",
+    "showAll": "عرض كل السيارات المحفوظة",
+    "empty": {
+      "title": "لا توجد سيارات محفوظة بعد",
+      "description": "اضغط على القلب في أي إعلان لحفظه هنا والمقارنة لاحقًا.",
+      "explore": "استكشف السيارات"
+    }
   }
 }

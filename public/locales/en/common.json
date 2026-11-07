@@ -15,7 +15,9 @@
     "settings": "Account settings",
     "logIn": "Log in",
     "signUp": "Create account",
-    "logOut": "Log out"
+    "logOut": "Log out",
+    "saved": "Saved cars",
+    "savedShort": "Saved"
   },
   "noAccess": {
     "title": "You can't open this page",

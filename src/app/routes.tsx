@@ -8,6 +8,7 @@ import { LoginPage } from "../features/auth/pages/LoginPage";
 import { RegisterPage } from "../features/auth/pages/RegisterPage";
 import { ResetPasswordPage } from "../features/auth/pages/ResetPasswordPage";
 import { VerifyEmailPage } from "../features/auth/pages/VerifyEmailPage";
+import { SavedPage } from "../features/favorites/pages/SavedPage";
 import { MyListingsPage } from "../features/listings/pages/MyListingsPage";
 import { CarDetailsPage } from "../features/listings/pages/CarDetailsPage";
 import { DraftListingPage } from "../features/listings/pages/DraftListingPage";
@@ -38,6 +39,10 @@ export const routes: RouteObject[] = [
           {
             element: <RequireRole allowed="seller" />,
             children: [{ path: paths.myListings, element: <MyListingsPage /> }],
+          },
+          {
+            element: <RequireRole allowed="buyer" />,
+            children: [{ path: paths.saved, element: <SavedPage /> }],
           },
           {
             element: <RequireRole />,

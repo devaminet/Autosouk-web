@@ -15,7 +15,9 @@
     "settings": "Paramètres du compte",
     "logIn": "Se connecter",
     "signUp": "Créer un compte",
-    "logOut": "Se déconnecter"
+    "logOut": "Se déconnecter",
+    "saved": "Voitures enregistrées",
+    "savedShort": "Enregistrées"
   },
   "noAccess": {
     "title": "Vous ne pouvez pas ouvrir cette page",

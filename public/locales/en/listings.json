@@ -412,5 +412,41 @@
       "from": "From",
       "upTo": "Up to"
     }
+  },
+  "saved": {
+    "overline": "Your shortlist",
+    "title": "Saved cars",
+    "count_one": "{{formatted}} car",
+    "count_other": "{{formatted}} cars",
+    "inspectedCount_one": "{{formatted}} already inspected",
+    "inspectedCount_other": "{{formatted}} already inspected",
+    "hint": "tap the heart to remove",
+    "filters": {
+      "label": "Show saved cars",
+      "all": "All",
+      "inspected": "Inspected",
+      "notInspected": "Not inspected"
+    },
+    "sort": {
+      "recent": "Recently saved",
+      "priceAsc": "Price: low to high",
+      "priceDesc": "Price: high to low"
+    },
+    "status": {
+      "sold": "Sold",
+      "unavailable": "No longer listed"
+    },
+    "remove": "Remove",
+    "removeLabel": "Remove {{title}} from saved cars",
+    "findSimilar": "Find similar",
+    "findSimilarLabel": "Find cars like {{title}}",
+    "end": "You've reached the end of your saved cars",
+    "noMatch": "None of your saved cars match this filter.",
+    "showAll": "Show all saved cars",
+    "empty": {
+      "title": "No saved cars yet",
+      "description": "Tap the heart on any listing to keep it here and compare later.",
+      "explore": "Explore cars"
+    }
   }
 }
