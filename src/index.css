@@ -85,6 +85,8 @@
   --container-brand: 37.5rem;
   /* The search page's filter sidebar. */
   --container-filters: 20rem;
+  /* Dialogs with a form, such as the inspection request. */
+  --container-dialog: 40rem;
 
   /* Radius */
   --radius-*: initial;
@@ -247,6 +249,11 @@
 }
 
 /* For a row that scrolls sideways, such as filter chips on small screens. */
+/* A modal on wide screens keeps a gap to the window's top and bottom. */
+@utility max-h-dialog {
+  max-height: calc(100dvh - 2 * var(--spacing-32));
+}
+
 @utility no-scrollbar {
   scrollbar-width: none;
 }

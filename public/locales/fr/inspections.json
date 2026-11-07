@@ -1,0 +1,30 @@
+{
+  "request": {
+    "overline": "Demande d'inspection",
+    "title": "Demander une inspection",
+    "close": "Fermer",
+    "chooseGarage": "Choisissez un garage à {{city}}",
+    "noGarage": "Aucun garage à {{city}} n'inspecte encore de voitures.",
+    "noReviews": "Pas encore d'avis",
+    "ratingLabel_one": "Noté {{rating}} sur 5 d'après {{count}} avis",
+    "ratingLabel_many": "Noté {{rating}} sur 5 d'après {{count}} avis",
+    "ratingLabel_other": "Noté {{rating}} sur 5 d'après {{count}} avis",
+    "paidAtGarage": "payé au garage",
+    "priceAtGarage": "Prix fixé par le garage",
+    "includedLabel": "Chaque inspection comprend",
+    "included": {
+      "identity": "Identité : matricule · VIN · carte grise",
+      "mileage": "Cohérence du kilométrage",
+      "papers": "CT et vignette",
+      "checklist": "Contrôle en 6 sections",
+      "roadTest": "Essai sur route",
+      "pdf": "PDF signé"
+    },
+    "oneActive": "Une voiture ne peut avoir qu'une inspection en cours à la fois.",
+    "total": "Total à payer au garage",
+    "send": "Envoyer la demande",
+    "sent": "Demande envoyée",
+    "sentDescription": "{{garage}} va accepter ou refuser votre demande.",
+    "done": "Terminé"
+  }
+}

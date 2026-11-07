@@ -349,7 +349,9 @@
     "slideRole": "شريحة",
     "slide": "{{current}} من {{total}}",
     "previousMedia": "الصورة أو الفيديو السابق",
-    "nextMedia": "الصورة أو الفيديو التالي"
+    "nextMedia": "الصورة أو الفيديو التالي",
+    "requestInspection": "طلب فحص",
+    "loginToInspect": "سجّل الدخول لطلب فحص"
   },
   "explore": {
     "pageTitle": "اعثر على سيارة تثق بها",
