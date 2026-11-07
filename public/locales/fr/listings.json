@@ -288,7 +288,9 @@
     "slideRole": "diapositive",
     "slide": "{{current}} sur {{total}}",
     "previousMedia": "Photo ou vidéo précédente",
-    "nextMedia": "Photo ou vidéo suivante"
+    "nextMedia": "Photo ou vidéo suivante",
+    "requestInspection": "Demander une inspection",
+    "loginToInspect": "Se connecter pour demander une inspection"
   },
   "explore": {
     "pageTitle": "Trouvez une voiture de confiance",

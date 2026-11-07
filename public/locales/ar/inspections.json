@@ -1,0 +1,33 @@
+{
+  "request": {
+    "overline": "طلب فحص",
+    "title": "طلب فحص",
+    "close": "إغلاق",
+    "chooseGarage": "اختر مرآبًا في {{city}}",
+    "noGarage": "لا يوجد بعد مرآب في {{city}} يفحص السيارات.",
+    "noReviews": "لا توجد تقييمات بعد",
+    "ratingLabel_zero": "تقييم {{rating}} من 5 بدون تقييمات",
+    "ratingLabel_one": "تقييم {{rating}} من 5 من تقييم واحد",
+    "ratingLabel_two": "تقييم {{rating}} من 5 من تقييمين",
+    "ratingLabel_few": "تقييم {{rating}} من 5 من {{count}} تقييمات",
+    "ratingLabel_many": "تقييم {{rating}} من 5 من {{count}} تقييمًا",
+    "ratingLabel_other": "تقييم {{rating}} من 5 من {{count}} تقييم",
+    "paidAtGarage": "يُدفع في المرآب",
+    "priceAtGarage": "السعر يحدده المرآب",
+    "includedLabel": "يشمل كل فحص",
+    "included": {
+      "identity": "الهوية: رقم التسجيل · رقم الهيكل · البطاقة الرمادية",
+      "mileage": "تطابق عدد الكيلومترات",
+      "papers": "الفحص التقني والضريبة",
+      "checklist": "قائمة فحص من 6 أقسام",
+      "roadTest": "تجربة على الطريق",
+      "pdf": "تقرير PDF موقّع"
+    },
+    "oneActive": "لا يمكن أن يكون للسيارة سوى فحص نشط واحد في كل مرة.",
+    "total": "المبلغ المستحق في المرآب",
+    "send": "إرسال الطلب",
+    "sent": "تم إرسال الطلب",
+    "sentDescription": "سيقبل {{garage}} طلبك أو يرفضه.",
+    "done": "تم"
+  }
+}

@@ -2,6 +2,7 @@ import { useState } from "react";
 import { useTranslation } from "react-i18next";
 import { Link, useLocation, useNavigate, useParams } from "react-router";
 import { Alert } from "../../../components/Alert";
+import { Button } from "../../../components/Button";
 import { ButtonLink } from "../../../components/ButtonLink";
 import { Icon } from "../../../components/Icon";
 import { PageTitle } from "../../../components/PageTitle";
@@ -15,6 +16,7 @@ import { SellerCard } from "../components/SellerCard";
 import { StatusBadge } from "../components/StatusBadge";
 import { useSession } from "../../auth/hooks";
 import { useListing, useLookups } from "../hooks";
+import { RequestInspectionDialog } from "../../inspections/components/RequestInspectionDialog";
 import { listingIdFrom } from "../useDraftFromRoute";
 
 const backClass =
@@ -32,6 +34,7 @@ export function ListingPage() {
   const navigate = useNavigate();
   const location = useLocation();
   const [viewing, setViewing] = useState<number | null>(null);
+  const [requesting, setRequesting] = useState(false);
   const listing = query.data;
   const car = listing?.car;
 
@@ -62,6 +65,23 @@ export function ListingPage() {
       return <output className="block type-body-m text-muted">{t("common:loading")}</output>;
     }
     const media = car?.carMedias ?? [];
+    // Buyers ask for inspections of approved listings. Visitors log in first;
+    // other roles can't ask.
+    const user = session.user;
+    const inspection =
+      car && listing.status === "approved" && (!user || user.role === "buyer") ? (
+        user ? (
+          <Button block onClick={() => setRequesting(true)} size="l" variant="primary">
+            <Icon name="shield" size={18} />
+            {t("listing.requestInspection")}
+          </Button>
+        ) : (
+          <ButtonLink block size="l" state={{ from: `${location.pathname}${location.search}` }} to={paths.login} variant="primary">
+            <Icon name="shield" size={18} />
+            {t("listing.loginToInspect")}
+          </ButtonLink>
+        )
+      ) : null;
     return (
       <>
         <div className="-mx-20 md:mx-0">
@@ -90,6 +110,7 @@ export function ListingPage() {
                 <span className="type-mono-s text-muted">{t("units.mad")}</span>
               </p>
             )}
+            {inspection && <div className="md:hidden">{inspection}</div>}
             {car && <ListingSpecs car={car} lookups={lookups.data} />}
             {car && <ListingEquipment equipment={car.equipment} />}
             <section className="flex flex-col gap-12">
@@ -101,17 +122,26 @@ export function ListingPage() {
           </div>
           <aside className="flex flex-col gap-16 md:sticky md:top-24">
             {car && (
-              <section className="hidden flex-col gap-4 rounded-xl border border-line bg-surface p-24 md:flex">
+              <section className="hidden flex-col gap-16 rounded-xl border border-line bg-surface p-24 md:flex">
                 <h2 className="sr-only">{t("carDetails.price")}</h2>
                 <p className="type-price-l text-ink">
                   <bdi dir="ltr">{formatNumber(car.price)}</bdi>{" "}
                   <span className="type-mono-s text-muted">{t("units.mad")}</span>
                 </p>
+                {inspection}
               </section>
             )}
             {listing.user && <SellerCard seller={listing.user} />}
           </aside>
         </div>
+        {car && (
+          <RequestInspectionDialog
+            car={car}
+            onClose={() => setRequesting(false)}
+            open={requesting}
+            title={listing.title}
+          />
+        )}
         <MediaViewer
           index={viewing}
           media={media}

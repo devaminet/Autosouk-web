@@ -277,7 +277,9 @@
     "slideRole": "slide",
     "slide": "{{current}} of {{total}}",
     "previousMedia": "Previous photo or video",
-    "nextMedia": "Next photo or video"
+    "nextMedia": "Next photo or video",
+    "requestInspection": "Request an inspection",
+    "loginToInspect": "Log in to request an inspection"
   },
   "explore": {
     "pageTitle": "Find a car you can trust",

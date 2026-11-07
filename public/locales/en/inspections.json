@@ -1,0 +1,29 @@
+{
+  "request": {
+    "overline": "Inspection request",
+    "title": "Request an inspection",
+    "close": "Close",
+    "chooseGarage": "Choose a garage in {{city}}",
+    "noGarage": "No garage in {{city}} inspects cars yet.",
+    "noReviews": "No reviews yet",
+    "ratingLabel_one": "Rated {{rating}} out of 5 from {{count}} review",
+    "ratingLabel_other": "Rated {{rating}} out of 5 from {{count}} reviews",
+    "paidAtGarage": "paid at the garage",
+    "priceAtGarage": "Price set at the garage",
+    "includedLabel": "Every inspection covers",
+    "included": {
+      "identity": "Identity: matricule · VIN · carte grise",
+      "mileage": "Mileage consistency",
+      "papers": "CT & vignette",
+      "checklist": "6-section checklist",
+      "roadTest": "Road test",
+      "pdf": "Signed PDF"
+    },
+    "oneActive": "A car can only have one active inspection at a time.",
+    "total": "Total due at the garage",
+    "send": "Send request",
+    "sent": "Request sent",
+    "sentDescription": "{{garage}} will accept or decline your request.",
+    "done": "Done"
+  }
+}
