@@ -55,6 +55,11 @@ export function MobileTabBar({ role }: MobileTabBarProps) {
         {t("nav.mechanicsShort")}
       </Tab>
       {role === "mechanic" && (
+        <Tab icon="inbox" to={paths.inspections}>
+          {t("nav.queue")}
+        </Tab>
+      )}
+      {role === "mechanic" && (
         <Tab icon="wrench" to={paths.workshop}>
           {t("nav.workshopShort")}
         </Tab>

@@ -25,5 +25,59 @@
     "sent": "Request sent",
     "sentDescription": "{{garage}} will accept or decline your request.",
     "done": "Done"
+  },
+  "queue": {
+    "title": "Inspection queue",
+    "accepting": "Accepting requests",
+    "paused": "Paused",
+    "workshop": "Workshop profile",
+    "noWorkshop": "Set up your workshop so buyers can ask you for inspections.",
+    "setUp": "Set up my workshop",
+    "retry": "Try again",
+    "stats": {
+      "label": "Your activity",
+      "new": "New requests",
+      "newHint": "Waiting for your answer",
+      "week": "Last 7 days",
+      "weekHint": "{{change}} vs the 7 days before",
+      "rating": "Average rating",
+      "noRating": "No reviews yet",
+      "reviews_one": "{{count}} review",
+      "reviews_other": "{{count}} reviews",
+      "month": "Inspections ({{month}})",
+      "earned": "{{amount}} MAD in inspection fees"
+    },
+    "columns": {
+      "label": "Requests by status",
+      "pending": "New requests",
+      "accepted": "Accepted",
+      "in_progress": "In progress",
+      "completed": "Completed"
+    },
+    "empty": {
+      "pending": "No new requests.",
+      "accepted": "No accepted requests.",
+      "in_progress": "No inspection in progress.",
+      "completed": "No completed inspections yet."
+    },
+    "card": {
+      "requested": "{{name}} · {{time}}",
+      "sellerName": "seller {{name}}",
+      "callSeller": "Call the seller, {{name}}, on {{phone}}",
+      "score": "score {{score}}",
+      "accepted": "Accepted {{time}}",
+      "accept": "Accept",
+      "reject": "Reject",
+      "start": "Start inspection",
+      "report": "Open PDF",
+      "reportLabel": "Open the report for {{car}}",
+      "seller": "Seller:"
+    },
+    "rejectDialog": {
+      "title": "Reject this request?",
+      "description": "{{name}} will see that you declined the inspection of the {{car}}. You can't undo this.",
+      "cancel": "Keep it",
+      "confirm": "Reject request"
+    }
   }
 }

@@ -18,6 +18,9 @@ export const paths = {
   mechanic: "/mechanics/:mechanicId",
   // The mechanic's own workshop profile, which also sets it up.
   workshop: "/workshop",
+  // The mechanic's inspection requests, by status. The status shown on small
+  // screens lives in the query string.
+  inspections: "/inspections",
   // A listing as buyers see it. Build links with listingPath.
   listing: "/listings/:listingId",
   myListings: "/my-listings",

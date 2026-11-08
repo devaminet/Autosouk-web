@@ -9,6 +9,7 @@ import { RegisterPage } from "../features/auth/pages/RegisterPage";
 import { ResetPasswordPage } from "../features/auth/pages/ResetPasswordPage";
 import { VerifyEmailPage } from "../features/auth/pages/VerifyEmailPage";
 import { SavedPage } from "../features/favorites/pages/SavedPage";
+import { InspectionQueuePage } from "../features/inspections/pages/InspectionQueuePage";
 import { MechanicPage } from "../features/mechanics/pages/MechanicPage";
 import { MechanicsPage } from "../features/mechanics/pages/MechanicsPage";
 import { WorkshopProfilePage } from "../features/mechanics/pages/WorkshopProfilePage";
@@ -51,7 +52,10 @@ export const routes: RouteObject[] = [
           },
           {
             element: <RequireRole allowed="mechanic" />,
-            children: [{ path: paths.workshop, element: <WorkshopProfilePage /> }],
+            children: [
+              { path: paths.workshop, element: <WorkshopProfilePage /> },
+              { path: paths.inspections, element: <InspectionQueuePage /> },
+            ],
           },
           {
             element: <RequireRole />,

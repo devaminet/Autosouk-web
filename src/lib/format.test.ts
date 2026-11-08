@@ -1,5 +1,5 @@
 import { describe, expect, it } from "vitest";
-import { formatDay, formatNumber } from "./format";
+import { formatDay, formatDayTime, formatNumber, formatTimeAgo } from "./format";
 
 const now = new Date(2026, 10, 5, 15, 30);
 
@@ -25,5 +25,28 @@ describe("formatDay", () => {
 
   it("uses Latin digits in Arabic", () => {
     expect(formatDay("2026-10-03", "ar", now)).toMatch(/3/u);
+  });
+});
+
+describe("formatTimeAgo", () => {
+  const at = (hours: number, minutes: number, day = 5) => new Date(2026, 10, day, hours, minutes).toISOString();
+
+  it("counts minutes, then hours, within a day", () => {
+    expect(formatTimeAgo(at(14, 55), "en", now)).toBe("35 min. ago");
+    expect(formatTimeAgo(at(13, 10), "en", now)).toBe("2 hr. ago");
+  });
+
+  it("names the day after a day", () => {
+    expect(formatTimeAgo(at(9, 0, 4), "en", now)).toBe("Yesterday");
+  });
+
+  it("uses Latin digits in Arabic", () => {
+    expect(formatTimeAgo(at(14, 55), "ar", now)).toMatch(/35/u);
+  });
+});
+
+describe("formatDayTime", () => {
+  it("adds the time to the day", () => {
+    expect(formatDayTime(new Date(2026, 10, 5, 18, 40).toISOString(), "en", now)).toBe("Today 18:40");
   });
 });

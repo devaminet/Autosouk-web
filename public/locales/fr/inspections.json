@@ -26,5 +26,59 @@
     "sent": "Demande envoyée",
     "sentDescription": "{{garage}} va accepter ou refuser votre demande.",
     "done": "Terminé"
+  },
+  "queue": {
+    "title": "Demandes d'inspection",
+    "accepting": "Accepte les demandes",
+    "paused": "En pause",
+    "workshop": "Profil de l'atelier",
+    "noWorkshop": "Configurez votre atelier pour que les acheteurs puissent vous demander des inspections.",
+    "setUp": "Configurer mon atelier",
+    "retry": "Réessayer",
+    "stats": {
+      "label": "Votre activité",
+      "new": "Nouvelles demandes",
+      "newHint": "En attente de votre réponse",
+      "week": "7 derniers jours",
+      "weekHint": "{{change}} par rapport aux 7 jours précédents",
+      "rating": "Note moyenne",
+      "noRating": "Aucun avis pour l'instant",
+      "reviews_one": "{{count}} avis",
+      "reviews_other": "{{count}} avis",
+      "month": "Inspections ({{month}})",
+      "earned": "{{amount}} MAD de frais d'inspection"
+    },
+    "columns": {
+      "label": "Demandes par statut",
+      "pending": "Nouvelles demandes",
+      "accepted": "Acceptées",
+      "in_progress": "En cours",
+      "completed": "Terminées"
+    },
+    "empty": {
+      "pending": "Aucune nouvelle demande.",
+      "accepted": "Aucune demande acceptée.",
+      "in_progress": "Aucune inspection en cours.",
+      "completed": "Aucune inspection terminée pour l'instant."
+    },
+    "card": {
+      "requested": "{{name}} · {{time}}",
+      "sellerName": "vendeur {{name}}",
+      "callSeller": "Appeler le vendeur, {{name}}, au {{phone}}",
+      "score": "score {{score}}",
+      "accepted": "Acceptée {{time}}",
+      "accept": "Accepter",
+      "reject": "Refuser",
+      "start": "Commencer l'inspection",
+      "report": "Ouvrir le PDF",
+      "reportLabel": "Ouvrir le rapport de {{car}}",
+      "seller": "Vendeur :"
+    },
+    "rejectDialog": {
+      "title": "Refuser cette demande ?",
+      "description": "{{name}} verra que vous avez refusé l'inspection de {{car}}. Cette action est définitive.",
+      "cancel": "La garder",
+      "confirm": "Refuser la demande"
+    }
   }
 }

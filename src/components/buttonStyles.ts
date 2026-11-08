@@ -3,7 +3,8 @@ export type ButtonVariant =
   | "dark"
   | "secondary"
   | "ghost"
-  | "danger";
+  | "danger"
+  | "success";
 
 export type ButtonSize = "s" | "m" | "l";
 
@@ -18,6 +19,7 @@ const variants: Record<ButtonVariant, string> = {
     "bg-surface text-ink ring-1 ring-line-strong ring-inset hover:bg-surface-2 disabled:hover:bg-surface",
   ghost: "text-ink hover:bg-line disabled:hover:bg-transparent",
   danger: "bg-danger-soft text-danger hover:bg-line",
+  success: "bg-success text-on-brand hover:bg-success/90 disabled:hover:bg-success",
 };
 
 const sizes: Record<ButtonSize, string> = {

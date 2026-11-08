@@ -51,6 +51,12 @@ const apiCatalogs: Record<string, unknown> = {
     transmission: { manual: "Manual", automatic: "Automatic" },
     equipment_category: { safety: "Safety", multimedia: "Multimedia" },
     equipment: { abs: "ABS", esp: "ESP", apple_carplay: "Apple CarPlay" },
+    inspection_verdict: {
+      excellent: "Excellent condition",
+      good: "Good condition",
+      fair: "Fair condition",
+      poor: "Poor condition",
+    },
   },
   errors: { unexpected: "An unexpected error occurred" },
   messages: {},
