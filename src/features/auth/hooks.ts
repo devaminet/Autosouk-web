@@ -57,9 +57,13 @@ export const useCityOptions = () => {
     staleTime: 60 * 60 * 1000,
   });
   const options = (cities.data ?? [])
-    .map(({ id, slug, name }) => ({
+    .map(({ id, slug, name, latitude, longitude, radiusKm }) => ({
       id,
       label: t(`city.${slug}`, { defaultValue: name }),
+      area:
+        latitude === null || longitude === null || radiusKm === null
+          ? null
+          : { lat: latitude, lng: longitude, radiusKm },
     }))
     .sort((a, b) => a.label.localeCompare(b.label, i18n.language));
 

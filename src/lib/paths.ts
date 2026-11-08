@@ -12,6 +12,8 @@ export const paths = {
   account: "/account",
   // The buyer's saved listings. Its filter lives in the query string.
   saved: "/saved",
+  // The mechanic's own workshop profile, which also sets it up.
+  workshop: "/workshop",
   // A listing as buyers see it. Build links with listingPath.
   listing: "/listings/:listingId",
   myListings: "/my-listings",

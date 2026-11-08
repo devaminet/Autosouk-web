@@ -17,7 +17,7 @@ export function AppLayout({ focusedOnMobile = false }: AppLayoutProps) {
       <main className="flex flex-1 flex-col outline-none" tabIndex={-1}>
         <Outlet />
       </main>
-      {(user?.role === "seller" || user?.role === "buyer") && !focusedOnMobile && <MobileTabBar role={user.role} />}
+      {user && user.role !== "admin" && !focusedOnMobile && <MobileTabBar role={user.role} />}
     </div>
   );
 }

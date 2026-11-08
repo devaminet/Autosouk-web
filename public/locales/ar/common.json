@@ -17,7 +17,9 @@
     "signUp": "إنشاء حساب",
     "logOut": "تسجيل الخروج",
     "saved": "السيارات المحفوظة",
-    "savedShort": "المحفوظة"
+    "savedShort": "المحفوظة",
+    "workshop": "ورشتي",
+    "workshopShort": "الورشة"
   },
   "noAccess": {
     "title": "لا يمكنك فتح هذه الصفحة",

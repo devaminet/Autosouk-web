@@ -43,6 +43,10 @@ const citySchema = z.object({
   id: z.number(),
   slug: z.string(),
   name: z.string(),
+  // The centre and how far the city reaches. Null without coordinates.
+  latitude: z.number().nullable().default(null),
+  longitude: z.number().nullable().default(null),
+  radiusKm: z.number().nullable().default(null),
 });
 
 export type City = z.infer<typeof citySchema>;

@@ -26,10 +26,10 @@ function Tab({ to, icon, children }: TabProps) {
 }
 
 type MobileTabBarProps = {
-  role: "buyer" | "seller";
+  role: "buyer" | "seller" | "mechanic";
 };
 
-// The navigation of buyers and sellers on small screens.
+// The navigation of buyers, sellers and mechanics on small screens.
 export function MobileTabBar({ role }: MobileTabBarProps) {
   const { t } = useTranslation();
 
@@ -41,13 +41,19 @@ export function MobileTabBar({ role }: MobileTabBarProps) {
       <Tab icon="home" to={paths.home}>
         {t("nav.exploreShort")}
       </Tab>
-      {role === "seller" ? (
+      {role === "seller" && (
         <Tab icon="car" to={paths.myListings}>
           {t("nav.myListings")}
         </Tab>
-      ) : (
+      )}
+      {role === "buyer" && (
         <Tab icon="heart" to={paths.saved}>
           {t("nav.savedShort")}
+        </Tab>
+      )}
+      {role === "mechanic" && (
+        <Tab icon="wrench" to={paths.workshop}>
+          {t("nav.workshopShort")}
         </Tab>
       )}
       <Tab icon="user" to={paths.account}>
