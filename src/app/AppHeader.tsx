@@ -68,7 +68,12 @@ export function AppHeader({ hideOnMobile = false }: AppHeaderProps) {
             <HeaderLink to={paths.myListings}>{t("nav.sell")}</HeaderLink>
           )}
           {user?.role === "buyer" && <HeaderLink to={paths.saved}>{t("nav.saved")}</HeaderLink>}
-          {user?.role === "mechanic" && <HeaderLink to={paths.workshop}>{t("nav.workshop")}</HeaderLink>}
+          {user?.role === "mechanic" && (
+            <>
+              <HeaderLink to={paths.inspections}>{t("nav.inspections")}</HeaderLink>
+              <HeaderLink to={paths.workshop}>{t("nav.workshop")}</HeaderLink>
+            </>
+          )}
         </nav>
       </div>
       <div className="flex items-center gap-8">

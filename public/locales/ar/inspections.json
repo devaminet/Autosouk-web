@@ -29,5 +29,63 @@
     "sent": "تم إرسال الطلب",
     "sentDescription": "سيقبل {{garage}} طلبك أو يرفضه.",
     "done": "تم"
+  },
+  "queue": {
+    "title": "طلبات الفحص",
+    "accepting": "يستقبل الطلبات",
+    "paused": "متوقف مؤقتًا",
+    "workshop": "ملف الورشة",
+    "noWorkshop": "أعدّ ورشتك ليتمكن المشترون من طلب الفحص منك.",
+    "setUp": "إعداد ورشتي",
+    "retry": "حاول مرة أخرى",
+    "stats": {
+      "label": "نشاطك",
+      "new": "طلبات جديدة",
+      "newHint": "بانتظار ردك",
+      "week": "آخر 7 أيام",
+      "weekHint": "{{change}} مقارنة بالأيام السبعة السابقة",
+      "rating": "متوسط التقييم",
+      "noRating": "لا توجد تقييمات بعد",
+      "reviews_zero": "{{count}} تقييم",
+      "reviews_one": "تقييم واحد",
+      "reviews_two": "تقييمان",
+      "reviews_few": "{{count}} تقييمات",
+      "reviews_many": "{{count}} تقييمًا",
+      "reviews_other": "{{count}} تقييم",
+      "month": "الفحوصات ({{month}})",
+      "earned": "{{amount}} درهم من رسوم الفحص"
+    },
+    "columns": {
+      "label": "الطلبات حسب الحالة",
+      "pending": "طلبات جديدة",
+      "accepted": "مقبولة",
+      "in_progress": "قيد التنفيذ",
+      "completed": "مكتملة"
+    },
+    "empty": {
+      "pending": "لا توجد طلبات جديدة.",
+      "accepted": "لا توجد طلبات مقبولة.",
+      "in_progress": "لا يوجد فحص قيد التنفيذ.",
+      "completed": "لا توجد فحوصات مكتملة بعد."
+    },
+    "card": {
+      "requested": "{{name}} · {{time}}",
+      "sellerName": "البائع {{name}}",
+      "callSeller": "اتصل بالبائع {{name}} على {{phone}}",
+      "score": "النتيجة {{score}}",
+      "accepted": "قُبل {{time}}",
+      "accept": "قبول",
+      "reject": "رفض",
+      "start": "بدء الفحص",
+      "report": "فتح ملف PDF",
+      "reportLabel": "فتح تقرير {{car}}",
+      "seller": "البائع:"
+    },
+    "rejectDialog": {
+      "title": "رفض هذا الطلب؟",
+      "description": "سيرى {{name}} أنك رفضت فحص {{car}}. لا يمكن التراجع عن ذلك.",
+      "cancel": "الإبقاء عليه",
+      "confirm": "رفض الطلب"
+    }
   }
 }
