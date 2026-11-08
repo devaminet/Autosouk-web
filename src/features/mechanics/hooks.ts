@@ -1,7 +1,19 @@
-import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
+import { useInfiniteQuery, useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import { useTranslation } from "react-i18next";
-import { addGaragePhotos, getOwnMechanic, getRankings, removeGaragePhoto, saveWorkshop, setAcceptingRequests } from "./api";
-import type { LogoChange, Mechanic, WorkshopDetails } from "./api";
+import {
+  addGaragePhotos,
+  deleteReview,
+  getMechanic,
+  getOwnMechanic,
+  getOwnReview,
+  getRankings,
+  getReviews,
+  saveReview,
+  removeGaragePhoto,
+  saveWorkshop,
+  setAcceptingRequests,
+} from "./api";
+import type { LogoChange, Mechanic, ReviewDraft, WorkshopDetails } from "./api";
 
 const ownKey = ["mechanics", "me"];
 
@@ -68,3 +80,53 @@ export const useRankings = (cityId: number | null, page: number) =>
     placeholderData: (previous, previousQuery) =>
       previousQuery?.queryKey[2] === cityId ? previous : undefined,
   });
+
+const mechanicKey = (mechanicId: number) => ["mechanics", mechanicId];
+
+// A workshop's public profile, with its rating.
+export const useMechanic = (mechanicId: number | null) =>
+  useQuery({
+    queryKey: mechanicKey(mechanicId ?? 0),
+    queryFn: () => getMechanic(mechanicId ?? 0),
+    enabled: mechanicId !== null,
+  });
+
+// A workshop's reviews, newest first, one page more at a time.
+export const useReviews = (mechanicId: number) =>
+  useInfiniteQuery({
+    queryKey: [...mechanicKey(mechanicId), "reviews"],
+    queryFn: ({ pageParam }) => getReviews(mechanicId, pageParam),
+    initialPageParam: 1,
+    getNextPageParam: ({ meta }) => (meta.page < meta.totalPages ? meta.page + 1 : undefined),
+  });
+
+// The signed-in buyer's review of the workshop. Only buyers write reviews.
+export const useOwnReview = (mechanicId: number, enabled: boolean) =>
+  useQuery({
+    queryKey: [...mechanicKey(mechanicId), "reviews", "me"],
+    queryFn: () => getOwnReview(mechanicId),
+    enabled,
+  });
+
+// A review changes the workshop's rating, its reviews and the rankings.
+const useAfterReview = (mechanicId: number) => {
+  const queryClient = useQueryClient();
+  return () =>
+    Promise.all([
+      queryClient.invalidateQueries({ queryKey: mechanicKey(mechanicId) }),
+      queryClient.invalidateQueries({ queryKey: ["mechanics", "rankings"] }),
+    ]);
+};
+
+export const useSaveReview = (mechanicId: number, isNew: boolean) => {
+  const refresh = useAfterReview(mechanicId);
+  return useMutation({
+    mutationFn: (draft: ReviewDraft) => saveReview({ mechanicId, draft, isNew }),
+    onSuccess: refresh,
+  });
+};
+
+export const useDeleteReview = (mechanicId: number) => {
+  const refresh = useAfterReview(mechanicId);
+  return useMutation({ mutationFn: () => deleteReview(mechanicId), onSuccess: refresh });
+};

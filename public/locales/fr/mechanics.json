@@ -8,7 +8,8 @@
     "save": "Enregistrer",
     "create": "Créer l'atelier",
     "saved": "Modifications enregistrées.",
-    "retry": "Réessayer"
+    "retry": "Réessayer",
+    "viewPublic": "Voir la page publique"
   },
   "status": {
     "label": "Accepter les demandes d'inspection",
@@ -99,6 +100,67 @@
     "empty": {
       "title": "Aucun garage à {{city}} pour l'instant",
       "description": "Les garages apparaissent ici dès qu'ils acceptent des demandes d'inspection. Essayez une autre ville."
-    }
+    },
+    "view": "Voir"
+  },
+  "profile": {
+    "notFound": "Cet atelier n'existe pas ou n'est pas visible pour le moment.",
+    "allGarages": "Voir tous les garages",
+    "accepting": "Accepte les demandes",
+    "notAccepting": "N'accepte pas de demandes",
+    "sections": "Sections de l'atelier",
+    "reviewsTab": "Avis",
+    "photosTab": "Photos du garage",
+    "noPhotos": "Cet atelier n'a pas encore ajouté de photos.",
+    "photo": "Photo du garage {{number}}",
+    "about": "À propos de l'atelier",
+    "map": "Emplacement de {{name}}",
+    "inspectionCard": "Inspection",
+    "perInspection": "par inspection",
+    "carToInspect": "Voiture à inspecter",
+    "requestInspection": "Demander une inspection",
+    "loginToRequest": "Connectez-vous pour demander une inspection",
+    "requestSent": "Demande envoyée",
+    "requestSentDescription": "L'atelier acceptera ou refusera l'inspection de {{car}}.",
+    "noSavedCar": "Enregistrez une voiture à vendre à {{city}} pour demander à cet atelier de l'inspecter.",
+    "findCar": "Trouver une voiture",
+    "editWorkshop": "Modifier mon atelier",
+    "call": "Appeler",
+    "share": "Partager cet atelier",
+    "linkCopied": "Lien copié.",
+    "retry": "Réessayer",
+    "writeReview": "Écrire un avis",
+    "loginToReview": "Connectez-vous pour écrire un avis",
+    "noReviews": "Pas encore d'avis. Les acheteurs qui font appel à cet atelier peuvent partager leur expérience.",
+    "yourReview": "Votre avis",
+    "you": "Vous · {{name}}",
+    "editReview": "Modifier",
+    "deleteReview": "Supprimer",
+    "moreReviews": "Voir plus d'avis",
+    "reviewRating": "Noté {{rating}} sur 5",
+    "stars_one": "{{count}} étoile",
+    "stars_many": "{{count}} étoiles",
+    "stars_other": "{{count}} étoiles"
+  },
+  "review": {
+    "overline": "Avis",
+    "close": "Fermer",
+    "question": "Comment s'est passée votre inspection ?",
+    "ratings": {
+      "1": "Mauvaise",
+      "2": "Passable",
+      "3": "Bonne",
+      "4": "Très bonne",
+      "5": "Excellente"
+    },
+    "ratingRequired": "Choisissez une note de 1 à 5 étoiles.",
+    "message": "Votre avis",
+    "helper": "Restez courtois : les avis au langage offensant sont bloqués automatiquement.",
+    "cancel": "Annuler",
+    "publish": "Publier l'avis",
+    "saveChanges": "Enregistrer",
+    "deleteTitle": "Supprimer votre avis ?",
+    "deleteDescription": "Votre note et votre texte quittent la page de cet atelier. Vous pourrez écrire un nouvel avis plus tard.",
+    "delete": "Supprimer"
   }
 }

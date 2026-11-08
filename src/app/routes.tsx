@@ -9,6 +9,7 @@ import { RegisterPage } from "../features/auth/pages/RegisterPage";
 import { ResetPasswordPage } from "../features/auth/pages/ResetPasswordPage";
 import { VerifyEmailPage } from "../features/auth/pages/VerifyEmailPage";
 import { SavedPage } from "../features/favorites/pages/SavedPage";
+import { MechanicPage } from "../features/mechanics/pages/MechanicPage";
 import { MechanicsPage } from "../features/mechanics/pages/MechanicsPage";
 import { WorkshopProfilePage } from "../features/mechanics/pages/WorkshopProfilePage";
 import { MyListingsPage } from "../features/listings/pages/MyListingsPage";
@@ -39,6 +40,7 @@ export const routes: RouteObject[] = [
           { path: paths.search, element: <SearchPage /> },
           { path: paths.listing, element: <ListingPage /> },
           { path: paths.mechanics, element: <MechanicsPage /> },
+          { path: paths.mechanic, element: <MechanicPage /> },
           {
             element: <RequireRole allowed="seller" />,
             children: [{ path: paths.myListings, element: <MyListingsPage /> }],

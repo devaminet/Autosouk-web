@@ -14,6 +14,8 @@ export const paths = {
   saved: "/saved",
   // The garages of a city, best rated first. The city and page live in the query string.
   mechanics: "/mechanics",
+  // A workshop's public profile and reviews. Build links with mechanicPath.
+  mechanic: "/mechanics/:mechanicId",
   // The mechanic's own workshop profile, which also sets it up.
   workshop: "/workshop",
   // A listing as buyers see it. Build links with listingPath.
@@ -40,3 +42,5 @@ export const listingPath = (listingId: number): string => `/listings/${listingId
 
 // The sign-up page with the mechanic role already chosen.
 export const partnerSignupPath = `${paths.register}?role=mechanic`;
+
+export const mechanicPath = (mechanicId: number): string => `/mechanics/${mechanicId}`;

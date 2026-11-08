@@ -1,5 +1,7 @@
 import { useTranslation } from "react-i18next";
+import { Link } from "react-router";
 import { formatNumber } from "../../../lib/format";
+import { mechanicPath } from "../../../lib/paths";
 import type { RankedGarage } from "../api";
 import { GarageAvatar } from "./GarageAvatar";
 import { GarageRating } from "./GarageRating";
@@ -32,10 +34,12 @@ export function TopGarages({ garages }: TopGaragesProps) {
           return null;
         }
         return (
-          <li className={`flex w-1/3 min-w-0 flex-col items-center gap-12 ${place.order}`} key={garage.mechanicId}>
+          <li className={`relative flex w-1/3 min-w-0 flex-col items-center gap-12 ${place.order}`} key={garage.mechanicId}>
             <GarageAvatar isTop={index === 0} logo={garage.profileImageLink} name={garage.name} size="l" />
             <h3 className="max-w-full truncate text-center type-h5 text-ink" dir="auto">
-              {garage.name}
+              <Link className="rounded-xs hover:underline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-brand after:absolute after:inset-0" to={mechanicPath(garage.mechanicId)}>
+                {garage.name}
+              </Link>
             </h3>
             <GarageRating count={garage.reviewCount} rating={garage.averageRating} />
             <div className={`flex w-full flex-col items-center gap-4 rounded-t-xl ${place.block}`}>

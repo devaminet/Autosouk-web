@@ -16,7 +16,7 @@ export type MapGarage = {
   isTop: boolean;
 };
 
-type RankingsMapProps = {
+type GaragesMapProps = {
   garages: MapGarage[];
   // Where to look when there is no garage to show.
   area: CityArea | null;
@@ -25,6 +25,8 @@ type RankingsMapProps = {
   zoomOutLabel: string;
   // The map itself never flips, but its controls sit at the end of the line.
   dir: "ltr" | "rtl";
+  // Tall beside the rankings, shorter in a profile's side column.
+  size?: "m" | "l";
 };
 
 // All of Morocco, until the city is known.
@@ -61,8 +63,8 @@ const priceIcon = (garage: MapGarage, dir: "ltr" | "rtl") => {
   return L.divIcon({ className: "", html: pill, iconSize: undefined, iconAnchor: [16, 16] });
 };
 
-// The garages of the page on an OpenStreetMap map, each with its price.
-export function RankingsMap({ garages, area, label, zoomInLabel, zoomOutLabel, dir }: RankingsMapProps) {
+// Garages on an OpenStreetMap map, each with its price.
+export function GaragesMap({ garages, area, label, zoomInLabel, zoomOutLabel, dir, size = "l" }: GaragesMapProps) {
   const container = useRef<HTMLElement>(null);
   const map = useRef<L.Map | null>(null);
 
@@ -131,7 +133,7 @@ export function RankingsMap({ garages, area, label, zoomInLabel, zoomOutLabel, d
   return (
     <section
       aria-label={label}
-      className="isolate h-map-l w-full overflow-hidden rounded-2xl bg-paper"
+      className={`isolate w-full overflow-hidden rounded-2xl bg-paper ${size === "l" ? "h-map-l" : "h-map"}`}
       dir="ltr"
       ref={container}
     />

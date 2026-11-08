@@ -175,3 +175,93 @@ export const getRankings = ({ cityId, page }: { cityId: number; page: number }):
     schema: rankingsSchema,
     anonymous: true,
   });
+
+const ratingSummarySchema = z.object({
+  // From 1 to 5. Null without reviews.
+  average: z.number().nullable(),
+  count: z.number(),
+  // How many reviews give each number of stars.
+  distribution: z.object({ 1: z.number(), 2: z.number(), 3: z.number(), 4: z.number(), 5: z.number() }),
+});
+
+export type RatingSummary = z.infer<typeof ratingSummarySchema>;
+
+// A workshop as buyers see it. Its own mechanic also sees it while hidden.
+const publicMechanicSchema = mechanicSchema.extend({ userId: z.number(), rating: ratingSummarySchema });
+
+export type PublicMechanic = z.infer<typeof publicMechanicSchema>;
+
+export const getMechanic = async (mechanicId: number): Promise<PublicMechanic> =>
+  (
+    await request(`/api/mechanics/${mechanicId}`, {
+      schema: z.object({ mechanic: publicMechanicSchema }),
+    })
+  ).mechanic;
+
+const reviewSchema = z.object({
+  id: z.number(),
+  rating: z.number(),
+  message: z.string().nullable(),
+  createdAt: z.string(),
+  // Left out of the buyer's own review.
+  buyer: z.object({ id: z.number(), name: z.string() }).optional(),
+});
+
+export type Review = z.infer<typeof reviewSchema>;
+
+const reviewsSchema = z.object({
+  reviews: z.array(reviewSchema),
+  rating: ratingSummarySchema,
+  meta: z.object({ total: z.number(), page: z.number(), limit: z.number(), totalPages: z.number() }),
+});
+
+export type ReviewsPage = z.infer<typeof reviewsSchema>;
+
+// Reviews per page, newest first.
+export const reviewsPageSize = 10;
+
+export const getReviews = (mechanicId: number, page: number): Promise<ReviewsPage> =>
+  request(`/api/mechanics/${mechanicId}/reviews?page=${page}&limit=${reviewsPageSize}`, {
+    schema: reviewsSchema,
+    anonymous: true,
+  });
+
+const ownReviewSchema = z.object({ review: reviewSchema });
+
+// The signed-in buyer's review of the workshop, or null before they write one.
+export const getOwnReview = async (mechanicId: number): Promise<Review | null> => {
+  try {
+    return (await request(`/api/mechanics/${mechanicId}/reviews/me`, { schema: ownReviewSchema })).review;
+  } catch (error) {
+    if (error instanceof ApiError && error.status === 404) {
+      return null;
+    }
+    throw error;
+  }
+};
+
+export type ReviewDraft = {
+  rating: number;
+  message: string;
+};
+
+// Writes the buyer's review, or changes the one they wrote.
+export const saveReview = async ({
+  mechanicId,
+  draft,
+  isNew,
+}: {
+  mechanicId: number;
+  draft: ReviewDraft;
+  isNew: boolean;
+}): Promise<Review> =>
+  (
+    await request(isNew ? `/api/mechanics/${mechanicId}/reviews` : `/api/mechanics/${mechanicId}/reviews/me`, {
+      method: isNew ? "POST" : "PATCH",
+      body: { rating: draft.rating, message: draft.message.trim() },
+      schema: ownReviewSchema,
+    })
+  ).review;
+
+export const deleteReview = (mechanicId: number) =>
+  request(`/api/mechanics/${mechanicId}/reviews/me`, { method: "DELETE", schema: z.unknown() });

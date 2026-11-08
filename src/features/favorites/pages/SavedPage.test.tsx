@@ -13,6 +13,7 @@ const savedListing = (id: number, title: string, status = "approved") => ({
   savedAt: "2026-01-02T10:00:00.000Z",
   inspectionScore: id === 7 ? 88 : null,
   car: {
+    id: id + 100,
     makeId: 482,
     modelId: 10,
     price: 245000,
