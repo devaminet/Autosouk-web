@@ -7,9 +7,12 @@ import { Button } from "../../../components/Button";
 import { Icon } from "../../../components/Icon";
 import { useModalDialog } from "../../../hooks/useModalDialog";
 import { formatNumber } from "../../../lib/format";
+import { getLocale } from "../../../lib/i18n";
+import type { Locale } from "../../../lib/locale";
 import type { ListingCar } from "../../listings/api";
 import { useCityGarages, useRequestInspection } from "../hooks";
 import { GarageOption } from "./GarageOption";
+import { ReportLanguageField } from "./ReportLanguageField";
 
 type RequestInspectionDialogProps = {
   open: boolean;
@@ -33,6 +36,8 @@ export function RequestInspectionDialog({ open, onClose, title, car }: RequestIn
   const garages = useCityGarages(car.cityId, open);
   const send = useRequestInspection();
   const [chosenId, setChosenId] = useState<number | null>(null);
+  // The interface's language until the buyer picks another.
+  const [reportLanguage, setReportLanguage] = useState<Locale | null>(null);
   const city = t(`enums:city.${car.city.slug}`, { defaultValue: car.city.name });
   // The best rated garage is chosen until the buyer picks another.
   const chosen = garages.data?.find(({ mechanicId }) => mechanicId === chosenId) ?? garages.data?.[0];
@@ -41,7 +46,7 @@ export function RequestInspectionDialog({ open, onClose, title, car }: RequestIn
   const submit = (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     if (chosen) {
-      send.mutate({ carId: car.id, mechanicId: chosen.mechanicId });
+      send.mutate({ carId: car.id, mechanicId: chosen.mechanicId, reportLanguage: reportLanguage ?? getLocale() });
     }
   };
 
@@ -49,6 +54,7 @@ export function RequestInspectionDialog({ open, onClose, title, car }: RequestIn
     onClose();
     send.reset();
     setChosenId(null);
+    setReportLanguage(null);
   };
 
   const garageList = () => {
@@ -143,6 +149,7 @@ export function RequestInspectionDialog({ open, onClose, title, car }: RequestIn
                     <span className="type-mono-s text-muted">{t("listings:units.mad")}</span>
                   </p>
                 </div>
+                <ReportLanguageField onChange={setReportLanguage} value={reportLanguage ?? getLocale()} />
                 <fieldset className="flex flex-col gap-12">
                   <legend className="pb-12 type-label-m text-ink">{t("request.chooseGarage", { city })}</legend>
                   {garageList()}

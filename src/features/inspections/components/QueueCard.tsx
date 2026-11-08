@@ -3,10 +3,11 @@ import { useTranslation } from "react-i18next";
 import { Link } from "react-router";
 import { Alert } from "../../../components/Alert";
 import { Button } from "../../../components/Button";
+import { ButtonLink } from "../../../components/ButtonLink";
 import { buttonClasses } from "../../../components/buttonStyles";
 import { Icon } from "../../../components/Icon";
 import { formatDay, formatDayTime, formatNumber, formatTimeAgo } from "../../../lib/format";
-import { listingPath } from "../../../lib/paths";
+import { inspectionReportPath, listingPath } from "../../../lib/paths";
 import { shortName } from "../../mechanics/names";
 import type { QueuedInspection } from "../api";
 import { useMoveInspection } from "../hooks";
@@ -136,6 +137,12 @@ export function QueueCard({ inspection }: QueueCardProps) {
           <Icon name="play" size={16} />
           {t("queue.card.start")}
         </Button>
+      )}
+      {status === "in_progress" && (
+        <ButtonLink block size="s" to={inspectionReportPath(inspection.id)} variant="primary">
+          <Icon name="file" size={16} />
+          {t("queue.card.completeReport")}
+        </ButtonLink>
       )}
       {status === "completed" && inspection.reportPdfLink && (
         <a

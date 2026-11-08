@@ -20,6 +20,8 @@
       "roadTest": "Essai sur route",
       "pdf": "PDF signé"
     },
+    "reportLanguage": "Langue du rapport",
+    "reportLanguageHint": "Le rapport PDF et son e-mail arrivent dans cette langue.",
     "oneActive": "Une voiture ne peut avoir qu'une inspection en cours à la fois.",
     "total": "Total à payer au garage",
     "send": "Envoyer la demande",
@@ -72,13 +74,171 @@
       "start": "Commencer l'inspection",
       "report": "Ouvrir le PDF",
       "reportLabel": "Ouvrir le rapport de {{car}}",
-      "seller": "Vendeur :"
+      "seller": "Vendeur :",
+      "completeReport": "Remplir le rapport"
     },
     "rejectDialog": {
       "title": "Refuser cette demande ?",
       "description": "{{name}} verra que vous avez refusé l'inspection de {{car}}. Cette action est définitive.",
       "cancel": "La garder",
       "confirm": "Refuser la demande"
+    }
+  },
+  "report": {
+    "pageTitle": "Rapport d'inspection",
+    "overline": "Inspection n°{{id}} · {{status}}",
+    "language": "Rapport en <name>{{language}}</name>",
+    "backToQueue": "Retour aux demandes",
+    "notInProgress": "Cette inspection n'est pas en cours, elle ne prend donc pas de rapport.",
+    "saveDraft": "Enregistrer le brouillon",
+    "draftSaved": "Brouillon enregistré {{time}}",
+    "submit": "Envoyer le rapport",
+    "submitAndGenerate": "Envoyer et générer le PDF",
+    "identity": {
+      "title": "Identité du véhicule",
+      "hint": "Vérifiée sur place",
+      "matricule": "Matricule",
+      "vin": "VIN",
+      "vinHelper": "17 caractères · sans I, O ni Q",
+      "carteGrise": "N° de carte grise",
+      "mileage": "Kilométrage (compteur)",
+      "km": "km",
+      "firstRegistration": "Première mise en circulation",
+      "inspectedAt": "Inspectée le",
+      "consistency": "Cohérence du kilométrage",
+      "consistencyNote": "Note sur le kilométrage",
+      "consistencyNotePlaceholder": "Comment vous l'avez vérifié, par exemple le carnet d'entretien",
+      "ct": "Contrôle technique valide",
+      "ctExpiry": "Date d'expiration du CT",
+      "vignette": "Vignette payée",
+      "vignetteHint": "Reçu vérifié"
+    },
+    "checklist": {
+      "title": "Points de contrôle",
+      "sections": "Sections des points de contrôle",
+      "progress": "{{done}} / {{total}} points",
+      "note": "Note sur {{item}}",
+      "notePlaceholder": "Ajouter une note (facultatif)",
+      "status": "Résultat pour {{item}}",
+      "newItem": "Nom du point",
+      "newItemLabel": "Nom du nouveau point",
+      "remove": "Retirer {{item}}",
+      "removeNew": "Retirer ce nouveau point",
+      "add": "Ajouter un point",
+      "empty": "Aucun point dans cette section. Ajoutez-en un si vous avez contrôlé quelque chose ici."
+    },
+    "itemStatus": {
+      "pass": "Bon",
+      "attention": "À surveiller",
+      "fail": "Défaut"
+    },
+    "categories": {
+      "exterior": "Extérieur",
+      "interior": "Intérieur",
+      "mechanical": "Mécanique",
+      "electrical": "Électricité",
+      "under_vehicle": "Dessous du véhicule",
+      "road_test": "Essai routier"
+    },
+    "items": {
+      "exterior": {
+        "body": "Carrosserie et peinture",
+        "glass": "Pare-brise et vitres",
+        "lights": "Feux et clignotants",
+        "tyres": "Pneus et jantes",
+        "openings": "Portes, capot et coffre",
+        "mirrors": "Rétroviseurs et essuie-glaces"
+      },
+      "interior": {
+        "seats": "Sièges et sellerie",
+        "dashboard": "Tableau de bord et voyants",
+        "climate": "Climatisation et chauffage",
+        "controls": "Commandes et interrupteurs",
+        "safety": "Ceintures et airbags",
+        "damp": "Humidité et odeurs"
+      },
+      "mechanical": {
+        "oil": "Huile moteur et fuites",
+        "coolant": "Liquide de refroidissement et radiateur",
+        "belts": "Courroies d'accessoires et de distribution",
+        "brakes": "Plaquettes et disques de frein",
+        "gearbox": "Boîte de vitesses et embrayage",
+        "exhaust": "Échappement et catalyseur",
+        "start": "Démarrage à froid et ralenti"
+      },
+      "electrical": {
+        "battery": "Batterie et charge",
+        "codes": "Codes défaut (OBD)",
+        "media": "Multimédia et audio",
+        "windows": "Lève-vitres et verrouillage",
+        "sensors": "Radars de recul et caméra"
+      },
+      "under_vehicle": {
+        "suspension": "Amortisseurs et ressorts",
+        "steering": "Direction et rotules",
+        "rust": "Châssis et rouille",
+        "leaks": "Fuites de liquides",
+        "driveshafts": "Cardans et soufflets"
+      },
+      "road_test": {
+        "engine": "Reprises et bruits moteur",
+        "shifting": "Passage des vitesses",
+        "braking": "Freinage",
+        "alignment": "Direction et parallélisme",
+        "rattles": "Bruits et vibrations"
+      }
+    },
+    "verdict": {
+      "title": "Verdict et résumé",
+      "legend": "Verdict",
+      "excellent": "Excellent",
+      "good": "Bon",
+      "fair": "Correct",
+      "poor": "Mauvais",
+      "summary": "Résumé",
+      "summaryPlaceholder": "Ce que l'acheteur doit savoir, en quelques phrases",
+      "repairCost": "Coût estimé des réparations",
+      "mad": "MAD",
+      "score": "Note globale",
+      "outOf": "/ 100"
+    },
+    "consistency": {
+      "consistent": "Cohérent",
+      "suspicious": "Suspect",
+      "unverifiable": "Invérifiable"
+    },
+    "summaryCard": {
+      "label": "Résumé du rapport",
+      "noScore": "Pas encore de note",
+      "noVerdict": "Choisissez un verdict",
+      "pass": "{{count}} bon",
+      "attention": "{{count}} à surveiller",
+      "fail": "{{count}} défaut",
+      "steps": "Étapes du rapport",
+      "done": "fait",
+      "todo": "à faire",
+      "identity": "Identité vérifiée",
+      "mileage": "Kilométrage évalué",
+      "papers": "CT et vignette",
+      "checklist": "Points de contrôle terminés",
+      "summary": "Résumé rédigé"
+    },
+    "errors": {
+      "required": "Remplissez ce champ.",
+      "consistency": "Indiquez la cohérence du kilométrage.",
+      "verdict": "Choisissez un verdict.",
+      "score": "Saisissez une note de 0 à 100.",
+      "itemLabel": "Nommez ce point.",
+      "unrated_one": "Donnez un résultat à {{count}} point de contrôle de plus.",
+      "unrated_other": "Donnez un résultat à {{count}} points de contrôle de plus.",
+      "noItems": "Ajoutez au moins un point de contrôle.",
+      "check": "Vérifiez les champs signalés."
+    },
+    "confirm": {
+      "title": "Envoyer le rapport ?",
+      "description": "AutoSouk crée le PDF et l'envoie par e-mail à {{name}}. Vous ne pourrez plus modifier le rapport.",
+      "cancel": "Continuer à modifier",
+      "submit": "Envoyer le rapport"
     }
   }
 }

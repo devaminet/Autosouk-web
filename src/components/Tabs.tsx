@@ -1,24 +1,46 @@
 import { useId, useRef } from "react";
 import type { KeyboardEvent, ReactNode } from "react";
-import { formatNumber } from "../../../lib/format";
+import { formatNumber } from "../lib/format";
+import { Icon } from "./Icon";
+import type { IconName } from "./Icon";
 
-export type ProfileTab<Id extends string> = {
+export type Tab<Id extends string> = {
   id: Id;
   label: string;
   count?: number;
+  // Shown before the label, such as a check on a finished section.
+  icon?: IconName;
   panel: ReactNode;
 };
 
-type ProfileTabsProps<Id extends string> = {
+type TabsProps<Id extends string> = {
   label: string;
-  tabs: ProfileTab<Id>[];
+  tabs: Tab<Id>[];
   selected: Id;
   onSelect: (id: Id) => void;
+  // Underlined labels, or a row of pills.
+  appearance?: "underline" | "pills";
 };
 
-// Tabs over the profile's sections. The arrow keys move between tabs, and
-// only the selected tab is in the tab order.
-export function ProfileTabs<Id extends string>({ label, tabs, selected, onSelect }: ProfileTabsProps<Id>) {
+const looks = {
+  underline: {
+    list: "flex gap-32 border-b border-line",
+    tab: "-mb-px border-b-2 py-12 focus-visible:-outline-offset-2",
+    selected: "border-ink text-ink",
+    idle: "border-transparent text-muted hover:text-ink",
+  },
+  pills: {
+    list: "flex gap-8",
+    tab: "min-h-control-m rounded-full px-16 focus-visible:outline-offset-2",
+    selected: "bg-ink text-surface",
+    idle: "bg-surface text-ink ring-1 ring-line-strong ring-inset hover:bg-surface-2",
+  },
+};
+
+// Tabs over a page's sections. The arrow keys move between tabs, and only the
+// selected tab is in the tab order.
+export function Tabs<Id extends string>({ label, tabs, selected, onSelect, appearance = "underline" }: TabsProps<Id>) {
+  const look = looks[appearance];
   const baseId = useId();
   const buttons = useRef<(HTMLButtonElement | null)[]>([]);
 
@@ -46,14 +68,14 @@ export function ProfileTabs<Id extends string>({ label, tabs, selected, onSelect
 
   return (
     <div className="flex flex-col gap-24">
-      <div aria-label={label} className="no-scrollbar flex gap-32 overflow-x-auto border-b border-line" role="tablist">
+      <div aria-label={label} className={`no-scrollbar overflow-x-auto ${look.list}`} role="tablist">
         {tabs.map((tab, index) => {
           const isSelected = tab.id === selected;
           return (
             <button
               aria-controls={`${baseId}-${tab.id}-panel`}
               aria-selected={isSelected}
-              className={`-mb-px flex shrink-0 cursor-pointer items-center gap-8 border-b-2 py-12 type-label-m focus-visible:outline-2 focus-visible:-outline-offset-2 focus-visible:outline-brand ${isSelected ? "border-ink text-ink" : "border-transparent text-muted hover:text-ink"}`}
+              className={`flex shrink-0 cursor-pointer items-center gap-8 type-label-m focus-visible:outline-2 focus-visible:outline-brand ${look.tab} ${isSelected ? look.selected : look.idle}`}
               id={`${baseId}-${tab.id}-tab`}
               key={tab.id}
               onClick={() => onSelect(tab.id)}
@@ -65,6 +87,7 @@ export function ProfileTabs<Id extends string>({ label, tabs, selected, onSelect
               tabIndex={isSelected ? 0 : -1}
               type="button"
             >
+              {tab.icon && <Icon name={tab.icon} size={16} />}
               {tab.label}
               {/* Keeps the label and the count apart in the tab's name. */}{" "}
               {tab.count !== undefined && (

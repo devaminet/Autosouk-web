@@ -5,6 +5,7 @@ import { Alert } from "../../../components/Alert";
 import { ButtonLink } from "../../../components/ButtonLink";
 import { Icon } from "../../../components/Icon";
 import { PageTitle } from "../../../components/PageTitle";
+import { Tabs } from "../../../components/Tabs";
 import { useMediaQuery } from "../../../hooks/useMediaQuery";
 import { formatNumber } from "../../../lib/format";
 import { getLocale } from "../../../lib/i18n";
@@ -13,7 +14,6 @@ import { paths } from "../../../lib/paths";
 import { GarageGallery } from "../components/GarageGallery";
 import { InspectionCard } from "../components/InspectionCard";
 import { MechanicIdentity } from "../components/MechanicIdentity";
-import { ProfileTabs } from "../components/ProfileTabs";
 import { ReviewsSection } from "../components/ReviewsSection";
 import { useMechanic } from "../hooks";
 
@@ -82,7 +82,7 @@ export function MechanicPage() {
         <div className="flex min-w-0 flex-col gap-32 lg:col-span-2">
           <MechanicIdentity city={city} mechanic={mechanic} />
           {!isWide && <InspectionCard city={city} mechanic={mechanic} />}
-          <ProfileTabs
+          <Tabs
             label={t("profile.sections")}
             onSelect={select}
             selected={tab}

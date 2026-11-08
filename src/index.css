@@ -83,6 +83,8 @@
   --spacing-map: 22.5rem;
   /* The rankings map, beside the list on wide screens. */
   --spacing-map-l: 35rem;
+  /* The score ring of the inspection report: size-score. */
+  --spacing-score: 9.5rem;
 
   /* Layout widths from Penpot's auth screens: max-w-auth. */
   --container-auth: 30rem;
