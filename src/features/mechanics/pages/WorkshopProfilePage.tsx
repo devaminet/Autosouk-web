@@ -2,7 +2,10 @@ import { useId } from "react";
 import { useTranslation } from "react-i18next";
 import { Alert } from "../../../components/Alert";
 import { Button } from "../../../components/Button";
+import { ButtonLink } from "../../../components/ButtonLink";
+import { Icon } from "../../../components/Icon";
 import { PageTitle } from "../../../components/PageTitle";
+import { mechanicPath } from "../../../lib/paths";
 import { useSession } from "../../auth/hooks";
 import type { Mechanic } from "../api";
 import { AcceptingRequestsCard } from "../components/AcceptingRequestsCard";
@@ -33,9 +36,17 @@ function WorkshopEditor({ mechanic, userCityId }: WorkshopEditorProps) {
           {isNew && <p className="type-body-m text-muted">{t("workshop.setupDescription")}</p>}
         </div>
         <div className="flex flex-col items-end gap-8">
-          <Button form={formId} isPending={save.isPending} size="l" type="submit" variant="primary">
+          <div className="flex flex-wrap items-center gap-8">
+            {mechanic && (
+              <ButtonLink size="l" to={mechanicPath(mechanic.id)}>
+                <Icon name="eye" size={18} />
+                {t("workshop.viewPublic")}
+              </ButtonLink>
+            )}
+            <Button form={formId} isPending={save.isPending} size="l" type="submit" variant="primary">
             {t(isNew ? "workshop.create" : "workshop.save")}
-          </Button>
+            </Button>
+          </div>
           <output className="type-body-s text-success empty:hidden">
             {save.isSuccess && t("workshop.saved")}
           </output>

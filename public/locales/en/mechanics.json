@@ -8,7 +8,8 @@
     "save": "Save changes",
     "create": "Create workshop",
     "saved": "Changes saved.",
-    "retry": "Try again"
+    "retry": "Try again",
+    "viewPublic": "View public page"
   },
   "status": {
     "label": "Accept inspection requests",
@@ -95,6 +96,66 @@
     "empty": {
       "title": "No garage in {{city}} yet",
       "description": "Garages appear here once they accept inspection requests. Try another city."
-    }
+    },
+    "view": "View"
+  },
+  "profile": {
+    "notFound": "This workshop doesn't exist or isn't visible right now.",
+    "allGarages": "See all garages",
+    "accepting": "Accepting requests",
+    "notAccepting": "Not accepting requests",
+    "sections": "Workshop sections",
+    "reviewsTab": "Reviews",
+    "photosTab": "Garage photos",
+    "noPhotos": "This workshop hasn't added photos yet.",
+    "photo": "Garage photo {{number}}",
+    "about": "About the workshop",
+    "map": "Location of {{name}}",
+    "inspectionCard": "Inspection",
+    "perInspection": "per inspection",
+    "carToInspect": "Car to inspect",
+    "requestInspection": "Request inspection",
+    "loginToRequest": "Log in to request an inspection",
+    "requestSent": "Request sent",
+    "requestSentDescription": "The workshop will accept or decline the inspection of {{car}}.",
+    "noSavedCar": "Save a car for sale in {{city}} to ask this workshop to inspect it.",
+    "findCar": "Find a car",
+    "editWorkshop": "Edit my workshop",
+    "call": "Call",
+    "share": "Share this workshop",
+    "linkCopied": "Link copied.",
+    "retry": "Try again",
+    "writeReview": "Write a review",
+    "loginToReview": "Log in to write a review",
+    "noReviews": "No reviews yet. Buyers who use this workshop can share how it went.",
+    "yourReview": "Your review",
+    "you": "You · {{name}}",
+    "editReview": "Edit",
+    "deleteReview": "Delete",
+    "moreReviews": "Load more reviews",
+    "reviewRating": "Rated {{rating}} out of 5",
+    "stars_one": "{{count}} star",
+    "stars_other": "{{count}} stars"
+  },
+  "review": {
+    "overline": "Review",
+    "close": "Close",
+    "question": "How was your inspection?",
+    "ratings": {
+      "1": "Poor",
+      "2": "Fair",
+      "3": "Good",
+      "4": "Very good",
+      "5": "Excellent"
+    },
+    "ratingRequired": "Choose a rating from 1 to 5 stars.",
+    "message": "Your review",
+    "helper": "Keep it respectful: reviews with offensive language are blocked automatically.",
+    "cancel": "Cancel",
+    "publish": "Publish review",
+    "saveChanges": "Save changes",
+    "deleteTitle": "Delete your review?",
+    "deleteDescription": "Your rating and words leave this workshop's page. You can write a new review later.",
+    "delete": "Delete"
   }
 }

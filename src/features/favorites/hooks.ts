@@ -1,5 +1,5 @@
 import { keepPreviousData, useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
-import { addFavorite, getFavoriteIds, getSavedListings, removeFavorite } from "./api";
+import { addFavorite, getFavoriteIds, getSavedCarsInCity, getSavedListings, removeFavorite } from "./api";
 import type { SavedListingsFilter } from "./api";
 
 const favoritesKey = ["favorites"];
@@ -12,6 +12,14 @@ export const useSavedListings = (filter: SavedListingsFilter) =>
     queryKey: [...favoritesKey, "list", filter],
     queryFn: () => getSavedListings(filter),
     placeholderData: keepPreviousData,
+  });
+
+// The buyer's saved cars in a city, to choose one to inspect.
+export const useSavedCarsInCity = (cityId: number, enabled: boolean) =>
+  useQuery({
+    queryKey: [...favoritesKey, "city", cityId],
+    queryFn: () => getSavedCarsInCity(cityId),
+    enabled,
   });
 
 // The listings the buyer keeps. Only buyers have favourites.

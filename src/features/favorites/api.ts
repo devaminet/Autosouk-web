@@ -22,7 +22,10 @@ export type SavedSort = (typeof savedSorts)[number];
 // A saved listing keeps its place after it leaves the market, with its status.
 const savedListingSchema = listingCardSchema.extend({
   status: listingStatusSchema,
-  car: listingCardSchema.shape.car.unwrap().extend({ makeId: z.number(), modelId: z.number() }).nullable(),
+  car: listingCardSchema.shape.car
+    .unwrap()
+    .extend({ id: z.number(), makeId: z.number(), modelId: z.number() })
+    .nullable(),
 });
 
 export type SavedListing = z.infer<typeof savedListingSchema>;
@@ -55,4 +58,16 @@ export const getSavedListings = ({ inspected, sort, page, limit }: SavedListings
     query.set("inspected", String(inspected));
   }
   return request(`/api/favorite_listings?${query}`, { schema: savedListingsSchema });
+};
+
+// The most saved cars one city offers to inspect.
+const savedCarsLimit = 100;
+
+// The buyer's saved cars in a city that can still be inspected.
+export const getSavedCarsInCity = async (cityId: number) => {
+  const query = new URLSearchParams({ cityId: String(cityId), limit: String(savedCarsLimit), sort: "recent" });
+  const { listings } = await request(`/api/favorite_listings?${query}`, { schema: savedListingsSchema });
+  return listings.flatMap(({ title, status, car }) =>
+    status === "approved" && car ? [{ carId: car.id, title, year: car.year }] : [],
+  );
 };

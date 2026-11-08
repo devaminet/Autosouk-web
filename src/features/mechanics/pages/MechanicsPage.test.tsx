@@ -69,10 +69,14 @@ describe("MechanicsPage", () => {
     ]);
     const list = await garageList();
     const fourth = within(list).getAllByRole("listitem")[3];
+    if (!fourth) {
+      throw new Error("The fourth garage is missing.");
+    }
     expect(fourth).toHaveTextContent("Rank 4");
     expect(fourth).toHaveTextContent("Speedy Check");
     expect(fourth).toHaveTextContent("14 Rue Example, Casablanca");
     expect(fourth).toHaveTextContent("280 MAD");
+    expect(within(fourth).getByRole("link", { name: "Speedy Check" })).toHaveAttribute("href", "/mechanics/14");
     expect(within(list).getByText("Rated 4.6 out of 5 from 24 reviews")).toBeInTheDocument();
     expect(queries[0]?.get("cityId")).toBe("1");
     expect(queries[0]?.get("page")).toBe("1");

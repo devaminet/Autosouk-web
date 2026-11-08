@@ -23,7 +23,7 @@ import type { CityChoice } from "../geo";
 import { useRankings } from "../hooks";
 
 // Leaflet is large, so only wide screens download it, on this page.
-const RankingsMap = lazy(async () => ({ default: (await import("../components/RankingsMap")).RankingsMap }));
+const GaragesMap = lazy(async () => ({ default: (await import("../components/GaragesMap")).GaragesMap }));
 
 // Tailwind's lg breakpoint, where the map joins the list.
 const wideScreen = "(min-width: 64rem)";
@@ -217,7 +217,7 @@ export function MechanicsPage() {
         <aside className="flex flex-col gap-16 lg:col-span-4">
           {isWide && (
             <Suspense fallback={<div className="h-map-l w-full rounded-2xl bg-paper" />}>
-              <RankingsMap
+              <GaragesMap
                 area={city?.area ?? null}
                 dir={directionOf(getLocale())}
                 garages={mapGarages}
