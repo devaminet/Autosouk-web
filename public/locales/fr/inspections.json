@@ -20,6 +20,8 @@
       "roadTest": "Essai sur route",
       "pdf": "PDF signé"
     },
+    "reportLanguage": "Langue du rapport",
+    "reportLanguageHint": "Le rapport PDF et son e-mail arrivent dans cette langue.",
     "oneActive": "Une voiture ne peut avoir qu'une inspection en cours à la fois.",
     "total": "Total à payer au garage",
     "send": "Envoyer la demande",
@@ -85,6 +87,7 @@
   "report": {
     "pageTitle": "Rapport d'inspection",
     "overline": "Inspection n°{{id}} · {{status}}",
+    "language": "Rapport en <name>{{language}}</name>",
     "backToQueue": "Retour aux demandes",
     "notInProgress": "Cette inspection n'est pas en cours, elle ne prend donc pas de rapport.",
     "saveDraft": "Enregistrer le brouillon",

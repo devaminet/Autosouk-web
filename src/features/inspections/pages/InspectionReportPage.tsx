@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { useTranslation } from "react-i18next";
+import { Trans, useTranslation } from "react-i18next";
 import { useNavigate, useParams } from "react-router";
 import { Alert } from "../../../components/Alert";
 import { Button } from "../../../components/Button";
@@ -8,6 +8,7 @@ import { Icon } from "../../../components/Icon";
 import { PageTitle } from "../../../components/PageTitle";
 import { fieldError } from "../../../lib/api/errors";
 import { formatDayTime } from "../../../lib/format";
+import { directionOf, localeNames } from "../../../lib/locale";
 import { paths } from "../../../lib/paths";
 import { shortName } from "../../mechanics/names";
 import type { Inspection, InspectionCategory, Report } from "../api";
@@ -29,16 +30,18 @@ const carTitle = ({ car }: Inspection) =>
 
 type ReportEditorProps = {
   inspection: Inspection;
+  // The name of a default checklist item, in the report's language.
+  itemLabel: (category: InspectionCategory, key: string) => string;
 };
 
 // The report form, started from the saved draft or from the default checklist.
-function ReportEditor({ inspection }: ReportEditorProps) {
+function ReportEditor({ inspection, itemLabel }: ReportEditorProps) {
   const { t, i18n } = useTranslation(["inspections", "enums"]);
   const navigate = useNavigate();
   const save = useSaveReportDraft(inspection.id);
   const submit = useSubmitReport(inspection.id);
   const [form, setForm] = useState<ReportForm>(() => {
-    const start = emptyForm((category, key) => t(`report.items.${category}.${key}`), new Date());
+    const start = emptyForm(itemLabel, new Date());
     return inspection.reportDraft ? formFromDraft(inspection.reportDraft, start) : start;
   });
   const [category, setCategory] = useState<InspectionCategory>("exterior");
@@ -102,9 +105,21 @@ function ReportEditor({ inspection }: ReportEditorProps) {
             </span>
           )}
           <div className="flex min-w-0 flex-col gap-4">
-            <p className="type-overline text-muted">
-              {t("report.overline", { id: inspection.id, status: t(`enums:inspection_status.${inspection.status}`) })}
-            </p>
+            <div className="flex flex-wrap items-center gap-8">
+              <p className="type-overline text-muted">
+                {t("report.overline", { id: inspection.id, status: t(`enums:inspection_status.${inspection.status}`) })}
+              </p>
+              <p className="rounded-full bg-brand-soft px-8 py-4 type-label-s text-brand">
+                <Trans
+                  components={{
+                    name: <span dir={directionOf(inspection.reportLanguage)} lang={inspection.reportLanguage} />,
+                  }}
+                  i18nKey="report.language"
+                  t={t}
+                  values={{ language: localeNames[inspection.reportLanguage] }}
+                />
+              </p>
+            </div>
             <h1 className="type-h2 text-ink" dir="auto">
               {title}
             </h1>
@@ -183,6 +198,9 @@ export function InspectionReportPage() {
   const id = inspectionIdFrom(useParams());
   const query = useInspection(id);
   const inspection = query.data;
+  // The default checklist is written in the report's language, which can
+  // differ from the mechanic's.
+  const report = useTranslation("inspections", { lng: inspection?.reportLanguage, useSuspense: false });
 
   const content = () => {
     if (id === null || query.error) {
@@ -193,7 +211,7 @@ export function InspectionReportPage() {
         </div>
       );
     }
-    if (!inspection) {
+    if (!inspection || !report.ready) {
       return <output className="block type-body-m text-muted">{t("common:loading")}</output>;
     }
     if (inspection.status !== "in_progress") {
@@ -204,7 +222,13 @@ export function InspectionReportPage() {
         </div>
       );
     }
-    return <ReportEditor inspection={inspection} key={inspection.id} />;
+    return (
+      <ReportEditor
+        inspection={inspection}
+        itemLabel={(category, key) => report.t(`report.items.${category}.${key}`)}
+        key={inspection.id}
+      />
+    );
   };
 
   return (

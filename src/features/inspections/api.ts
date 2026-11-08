@@ -1,5 +1,7 @@
 import { z } from "zod";
 import { request } from "../../lib/api/client";
+import { locales } from "../../lib/locale";
+import type { Locale } from "../../lib/locale";
 
 const garageSchema = z.object({
   mechanicId: z.number(),
@@ -28,7 +30,8 @@ export const getCityGarages = async (cityId: number): Promise<Garage[]> =>
     })
   ).rankings;
 
-export const requestInspection = (input: { carId: number; mechanicId: number }) =>
+// Without a report language, the API uses the interface's.
+export const requestInspection = (input: { carId: number; mechanicId: number; reportLanguage?: Locale }) =>
   request("/api/inspections", { method: "POST", body: input, schema: z.unknown() });
 
 export const inspectionStatuses = ["pending", "accepted", "rejected", "in_progress", "completed", "cancelled"] as const;
@@ -144,6 +147,8 @@ const inspectionSchema = z.object({
     photoUrl: z.string().nullable(),
   }),
   buyer: z.object({ firstName: z.string(), lastName: z.string() }),
+  // The language the buyer chose for the report.
+  reportLanguage: z.enum(locales),
   // Only the assigned mechanic gets these. A draft that no longer reads is dropped.
   reportDraft: reportDraftSchema.nullable().optional().catch(null),
   reportDraftSavedAt: z.string().nullable().optional(),

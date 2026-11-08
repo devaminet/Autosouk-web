@@ -5,9 +5,10 @@ import { describe, expect, it } from "vitest";
 import { server } from "../../../test/bootstrap";
 import { apiErrors, testUser } from "../../../test/handlers";
 import { renderApp } from "../../../test/renderApp";
+import type { Locale } from "../../../lib/locale";
 import type { InspectionStatus, ReportDraft } from "../api";
 
-const inspection = (status: InspectionStatus, reportDraft: ReportDraft | null = null) => ({
+const inspection = (status: InspectionStatus, reportDraft: ReportDraft | null, reportLanguage: Locale) => ({
   id: 41,
   status,
   car: {
@@ -18,6 +19,7 @@ const inspection = (status: InspectionStatus, reportDraft: ReportDraft | null = 
     photoUrl: null,
   },
   buyer: { firstName: "Amine", lastName: "Takha" },
+  reportLanguage,
   reportDraft,
   reportDraftSavedAt: reportDraft ? "2026-11-08T10:15:00.000Z" : null,
 });
@@ -27,6 +29,7 @@ const reportApi = ({
   status = "in_progress" as InspectionStatus,
   draft = null as ReportDraft | null,
   reportError = null as { code: string; message: string; field?: string } | null,
+  reportLanguage = "en" as Locale,
 } = {}) => {
   const drafts: unknown[] = [];
   const reports: unknown[] = [];
@@ -34,7 +37,7 @@ const reportApi = ({
     http.post("*/api/auth/refresh-token", () =>
       HttpResponse.json({ accessToken: "token", user: { ...testUser, role: "mechanic" } }),
     ),
-    http.get("*/api/inspections/41", () => HttpResponse.json({ inspection: inspection(status, draft) })),
+    http.get("*/api/inspections/41", () => HttpResponse.json({ inspection: inspection(status, draft, reportLanguage) })),
     http.get("*/api/inspections", () => HttpResponse.json({ inspections: [] })),
     http.get("*/api/mechanics/me", () => apiErrors(404, { code: "mechanic.profile_not_found", message: "Not found" })),
     http.put("*/api/inspections/41/draft", async ({ request }) => {
@@ -83,6 +86,15 @@ describe("InspectionReportPage", () => {
     expect(screen.getByRole("tab", { name: "Exterior" })).toHaveAttribute("aria-selected", "true");
     expect(screen.getByText("Body panels and paint")).toBeInTheDocument();
     expect(screen.getByText("0 / 34 items")).toBeInTheDocument();
+  });
+
+  it("writes the default checklist in the report's language", async () => {
+    reportApi({ reportLanguage: "fr" });
+    renderApp("/inspections/41/report");
+
+    expect(await screen.findByText("Carrosserie et peinture")).toBeInTheDocument();
+    expect(screen.getByRole("tab", { name: "Exterior" })).toBeInTheDocument();
+    expect(screen.getByText("Français").parentElement).toHaveTextContent("Report in Français");
   });
 
   it("saves the draft, with only the fields filled in", async () => {

@@ -91,10 +91,26 @@ describe("RequestInspectionDialog", () => {
     await user.click(dialog.getByRole("button", { name: "Send request" }));
     expect(await dialog.findByText("Request sent")).toBeInTheDocument();
     expect(dialog.getByText("Speedy Check Anfa will accept or decline your request.")).toBeInTheDocument();
-    expect(requests).toEqual([{ carId: 70, mechanicId: 5 }]);
+    expect(requests).toEqual([{ carId: 70, mechanicId: 5, reportLanguage: "en" }]);
 
     await user.click(dialog.getByRole("button", { name: "Done" }));
     expect(screen.queryByRole("dialog")).not.toBeInTheDocument();
+  });
+
+  it("sends the report language the buyer chose", async () => {
+    signIn();
+    const { requests } = renderListing();
+    const { user, dialog } = await openDialog();
+
+    const languages = dialog.getByRole("group", { name: "Report language" });
+    expect(languages).toHaveAccessibleDescription("The PDF report and its email come in this language.");
+    expect(within(languages).getByRole("radio", { name: "English" })).toBeChecked();
+    await user.click(within(languages).getByRole("radio", { name: "العربية" }));
+    await dialog.findByRole("radio", { name: /Garage Atlas Auto/u });
+    await user.click(dialog.getByRole("button", { name: "Send request" }));
+
+    expect(await dialog.findByText("Request sent")).toBeInTheDocument();
+    expect(requests).toEqual([{ carId: 70, mechanicId: 3, reportLanguage: "ar" }]);
   });
 
   it("shows the API's message when the car already has an active inspection", async () => {

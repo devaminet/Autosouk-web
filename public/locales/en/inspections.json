@@ -19,6 +19,8 @@
       "roadTest": "Road test",
       "pdf": "Signed PDF"
     },
+    "reportLanguage": "Report language",
+    "reportLanguageHint": "The PDF report and its email come in this language.",
     "oneActive": "A car can only have one active inspection at a time.",
     "total": "Total due at the garage",
     "send": "Send request",
@@ -84,6 +86,7 @@
   "report": {
     "pageTitle": "Inspection report",
     "overline": "Inspection #{{id}} · {{status}}",
+    "language": "Report in <name>{{language}}</name>",
     "backToQueue": "Back to the queue",
     "notInProgress": "This inspection isn't in progress, so it takes no report.",
     "saveDraft": "Save draft",
