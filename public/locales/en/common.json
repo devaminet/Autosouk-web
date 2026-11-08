@@ -17,7 +17,9 @@
     "signUp": "Create account",
     "logOut": "Log out",
     "saved": "Saved cars",
-    "savedShort": "Saved"
+    "savedShort": "Saved",
+    "workshop": "My workshop",
+    "workshopShort": "Workshop"
   },
   "noAccess": {
     "title": "You can't open this page",

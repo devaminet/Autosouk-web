@@ -17,7 +17,9 @@
     "signUp": "Créer un compte",
     "logOut": "Se déconnecter",
     "saved": "Voitures enregistrées",
-    "savedShort": "Enregistrées"
+    "savedShort": "Enregistrées",
+    "workshop": "Mon atelier",
+    "workshopShort": "Atelier"
   },
   "noAccess": {
     "title": "Vous ne pouvez pas ouvrir cette page",

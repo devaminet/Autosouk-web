@@ -3,28 +3,34 @@ import arAuth from "../../public/locales/ar/auth.json";
 import arCommon from "../../public/locales/ar/common.json";
 import arInspections from "../../public/locales/ar/inspections.json";
 import arListings from "../../public/locales/ar/listings.json";
+import arMechanics from "../../public/locales/ar/mechanics.json";
 import enAuth from "../../public/locales/en/auth.json";
 import enCommon from "../../public/locales/en/common.json";
 import enInspections from "../../public/locales/en/inspections.json";
 import enListings from "../../public/locales/en/listings.json";
+import enMechanics from "../../public/locales/en/mechanics.json";
 import frAuth from "../../public/locales/fr/auth.json";
 import frCommon from "../../public/locales/fr/common.json";
 import frInspections from "../../public/locales/fr/inspections.json";
 import frListings from "../../public/locales/fr/listings.json";
+import frMechanics from "../../public/locales/fr/mechanics.json";
 
 const translations: Record<string, unknown> = {
   "en/common": enCommon,
   "en/auth": enAuth,
   "en/listings": enListings,
   "en/inspections": enInspections,
+  "en/mechanics": enMechanics,
   "fr/common": frCommon,
   "fr/auth": frAuth,
   "fr/listings": frListings,
   "fr/inspections": frInspections,
+  "fr/mechanics": frMechanics,
   "ar/common": arCommon,
   "ar/auth": arAuth,
   "ar/listings": arListings,
   "ar/inspections": arInspections,
+  "ar/mechanics": arMechanics,
 };
 
 const apiCatalogs: Record<string, unknown> = {

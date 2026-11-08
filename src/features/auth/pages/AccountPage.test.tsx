@@ -242,4 +242,26 @@ describe("AccountPage", () => {
     expect(await screen.findByRole("heading", { name: "Welcome back" })).toBeInTheDocument();
     expect(router.state.location.pathname).toBe("/login");
   });
+
+  it("links mechanics to their workshop", async () => {
+    signIn({ role: "mechanic" });
+    const user = userEvent.setup();
+    const router = renderApp("/account");
+
+    const workshop = within(await screen.findByRole("region", { name: "Your workshop" }));
+    const sections = within(screen.getByRole("navigation", { name: "Settings sections" }));
+    expect(sections.getByRole("link", { name: "Workshop" })).toHaveAttribute("href", "/account#workshop");
+    await user.click(workshop.getByRole("link", { name: "Open my workshop" }));
+
+    expect(router.state.location.pathname).toBe("/workshop");
+  });
+
+  it("has no workshop section for other roles", async () => {
+    signIn();
+    renderApp("/account");
+
+    expect(await screen.findByRole("region", { name: "Personal information" })).toBeInTheDocument();
+    expect(screen.queryByRole("region", { name: "Your workshop" })).not.toBeInTheDocument();
+  });
 });
+

@@ -9,6 +9,7 @@ import { LanguageSection } from "../components/account/LanguageSection";
 import { LogOutSection } from "../components/account/LogOutSection";
 import { PersonalInfoSection } from "../components/account/PersonalInfoSection";
 import { ProfilePhotoSection } from "../components/account/ProfilePhotoSection";
+import { WorkshopSection } from "../components/account/WorkshopSection";
 import { useSession } from "../hooks";
 
 const sections: { id: string; icon: IconName; label: string }[] = [
@@ -18,13 +19,22 @@ const sections: { id: string; icon: IconName; label: string }[] = [
   { id: "log-out", icon: "logout", label: "account.nav.logOut" },
 ];
 
+// Mechanics also get a link to their workshop, right after their profile.
+const mechanicSections: typeof sections = [
+  ...sections.slice(0, 1),
+  { id: "workshop", icon: "wrench", label: "account.nav.workshop" },
+  ...sections.slice(1),
+];
+
 const sectionIds = sections.map(({ id }) => id);
+const mechanicSectionIds = mechanicSections.map(({ id }) => id);
 
 // The signed-in user's settings. RequireRole makes sure there is a user.
 export function AccountPage() {
   const { t } = useTranslation("auth");
   const { user } = useSession();
-  const { active, choose } = useActiveSection(sectionIds);
+  const isMechanic = user?.role === "mechanic";
+  const { active, choose } = useActiveSection(isMechanic ? mechanicSectionIds : sectionIds);
 
   if (!user) {
     return null;
@@ -42,7 +52,7 @@ export function AccountPage() {
           aria-label={t("account.nav.label")}
           className="hidden w-3xs shrink-0 flex-col gap-4 md:sticky md:top-24 md:flex"
         >
-          {sections.map(({ id, icon, label }) => {
+          {(isMechanic ? mechanicSections : sections).map(({ id, icon, label }) => {
             const current = id === active;
             return (
               // ScrollRestoration resets the scroll after a plain hash link,
@@ -66,6 +76,7 @@ export function AccountPage() {
             <ProfilePhotoSection id="profile-photo" user={user} />
             <PersonalInfoSection id="personal" user={user} />
           </div>
+          {isMechanic && <WorkshopSection id="workshop" />}
           <LanguageSection id="language" user={user} />
           <ChangePasswordSection id="security" user={user} />
           <LogOutSection id="log-out" />
