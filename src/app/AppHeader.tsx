@@ -63,6 +63,7 @@ export function AppHeader({ hideOnMobile = false }: AppHeaderProps) {
           <HeaderLink alsoActiveOn={paths.search} to={paths.home}>
             {t("nav.explore")}
           </HeaderLink>
+          <HeaderLink to={paths.mechanics}>{t("nav.mechanics")}</HeaderLink>
           {user?.role === "seller" && (
             <HeaderLink to={paths.myListings}>{t("nav.sell")}</HeaderLink>
           )}

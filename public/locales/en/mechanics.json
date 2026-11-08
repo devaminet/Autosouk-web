@@ -70,5 +70,31 @@
     "uploading_other": "Uploading {{count}} photos…",
     "uploadFailed_one": "{{count}} photo didn't upload. Try again.",
     "uploadFailed_other": "{{count}} photos didn't upload. Try again."
+  },
+  "rankings": {
+    "pageTitle": "Best garages",
+    "overline": "Ranked by verified buyers",
+    "title": "Best garages in <city>{{city}}</city>",
+    "titleNoCity": "Best garages",
+    "city": "City",
+    "becomePartner": "Become a partner garage",
+    "myWorkshop": "My workshop",
+    "podium": "Top three garages",
+    "listLabel": "Garages in {{city}}, best rated first",
+    "rank": "Rank",
+    "noReviews": "No reviews yet",
+    "ratingLabel_one": "Rated {{rating}} out of 5 from {{count}} review",
+    "ratingLabel_other": "Rated {{rating}} out of 5 from {{count}} reviews",
+    "reviews_one": "review",
+    "reviews_other": "reviews",
+    "inspection": "inspection",
+    "priceAtGarage": "Price at the garage",
+    "map": "Map of garages in {{city}}",
+    "rule": "Garages are ranked by their average rating, then by their number of reviews. Only garages accepting requests are shown.",
+    "retry": "Try again",
+    "empty": {
+      "title": "No garage in {{city}} yet",
+      "description": "Garages appear here once they accept inspection requests. Try another city."
+    }
   }
 }

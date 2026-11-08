@@ -72,5 +72,33 @@
     "uploadFailed_one": "{{count}} photo n'a pas été importée. Réessayez.",
     "uploadFailed_many": "{{count}} photos n'ont pas été importées. Réessayez.",
     "uploadFailed_other": "{{count}} photos n'ont pas été importées. Réessayez."
+  },
+  "rankings": {
+    "pageTitle": "Meilleurs garages",
+    "overline": "Classés par des acheteurs vérifiés",
+    "title": "Meilleurs garages à <city>{{city}}</city>",
+    "titleNoCity": "Meilleurs garages",
+    "city": "Ville",
+    "becomePartner": "Devenir garage partenaire",
+    "myWorkshop": "Mon atelier",
+    "podium": "Les trois meilleurs garages",
+    "listLabel": "Garages à {{city}}, les mieux notés en premier",
+    "rank": "Rang",
+    "noReviews": "Pas encore d'avis",
+    "ratingLabel_one": "Noté {{rating}} sur 5 selon {{count}} avis",
+    "ratingLabel_many": "Noté {{rating}} sur 5 selon {{count}} avis",
+    "ratingLabel_other": "Noté {{rating}} sur 5 selon {{count}} avis",
+    "reviews_one": "avis",
+    "reviews_many": "avis",
+    "reviews_other": "avis",
+    "inspection": "inspection",
+    "priceAtGarage": "Prix au garage",
+    "map": "Carte des garages à {{city}}",
+    "rule": "Les garages sont classés selon leur note moyenne, puis selon leur nombre d'avis. Seuls les garages qui acceptent des demandes sont affichés.",
+    "retry": "Réessayer",
+    "empty": {
+      "title": "Aucun garage à {{city}} pour l'instant",
+      "description": "Les garages apparaissent ici dès qu'ils acceptent des demandes d'inspection. Essayez une autre ville."
+    }
   }
 }

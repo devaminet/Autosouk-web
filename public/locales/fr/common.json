@@ -19,7 +19,9 @@
     "saved": "Voitures enregistrées",
     "savedShort": "Enregistrées",
     "workshop": "Mon atelier",
-    "workshopShort": "Atelier"
+    "workshopShort": "Atelier",
+    "mechanics": "Mécaniciens",
+    "mechanicsShort": "Garages"
   },
   "noAccess": {
     "title": "Vous ne pouvez pas ouvrir cette page",

@@ -1,6 +1,6 @@
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import { useTranslation } from "react-i18next";
-import { addGaragePhotos, getOwnMechanic, removeGaragePhoto, saveWorkshop, setAcceptingRequests } from "./api";
+import { addGaragePhotos, getOwnMechanic, getRankings, removeGaragePhoto, saveWorkshop, setAcceptingRequests } from "./api";
 import type { LogoChange, Mechanic, WorkshopDetails } from "./api";
 
 const ownKey = ["mechanics", "me"];
@@ -57,3 +57,14 @@ export const useRemoveGaragePhoto = () => {
     onSettled: () => queryClient.invalidateQueries({ queryKey: ownKey }),
   });
 };
+
+// A city's rankings. The previous page stays on screen while the next loads,
+// but never another city's garages.
+export const useRankings = (cityId: number | null, page: number) =>
+  useQuery({
+    queryKey: ["mechanics", "rankings", cityId, page],
+    queryFn: () => getRankings({ cityId: cityId ?? 0, page }),
+    enabled: cityId !== null,
+    placeholderData: (previous, previousQuery) =>
+      previousQuery?.queryKey[2] === cityId ? previous : undefined,
+  });

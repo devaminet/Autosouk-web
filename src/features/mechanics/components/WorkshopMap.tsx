@@ -2,6 +2,7 @@ import L from "leaflet";
 import "leaflet/dist/leaflet.css";
 import { useEffect, useRef } from "react";
 import type { CityArea } from "../geo";
+import { attribution, tileUrl, wrenchSvg } from "../mapParts";
 
 export type LatLng = { lat: number; lng: number };
 
@@ -22,10 +23,6 @@ type WorkshopMapProps = {
   dir: "ltr" | "rtl";
 };
 
-// OpenStreetMap's own tiles, free under its tile usage policy.
-const tileUrl = "https://tile.openstreetmap.org/{z}/{x}/{y}.png";
-const attribution = '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a>';
-
 // How far one arrow key press moves the pin, in screen pixels.
 const keyStep = 8;
 
@@ -39,7 +36,7 @@ const keyMoves: Record<string, [number, number]> = {
 // The wrench icon in a brand circle, as in the design.
 const pinIcon = L.divIcon({
   className: "",
-  html: '<span class="flex size-40 items-center justify-center rounded-full bg-brand text-on-brand shadow-elevation-brand ring-4 ring-surface"><svg aria-hidden="true" fill="none" height="18" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewBox="0 0 24 24" width="18"><path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z"/></svg></span>',
+  html: `<span class="flex size-40 items-center justify-center rounded-full bg-brand text-on-brand shadow-elevation-brand ring-4 ring-surface">${wrenchSvg(18)}</span>`,
   iconSize: [40, 40],
   iconAnchor: [20, 20],
 });
