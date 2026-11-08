@@ -10,6 +10,7 @@ import { ResetPasswordPage } from "../features/auth/pages/ResetPasswordPage";
 import { VerifyEmailPage } from "../features/auth/pages/VerifyEmailPage";
 import { SavedPage } from "../features/favorites/pages/SavedPage";
 import { InspectionQueuePage } from "../features/inspections/pages/InspectionQueuePage";
+import { InspectionReportPage } from "../features/inspections/pages/InspectionReportPage";
 import { MechanicPage } from "../features/mechanics/pages/MechanicPage";
 import { MechanicsPage } from "../features/mechanics/pages/MechanicsPage";
 import { WorkshopProfilePage } from "../features/mechanics/pages/WorkshopProfilePage";
@@ -55,6 +56,7 @@ export const routes: RouteObject[] = [
             children: [
               { path: paths.workshop, element: <WorkshopProfilePage /> },
               { path: paths.inspections, element: <InspectionQueuePage /> },
+              { path: paths.inspectionReport, element: <InspectionReportPage /> },
             ],
           },
           {

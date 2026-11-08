@@ -123,6 +123,9 @@ describe("InspectionQueuePage", () => {
       "tel:0670112233",
     );
 
+    const inProgress = await column("In progress");
+    expect(inProgress.getByRole("link", { name: "Complete report" })).toHaveAttribute("href", "/inspections/3/report");
+
     const completed = await column("Completed");
     expect(completed.getByText("Omar L. · score 92 · Excellent condition")).toBeInTheDocument();
     expect(completed.getByRole("link", { name: "Open the report for Volkswagen Golf 8 Life" })).toHaveAttribute(

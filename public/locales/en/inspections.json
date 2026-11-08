@@ -71,13 +71,170 @@
       "start": "Start inspection",
       "report": "Open PDF",
       "reportLabel": "Open the report for {{car}}",
-      "seller": "Seller:"
+      "seller": "Seller:",
+      "completeReport": "Complete report"
     },
     "rejectDialog": {
       "title": "Reject this request?",
       "description": "{{name}} will see that you declined the inspection of the {{car}}. You can't undo this.",
       "cancel": "Keep it",
       "confirm": "Reject request"
+    }
+  },
+  "report": {
+    "pageTitle": "Inspection report",
+    "overline": "Inspection #{{id}} · {{status}}",
+    "backToQueue": "Back to the queue",
+    "notInProgress": "This inspection isn't in progress, so it takes no report.",
+    "saveDraft": "Save draft",
+    "draftSaved": "Draft saved {{time}}",
+    "submit": "Submit report",
+    "submitAndGenerate": "Submit and generate PDF",
+    "identity": {
+      "title": "Vehicle identity",
+      "hint": "Verified on site",
+      "matricule": "Matricule",
+      "vin": "VIN",
+      "vinHelper": "17 characters · no I, O or Q",
+      "carteGrise": "Carte grise n°",
+      "mileage": "Mileage (dashboard)",
+      "km": "km",
+      "firstRegistration": "First registration",
+      "inspectedAt": "Inspected at",
+      "consistency": "Mileage consistency",
+      "consistencyNote": "Mileage note",
+      "consistencyNotePlaceholder": "How you checked it, such as the service book",
+      "ct": "Contrôle technique valid",
+      "ctExpiry": "CT expiry date",
+      "vignette": "Vignette paid",
+      "vignetteHint": "Receipt checked"
+    },
+    "checklist": {
+      "title": "Checklist",
+      "sections": "Checklist sections",
+      "progress": "{{done}} / {{total}} items",
+      "note": "Note on {{item}}",
+      "notePlaceholder": "Add a note (optional)",
+      "status": "Result for {{item}}",
+      "newItem": "Item name",
+      "newItemLabel": "New item name",
+      "remove": "Remove {{item}}",
+      "removeNew": "Remove this new item",
+      "add": "Add item",
+      "empty": "No items in this section. Add one if you checked something here."
+    },
+    "itemStatus": {
+      "pass": "Pass",
+      "attention": "Attention",
+      "fail": "Fail"
+    },
+    "categories": {
+      "exterior": "Exterior",
+      "interior": "Interior",
+      "mechanical": "Mechanical",
+      "electrical": "Electrical",
+      "under_vehicle": "Under vehicle",
+      "road_test": "Road test"
+    },
+    "items": {
+      "exterior": {
+        "body": "Body panels and paint",
+        "glass": "Windscreen and windows",
+        "lights": "Lights and indicators",
+        "tyres": "Tyres and wheels",
+        "openings": "Doors, bonnet and boot",
+        "mirrors": "Mirrors and wipers"
+      },
+      "interior": {
+        "seats": "Seats and upholstery",
+        "dashboard": "Dashboard and warning lights",
+        "climate": "Air conditioning and heating",
+        "controls": "Switches and controls",
+        "safety": "Seat belts and airbags",
+        "damp": "Damp and odours"
+      },
+      "mechanical": {
+        "oil": "Engine oil and leaks",
+        "coolant": "Coolant and radiator",
+        "belts": "Accessory and timing belts",
+        "brakes": "Brake pads and discs",
+        "gearbox": "Gearbox and clutch",
+        "exhaust": "Exhaust and catalytic converter",
+        "start": "Cold start and idle"
+      },
+      "electrical": {
+        "battery": "Battery and charging",
+        "codes": "Fault codes (OBD)",
+        "media": "Infotainment and audio",
+        "windows": "Power windows and locks",
+        "sensors": "Parking sensors and camera"
+      },
+      "under_vehicle": {
+        "suspension": "Shock absorbers and springs",
+        "steering": "Steering and ball joints",
+        "rust": "Chassis and rust",
+        "leaks": "Fluid leaks",
+        "driveshafts": "Driveshafts and CV boots"
+      },
+      "road_test": {
+        "engine": "Engine pull and noises",
+        "shifting": "Gear changes",
+        "braking": "Braking",
+        "alignment": "Steering and alignment",
+        "rattles": "Rattles and noises"
+      }
+    },
+    "verdict": {
+      "title": "Verdict and summary",
+      "legend": "Verdict",
+      "excellent": "Excellent",
+      "good": "Good",
+      "fair": "Fair",
+      "poor": "Poor",
+      "summary": "Summary",
+      "summaryPlaceholder": "What the buyer should know, in a few sentences",
+      "repairCost": "Estimated repair cost",
+      "mad": "MAD",
+      "score": "Overall score",
+      "outOf": "/ 100"
+    },
+    "consistency": {
+      "consistent": "Consistent",
+      "suspicious": "Suspicious",
+      "unverifiable": "Unverifiable"
+    },
+    "summaryCard": {
+      "label": "Report summary",
+      "noScore": "No score yet",
+      "noVerdict": "Choose a verdict",
+      "pass": "{{count}} pass",
+      "attention": "{{count}} attention",
+      "fail": "{{count}} fail",
+      "steps": "Report steps",
+      "done": "done",
+      "todo": "to do",
+      "identity": "Identity verified",
+      "mileage": "Mileage assessed",
+      "papers": "CT and vignette",
+      "checklist": "Checklist complete",
+      "summary": "Summary written"
+    },
+    "errors": {
+      "required": "Fill this in.",
+      "consistency": "Choose how consistent the mileage is.",
+      "verdict": "Choose a verdict.",
+      "score": "Enter a score from 0 to 100.",
+      "itemLabel": "Name this item.",
+      "unrated_one": "Give a result to {{count}} more checklist item.",
+      "unrated_other": "Give a result to {{count}} more checklist items.",
+      "noItems": "Add at least one checklist item.",
+      "check": "Check the highlighted fields."
+    },
+    "confirm": {
+      "title": "Submit the report?",
+      "description": "AutoSouk creates the PDF and emails it to {{name}}. You can't change the report afterwards.",
+      "cancel": "Keep editing",
+      "submit": "Submit report"
     }
   }
 }

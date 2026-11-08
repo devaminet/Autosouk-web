@@ -21,6 +21,8 @@ export const paths = {
   // The mechanic's inspection requests, by status. The status shown on small
   // screens lives in the query string.
   inspections: "/inspections",
+  // The mechanic's report on an inspection in progress. Build links with inspectionReportPath.
+  inspectionReport: "/inspections/:inspectionId/report",
   // A listing as buyers see it. Build links with listingPath.
   listing: "/listings/:listingId",
   myListings: "/my-listings",
@@ -47,3 +49,5 @@ export const listingPath = (listingId: number): string => `/listings/${listingId
 export const partnerSignupPath = `${paths.register}?role=mechanic`;
 
 export const mechanicPath = (mechanicId: number): string => `/mechanics/${mechanicId}`;
+
+export const inspectionReportPath = (inspectionId: number): string => `/inspections/${inspectionId}/report`;
