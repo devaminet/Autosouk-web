@@ -23,6 +23,13 @@ const submit = (user: ReturnType<typeof userEvent.setup>) =>
   user.click(screen.getByRole("button", { name: "Create account" }));
 
 describe("RegisterPage", () => {
+  it("chooses the role asked in the link", async () => {
+    renderApp("/register?role=mechanic");
+
+    expect(await screen.findByRole("radio", { name: /^Mechanic/u })).toBeChecked();
+    expect(screen.getByRole("radio", { name: /^Buyer/u })).not.toBeChecked();
+  });
+
   it("creates the account and asks to check the inbox", async () => {
     const user = userEvent.setup();
     let body: unknown;

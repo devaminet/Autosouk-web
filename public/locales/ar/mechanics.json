@@ -78,5 +78,39 @@
     "uploadFailed_few": "لم تُرفع {{count}} صور. حاول مرة أخرى.",
     "uploadFailed_many": "لم تُرفع {{count}} صورة. حاول مرة أخرى.",
     "uploadFailed_other": "لم تُرفع {{count}} صورة. حاول مرة أخرى."
+  },
+  "rankings": {
+    "pageTitle": "أفضل الورشات",
+    "overline": "ترتيب من مشترين موثَّقين",
+    "title": "أفضل الورشات في <city>{{city}}</city>",
+    "titleNoCity": "أفضل الورشات",
+    "city": "المدينة",
+    "becomePartner": "انضم كورشة شريكة",
+    "myWorkshop": "ورشتي",
+    "podium": "أفضل ثلاث ورشات",
+    "listLabel": "الورشات في {{city}}، الأعلى تقييمًا أولًا",
+    "rank": "الترتيب",
+    "noReviews": "لا توجد تقييمات بعد",
+    "ratingLabel_zero": "التقييم {{rating}} من 5 من دون مراجعات",
+    "ratingLabel_one": "التقييم {{rating}} من 5 من مراجعة واحدة",
+    "ratingLabel_two": "التقييم {{rating}} من 5 من مراجعتين",
+    "ratingLabel_few": "التقييم {{rating}} من 5 من {{count}} مراجعات",
+    "ratingLabel_many": "التقييم {{rating}} من 5 من {{count}} مراجعة",
+    "ratingLabel_other": "التقييم {{rating}} من 5 من {{count}} مراجعة",
+    "reviews_zero": "مراجعة",
+    "reviews_one": "مراجعة",
+    "reviews_two": "مراجعة",
+    "reviews_few": "مراجعات",
+    "reviews_many": "مراجعة",
+    "reviews_other": "مراجعة",
+    "inspection": "فحص",
+    "priceAtGarage": "السعر في الورشة",
+    "map": "خريطة الورشات في {{city}}",
+    "rule": "تُرتَّب الورشات حسب متوسط تقييمها، ثم حسب عدد مراجعاتها. لا تظهر إلا الورشات التي تقبل الطلبات.",
+    "retry": "أعد المحاولة",
+    "empty": {
+      "title": "لا توجد ورشة في {{city}} بعد",
+      "description": "تظهر الورشات هنا عندما تقبل طلبات الفحص. جرّب مدينة أخرى."
+    }
   }
 }

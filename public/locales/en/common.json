@@ -19,7 +19,9 @@
     "saved": "Saved cars",
     "savedShort": "Saved",
     "workshop": "My workshop",
-    "workshopShort": "Workshop"
+    "workshopShort": "Workshop",
+    "mechanics": "Mechanics",
+    "mechanicsShort": "Garages"
   },
   "noAccess": {
     "title": "You can't open this page",

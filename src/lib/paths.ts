@@ -12,6 +12,8 @@ export const paths = {
   account: "/account",
   // The buyer's saved listings. Its filter lives in the query string.
   saved: "/saved",
+  // The garages of a city, best rated first. The city and page live in the query string.
+  mechanics: "/mechanics",
   // The mechanic's own workshop profile, which also sets it up.
   workshop: "/workshop",
   // A listing as buyers see it. Build links with listingPath.
@@ -35,3 +37,6 @@ export const draftStepPath = (listingId: number, step: DraftStep): string =>
 export const listingMediaPath = (listingId: number): string => `/my-listings/${listingId}/media`;
 
 export const listingPath = (listingId: number): string => `/listings/${listingId}`;
+
+// The sign-up page with the mechanic role already chosen.
+export const partnerSignupPath = `${paths.register}?role=mechanic`;

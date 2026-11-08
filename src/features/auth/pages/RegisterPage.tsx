@@ -1,7 +1,7 @@
 import { useRef, useState } from "react";
 import type { FormEvent } from "react";
 import { useTranslation } from "react-i18next";
-import { Link, useNavigate } from "react-router";
+import { Link, useNavigate, useSearchParams } from "react-router";
 import { Button } from "../../../components/Button";
 import { FormErrors } from "../../../components/FormErrors";
 import { Icon } from "../../../components/Icon";
@@ -42,6 +42,9 @@ const isSignupRole = (value: string): value is SignupRole =>
 export function RegisterPage() {
   const { t } = useTranslation("auth");
   const navigate = useNavigate();
+  // Links such as "Become a partner garage" choose the role ahead.
+  const [params] = useSearchParams();
+  const askedRole = params.get("role") ?? "";
   const form = useRef<HTMLFormElement>(null);
   const register = useRegister();
   const cities = useCityOptions();
@@ -114,7 +117,7 @@ export function RegisterPage() {
             <LanguageSegmented label={t("register.language")} />
             <p className="type-body-xs text-muted">{t("register.languageHelper")}</p>
           </div>
-          <RoleSelector error={fieldError(error, "userType")} />
+          <RoleSelector defaultRole={isSignupRole(askedRole) ? askedRole : "buyer"} error={fieldError(error, "userType")} />
           <div className="grid grid-cols-1 gap-16 sm:grid-cols-2">
             <TextField
               autoComplete="given-name"

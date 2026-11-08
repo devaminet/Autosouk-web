@@ -142,3 +142,36 @@ export const removeGaragePhoto = (imageId: number) =>
     method: "DELETE",
     schema: z.unknown(),
   });
+
+const rankedGarageSchema = z.object({
+  mechanicId: z.number(),
+  name: z.string(),
+  address: z.string(),
+  latitude: z.number(),
+  longitude: z.number(),
+  // In MAD, paid at the garage. Null when the garage hasn't set it.
+  inspectionPrice: z.number().nullable(),
+  profileImageLink: z.string().nullable(),
+  // From 1 to 5. Null without reviews.
+  averageRating: z.number().nullable(),
+  reviewCount: z.number(),
+});
+
+export type RankedGarage = z.infer<typeof rankedGarageSchema>;
+
+const rankingsSchema = z.object({
+  rankings: z.array(rankedGarageSchema),
+  meta: z.object({ total: z.number(), page: z.number(), limit: z.number(), totalPages: z.number() }),
+});
+
+export type Rankings = z.infer<typeof rankingsSchema>;
+
+// Garages per page of the rankings.
+export const rankingsPageSize = 20;
+
+// The garages of a city that accept requests, best rated first.
+export const getRankings = ({ cityId, page }: { cityId: number; page: number }): Promise<Rankings> =>
+  request(`/api/mechanics/rankings?cityId=${cityId}&page=${page}&limit=${rankingsPageSize}`, {
+    schema: rankingsSchema,
+    anonymous: true,
+  });

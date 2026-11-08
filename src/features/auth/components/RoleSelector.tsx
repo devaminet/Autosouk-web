@@ -11,10 +11,11 @@ const roleIcons: Record<SignupRole, IconName> = {
 };
 
 type RoleSelectorProps = {
+  defaultRole?: SignupRole;
   error?: string;
 };
 
-export function RoleSelector({ error }: RoleSelectorProps) {
+export function RoleSelector({ defaultRole = "buyer", error }: RoleSelectorProps) {
   const { t } = useTranslation(["auth", "enums"]);
 
   return (
@@ -35,7 +36,7 @@ export function RoleSelector({ error }: RoleSelectorProps) {
               </span>
               <input
                 className="sr-only"
-                defaultChecked={role === "buyer"}
+                defaultChecked={role === defaultRole}
                 name="userType"
                 type="radio"
                 value={role}

@@ -19,7 +19,9 @@
     "saved": "السيارات المحفوظة",
     "savedShort": "المحفوظة",
     "workshop": "ورشتي",
-    "workshopShort": "الورشة"
+    "workshopShort": "الورشة",
+    "mechanics": "الميكانيكيون",
+    "mechanicsShort": "الورشات"
   },
   "noAccess": {
     "title": "لا يمكنك فتح هذه الصفحة",
