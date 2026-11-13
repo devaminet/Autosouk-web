@@ -3,6 +3,10 @@ import { request } from "../../lib/api/client";
 import { uploadToPresignedPost } from "../../lib/api/upload";
 import { locales } from "../../lib/locale";
 
+export const identityStatuses = ["not_submitted", "pending", "approved", "rejected"] as const;
+
+export type IdentityStatus = (typeof identityStatuses)[number];
+
 const userSchema = z.object({
   id: z.number(),
   firstName: z.string(),
@@ -13,6 +17,10 @@ const userSchema = z.object({
   isVerified: z.boolean(),
   phone: z.string(),
   locale: z.enum(locales),
+  // The two checks every account passes before it may sell, inspect or ask
+  // for inspections.
+  phoneVerified: z.boolean(),
+  identityStatus: z.enum(identityStatuses),
   role: z.enum(["buyer", "seller", "mechanic", "admin"]),
 });
 

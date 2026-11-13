@@ -1,4 +1,4 @@
-import { screen } from "@testing-library/react";
+import { screen, within } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 import { http, HttpResponse } from "msw";
 import { describe, expect, it } from "vitest";
@@ -123,3 +123,38 @@ describe("user menu", () => {
     expect(screen.queryByRole("button", { name: "Log out" })).not.toBeInTheDocument();
   });
 });
+
+describe("identity banner", () => {
+  it("asks a new account to verify, starting with the phone", async () => {
+    signInAs({ ...testUser, phoneVerified: false, identityStatus: "not_submitted" });
+    renderApp("/");
+
+    const banner = await screen.findByRole("complementary", { name: "Verify your identity" });
+    expect(within(banner).getByRole("link", { name: "Start" })).toHaveAttribute("href", "/verify-phone");
+  });
+
+  it("says the face video is being checked", async () => {
+    signInAs({ ...testUser, identityStatus: "pending" });
+    renderApp("/");
+
+    const banner = await screen.findByRole("complementary", { name: "We're checking your identity" });
+    expect(within(banner).queryByRole("link")).not.toBeInTheDocument();
+  });
+
+  it("offers to record again after a rejection", async () => {
+    signInAs({ ...testUser, identityStatus: "rejected" });
+    renderApp("/");
+
+    const banner = await screen.findByRole("complementary", { name: "We couldn't verify your identity" });
+    expect(within(banner).getByRole("link", { name: "Try again" })).toHaveAttribute("href", "/verify-identity");
+  });
+
+  it("stays hidden once the user is verified", async () => {
+    signInAs(testUser);
+    renderApp("/");
+
+    expect(await screen.findByText("Salam, Amine")).toBeInTheDocument();
+    expect(screen.queryByRole("complementary", { name: /identity/u })).not.toBeInTheDocument();
+  });
+});
+

@@ -1,16 +1,19 @@
 import { http, HttpResponse } from "msw";
 import arAuth from "../../public/locales/ar/auth.json";
 import arCommon from "../../public/locales/ar/common.json";
+import arIdentity from "../../public/locales/ar/identity.json";
 import arInspections from "../../public/locales/ar/inspections.json";
 import arListings from "../../public/locales/ar/listings.json";
 import arMechanics from "../../public/locales/ar/mechanics.json";
 import enAuth from "../../public/locales/en/auth.json";
 import enCommon from "../../public/locales/en/common.json";
+import enIdentity from "../../public/locales/en/identity.json";
 import enInspections from "../../public/locales/en/inspections.json";
 import enListings from "../../public/locales/en/listings.json";
 import enMechanics from "../../public/locales/en/mechanics.json";
 import frAuth from "../../public/locales/fr/auth.json";
 import frCommon from "../../public/locales/fr/common.json";
+import frIdentity from "../../public/locales/fr/identity.json";
 import frInspections from "../../public/locales/fr/inspections.json";
 import frListings from "../../public/locales/fr/listings.json";
 import frMechanics from "../../public/locales/fr/mechanics.json";
@@ -20,16 +23,19 @@ const translations: Record<string, unknown> = {
   "en/auth": enAuth,
   "en/listings": enListings,
   "en/inspections": enInspections,
+  "en/identity": enIdentity,
   "en/mechanics": enMechanics,
   "fr/common": frCommon,
   "fr/auth": frAuth,
   "fr/listings": frListings,
   "fr/inspections": frInspections,
+  "fr/identity": frIdentity,
   "fr/mechanics": frMechanics,
   "ar/common": arCommon,
   "ar/auth": arAuth,
   "ar/listings": arListings,
   "ar/inspections": arInspections,
+  "ar/identity": arIdentity,
   "ar/mechanics": arMechanics,
 };
 
@@ -59,6 +65,21 @@ const apiCatalogs: Record<string, unknown> = {
       completed: "Completed",
       cancelled: "Cancelled",
     },
+    identity_challenge: {
+      look_straight: "Look straight at the camera",
+      turn_left: "Turn your head left",
+      turn_right: "Turn your head right",
+      look_up: "Look up",
+      look_down: "Look down",
+      smile: "Smile",
+      blink: "Blink twice",
+    },
+    identity_status: {
+      not_submitted: "Not checked",
+      pending: "Being checked",
+      approved: "Verified",
+      rejected: "Not verified",
+    },
     inspection_verdict: {
       excellent: "Excellent condition",
       good: "Good condition",
@@ -80,6 +101,8 @@ export const testUser = {
   isVerified: true,
   phone: "+212612345678",
   locale: "en",
+  phoneVerified: true,
+  identityStatus: "approved",
   role: "buyer",
 };
 

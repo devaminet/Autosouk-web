@@ -9,6 +9,9 @@ import { RegisterPage } from "../features/auth/pages/RegisterPage";
 import { ResetPasswordPage } from "../features/auth/pages/ResetPasswordPage";
 import { VerifyEmailPage } from "../features/auth/pages/VerifyEmailPage";
 import { SavedPage } from "../features/favorites/pages/SavedPage";
+import { RequireIdentity } from "../features/identity/components/RequireIdentity";
+import { IdentityCheckPage } from "../features/identity/pages/IdentityCheckPage";
+import { VerifyPhonePage } from "../features/identity/pages/VerifyPhonePage";
 import { InspectionQueuePage } from "../features/inspections/pages/InspectionQueuePage";
 import { InspectionReportPage } from "../features/inspections/pages/InspectionReportPage";
 import { MechanicPage } from "../features/mechanics/pages/MechanicPage";
@@ -54,9 +57,14 @@ export const routes: RouteObject[] = [
           {
             element: <RequireRole allowed="mechanic" />,
             children: [
-              { path: paths.workshop, element: <WorkshopProfilePage /> },
               { path: paths.inspections, element: <InspectionQueuePage /> },
-              { path: paths.inspectionReport, element: <InspectionReportPage /> },
+              {
+                element: <RequireIdentity />,
+                children: [
+                  { path: paths.workshop, element: <WorkshopProfilePage /> },
+                  { path: paths.inspectionReport, element: <InspectionReportPage /> },
+                ],
+              },
             ],
           },
           {
@@ -72,15 +80,28 @@ export const routes: RouteObject[] = [
           {
             element: <RequireRole allowed="seller" />,
             children: [
-              { path: paths.newListing, element: <NewListingPage /> },
-              { path: paths.draftListing, element: <DraftListingPage /> },
-              { path: paths.draftCar, element: <CarDetailsPage /> },
-              { path: paths.draftPhotos, element: <PhotosPage /> },
-              { path: paths.draftReview, element: <ReviewPage /> },
-              // Its confirm bar sticks to the bottom, where the tab bar would be.
-              { path: paths.listingMedia, element: <ListingMediaPage /> },
+              {
+                element: <RequireIdentity />,
+                children: [
+                  { path: paths.newListing, element: <NewListingPage /> },
+                  { path: paths.draftListing, element: <DraftListingPage /> },
+                  { path: paths.draftCar, element: <CarDetailsPage /> },
+                  { path: paths.draftPhotos, element: <PhotosPage /> },
+                  { path: paths.draftReview, element: <ReviewPage /> },
+                  // Its confirm bar sticks to the bottom, where the tab bar would be.
+                  { path: paths.listingMedia, element: <ListingMediaPage /> },
+                ],
+              },
             ],
           },
+        ],
+      },
+      {
+        // The phone and face checks after signing up, with their own header.
+        element: <RequireRole />,
+        children: [
+          { path: paths.verifyPhone, element: <VerifyPhonePage /> },
+          { path: paths.verifyIdentity, element: <IdentityCheckPage /> },
         ],
       },
       // Email links can open these whether or not someone is signed in.

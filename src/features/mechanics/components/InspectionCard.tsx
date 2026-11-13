@@ -11,6 +11,8 @@ import { formatNumber } from "../../../lib/format";
 import { paths } from "../../../lib/paths";
 import { useSession } from "../../auth/hooks";
 import { useSavedCarsInCity } from "../../favorites/hooks";
+import { isFullyVerified } from "../../identity/api";
+import { VerifyFirstLink } from "../../identity/components/VerifyFirstLink";
 import { useRequestInspection } from "../../inspections/hooks";
 import type { PublicMechanic } from "../api";
 import { ShareButton } from "./ShareButton";
@@ -70,6 +72,9 @@ export function InspectionCard({ mechanic, city }: InspectionCardProps) {
           {t("profile.loginToRequest")}
         </ButtonLink>
       );
+    }
+    if (!isFullyVerified(user)) {
+      return <VerifyFirstLink user={user} />;
     }
     if (send.isSuccess && chosen) {
       return (

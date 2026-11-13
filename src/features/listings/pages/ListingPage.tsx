@@ -16,6 +16,8 @@ import { SellerCard } from "../components/SellerCard";
 import { StatusBadge } from "../components/StatusBadge";
 import { useSession } from "../../auth/hooks";
 import { useListing, useLookups } from "../hooks";
+import { isFullyVerified } from "../../identity/api";
+import { VerifyFirstLink } from "../../identity/components/VerifyFirstLink";
 import { RequestInspectionDialog } from "../../inspections/components/RequestInspectionDialog";
 import { listingIdFrom } from "../useDraftFromRoute";
 
@@ -70,7 +72,9 @@ export function ListingPage() {
     const user = session.user;
     const inspection =
       car && listing.status === "approved" && (!user || user.role === "buyer") ? (
-        user ? (
+        user && !isFullyVerified(user) ? (
+          <VerifyFirstLink user={user} />
+        ) : user ? (
           <Button block onClick={() => setRequesting(true)} size="l" variant="primary">
             <Icon name="shield" size={18} />
             {t("listing.requestInspection")}

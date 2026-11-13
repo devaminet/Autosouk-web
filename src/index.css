@@ -85,6 +85,10 @@
   --spacing-map-l: 35rem;
   /* The score ring of the inspection report: size-score. */
   --spacing-score: 9.5rem;
+  /* The face check's oval guide (w-oval-w h-oval-h) and its camera view (h-camera). */
+  --spacing-oval-w: 15rem;
+  --spacing-oval-h: 19.75rem;
+  --spacing-camera: 33.5rem;
 
   /* Layout widths from Penpot's auth screens: max-w-auth. */
   --container-auth: 30rem;
@@ -94,6 +98,8 @@
   --container-filters: 20rem;
   /* Dialogs with a form, such as the inspection request. */
   --container-dialog: 40rem;
+  /* The face check card on wide screens, camera and steps side by side. */
+  --container-face-check: 65rem;
 
   /* Radius */
   --radius-*: initial;

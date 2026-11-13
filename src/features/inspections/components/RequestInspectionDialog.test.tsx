@@ -18,10 +18,10 @@ const garage = (mechanicId: number, name: string, changes: Record<string, unknow
   ...changes,
 });
 
-const signIn = (role = "buyer") =>
+const signIn = (role = "buyer", identityStatus = "approved") =>
   server.use(
     http.post("*/api/auth/refresh-token", () =>
-      HttpResponse.json({ accessToken: "token", user: { ...testUser, role } }),
+      HttpResponse.json({ accessToken: "token", user: { ...testUser, role, identityStatus } }),
     ),
   );
 
@@ -156,6 +156,15 @@ describe("RequestInspectionDialog", () => {
     }
     expect(router.state.location.pathname).toBe("/login");
     expect(router.state.location.state).toEqual({ from: "/listings/7" });
+  });
+
+  it("asks a buyer to verify their identity first", async () => {
+    signIn("buyer", "pending");
+    renderListing();
+
+    const [link] = await screen.findAllByRole("link", { name: "Verify your identity first" });
+    expect(link).toHaveAttribute("href", "/verify-identity");
+    expect(screen.queryByRole("button", { name: "Request an inspection" })).not.toBeInTheDocument();
   });
 
   it("is not offered to sellers", async () => {

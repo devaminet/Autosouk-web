@@ -43,7 +43,8 @@ const reportApi = ({
     http.put("*/api/inspections/41/draft", async ({ request }) => {
       const body = await request.json();
       drafts.push(body);
-      return HttpResponse.json({ reportDraft: body, reportDraftSavedAt: "2026-11-08T14:02:00.000Z" });
+      // Saved now, so the page says "Today" whatever day the tests run.
+      return HttpResponse.json({ reportDraft: body, reportDraftSavedAt: new Date().toISOString() });
     }),
     http.post("*/api/inspections/41/report", async ({ request }) => {
       reports.push(await request.json());

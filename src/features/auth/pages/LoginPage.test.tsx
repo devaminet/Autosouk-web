@@ -30,6 +30,27 @@ describe("LoginPage", () => {
     expect(router.state.location.pathname).toBe("/");
   });
 
+  it("sends a new account to check its phone first", async () => {
+    const user = userEvent.setup();
+    server.use(
+      http.post("*/api/auth/login", () =>
+        HttpResponse.json({
+          accessToken: "token",
+          user: { ...testUser, phoneVerified: false, identityStatus: "not_submitted" },
+        }),
+      ),
+      http.post("*/api/auth/phone/code", () =>
+        HttpResponse.json({ phone: testUser.phone, expiresAt: new Date().toISOString(), resendAt: new Date().toISOString() }),
+      ),
+    );
+    const router = renderApp("/login");
+
+    await logIn(user);
+
+    expect(await screen.findByRole("heading", { name: "Check your phone" })).toBeInTheDocument();
+    expect(router.state.location.pathname).toBe("/verify-phone");
+  });
+
   it("shows the API's message when the credentials are wrong", async () => {
     const user = userEvent.setup();
     server.use(

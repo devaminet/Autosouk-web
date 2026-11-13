@@ -1,0 +1,88 @@
+{
+  "steps": {
+    "phone": "Étape 2 sur 4 · Téléphone",
+    "face": "Étape 3 sur 4 · Vérification du visage",
+    "review": "Étape 4 sur 4 · Vérification",
+    "faceShort": "Vérification du visage"
+  },
+  "logOut": "Se déconnecter",
+  "phone": {
+    "pageTitle": "Vérifiez votre téléphone",
+    "title": "Vérifiez votre téléphone",
+    "description": "Saisissez le code à 6 chiffres envoyé par SMS au {{phone}}. Un numéro de téléphone ne peut avoir qu'un seul compte AutoSouk.",
+    "sending": "Envoi d'un code au {{phone}}…",
+    "codeLabel": "Code envoyé au {{phone}}",
+    "digit": "Chiffre {{position}} sur {{total}}",
+    "resendIn": "Renvoyer dans",
+    "resend": "Envoyer un nouveau code",
+    "confirm": "Confirmer"
+  },
+  "face": {
+    "pageTitle": "Vérification du visage",
+    "introTitle": "Montrez-nous que c'est bien vous",
+    "introDescription": "Enregistrez une courte vidéo de votre visage en suivant 4 instructions rapides. Un administrateur AutoSouk la vérifie à la main.",
+    "tips": {
+      "time": "Environ 1 minute, avec la caméra avant",
+      "light": "Bonne lumière, visage dégagé, sans lunettes de soleil ni casquette",
+      "privacy": "Seuls les administrateurs AutoSouk voient la vidéo. Nous la supprimons après la vérification."
+    },
+    "consent": "J'accepte qu'AutoSouk enregistre ma vidéo et la compare à mon compte.",
+    "consentRequired": "Cochez la case pour donner votre accord.",
+    "start": "Démarrer la caméra",
+    "attemptsLeft_one": "{{count}} essai restant",
+    "attemptsLeft_other": "{{count}} essais restants",
+    "cameraBlocked": "Nous ne pouvons pas utiliser votre caméra. Autorisez-la dans les réglages du navigateur, puis réessayez.",
+    "noRecorder": "Votre navigateur ne peut pas enregistrer de vidéo. Essayez un autre navigateur.",
+    "cameraTitle": "Suivez les instructions",
+    "cameraDescription": "Gardez votre visage dans l'ovale. L'enregistrement s'arrête seul après la dernière étape.",
+    "challengeCount": "Instruction {{current}} sur {{total}}",
+    "recording": "Enregistrement",
+    "stepsLabel": "Instructions",
+    "stepDone": "fait",
+    "stepCurrent": "en cours",
+    "cancel": "Annuler",
+    "reviewTitle": "Vérifiez votre vidéo",
+    "reviewDescription": "Regardez-la une fois : votre visage doit être net à chaque étape.",
+    "videoLabel": "Votre vidéo",
+    "send": "Envoyer pour vérification",
+    "recordAgain": "Recommencer",
+    "uploadingTitle": "Envoi de votre vidéo",
+    "uploadingDescription": "Gardez cette page ouverte jusqu'à la fin. Cela prend quelques secondes.",
+    "uploadProgress": "Progression de l'envoi",
+    "uploadFailed": "La vidéo n'est pas arrivée. Vérifiez votre connexion et envoyez-la à nouveau.",
+    "pendingTitle": "Nous vérifions votre vidéo",
+    "pendingDescription": "Un administrateur AutoSouk la vérifie à la main, généralement sous 24 heures. Nous vous enverrons un e-mail.",
+    "whileYouWait": "En attendant",
+    "whileYouWaitDescription": "Vous pouvez parcourir et enregistrer des voitures. La vente et les inspections s'ouvrent une fois vérifié.",
+    "browse": "Parcourir les voitures",
+    "rejectedTitle": "Nous n'avons pas pu vous vérifier",
+    "rejectedDescription": "Votre compte reste limité tant qu'une vidéo n'est pas validée. Enregistrez-la à nouveau avec une bonne lumière.",
+    "reasonTitle": "Raison de l'administrateur",
+    "noAttempts": "Vous avez utilisé tous vos essais. Contactez le support pour vérifier votre identité."
+  },
+  "banner": {
+    "actionTitle": "Vérifiez votre identité",
+    "actionDescription": "Vérifiez votre téléphone et enregistrez une courte vidéo pour vendre, demander des inspections et inspecter.",
+    "start": "Commencer",
+    "pendingTitle": "Nous vérifions votre identité",
+    "pendingDescription": "Généralement sous 24 heures. Vous pouvez naviguer en attendant.",
+    "rejectedTitle": "Nous n'avons pas pu vérifier votre identité",
+    "rejectedDescription": "Enregistrez à nouveau votre vidéo pour débloquer tout AutoSouk.",
+    "tryAgain": "Réessayer"
+  },
+  "required": {
+    "title": "Vérifiez d'abord votre identité",
+    "description": "Pour la sécurité d'AutoSouk, la vente, les inspections et les avis s'ouvrent une fois votre téléphone et votre vidéo vérifiés.",
+    "action": "Vérifier mon identité",
+    "locked": "Vérifiez d'abord votre identité"
+  },
+  "account": {
+    "title": "Identité et sécurité",
+    "description": "Qui vous êtes sur AutoSouk et comment votre compte est protégé.",
+    "phone": "Numéro de téléphone",
+    "phoneVerified": "Vérifié",
+    "phoneNotVerified": "Non vérifié",
+    "identity": "Vérification du visage",
+    "continue": "Continuer"
+  }
+}

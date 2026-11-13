@@ -10,10 +10,12 @@ import { LogOutSection } from "../components/account/LogOutSection";
 import { PersonalInfoSection } from "../components/account/PersonalInfoSection";
 import { ProfilePhotoSection } from "../components/account/ProfilePhotoSection";
 import { WorkshopSection } from "../components/account/WorkshopSection";
+import { IdentitySection } from "../../identity/components/IdentitySection";
 import { useSession } from "../hooks";
 
 const sections: { id: string; icon: IconName; label: string }[] = [
   { id: "profile", icon: "user", label: "account.nav.profile" },
+  { id: "identity", icon: "shield", label: "account.nav.identity" },
   { id: "language", icon: "globe", label: "account.nav.language" },
   { id: "security", icon: "lock", label: "account.nav.security" },
   { id: "log-out", icon: "logout", label: "account.nav.logOut" },
@@ -26,15 +28,23 @@ const mechanicSections: typeof sections = [
   ...sections.slice(1),
 ];
 
+// Admins don't take the phone and face checks.
+const adminSections = sections.filter(({ id }) => id !== "identity");
+
 const sectionIds = sections.map(({ id }) => id);
 const mechanicSectionIds = mechanicSections.map(({ id }) => id);
+const adminSectionIds = adminSections.map(({ id }) => id);
 
 // The signed-in user's settings. RequireRole makes sure there is a user.
 export function AccountPage() {
   const { t } = useTranslation("auth");
   const { user } = useSession();
   const isMechanic = user?.role === "mechanic";
-  const { active, choose } = useActiveSection(isMechanic ? mechanicSectionIds : sectionIds);
+  const isAdmin = user?.role === "admin";
+  const shown = isMechanic ? mechanicSections : isAdmin ? adminSections : sections;
+  const { active, choose } = useActiveSection(
+    isMechanic ? mechanicSectionIds : isAdmin ? adminSectionIds : sectionIds,
+  );
 
   if (!user) {
     return null;
@@ -52,7 +62,7 @@ export function AccountPage() {
           aria-label={t("account.nav.label")}
           className="hidden w-3xs shrink-0 flex-col gap-4 md:sticky md:top-24 md:flex"
         >
-          {(isMechanic ? mechanicSections : sections).map(({ id, icon, label }) => {
+          {shown.map(({ id, icon, label }) => {
             const current = id === active;
             return (
               // ScrollRestoration resets the scroll after a plain hash link,
@@ -76,6 +86,7 @@ export function AccountPage() {
             <ProfilePhotoSection id="profile-photo" user={user} />
             <PersonalInfoSection id="personal" user={user} />
           </div>
+          {!isAdmin && <IdentitySection id="identity" user={user} />}
           {isMechanic && <WorkshopSection id="workshop" />}
           <LanguageSection id="language" user={user} />
           <ChangePasswordSection id="security" user={user} />
