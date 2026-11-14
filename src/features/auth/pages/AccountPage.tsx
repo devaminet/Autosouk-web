@@ -9,6 +9,7 @@ import { LanguageSection } from "../components/account/LanguageSection";
 import { LogOutSection } from "../components/account/LogOutSection";
 import { PersonalInfoSection } from "../components/account/PersonalInfoSection";
 import { ProfilePhotoSection } from "../components/account/ProfilePhotoSection";
+import { SignInSecuritySection } from "../components/account/SignInSecuritySection";
 import { WorkshopSection } from "../components/account/WorkshopSection";
 import { IdentitySection } from "../../identity/components/IdentitySection";
 import { useSession } from "../hooks";
@@ -28,12 +29,8 @@ const mechanicSections: typeof sections = [
   ...sections.slice(1),
 ];
 
-// Admins don't take the phone and face checks.
-const adminSections = sections.filter(({ id }) => id !== "identity");
-
 const sectionIds = sections.map(({ id }) => id);
 const mechanicSectionIds = mechanicSections.map(({ id }) => id);
-const adminSectionIds = adminSections.map(({ id }) => id);
 
 // The signed-in user's settings. RequireRole makes sure there is a user.
 export function AccountPage() {
@@ -41,10 +38,8 @@ export function AccountPage() {
   const { user } = useSession();
   const isMechanic = user?.role === "mechanic";
   const isAdmin = user?.role === "admin";
-  const shown = isMechanic ? mechanicSections : isAdmin ? adminSections : sections;
-  const { active, choose } = useActiveSection(
-    isMechanic ? mechanicSectionIds : isAdmin ? adminSectionIds : sectionIds,
-  );
+  const shown = isMechanic ? mechanicSections : sections;
+  const { active, choose } = useActiveSection(isMechanic ? mechanicSectionIds : sectionIds);
 
   if (!user) {
     return null;
@@ -86,7 +81,11 @@ export function AccountPage() {
             <ProfilePhotoSection id="profile-photo" user={user} />
             <PersonalInfoSection id="personal" user={user} />
           </div>
-          {!isAdmin && <IdentitySection id="identity" user={user} />}
+          <div className="flex scroll-mt-24 flex-col gap-24" id="identity">
+            {/* Admins don't take the phone and face checks. */}
+            {!isAdmin && <IdentitySection id="identity-checks" user={user} />}
+            <SignInSecuritySection id="sign-in" user={user} />
+          </div>
           {isMechanic && <WorkshopSection id="workshop" />}
           <LanguageSection id="language" user={user} />
           <ChangePasswordSection id="security" user={user} />

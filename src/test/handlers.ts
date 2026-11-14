@@ -103,6 +103,8 @@ export const testUser = {
   locale: "en",
   phoneVerified: true,
   identityStatus: "approved",
+  twoFactorEnabled: false,
+  twoFactorRequired: false,
   role: "buyer",
 };
 

@@ -1,6 +1,8 @@
 {
   "loading": "Chargement…",
-  "language": { "label": "Langue" },
+  "language": {
+    "label": "Langue"
+  },
   "errors": {
     "network": "Impossible de joindre AutoSouk pour le moment. Vérifiez votre connexion et réessayez.",
     "unexpected": "Une erreur est survenue. Veuillez réessayer."
@@ -45,5 +47,8 @@
     "title": "Une erreur est survenue",
     "description": "Rechargez la page pour réessayer.",
     "home": "Retour à l'accueil"
+  },
+  "otp": {
+    "digit": "Chiffre {{position}} sur {{total}}"
   }
 }

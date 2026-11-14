@@ -5,6 +5,7 @@ import { Navigate, useNavigate } from "react-router";
 import { Alert } from "../../../components/Alert";
 import { Button } from "../../../components/Button";
 import { Icon } from "../../../components/Icon";
+import { OtpInput } from "../../../components/OtpInput";
 import { PageTitle } from "../../../components/PageTitle";
 import { useCountdown } from "../../../hooks/useCountdown";
 import { ApiError } from "../../../lib/api/client";
@@ -14,7 +15,7 @@ import { AuthHeading } from "../../auth/components/AuthHeading";
 import { AuthShell } from "../../auth/components/AuthShell";
 import { IconCircle } from "../../auth/components/IconCircle";
 import { useSession } from "../../auth/hooks";
-import { OtpInput } from "../components/OtpInput";
+
 import { StepAction } from "../components/StepAction";
 import { useSendPhoneCode, useVerifyPhoneCode } from "../hooks";
 import { maskPhone } from "../recording";
@@ -44,7 +45,9 @@ export function VerifyPhonePage() {
   const [code, setCode] = useState("");
   const { remaining, startFrom } = useCountdown(0);
   const asked = useRef(false);
-  const needsCode = Boolean(user && user.role !== "admin" && !user.phoneVerified);
+  // Admins don't have to, but verify their phone to get two-step sign-in.
+  const needsCode = Boolean(user && !user.phoneVerified);
+  const next = user?.role === "admin" ? paths.account : paths.verifyIdentity;
 
   const ask = useCallback(() => {
     sendCode(undefined, {
@@ -70,7 +73,7 @@ export function VerifyPhonePage() {
     return null;
   }
   if (!needsCode) {
-    return <Navigate replace to={user.role === "admin" ? paths.home : paths.verifyIdentity} />;
+    return <Navigate replace to={next} />;
   }
 
   const phone = maskPhone(user.phone);
@@ -78,7 +81,7 @@ export function VerifyPhonePage() {
 
   const submit = (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
-    verify.mutate(code, { onSuccess: () => void navigate(paths.verifyIdentity) });
+    verify.mutate(code, { onSuccess: () => void navigate(next) });
   };
 
   return (

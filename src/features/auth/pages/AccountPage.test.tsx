@@ -1,7 +1,7 @@
 import { screen, within } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 import { delay, http, HttpResponse } from "msw";
-import { describe, expect, it } from "vitest";
+import { describe, expect, it, vi } from "vitest";
 import { server } from "../../../test/bootstrap";
 import { apiErrors, storageResponse, testUser } from "../../../test/handlers";
 import { renderApp } from "../../../test/renderApp";
@@ -263,5 +263,57 @@ describe("AccountPage", () => {
     expect(await screen.findByRole("region", { name: "Personal information" })).toBeInTheDocument();
     expect(screen.queryByRole("region", { name: "Your workshop" })).not.toBeInTheDocument();
   });
-});
 
+  it("turns two-step sign-in on and signs another device out", async () => {
+    signIn();
+    const changes: unknown[] = [];
+    let signedOut = false;
+    server.use(
+      http.get("*/api/auth/devices", () =>
+        HttpResponse.json({
+          devices: [
+            { id: 1, label: "Chrome on Windows", ipAddress: "1.2.3.4", createdAt: "2026-11-01T10:00:00.000Z", lastSeenAt: new Date().toISOString(), current: true },
+            ...(signedOut
+              ? []
+              : [{ id: 2, label: "Safari on iOS", ipAddress: null, createdAt: "2026-11-02T10:00:00.000Z", lastSeenAt: "2026-11-10T10:00:00.000Z", current: false }]),
+          ],
+        }),
+      ),
+      http.delete("*/api/auth/devices/2", () => {
+        signedOut = true;
+        return new HttpResponse(null, { status: 204 });
+      }),
+      http.patch("*/api/auth/two-factor", async ({ request }) => {
+        const body = (await request.json()) as { enabled: boolean };
+        changes.push(body);
+        return HttpResponse.json({ user: { ...testUser, twoFactorEnabled: body.enabled } });
+      }),
+    );
+    const user = userEvent.setup();
+    renderApp("/account");
+
+    const section = within(await screen.findByRole("region", { name: "Sign-in security" }));
+    const toggle = section.getByRole("switch", { name: "Two-step sign-in" });
+    expect(toggle).not.toBeChecked();
+    await user.click(toggle);
+    expect(await section.findByRole("switch", { name: "Two-step sign-in" })).toBeChecked();
+    expect(changes).toEqual([{ enabled: true }]);
+
+    expect(await section.findByText("Safari on iOS")).toBeInTheDocument();
+    expect(section.getByText("Chrome on Windows").closest("li")).toHaveTextContent("This device");
+    await user.click(section.getByRole("button", { name: "Sign out Safari on iOS" }));
+    await vi.waitFor(() => expect(section.queryByText("Safari on iOS")).not.toBeInTheDocument());
+  });
+
+  it("keeps two-step sign-in on for mechanics", async () => {
+    signIn({ role: "mechanic", twoFactorEnabled: true, twoFactorRequired: true });
+    server.use(http.get("*/api/auth/devices", () => HttpResponse.json({ devices: [] })));
+    renderApp("/account");
+
+    const section = within(await screen.findByRole("region", { name: "Sign-in security" }));
+    const toggle = section.getByRole("switch", { name: "Two-step sign-in" });
+    expect(toggle).toBeChecked();
+    expect(toggle).toBeDisabled();
+    expect(section.getByText("Always on for mechanics and admins.")).toBeInTheDocument();
+  });
+});

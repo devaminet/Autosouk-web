@@ -1,6 +1,8 @@
 {
   "loading": "Loading…",
-  "language": { "label": "Language" },
+  "language": {
+    "label": "Language"
+  },
   "errors": {
     "network": "We can't reach AutoSouk right now. Check your connection and try again.",
     "unexpected": "Something went wrong. Please try again."
@@ -45,5 +47,8 @@
     "title": "Something went wrong",
     "description": "Reload the page to try again.",
     "home": "Back to home"
+  },
+  "otp": {
+    "digit": "Digit {{position}} of {{total}}"
   }
 }

@@ -12,7 +12,6 @@
     "description": "Saisissez le code à 6 chiffres envoyé par SMS au {{phone}}. Un numéro de téléphone ne peut avoir qu'un seul compte AutoSouk.",
     "sending": "Envoi d'un code au {{phone}}…",
     "codeLabel": "Code envoyé au {{phone}}",
-    "digit": "Chiffre {{position}} sur {{total}}",
     "resendIn": "Renvoyer dans",
     "resend": "Envoyer un nouveau code",
     "confirm": "Confirmer"

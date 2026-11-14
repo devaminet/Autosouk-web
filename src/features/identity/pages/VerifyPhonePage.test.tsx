@@ -1,7 +1,7 @@
 import { screen, within } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 import { http, HttpResponse } from "msw";
-import { describe, expect, it } from "vitest";
+import { describe, expect, it, vi } from "vitest";
 import { server } from "../../../test/bootstrap";
 import { apiErrors, testUser } from "../../../test/handlers";
 import { renderApp } from "../../../test/renderApp";
@@ -109,5 +109,21 @@ describe("VerifyPhonePage", () => {
 
     expect(await screen.findByRole("heading", { name: "We're checking your video" })).toBeInTheDocument();
     expect(router.state.location.pathname).toBe("/verify-identity");
+  });
+
+  it("lets an admin verify their phone, for two-step sign-in", async () => {
+    phoneApi();
+    server.use(
+      http.post("*/api/auth/refresh-token", () =>
+        HttpResponse.json({ accessToken: "token", user: { ...newUser, role: "admin" } }),
+      ),
+    );
+    const user = userEvent.setup();
+    const router = renderApp("/verify-phone");
+
+    await user.type(await screen.findByRole("textbox", { name: "Digit 1 of 6" }), "482619");
+    await user.click(screen.getByRole("button", { name: "Confirm" }));
+
+    await vi.waitFor(() => expect(router.state.location.pathname).toBe("/account"));
   });
 });

@@ -17,7 +17,7 @@ const digitsOnly = (text: string) => text.replace(/\D/gu, "");
 // One box per digit. Typing moves to the next box, Backspace to the previous
 // one, and pasting a whole code fills every box.
 export function OtpInput({ value, onChange, label, error, hint, length = 6 }: OtpInputProps) {
-  const { t } = useTranslation("identity");
+  const { t } = useTranslation();
   const boxes = useRef<(HTMLInputElement | null)[]>([]);
   const errorId = useId();
   const hintId = useId();
@@ -73,7 +73,7 @@ export function OtpInput({ value, onChange, label, error, hint, length = 6 }: Ot
           return (
           <input
             aria-invalid={Boolean(error)}
-            aria-label={t("phone.digit", { position, total: length })}
+            aria-label={t("otp.digit", { position, total: length })}
             autoComplete={index === 0 ? "one-time-code" : "off"}
             className={`h-control-l w-48 rounded-md border bg-surface text-center type-h3 text-ink focus:border-brand focus:shadow-focus focus:outline-none ${error ? "border-danger" : "border-line-strong"}`}
             inputMode="numeric"

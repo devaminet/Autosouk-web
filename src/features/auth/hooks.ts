@@ -1,7 +1,13 @@
-import { useMutation, useQuery } from "@tanstack/react-query";
+import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import { useTranslation } from "react-i18next";
 import {
   changePassword,
+  completeTwoFactor,
+  getDevices,
+  isChallenge,
+  resendTwoFactorCode,
+  setTwoFactor,
+  signOutDevice,
   getCities,
   login,
   logout,
@@ -11,7 +17,7 @@ import {
   setNewPassword,
 } from "./api";
 import type { RegisterInput } from "./api";
-import { endSession, refreshSession, sessionKey, startSession } from "./session";
+import { endSession, refreshSession, sessionKey, startSession, updateSessionUser } from "./session";
 
 export const useSession = () => {
   const session = useQuery({
@@ -24,8 +30,39 @@ export const useSession = () => {
   return { user: session.data ?? null, isPending: session.isPending };
 };
 
+// Starts the session at once, unless the API asks for a code first.
 export const useLogin = () =>
-  useMutation({ mutationFn: login, onSuccess: startSession });
+  useMutation({
+    mutationFn: login,
+    onSuccess: (result) => {
+      if (!isChallenge(result)) {
+        startSession(result);
+      }
+    },
+  });
+
+export const useCompleteTwoFactor = () =>
+  useMutation({ mutationFn: completeTwoFactor, onSuccess: startSession });
+
+export const useResendTwoFactorCode = () => useMutation({ mutationFn: resendTwoFactorCode });
+
+const devicesKey = ["devices"];
+
+export const useDevices = () => useQuery({ queryKey: devicesKey, queryFn: getDevices });
+
+export const useSignOutDevice = () => {
+  const queryClient = useQueryClient();
+  return useMutation({
+    mutationFn: signOutDevice,
+    onSuccess: () => queryClient.invalidateQueries({ queryKey: devicesKey }),
+  });
+};
+
+export const useSetTwoFactor = () =>
+  useMutation({
+    mutationFn: setTwoFactor,
+    onSuccess: (user) => updateSessionUser({ twoFactorEnabled: user.twoFactorEnabled }),
+  });
 
 export const useLogout = () =>
   useMutation({ mutationFn: logout, onSuccess: endSession });
