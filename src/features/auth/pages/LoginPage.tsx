@@ -22,7 +22,7 @@ import { rawValue } from "../formValues";
 import { isChallenge } from "../api";
 import type { TwoFactorChallenge } from "../api";
 import { TwoFactorStep } from "../components/TwoFactorStep";
-import { useLogin, useResendVerification } from "../hooks";
+import { useLogin, useResendVerification, useSessionRevoked } from "../hooks";
 
 const fields = ["email", "password"];
 
@@ -39,6 +39,7 @@ export function LoginPage() {
   const login = useLogin();
   const resend = useResendVerification();
   const notice = noticeSchema.safeParse(location.state);
+  const revoked = useSessionRevoked();
 
   const error = login.error ?? resend.error;
   useFocusFirstInvalid(form, error);
@@ -99,6 +100,7 @@ export function LoginPage() {
           <AuthHeading title={t("login.title")} description={t("login.description")} />
           <output className="block empty:hidden">
             {notice.success && <Alert tone="success">{notice.data.notice}</Alert>}
+            {revoked && !notice.success && <Alert tone="info">{t("login.sessionEnded")}</Alert>}
           </output>
           <form
             className="flex flex-col gap-24"

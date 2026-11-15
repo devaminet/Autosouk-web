@@ -5,6 +5,7 @@ import { afterAll, afterEach, beforeEach } from "vitest";
 import { setAccessToken } from "../lib/api/client";
 import i18n from "../lib/i18n";
 import { queryClient } from "../lib/queryClient";
+import { FakeEventSource } from "./eventSource";
 
 // jsdom has the dialog element but not these methods.
 HTMLDialogElement.prototype.showModal = function showModal() {
@@ -26,6 +27,8 @@ URL.createObjectURL = () => {
 };
 URL.revokeObjectURL = () => undefined;
 
+globalThis.EventSource = FakeEventSource as unknown as typeof EventSource;
+
 beforeEach(async () => {
   await i18n.changeLanguage("en");
 });
@@ -35,6 +38,7 @@ afterEach(() => {
   server.resetHandlers();
   queryClient.clear();
   setAccessToken(null);
+  FakeEventSource.instances = [];
 });
 
 afterAll(() => {
