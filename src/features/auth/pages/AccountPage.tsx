@@ -9,11 +9,14 @@ import { LanguageSection } from "../components/account/LanguageSection";
 import { LogOutSection } from "../components/account/LogOutSection";
 import { PersonalInfoSection } from "../components/account/PersonalInfoSection";
 import { ProfilePhotoSection } from "../components/account/ProfilePhotoSection";
+import { SignInSecuritySection } from "../components/account/SignInSecuritySection";
 import { WorkshopSection } from "../components/account/WorkshopSection";
+import { IdentitySection } from "../../identity/components/IdentitySection";
 import { useSession } from "../hooks";
 
 const sections: { id: string; icon: IconName; label: string }[] = [
   { id: "profile", icon: "user", label: "account.nav.profile" },
+  { id: "identity", icon: "shield", label: "account.nav.identity" },
   { id: "language", icon: "globe", label: "account.nav.language" },
   { id: "security", icon: "lock", label: "account.nav.security" },
   { id: "log-out", icon: "logout", label: "account.nav.logOut" },
@@ -34,6 +37,8 @@ export function AccountPage() {
   const { t } = useTranslation("auth");
   const { user } = useSession();
   const isMechanic = user?.role === "mechanic";
+  const isAdmin = user?.role === "admin";
+  const shown = isMechanic ? mechanicSections : sections;
   const { active, choose } = useActiveSection(isMechanic ? mechanicSectionIds : sectionIds);
 
   if (!user) {
@@ -52,7 +57,7 @@ export function AccountPage() {
           aria-label={t("account.nav.label")}
           className="hidden w-3xs shrink-0 flex-col gap-4 md:sticky md:top-24 md:flex"
         >
-          {(isMechanic ? mechanicSections : sections).map(({ id, icon, label }) => {
+          {shown.map(({ id, icon, label }) => {
             const current = id === active;
             return (
               // ScrollRestoration resets the scroll after a plain hash link,
@@ -75,6 +80,11 @@ export function AccountPage() {
           <div className="flex scroll-mt-24 flex-col gap-24" id="profile">
             <ProfilePhotoSection id="profile-photo" user={user} />
             <PersonalInfoSection id="personal" user={user} />
+          </div>
+          <div className="flex scroll-mt-24 flex-col gap-24" id="identity">
+            {/* Admins don't take the phone and face checks. */}
+            {!isAdmin && <IdentitySection id="identity-checks" user={user} />}
+            <SignInSecuritySection id="sign-in" user={user} />
           </div>
           {isMechanic && <WorkshopSection id="workshop" />}
           <LanguageSection id="language" user={user} />

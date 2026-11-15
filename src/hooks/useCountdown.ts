@@ -16,6 +16,8 @@ export const useCountdown = (seconds: number) => {
   }, [running]);
 
   const restart = useCallback(() => setRemaining(seconds), [seconds]);
+  // Starts again from another number of seconds, such as one the API gave.
+  const startFrom = useCallback((next: number) => setRemaining(Math.max(0, Math.ceil(next))), []);
 
-  return { remaining, restart };
+  return { remaining, restart, startFrom };
 };

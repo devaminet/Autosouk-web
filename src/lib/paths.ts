@@ -10,6 +10,9 @@ export const paths = {
   resetPassword: "/reset-password",
   forgotPassword: "/forgot-password",
   account: "/account",
+  // The phone and face checks every account passes after signing up.
+  verifyPhone: "/verify-phone",
+  verifyIdentity: "/verify-identity",
   // The buyer's saved listings. Its filter lives in the query string.
   saved: "/saved",
   // The garages of a city, best rated first. The city and page live in the query string.

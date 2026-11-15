@@ -1,5 +1,6 @@
 import { Outlet } from "react-router";
 import { useSession } from "../features/auth/hooks";
+import { VerificationBanner } from "../features/identity/components/VerificationBanner";
 import { AppHeader } from "./AppHeader";
 import { MobileTabBar } from "./MobileTabBar";
 
@@ -14,6 +15,7 @@ export function AppLayout({ focusedOnMobile = false }: AppLayoutProps) {
   return (
     <div className="flex min-h-dvh flex-col">
       <AppHeader hideOnMobile={focusedOnMobile} />
+      {user && <VerificationBanner user={user} />}
       <main className="flex flex-1 flex-col outline-none" tabIndex={-1}>
         <Outlet />
       </main>

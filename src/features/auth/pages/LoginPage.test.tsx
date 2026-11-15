@@ -1,4 +1,4 @@
-import { screen } from "@testing-library/react";
+import { screen, within } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 import { http, HttpResponse } from "msw";
 import { describe, expect, it } from "vitest";
@@ -28,6 +28,96 @@ describe("LoginPage", () => {
       await screen.findByText("Salam, Amine"),
     ).toBeInTheDocument();
     expect(router.state.location.pathname).toBe("/");
+  });
+
+  it("sends a new account to check its phone first", async () => {
+    const user = userEvent.setup();
+    server.use(
+      http.post("*/api/auth/login", () =>
+        HttpResponse.json({
+          accessToken: "token",
+          user: { ...testUser, phoneVerified: false, identityStatus: "not_submitted" },
+        }),
+      ),
+      http.post("*/api/auth/phone/code", () =>
+        HttpResponse.json({ phone: testUser.phone, expiresAt: new Date().toISOString(), resendAt: new Date().toISOString() }),
+      ),
+    );
+    const router = renderApp("/login");
+
+    await logIn(user);
+
+    expect(await screen.findByRole("heading", { name: "Check your phone" })).toBeInTheDocument();
+    expect(router.state.location.pathname).toBe("/verify-phone");
+  });
+
+  it("asks for the texted code on a new device", async () => {
+    const user = userEvent.setup();
+    const codes: unknown[] = [];
+    server.use(
+      http.post("*/api/auth/login", () =>
+        HttpResponse.json({
+          twoFactorRequired: true,
+          challengeToken: "c".repeat(64),
+          phoneHint: "•• 78",
+          expiresAt: new Date(Date.now() + 600_000).toISOString(),
+        }),
+      ),
+      http.post("*/api/auth/login/two-factor", async ({ request }) => {
+        const body = (await request.json()) as { code: string };
+        codes.push(body);
+        return body.code === "482619"
+          ? HttpResponse.json({ accessToken: "token", user: testUser })
+          : apiErrors(400, { code: "auth.phone_code_invalid", message: "That code is wrong. Tries left: 2" });
+      }),
+    );
+    const router = renderApp("/login");
+
+    await logIn(user);
+    expect(await screen.findByRole("heading", { name: "Check your phone" })).toBeInTheDocument();
+    expect(screen.getByText(/the phone ending/u)).toHaveTextContent("•• 78");
+    const code = screen.getByRole("group", { name: "Sign-in code" });
+
+    await user.type(within(code).getByRole("textbox", { name: "Digit 1 of 6" }), "000000");
+    await user.click(screen.getByRole("button", { name: "Sign in" }));
+    expect(await screen.findByText("That code is wrong. Tries left: 2")).toBeInTheDocument();
+
+    await user.type(within(code).getByRole("textbox", { name: "Digit 1 of 6" }), "482619");
+    await user.click(screen.getByRole("button", { name: "Sign in" }));
+
+    expect(await screen.findByText("Salam, Amine")).toBeInTheDocument();
+    expect(router.state.location.pathname).toBe("/");
+    expect(codes).toEqual([
+      { challengeToken: "c".repeat(64), code: "000000" },
+      { challengeToken: "c".repeat(64), code: "482619" },
+    ]);
+  });
+
+  it("goes back to the password when the sign-in expired", async () => {
+    const user = userEvent.setup();
+    server.use(
+      http.post("*/api/auth/login", () =>
+        HttpResponse.json({
+          twoFactorRequired: true,
+          challengeToken: "c".repeat(64),
+          phoneHint: "•• 78",
+          expiresAt: new Date().toISOString(),
+        }),
+      ),
+      http.post("*/api/auth/login/two-factor", () =>
+        apiErrors(400, { code: "auth.two_factor_expired", message: "This sign-in code expired or was used up. Log in again" }),
+      ),
+    );
+    renderApp("/login");
+
+    await logIn(user);
+    await user.type(await screen.findByRole("textbox", { name: "Digit 1 of 6" }), "123456");
+    await user.click(screen.getByRole("button", { name: "Sign in" }));
+
+    expect(await screen.findByRole("alert")).toHaveTextContent("This sign-in code expired");
+    expect(screen.getByRole("button", { name: "Sign in" })).toBeDisabled();
+    await user.click(screen.getByRole("button", { name: "Back to log in" }));
+    expect(screen.getByRole("heading", { name: "Welcome back" })).toBeInTheDocument();
   });
 
   it("shows the API's message when the credentials are wrong", async () => {

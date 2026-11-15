@@ -1,0 +1,87 @@
+{
+  "steps": {
+    "phone": "Step 2 of 4 · Phone",
+    "face": "Step 3 of 4 · Face check",
+    "review": "Step 4 of 4 · Review",
+    "faceShort": "Face check"
+  },
+  "logOut": "Log out",
+  "phone": {
+    "pageTitle": "Check your phone",
+    "title": "Check your phone",
+    "description": "Enter the 6-digit code we texted to {{phone}}. One phone number can only have one AutoSouk account.",
+    "sending": "Sending a code to {{phone}}…",
+    "codeLabel": "Code sent to {{phone}}",
+    "resendIn": "Resend in",
+    "resend": "Send a new code",
+    "confirm": "Confirm"
+  },
+  "face": {
+    "pageTitle": "Face check",
+    "introTitle": "Show us it's really you",
+    "introDescription": "Record a short video of your face while you follow 4 quick instructions. An AutoSouk admin checks it by hand.",
+    "tips": {
+      "time": "About 1 minute, with the front camera",
+      "light": "Good light, face uncovered, no sunglasses or cap",
+      "privacy": "Only AutoSouk admins see the video. We delete it after the check."
+    },
+    "consent": "I agree that AutoSouk records my face video and checks it against my account.",
+    "consentRequired": "Tick the box to agree first.",
+    "start": "Start the camera",
+    "attemptsLeft_one": "{{count}} attempt left",
+    "attemptsLeft_other": "{{count}} attempts left",
+    "cameraBlocked": "We can't use your camera. Allow it in your browser settings, then try again.",
+    "noRecorder": "Your browser can't record video. Try another browser.",
+    "cameraTitle": "Follow the instructions",
+    "cameraDescription": "Keep your face inside the oval. Recording stops by itself after the last step.",
+    "challengeCount": "Challenge {{current}} of {{total}}",
+    "recording": "Recording",
+    "stepsLabel": "Instructions",
+    "stepDone": "done",
+    "stepCurrent": "now",
+    "cancel": "Cancel",
+    "reviewTitle": "Check your video",
+    "reviewDescription": "Watch it once: your face must be clear in every step.",
+    "videoLabel": "Your face video",
+    "send": "Send for review",
+    "recordAgain": "Record again",
+    "uploadingTitle": "Sending your video",
+    "uploadingDescription": "Keep this page open until it's done. It takes a few seconds.",
+    "uploadProgress": "Upload progress",
+    "uploadFailed": "The video didn't arrive. Check your connection and send it again.",
+    "pendingTitle": "We're checking your video",
+    "pendingDescription": "An AutoSouk admin reviews it by hand, usually within 24 hours. We'll email you when it's done.",
+    "whileYouWait": "While you wait",
+    "whileYouWaitDescription": "You can browse and save cars. Selling and inspections open once you're verified.",
+    "browse": "Browse cars",
+    "rejectedTitle": "We couldn't verify you",
+    "rejectedDescription": "Your account stays limited until a face video is approved. Record it again in good light.",
+    "reasonTitle": "Reason from the reviewer",
+    "noAttempts": "You have used all your attempts. Contact support to verify your identity."
+  },
+  "banner": {
+    "actionTitle": "Verify your identity",
+    "actionDescription": "Check your phone and record a short face video to sell, buy inspections and inspect cars.",
+    "start": "Start",
+    "pendingTitle": "We're checking your identity",
+    "pendingDescription": "Usually within 24 hours. You can browse in the meantime.",
+    "rejectedTitle": "We couldn't verify your identity",
+    "rejectedDescription": "Record your face video again to unlock all of AutoSouk.",
+    "tryAgain": "Try again"
+  },
+  "required": {
+    "title": "Verify your identity first",
+    "description": "To keep AutoSouk safe, selling, inspections and reviews open once your phone and face video are checked.",
+    "action": "Verify my identity",
+    "locked": "Verify your identity first"
+  },
+  "account": {
+    "title": "Identity & security",
+    "description": "Who you are on AutoSouk and how your account is protected.",
+    "phone": "Phone number",
+    "phoneVerified": "Verified",
+    "phoneNotVerified": "Not verified",
+    "identity": "Face check",
+    "continue": "Continue"
+  }
+}

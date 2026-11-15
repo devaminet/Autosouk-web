@@ -19,7 +19,10 @@ import { EmailField } from "../components/EmailField";
 import { HeaderAction } from "../components/HeaderAction";
 import { MobileBrandHero } from "../components/MobileBrandHero";
 import { rawValue } from "../formValues";
-import { useLogin, useResendVerification } from "../hooks";
+import { isChallenge } from "../api";
+import type { TwoFactorChallenge } from "../api";
+import { TwoFactorStep } from "../components/TwoFactorStep";
+import { useLogin, useResendVerification, useSessionRevoked } from "../hooks";
 
 const fields = ["email", "password"];
 
@@ -31,9 +34,12 @@ export function LoginPage() {
   const location = useLocation();
   const form = useRef<HTMLFormElement>(null);
   const [email, setEmail] = useState("");
+  // Set when the device is new and the API texted a code to type.
+  const [challenge, setChallenge] = useState<TwoFactorChallenge | null>(null);
   const login = useLogin();
   const resend = useResendVerification();
   const notice = noticeSchema.safeParse(location.state);
+  const revoked = useSessionRevoked();
 
   const error = login.error ?? resend.error;
   useFocusFirstInvalid(form, error);
@@ -41,10 +47,19 @@ export function LoginPage() {
   const submit = (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     resend.reset();
-    login.mutate({
-      email: email.trim(),
-      password: rawValue(new FormData(event.currentTarget), "password"),
-    });
+    login.mutate(
+      {
+        email: email.trim(),
+        password: rawValue(new FormData(event.currentTarget), "password"),
+      },
+      {
+        onSuccess: (result) => {
+          if (isChallenge(result)) {
+            setChallenge(result);
+          }
+        },
+      },
+    );
   };
 
   const resendLink = () => {
@@ -69,64 +84,77 @@ export function LoginPage() {
       hideHeaderOnMobile
     >
       <PageTitle>{t("login.pageTitle")}</PageTitle>
-      <AuthCard>
-        <MobileBrandHero />
-        <AuthHeading title={t("login.title")} description={t("login.description")} />
-        <output className="block empty:hidden">
-          {notice.success && <Alert tone="success">{notice.data.notice}</Alert>}
-        </output>
-        <form
-          className="flex flex-col gap-24"
-          noValidate
-          onSubmit={submit}
-          ref={form}
-        >
-          <FormErrors error={error} fields={fields} />
-          <EmailField
-            error={fieldError(error, "email")}
-            onChange={(event) => setEmail(event.target.value)}
-            value={email}
+      {challenge ? (
+        <AuthCard>
+          <TwoFactorStep
+            challenge={challenge}
+            onBack={() => {
+              login.reset();
+              setChallenge(null);
+            }}
           />
-          <div className="flex flex-col items-end gap-8">
-            <TextField
-              autoComplete="current-password"
-              dir="auto"
-              error={fieldError(error, "password")}
-              fieldClassName="self-stretch"
-              icon="lock"
-              label={t("fields.password")}
-              name="password"
-              type="password"
-            />
-            <TextLink size="s" to={paths.forgotPassword}>
-              {t("login.forgotPassword")}
-            </TextLink>
-          </div>
-          <Button block isPending={login.isPending} size="l" type="submit" variant="primary">
-            {t("login.submit")}
-          </Button>
-          <Alert
-            action={
-              <button
-                className="cursor-pointer rounded-xs type-label-s text-warning underline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-brand disabled:cursor-not-allowed"
-                disabled={resend.isPending}
-                onClick={resendLink}
-                type="button"
-              >
-                {t("login.resend")}
-              </button>
-            }
-            title={t("login.notVerifiedTitle")}
-            tone="warning"
+        </AuthCard>
+      ) : (
+        <AuthCard>
+          <MobileBrandHero />
+          <AuthHeading title={t("login.title")} description={t("login.description")} />
+          <output className="block empty:hidden">
+            {notice.success && <Alert tone="success">{notice.data.notice}</Alert>}
+            {revoked && !notice.success && <Alert tone="info">{t("login.sessionEnded")}</Alert>}
+          </output>
+          <form
+            className="flex flex-col gap-24"
+            noValidate
+            onSubmit={submit}
+            ref={form}
           >
-            {t("login.notVerifiedDescription")}
-          </Alert>
-          <p className="text-center type-body-s text-muted md:hidden">
-            {t("login.newHereMobile")}{" "}
-            <TextLink to={paths.register}>{t("login.createAccountMobile")}</TextLink>
-          </p>
-        </form>
-      </AuthCard>
+            <FormErrors error={error} fields={fields} />
+            <EmailField
+              error={fieldError(error, "email")}
+              onChange={(event) => setEmail(event.target.value)}
+              value={email}
+            />
+            <div className="flex flex-col items-end gap-8">
+              <TextField
+                autoComplete="current-password"
+                dir="auto"
+                error={fieldError(error, "password")}
+                fieldClassName="self-stretch"
+                icon="lock"
+                label={t("fields.password")}
+                name="password"
+                type="password"
+              />
+              <TextLink size="s" to={paths.forgotPassword}>
+                {t("login.forgotPassword")}
+              </TextLink>
+            </div>
+            <Button block isPending={login.isPending} size="l" type="submit" variant="primary">
+              {t("login.submit")}
+            </Button>
+            <Alert
+              action={
+                <button
+                  className="cursor-pointer rounded-xs type-label-s text-warning underline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-brand disabled:cursor-not-allowed"
+                  disabled={resend.isPending}
+                  onClick={resendLink}
+                  type="button"
+                >
+                  {t("login.resend")}
+                </button>
+              }
+              title={t("login.notVerifiedTitle")}
+              tone="warning"
+            >
+              {t("login.notVerifiedDescription")}
+            </Alert>
+            <p className="text-center type-body-s text-muted md:hidden">
+              {t("login.newHereMobile")}{" "}
+              <TextLink to={paths.register}>{t("login.createAccountMobile")}</TextLink>
+            </p>
+          </form>
+        </AuthCard>
+      )}
     </AuthShell>
   );
 }

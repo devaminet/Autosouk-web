@@ -3,6 +3,10 @@ import { request } from "../../lib/api/client";
 import { uploadToPresignedPost } from "../../lib/api/upload";
 import { locales } from "../../lib/locale";
 
+export const identityStatuses = ["not_submitted", "pending", "approved", "rejected"] as const;
+
+export type IdentityStatus = (typeof identityStatuses)[number];
+
 const userSchema = z.object({
   id: z.number(),
   firstName: z.string(),
@@ -13,6 +17,14 @@ const userSchema = z.object({
   isVerified: z.boolean(),
   phone: z.string(),
   locale: z.enum(locales),
+  // The two checks every account passes before it may sell, inspect or ask
+  // for inspections.
+  phoneVerified: z.boolean(),
+  identityStatus: z.enum(identityStatuses),
+  // A code by SMS when signing in on a new device. Mechanics and admins
+  // always have it.
+  twoFactorEnabled: z.boolean(),
+  twoFactorRequired: z.boolean(),
   role: z.enum(["buyer", "seller", "mechanic", "admin"]),
 });
 
@@ -24,6 +36,25 @@ const sessionSchema = z.object({
 });
 
 export type Session = z.infer<typeof sessionSchema>;
+
+// On a new device, with two-step sign-in, the password only opens this step:
+// the API texts a code to type next.
+const challengeSchema = z.object({
+  twoFactorRequired: z.literal(true),
+  challengeToken: z.string(),
+  // The phone's last digits, such as "•• 78".
+  phoneHint: z.string(),
+  expiresAt: z.string(),
+});
+
+export type TwoFactorChallenge = z.infer<typeof challengeSchema>;
+
+const signInSchema = z.union([challengeSchema, sessionSchema]);
+
+export type SignIn = z.infer<typeof signInSchema>;
+
+export const isChallenge = (result: SignIn): result is TwoFactorChallenge =>
+  "twoFactorRequired" in result && result.twoFactorRequired === true;
 
 const messageSchema = z.object({
   code: z.string(),
@@ -78,9 +109,55 @@ export const login = (input: { email: string; password: string }) =>
   request("/api/auth/login", {
     method: "POST",
     body: input,
+    schema: signInSchema,
+    anonymous: true,
+  });
+
+export const completeTwoFactor = (input: { challengeToken: string; code: string }) =>
+  request("/api/auth/login/two-factor", {
+    method: "POST",
+    body: input,
     schema: sessionSchema,
     anonymous: true,
   });
+
+const resentSchema = z.object({ phoneHint: z.string(), expiresAt: z.string() });
+
+export const resendTwoFactorCode = (challengeToken: string) =>
+  request("/api/auth/login/two-factor/resend", {
+    method: "POST",
+    body: { challengeToken },
+    schema: resentSchema,
+    anonymous: true,
+  });
+
+const deviceSchema = z.object({
+  id: z.number(),
+  // Such as "Chrome on Windows".
+  label: z.string(),
+  ipAddress: z.string().nullable(),
+  createdAt: z.string(),
+  lastSeenAt: z.string(),
+  // The device the user is on now.
+  current: z.boolean(),
+});
+
+export type Device = z.infer<typeof deviceSchema>;
+
+export const getDevices = async (): Promise<Device[]> =>
+  (await request("/api/auth/devices", { schema: z.object({ devices: z.array(deviceSchema) }) })).devices;
+
+export const signOutDevice = (id: number) =>
+  request(`/api/auth/devices/${id}`, { method: "DELETE", schema: z.unknown() });
+
+export const setTwoFactor = async (enabled: boolean): Promise<AuthUser> =>
+  (
+    await request("/api/auth/two-factor", {
+      method: "PATCH",
+      body: { enabled },
+      schema: z.object({ user: userSchema }),
+    })
+  ).user;
 
 export const postRefreshToken = () =>
   request("/api/auth/refresh-token", {

@@ -2,6 +2,7 @@ import { useTranslation } from "react-i18next";
 import { Navigate, Outlet, useLocation } from "react-router";
 import { z } from "zod";
 import { paths } from "../../../lib/paths";
+import { nextVerificationStep } from "../../identity/api";
 import { useSession } from "../hooks";
 
 // RequireRole sends this when it redirects someone to log in.
@@ -19,6 +20,11 @@ export function GuestRoute() {
     );
   }
   if (user) {
+    // A new account checks its phone, then records the face video, first.
+    const step = nextVerificationStep(user);
+    if (step) {
+      return <Navigate replace to={step === "phone" ? paths.verifyPhone : paths.verifyIdentity} />;
+    }
     const target = returnSchema.safeParse(location.state);
     return <Navigate replace to={target.success ? target.data.from : paths.home} />;
   }
