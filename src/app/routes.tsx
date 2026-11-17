@@ -18,6 +18,7 @@ import { AdminUserPage } from "../features/admin/pages/AdminUserPage";
 import { AdminUsersPage } from "../features/admin/pages/AdminUsersPage";
 import { AdminVerificationPage } from "../features/admin/pages/AdminVerificationPage";
 import { AdminVerificationsPage } from "../features/admin/pages/AdminVerificationsPage";
+import { AdminWorkshopsPage } from "../features/admin/pages/AdminWorkshopsPage";
 import { MechanicDocumentsPage } from "../features/documents/pages/MechanicDocumentsPage";
 import { InspectionQueuePage } from "../features/inspections/pages/InspectionQueuePage";
 import { InspectionReportPage } from "../features/inspections/pages/InspectionReportPage";
@@ -124,6 +125,7 @@ export const routes: RouteObject[] = [
               { path: paths.adminUsers, element: <AdminUsersPage /> },
               { path: paths.adminUser, element: <AdminUserPage /> },
               { path: paths.adminListings, element: <AdminListingsPage /> },
+              { path: paths.adminWorkshops, element: <AdminWorkshopsPage /> },
             ],
           },
         ],

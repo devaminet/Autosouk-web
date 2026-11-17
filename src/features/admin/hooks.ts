@@ -7,6 +7,8 @@ import { deleteUser, getUser, getUsers, reactivateUser, suspendUser } from "./us
 import type { AdminUser } from "./usersApi";
 import type { UsersQuery } from "./usersApi";
 import { decideVerification, getVerification, getVerifications } from "./verificationsApi";
+import { getWorkshops } from "./workshopsApi";
+import type { WorkshopsQuery } from "./workshopsApi";
 
 export const adminKeys = {
   all: ["admin"] as const,
@@ -17,6 +19,7 @@ export const adminKeys = {
   users: (query: UsersQuery) => ["admin", "users", query] as const,
   user: (userId: number) => ["admin", "user", userId] as const,
   listings: (query: ListingsQuery) => ["admin", "listings", query] as const,
+  workshops: (query: WorkshopsQuery) => ["admin", "workshops", query] as const,
 };
 
 // Refreshed every minute, so the menu's counts follow what others decide.
@@ -100,3 +103,6 @@ export const useDeleteListing = () => {
     onSuccess: () => queryClient.invalidateQueries({ queryKey: adminKeys.all }),
   });
 };
+
+export const useAdminWorkshops = (query: WorkshopsQuery) =>
+  useQuery({ queryKey: adminKeys.workshops(query), queryFn: () => getWorkshops(query), placeholderData: keepPreviousData });
