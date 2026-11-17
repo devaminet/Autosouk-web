@@ -139,6 +139,26 @@ describe("LoginPage", () => {
     );
   });
 
+  it("tells a suspended user why they can't sign in", async () => {
+    const user = userEvent.setup();
+    server.use(
+      http.post("*/api/auth/login", () =>
+        apiErrors(403, {
+          code: "auth.account_suspended",
+          message: "Your account is suspended. Contact AutoSouk support to find out more.",
+        }),
+      ),
+    );
+    const router = renderApp("/login");
+
+    await logIn(user);
+
+    const alert = await screen.findByRole("alert");
+    expect(alert).toHaveTextContent("Account suspended");
+    expect(alert).toHaveTextContent("Your account is suspended. Contact AutoSouk support to find out more.");
+    expect(router.state.location.pathname).toBe("/login");
+  });
+
   it("attaches a field error to its input and moves focus there", async () => {
     const user = userEvent.setup();
     server.use(

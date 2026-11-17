@@ -89,6 +89,12 @@ export function QueueCard({ inspection }: QueueCardProps) {
         <p className="type-body-xs text-muted" dir="auto">
           {details()}
         </p>
+        {car.removed && (
+          <p className="flex items-center gap-4 type-body-xs text-warning">
+            <Icon name="info" size={14} />
+            {t("queue.card.carDeleted")}
+          </p>
+        )}
       </div>
       {showsSeller && car.seller && (
         <a

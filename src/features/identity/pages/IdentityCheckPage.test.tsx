@@ -109,6 +109,23 @@ describe("IdentityCheckPage", () => {
     expect(submitted).toEqual([12]);
   });
 
+  it("lets a mechanic send their documents while the video waits", async () => {
+    identityApi("pending");
+    server.use(
+      http.post("*/api/auth/refresh-token", () =>
+        HttpResponse.json({ accessToken: "token", user: { ...testUser, role: "mechanic", identityStatus: "pending" } }),
+      ),
+    );
+    renderApp("/verify-identity");
+
+    expect(await screen.findByRole("heading", { name: "We're checking your video" })).toBeInTheDocument();
+    expect(
+      screen.getByText("Send your documents now: an admin checks them with your video, so buyers can book you sooner."),
+    ).toBeInTheDocument();
+    expect(screen.getByRole("link", { name: "Send my documents" })).toHaveAttribute("href", "/mechanic/documents");
+    expect(screen.queryByRole("link", { name: "Browse cars" })).not.toBeInTheDocument();
+  });
+
   it("asks for the consent first", async () => {
     identityApi();
     const user = userEvent.setup();

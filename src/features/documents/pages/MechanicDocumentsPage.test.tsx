@@ -112,6 +112,34 @@ describe("mechanic documents", () => {
     expect(screen.queryByRole("button", { name: "I run a garage instead" })).not.toBeInTheDocument();
   });
 
+  it("opens once the face video is sent, before it is reviewed", async () => {
+    documentsApi();
+    server.use(
+      http.post("*/api/auth/refresh-token", () =>
+        HttpResponse.json({ accessToken: "token", user: { ...testUser, role: "mechanic", identityStatus: "pending" } }),
+      ),
+    );
+    renderApp("/mechanic/documents");
+
+    expect(await screen.findByRole("heading", { name: "How do you work?" })).toBeInTheDocument();
+  });
+
+  it("waits for the face video first", async () => {
+    documentsApi();
+    server.use(
+      http.post("*/api/auth/refresh-token", () =>
+        HttpResponse.json({
+          accessToken: "token",
+          user: { ...testUser, role: "mechanic", identityStatus: "not_submitted" },
+        }),
+      ),
+    );
+    renderApp("/mechanic/documents");
+
+    expect(await screen.findByRole("heading", { name: "Verify your identity first", level: 1 })).toBeInTheDocument();
+    expect(screen.queryByRole("heading", { name: "How do you work?" })).not.toBeInTheDocument();
+  });
+
   it("asks a garage for every document", async () => {
     documentsApi({ kind: "garage", requiredTypes: [...documentsByKind.garage] });
     renderApp("/mechanic/documents");

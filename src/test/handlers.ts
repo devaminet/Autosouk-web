@@ -1,4 +1,5 @@
 import { http, HttpResponse } from "msw";
+import arAdmin from "../../public/locales/ar/admin.json";
 import arAuth from "../../public/locales/ar/auth.json";
 import arCommon from "../../public/locales/ar/common.json";
 import arDocuments from "../../public/locales/ar/documents.json";
@@ -6,6 +7,7 @@ import arIdentity from "../../public/locales/ar/identity.json";
 import arInspections from "../../public/locales/ar/inspections.json";
 import arListings from "../../public/locales/ar/listings.json";
 import arMechanics from "../../public/locales/ar/mechanics.json";
+import enAdmin from "../../public/locales/en/admin.json";
 import enAuth from "../../public/locales/en/auth.json";
 import enCommon from "../../public/locales/en/common.json";
 import enDocuments from "../../public/locales/en/documents.json";
@@ -13,6 +15,7 @@ import enIdentity from "../../public/locales/en/identity.json";
 import enInspections from "../../public/locales/en/inspections.json";
 import enListings from "../../public/locales/en/listings.json";
 import enMechanics from "../../public/locales/en/mechanics.json";
+import frAdmin from "../../public/locales/fr/admin.json";
 import frAuth from "../../public/locales/fr/auth.json";
 import frCommon from "../../public/locales/fr/common.json";
 import frDocuments from "../../public/locales/fr/documents.json";
@@ -29,6 +32,7 @@ const translations: Record<string, unknown> = {
   "en/identity": enIdentity,
   "en/mechanics": enMechanics,
   "en/documents": enDocuments,
+  "en/admin": enAdmin,
   "fr/common": frCommon,
   "fr/auth": frAuth,
   "fr/listings": frListings,
@@ -36,6 +40,7 @@ const translations: Record<string, unknown> = {
   "fr/identity": frIdentity,
   "fr/mechanics": frMechanics,
   "fr/documents": frDocuments,
+  "fr/admin": frAdmin,
   "ar/common": arCommon,
   "ar/auth": arAuth,
   "ar/listings": arListings,
@@ -43,6 +48,7 @@ const translations: Record<string, unknown> = {
   "ar/identity": arIdentity,
   "ar/mechanics": arMechanics,
   "ar/documents": arDocuments,
+  "ar/admin": arAdmin,
 };
 
 const apiCatalogs: Record<string, unknown> = {
@@ -145,6 +151,16 @@ const cors = {
 // What storage answers to an upload, with the headers a cross-origin request needs.
 export const storageResponse = (status: number) => new HttpResponse(null, { status, headers: cors });
 
+export const emptyOverview = {
+  users: { total: 1, byRole: { buyer: 0, seller: 0, mechanic: 0, admin: 1 }, suspended: 0 },
+  listings: { byStatus: { draft: 0, pending: 0, approved: 0, withdrawn: 0, rejected: 0, sold: 0 } },
+  mechanics: { total: 0, bookable: 0 },
+  inspections: {
+    byStatus: { pending: 0, accepted: 0, rejected: 0, in_progress: 0, completed: 0, cancelled: 0 },
+  },
+  queues: { verifications: 0, listings: 0, identityChecks: 0, mechanicDocuments: 0 },
+};
+
 export const defaultHandlers = [
   http.options("http://storage.test/*", () => storageResponse(204)),
   http.get("*/locales/:lng/:ns.json", ({ params }) =>
@@ -233,6 +249,8 @@ export const defaultHandlers = [
   ),
   http.get("*/api/favorite_listings/ids", () => HttpResponse.json({ listingIds: [] })),
   // A mechanic who hasn't sent documents yet.
+  // Nothing waits for an admin unless a test says so.
+  http.get("*/api/admin/overview", () => HttpResponse.json(emptyOverview)),
   http.get("*/api/mechanic-documents/me", () =>
     HttpResponse.json({
       kind: null,

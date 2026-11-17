@@ -10,6 +10,7 @@ import { PageTitle } from "../../../components/PageTitle";
 import { TextField } from "../../../components/TextField";
 import { TextLink } from "../../../components/TextLink";
 import { useFocusFirstInvalid } from "../../../hooks/useFocusFirstInvalid";
+import { ApiError } from "../../../lib/api/client";
 import { fieldError } from "../../../lib/api/errors";
 import { paths } from "../../../lib/paths";
 import { AuthCard } from "../components/AuthCard";
@@ -43,6 +44,8 @@ export function LoginPage() {
 
   const error = login.error ?? resend.error;
   useFocusFirstInvalid(form, error);
+  // A suspended account gets its own message, with the API's text.
+  const suspended = error instanceof ApiError && error.code === "auth.account_suspended" ? error : null;
 
   const submit = (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
@@ -108,7 +111,15 @@ export function LoginPage() {
             onSubmit={submit}
             ref={form}
           >
-            <FormErrors error={error} fields={fields} />
+            {suspended ? (
+              <div role="alert">
+                <Alert title={t("login.suspendedTitle")} tone="danger">
+                  {suspended.message}
+                </Alert>
+              </div>
+            ) : (
+              <FormErrors error={error} fields={fields} />
+            )}
             <EmailField
               error={fieldError(error, "email")}
               onChange={(event) => setEmail(event.target.value)}

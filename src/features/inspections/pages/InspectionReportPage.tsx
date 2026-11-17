@@ -53,7 +53,7 @@ function ReportEditor({ inspection, itemLabel }: ReportEditorProps) {
   const problems = showProblems && "problems" in checked ? checked.problems : null;
   const progress = formProgress(form);
   const buyer = shortName(`${inspection.buyer.firstName} ${inspection.buyer.lastName}`);
-  const title = `${carTitle(inspection)} · ${inspection.car.year}`;
+  const title = [carTitle(inspection), inspection.car.year].filter(Boolean).join(" · ");
 
   const update = (patch: Partial<ReportForm>) => setForm((current) => ({ ...current, ...patch }));
 

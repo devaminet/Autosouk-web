@@ -5,16 +5,21 @@ import { Icon } from "../../../components/Icon";
 import { PageTitle } from "../../../components/PageTitle";
 import { paths } from "../../../lib/paths";
 import { useSession } from "../../auth/hooks";
-import { isFullyVerified } from "../api";
+import { hasSentFaceCheck, isFullyVerified } from "../api";
+
+type RequireIdentityProps = {
+  // Opens once the face video is sent, before an admin reviews it.
+  allowPending?: boolean;
+};
 
 // Pages that change things, such as selling or inspecting, open once the
 // phone and face checks passed. The API enforces it on every request; this
 // only explains it. Place it under RequireRole, which makes sure of a user.
-export function RequireIdentity() {
+export function RequireIdentity({ allowPending = false }: RequireIdentityProps) {
   const { t } = useTranslation("identity");
   const { user } = useSession();
 
-  if (!user || isFullyVerified(user)) {
+  if (!user || (allowPending ? hasSentFaceCheck(user) : isFullyVerified(user))) {
     return <Outlet />;
   }
   return (

@@ -12,7 +12,15 @@ import { SavedPage } from "../features/favorites/pages/SavedPage";
 import { RequireIdentity } from "../features/identity/components/RequireIdentity";
 import { IdentityCheckPage } from "../features/identity/pages/IdentityCheckPage";
 import { VerifyPhonePage } from "../features/identity/pages/VerifyPhonePage";
-import { AdminMechanicsPage } from "../features/documents/pages/AdminMechanicsPage";
+import { AdminAuditLogPage } from "../features/admin/pages/AdminAuditLogPage";
+import { AdminInspectionsPage } from "../features/admin/pages/AdminInspectionsPage";
+import { AdminListingsPage } from "../features/admin/pages/AdminListingsPage";
+import { AdminOverviewPage } from "../features/admin/pages/AdminOverviewPage";
+import { AdminUserPage } from "../features/admin/pages/AdminUserPage";
+import { AdminUsersPage } from "../features/admin/pages/AdminUsersPage";
+import { AdminVerificationPage } from "../features/admin/pages/AdminVerificationPage";
+import { AdminVerificationsPage } from "../features/admin/pages/AdminVerificationsPage";
+import { AdminWorkshopsPage } from "../features/admin/pages/AdminWorkshopsPage";
 import { MechanicDocumentsPage } from "../features/documents/pages/MechanicDocumentsPage";
 import { InspectionQueuePage } from "../features/inspections/pages/InspectionQueuePage";
 import { InspectionReportPage } from "../features/inspections/pages/InspectionReportPage";
@@ -112,7 +120,17 @@ export const routes: RouteObject[] = [
         children: [
           {
             element: <AdminLayout />,
-            children: [{ path: paths.adminMechanics, element: <AdminMechanicsPage /> }],
+            children: [
+              { path: paths.adminOverview, element: <AdminOverviewPage /> },
+              { path: paths.adminVerifications, element: <AdminVerificationsPage /> },
+              { path: paths.adminVerification, element: <AdminVerificationPage /> },
+              { path: paths.adminUsers, element: <AdminUsersPage /> },
+              { path: paths.adminUser, element: <AdminUserPage /> },
+              { path: paths.adminListings, element: <AdminListingsPage /> },
+              { path: paths.adminWorkshops, element: <AdminWorkshopsPage /> },
+              { path: paths.adminInspections, element: <AdminInspectionsPage /> },
+              { path: paths.adminAuditLog, element: <AdminAuditLogPage /> },
+            ],
           },
         ],
       },
@@ -121,7 +139,9 @@ export const routes: RouteObject[] = [
         element: <RequireRole allowed="mechanic" />,
         children: [
           {
-            element: <RequireIdentity />,
+            // Mechanics send their documents once the face video is sent, so
+            // an admin reviews both together.
+            element: <RequireIdentity allowPending />,
             children: [{ path: paths.mechanicDocuments, element: <MechanicDocumentsPage /> }],
           },
         ],

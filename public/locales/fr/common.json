@@ -27,8 +27,15 @@
     "mechanics": "Mécaniciens",
     "mechanicsShort": "Garages",
     "admin": "Administration",
-    "adminMechanics": "Vérification des mécaniciens",
-    "marketplace": "Marketplace"
+    "marketplace": "Marketplace",
+    "adminOverview": "Vue d'ensemble",
+    "adminVerifications": "Vérifications",
+    "adminUsers": "Utilisateurs",
+    "adminListings": "Annonces",
+    "adminWorkshops": "Ateliers",
+    "adminInspections": "Inspections",
+    "adminAuditLog": "Journal d'audit",
+    "waiting": "{{count}} en attente"
   },
   "noAccess": {
     "title": "Vous ne pouvez pas ouvrir cette page",

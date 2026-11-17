@@ -8,6 +8,7 @@ import { Icon } from "../../../components/Icon";
 import type { IconName } from "../../../components/Icon";
 import { PageTitle } from "../../../components/PageTitle";
 import { paths } from "../../../lib/paths";
+import { useSession } from "../../auth/hooks";
 import { AuthCard } from "../../auth/components/AuthCard";
 import { AuthHeading } from "../../auth/components/AuthHeading";
 import { AuthShell } from "../../auth/components/AuthShell";
@@ -38,6 +39,9 @@ const isUsable = (check: StartedCheck | null): check is StartedCheck =>
 // where the user is: still to record, waiting for review, or rejected.
 export function IdentityCheckPage() {
   const { t } = useTranslation("identity");
+  const { user } = useSession();
+  // Mechanics may send their documents while the video waits for review.
+  const isMechanic = user?.role === "mechanic";
   const consentId = useId();
   const state = useIdentityState();
   const start = useStartIdentityCheck();
@@ -153,13 +157,20 @@ export function IdentityCheckPage() {
           <AuthHeading description={t("face.pendingDescription")} title={t("face.pendingTitle")} />
           <div className="w-full text-start">
             <Alert title={t("face.whileYouWait")} tone="info">
-              {t("face.whileYouWaitDescription")}
+              {t(isMechanic ? "face.whileYouWaitMechanic" : "face.whileYouWaitDescription")}
             </Alert>
           </div>
-          <ButtonLink block size="l" to={paths.home} variant="dark">
-            <Icon name="search" size={18} />
-            {t("face.browse")}
-          </ButtonLink>
+          {isMechanic ? (
+            <ButtonLink block size="l" to={paths.mechanicDocuments} variant="primary">
+              <Icon name="id-card" size={18} />
+              {t("face.sendDocuments")}
+            </ButtonLink>
+          ) : (
+            <ButtonLink block size="l" to={paths.home} variant="dark">
+              <Icon name="search" size={18} />
+              {t("face.browse")}
+            </ButtonLink>
+          )}
         </AuthCard>
       </AuthShell>
     );

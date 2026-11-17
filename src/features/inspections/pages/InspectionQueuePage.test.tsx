@@ -38,6 +38,7 @@ const inspection = (id: number, status: InspectionStatus, title: string, changes
   reportPdfLink: status === "completed" ? "http://storage.test/report.pdf" : null,
   car: {
     id: 100 + id,
+    removed: false,
     year: 2020,
     make: { name: "FIAT" },
     model: { name: "500" },
@@ -98,6 +99,36 @@ const queueApi = ({
 const column = async (name: string) => within(await screen.findByRole("region", { name: new RegExp(`^${name}`, "u") }));
 
 describe("InspectionQueuePage", () => {
+  it("keeps a finished inspection whose car the seller deleted", async () => {
+    queueApi({
+      inspections: [
+        inspection(4, "completed", "unused", {
+          car: {
+            id: null,
+            removed: true,
+            year: 2020,
+            make: { name: "FIAT" },
+            model: { name: "500" },
+            listingId: null,
+            title: null,
+            photoUrl: null,
+            seller: null,
+          },
+        }),
+      ],
+    });
+    renderApp("/inspections");
+
+    const completed = await column("Completed");
+    expect(completed.getByRole("heading", { name: "FIAT 500 2020" })).toBeInTheDocument();
+    expect(completed.queryByRole("link", { name: "FIAT 500 2020" })).not.toBeInTheDocument();
+    expect(completed.getByText("The seller deleted this car. The report stays available.")).toBeInTheDocument();
+    expect(completed.getByRole("link", { name: "Open the report for FIAT 500 2020" })).toHaveAttribute(
+      "href",
+      "http://storage.test/report.pdf",
+    );
+  });
+
   it("sorts the requests into columns, with the figures above", async () => {
     queueApi();
     renderApp("/inspections");

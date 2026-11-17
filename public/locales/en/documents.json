@@ -88,26 +88,12 @@
     "start": "Send your documents"
   },
   "admin": {
-    "pageTitle": "Mechanic checks",
-    "overline": "Admin",
-    "title": "Mechanic verification",
-    "queue": {
-      "title": "Waiting for review",
-      "order": "Longest waiting first",
-      "empty": "No mechanic is waiting. New documents show up here.",
-      "documents_one": "{{count}} document",
-      "documents_other": "{{count}} documents",
-      "resent": "Sent again"
-    },
     "viewer": {
       "label": "Document",
       "pick": "Choose a document to view it.",
       "logged": "Opening is logged",
       "newTab": "Open in a new tab"
     },
-    "phoneVerified": "Phone verified",
-    "phoneNotVerified": "Phone not verified",
-    "faceCheck": "Face check: {{status}}",
     "documents": "Documents",
     "datesHint": "Give the end date of every CIN and patente you approve",
     "waiting": "Waiting for your decision",
@@ -132,17 +118,10 @@
     },
     "reasonFor": "Reason for rejecting {{document}}",
     "reasonHelper": "The mechanic sees this next to the document.",
-    "checklist": "Before approving, check",
     "checks": {
-      "identity": "The CIN matches the account's name and face check",
       "sameGarage": "The RC, patente and ICE name the same garage",
       "validToday": "Every document is valid today",
       "premises": "The lease or title deed covers the garage's address"
-    },
-    "footer": "The mechanic gets an email. Approved documents stay approved, and rejected files are deleted.",
-    "approve": "Approve mechanic",
-    "askAgain_one": "Ask for {{count}} document again",
-    "askAgain_other": "Ask for {{count}} documents again",
-    "saved": "Decision saved. We emailed {{name}}."
+    }
   }
 }
