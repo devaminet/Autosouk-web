@@ -7,5 +7,73 @@
     "label": "السبب",
     "counter": "{{count}} / {{max}}",
     "cancel": "إلغاء"
+  },
+  "overview": {
+    "title": "نظرة عامة",
+    "description": "كل ما في AutoSouk، وما ينتظرك.",
+    "stats": {
+      "users": "المستخدمون",
+      "suspended": "{{count}} موقوفون",
+      "listings": "الإعلانات المنشورة",
+      "listingsWaiting": "{{count}} في انتظار المراجعة",
+      "mechanics": "ميكانيكيون متاحون للحجز",
+      "mechanicsTotal": "من أصل {{count}} ورشة",
+      "inspections": "الفحوصات المنجزة",
+      "inspectionsActive": "{{count}} قيد الإنجاز"
+    },
+    "queues": {
+      "title": "ما ينتظرك",
+      "sorted": "الأقدم أولًا",
+      "verifications": "عمليات التحقق",
+      "verificationsHint": "فيديوهات الوجه ووثائق الميكانيكيين، يُبتّ فيها معًا",
+      "listings": "إعلانات للمراجعة",
+      "listingsHint": "الإعلانات المقبولة فقط تظهر للعموم",
+      "review": "راجع",
+      "nothing": "لا شيء ينتظرك."
+    },
+    "roles": {
+      "title": "المستخدمون حسب الدور",
+      "buyer": "المشترون",
+      "seller": "البائعون",
+      "mechanic": "الميكانيكيون",
+      "admin": "المسؤولون",
+      "suspended": "{{count}} حسابات موقوفة"
+    },
+    "activity": {
+      "title": "آخر إجراءات المسؤولين",
+      "when": "متى",
+      "admin": "المسؤول",
+      "action": "الإجراء",
+      "about": "يخص",
+      "empty": "لا توجد إجراءات بعد.",
+      "system": "AutoSouk"
+    }
+  },
+  "actions": {
+    "user": {
+      "suspended": "إيقاف حساب",
+      "reactivated": "رفع الإيقاف",
+      "deleted": "حذف حساب"
+    },
+    "listing": {
+      "deleted": "حذف إعلان"
+    },
+    "identity": {
+      "approved": "قبول التحقق من الوجه",
+      "rejected": "رفض التحقق من الوجه",
+      "video_viewed": "مشاهدة فيديو الوجه"
+    },
+    "mechanic_document": {
+      "approved": "قبول وثيقة",
+      "rejected": "رفض وثيقة",
+      "viewed": "فتح وثيقة"
+    }
+  },
+  "targets": {
+    "user": "المستخدم رقم {{id}}",
+    "listing": "الإعلان رقم {{id}}",
+    "identity_verification": "التحقق من الوجه رقم {{id}}",
+    "mechanic_document": "الوثيقة رقم {{id}}",
+    "other": "{{type}} رقم {{id}}"
   }
 }

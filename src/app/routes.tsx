@@ -12,6 +12,7 @@ import { SavedPage } from "../features/favorites/pages/SavedPage";
 import { RequireIdentity } from "../features/identity/components/RequireIdentity";
 import { IdentityCheckPage } from "../features/identity/pages/IdentityCheckPage";
 import { VerifyPhonePage } from "../features/identity/pages/VerifyPhonePage";
+import { AdminOverviewPage } from "../features/admin/pages/AdminOverviewPage";
 import { AdminMechanicsPage } from "../features/documents/pages/AdminMechanicsPage";
 import { MechanicDocumentsPage } from "../features/documents/pages/MechanicDocumentsPage";
 import { InspectionQueuePage } from "../features/inspections/pages/InspectionQueuePage";
@@ -112,7 +113,10 @@ export const routes: RouteObject[] = [
         children: [
           {
             element: <AdminLayout />,
-            children: [{ path: paths.adminMechanics, element: <AdminMechanicsPage /> }],
+            children: [
+              { path: paths.adminOverview, element: <AdminOverviewPage /> },
+              { path: paths.adminMechanics, element: <AdminMechanicsPage /> },
+            ],
           },
         ],
       },

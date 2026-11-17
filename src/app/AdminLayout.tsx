@@ -21,6 +21,7 @@ type AdminLink = {
 
 // Each admin page joins the menu as it is built.
 const links: AdminLink[] = [
+  { to: paths.adminOverview, label: "nav.adminOverview", icon: "grid", end: true },
   {
     to: paths.adminMechanics,
     label: "nav.adminMechanics",
@@ -58,7 +59,7 @@ export function AdminLayout() {
         <div className="flex items-center justify-between gap-12">
           <Link
             className="rounded-sm focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-brand"
-            to={paths.adminMechanics}
+            to={paths.adminOverview}
           >
             <Logo tone="dark" />
           </Link>

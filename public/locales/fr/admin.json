@@ -7,5 +7,73 @@
     "label": "Motif",
     "counter": "{{count}} / {{max}}",
     "cancel": "Annuler"
+  },
+  "overview": {
+    "title": "Vue d'ensemble",
+    "description": "Tout AutoSouk, et ce qui vous attend.",
+    "stats": {
+      "users": "Utilisateurs",
+      "suspended": "{{count}} suspendus",
+      "listings": "Annonces en ligne",
+      "listingsWaiting": "{{count}} en attente de vérification",
+      "mechanics": "Mécaniciens réservables",
+      "mechanicsTotal": "sur {{count}} ateliers",
+      "inspections": "Inspections réalisées",
+      "inspectionsActive": "{{count}} en cours"
+    },
+    "queues": {
+      "title": "Ce qui vous attend",
+      "sorted": "Les plus anciens d'abord",
+      "verifications": "Vérifications",
+      "verificationsHint": "Vidéos du visage et documents des mécaniciens, décidés ensemble",
+      "listings": "Annonces à vérifier",
+      "listingsHint": "Seules les annonces approuvées sont publiques",
+      "review": "Vérifier",
+      "nothing": "Rien ne vous attend."
+    },
+    "roles": {
+      "title": "Utilisateurs par rôle",
+      "buyer": "Acheteurs",
+      "seller": "Vendeurs",
+      "mechanic": "Mécaniciens",
+      "admin": "Administrateurs",
+      "suspended": "{{count}} comptes suspendus"
+    },
+    "activity": {
+      "title": "Dernières actions des administrateurs",
+      "when": "Quand",
+      "admin": "Administrateur",
+      "action": "Action",
+      "about": "Concerne",
+      "empty": "Aucune action pour l'instant.",
+      "system": "AutoSouk"
+    }
+  },
+  "actions": {
+    "user": {
+      "suspended": "Compte suspendu",
+      "reactivated": "Suspension levée",
+      "deleted": "Compte supprimé"
+    },
+    "listing": {
+      "deleted": "Annonce supprimée"
+    },
+    "identity": {
+      "approved": "Vérification du visage approuvée",
+      "rejected": "Vérification du visage refusée",
+      "video_viewed": "Vidéo du visage regardée"
+    },
+    "mechanic_document": {
+      "approved": "Document approuvé",
+      "rejected": "Document refusé",
+      "viewed": "Document ouvert"
+    }
+  },
+  "targets": {
+    "user": "Utilisateur n° {{id}}",
+    "listing": "Annonce n° {{id}}",
+    "identity_verification": "Vérification du visage n° {{id}}",
+    "mechanic_document": "Document n° {{id}}",
+    "other": "{{type}} n° {{id}}"
   }
 }

@@ -7,5 +7,73 @@
     "label": "Reason",
     "counter": "{{count}} / {{max}}",
     "cancel": "Cancel"
+  },
+  "overview": {
+    "title": "Overview",
+    "description": "Everything on AutoSouk, and what waits for you.",
+    "stats": {
+      "users": "Users",
+      "suspended": "{{count}} suspended",
+      "listings": "Listings online",
+      "listingsWaiting": "{{count}} waiting for review",
+      "mechanics": "Bookable mechanics",
+      "mechanicsTotal": "of {{count}} workshops",
+      "inspections": "Inspections done",
+      "inspectionsActive": "{{count}} under way"
+    },
+    "queues": {
+      "title": "Waiting for you",
+      "sorted": "Longest waiting first",
+      "verifications": "Verifications",
+      "verificationsHint": "Face videos and mechanic documents, decided together",
+      "listings": "Listings to review",
+      "listingsHint": "Only approved listings are public",
+      "review": "Review",
+      "nothing": "Nothing waits for you."
+    },
+    "roles": {
+      "title": "Users by role",
+      "buyer": "Buyers",
+      "seller": "Sellers",
+      "mechanic": "Mechanics",
+      "admin": "Admins",
+      "suspended": "{{count}} accounts suspended"
+    },
+    "activity": {
+      "title": "Latest admin actions",
+      "when": "When",
+      "admin": "Admin",
+      "action": "Action",
+      "about": "About",
+      "empty": "No admin action yet.",
+      "system": "AutoSouk"
+    }
+  },
+  "actions": {
+    "user": {
+      "suspended": "Suspended account",
+      "reactivated": "Lifted suspension",
+      "deleted": "Deleted account"
+    },
+    "listing": {
+      "deleted": "Deleted listing"
+    },
+    "identity": {
+      "approved": "Approved face check",
+      "rejected": "Rejected face check",
+      "video_viewed": "Watched face video"
+    },
+    "mechanic_document": {
+      "approved": "Approved document",
+      "rejected": "Rejected document",
+      "viewed": "Opened document"
+    }
+  },
+  "targets": {
+    "user": "User #{{id}}",
+    "listing": "Listing #{{id}}",
+    "identity_verification": "Face check #{{id}}",
+    "mechanic_document": "Document #{{id}}",
+    "other": "{{type}} #{{id}}"
   }
 }
