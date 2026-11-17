@@ -377,5 +377,39 @@
     "workshopFilterId": "Inspections of workshop #{{id}}",
     "clearWorkshop": "Show every workshop",
     "deletedNote": "When a listing or a seller is deleted, the car's inspections stay here with the car's name. Buyers keep their reports, and unfinished inspections are cancelled."
+  },
+  "auditLog": {
+    "title": "Audit log",
+    "description": "Who saw or decided what, newest first. Entries can't be changed or removed.",
+    "caption": "Audit log",
+    "when": "When",
+    "admin": "Admin",
+    "system": "System",
+    "action": "Action",
+    "about": "About",
+    "details": "Details",
+    "allActions": "Every action",
+    "targetType": "About",
+    "allTargets": "Anything",
+    "targetTypes": {
+      "user": "Accounts",
+      "listing": "Listings",
+      "identity_verification": "Face checks",
+      "mechanic_document": "Mechanic documents"
+    },
+    "byAdmin": "Entries by {{name}}",
+    "byAdminId": "Entries by admin #{{id}}",
+    "byAdminNamed": "Entries by {{name}}",
+    "clearAdmin": "Show every admin",
+    "aboutFilter": "Entries about {{target}}",
+    "allAbout": "Everything about {{target}}",
+    "clearTarget": "Show everything",
+    "reason": "Reason: {{reason}}",
+    "validUntil": "Valid until {{date}}",
+    "empty": "No entry matches these filters.",
+    "range": "{{from}}–{{to}} of {{total}}",
+    "seeAll": "See the whole log",
+    "seeHistory": "See the full history",
+    "note": "Every decision, suspension, deletion, and every face video or document opened is written here. A deleted account or listing keeps its name or title here."
   }
 }

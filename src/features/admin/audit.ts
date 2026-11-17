@@ -1,8 +1,9 @@
 import type { TFunction } from "i18next";
 import type { BadgeTone } from "../../components/Badge";
+import { formatDate } from "../../lib/format";
 import type { AuditEntry } from "./api";
 
-const knownTargets = ["user", "listing", "identity_verification", "mechanic_document"];
+export const knownTargets = ["user", "listing", "identity_verification", "mechanic_document"] as const;
 
 // Removals and refusals in red, approvals in green, views in grey.
 export const actionTone = (action: string): BadgeTone => {
@@ -20,7 +21,7 @@ export const actionLabel = (t: TFunction, action: string) => t(`admin:actions.${
 
 // "User #12", what the entry is about.
 export const targetLabel = (t: TFunction, entry: Pick<AuditEntry, "targetType" | "targetId">) =>
-  knownTargets.includes(entry.targetType)
+  (knownTargets as readonly string[]).includes(entry.targetType)
     ? t(`admin:targets.${entry.targetType}`, { id: entry.targetId })
     : t("admin:targets.other", { type: entry.targetType, id: entry.targetId });
 
@@ -28,4 +29,24 @@ export const targetLabel = (t: TFunction, entry: Pick<AuditEntry, "targetType" |
 export const entryReason = (entry: AuditEntry): string | null => {
   const reason = entry.details?.["reason"];
   return typeof reason === "string" ? reason : null;
+};
+
+const text = (entry: AuditEntry, key: string): string | null => {
+  const value = entry.details?.[key];
+  return typeof value === "string" ? value : null;
+};
+
+// What the entry kept about something now gone, such as a deleted account's
+// name and email, or a deleted listing's title.
+export const entryKept = (t: TFunction, entry: AuditEntry, locale: string): string | null => {
+  if (entry.action === "user.deleted") {
+    const name = text(entry, "name");
+    const email = text(entry, "email");
+    return [name, email].filter(Boolean).join(" · ") || null;
+  }
+  if (entry.action === "listing.deleted") {
+    return text(entry, "title");
+  }
+  const validUntil = text(entry, "validUntil");
+  return validUntil ? t("admin:auditLog.validUntil", { date: formatDate(validUntil, locale) }) : null;
 };

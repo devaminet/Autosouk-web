@@ -37,6 +37,7 @@ const links: AdminLink[] = [
   },
   { to: paths.adminWorkshops, label: "nav.adminWorkshops", icon: "wrench" },
   { to: paths.adminInspections, label: "nav.adminInspections", icon: "file-check" },
+  { to: paths.adminAuditLog, label: "nav.adminAuditLog", icon: "shield" },
   { to: paths.home, label: "nav.marketplace", icon: "home", end: true },
 ];
 

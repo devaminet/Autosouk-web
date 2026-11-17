@@ -158,9 +158,17 @@ function Activity() {
 
   return (
     <section aria-labelledby="activity-title" className="flex flex-col gap-12">
-      <h2 className="type-h4 text-ink" id="activity-title">
-        {t("overview.activity.title")}
-      </h2>
+      <div className="flex flex-wrap items-center justify-between gap-12">
+        <h2 className="type-h4 text-ink" id="activity-title">
+          {t("overview.activity.title")}
+        </h2>
+        <Link
+          className="rounded-xs type-label-s text-brand underline focus-visible:outline-2 focus-visible:outline-brand"
+          to={paths.adminAuditLog}
+        >
+          {t("auditLog.seeAll")}
+        </Link>
+      </div>
       {log.isError ? (
         <div role="alert">
           <Alert tone="danger">{log.error.message}</Alert>

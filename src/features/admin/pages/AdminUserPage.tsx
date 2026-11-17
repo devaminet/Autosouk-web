@@ -179,6 +179,11 @@ function History({ user }: { user: AdminUser }) {
           })}
         </ul>
       )}
+      {user.history.length > 0 && (
+        <Link className={moreLinkClass} to={`${paths.adminAuditLog}?targetType=user&targetId=${user.id}`}>
+          {t("auditLog.seeHistory")}
+        </Link>
+      )}
     </Card>
   );
 }

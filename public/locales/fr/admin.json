@@ -383,5 +383,39 @@
     "workshopFilterId": "Inspections de l'atelier n° {{id}}",
     "clearWorkshop": "Afficher tous les ateliers",
     "deletedNote": "Quand une annonce ou un vendeur est supprimé, les inspections de la voiture restent ici avec son nom. Les acheteurs gardent leurs rapports, et les inspections non terminées sont annulées."
+  },
+  "auditLog": {
+    "title": "Journal d'audit",
+    "description": "Qui a vu ou décidé quoi, du plus récent au plus ancien. Les entrées ne peuvent être ni modifiées ni supprimées.",
+    "caption": "Journal d'audit",
+    "when": "Quand",
+    "admin": "Admin",
+    "system": "Système",
+    "action": "Action",
+    "about": "Concerne",
+    "details": "Détails",
+    "allActions": "Toutes les actions",
+    "targetType": "Concerne",
+    "allTargets": "Tout",
+    "targetTypes": {
+      "user": "Comptes",
+      "listing": "Annonces",
+      "identity_verification": "Vérifications du visage",
+      "mechanic_document": "Documents des mécaniciens"
+    },
+    "byAdmin": "Entrées de {{name}}",
+    "byAdminId": "Entrées de l'admin n° {{id}}",
+    "byAdminNamed": "Entrées de {{name}}",
+    "clearAdmin": "Afficher tous les admins",
+    "aboutFilter": "Entrées concernant {{target}}",
+    "allAbout": "Tout sur {{target}}",
+    "clearTarget": "Tout afficher",
+    "reason": "Motif : {{reason}}",
+    "validUntil": "Valable jusqu'au {{date}}",
+    "empty": "Aucune entrée ne correspond à ces filtres.",
+    "range": "{{from}}–{{to}} sur {{total}}",
+    "seeAll": "Voir tout le journal",
+    "seeHistory": "Voir tout l'historique",
+    "note": "Chaque décision, suspension, suppression, et chaque vidéo du visage ou document ouvert est consigné ici. Un compte ou une annonce supprimé garde ici son nom ou son titre."
   }
 }

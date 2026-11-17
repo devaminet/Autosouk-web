@@ -30,7 +30,7 @@ export const useAdminOverview = () =>
   useQuery({ queryKey: adminKeys.overview, queryFn: getOverview, refetchInterval: 60_000 });
 
 export const useAuditLog = (query: AuditLogQuery) =>
-  useQuery({ queryKey: adminKeys.auditLog(query), queryFn: () => getAuditLog(query) });
+  useQuery({ queryKey: adminKeys.auditLog(query), queryFn: () => getAuditLog(query), placeholderData: keepPreviousData });
 
 export const useVerifications = () => useQuery({ queryKey: adminKeys.verifications, queryFn: getVerifications });
 

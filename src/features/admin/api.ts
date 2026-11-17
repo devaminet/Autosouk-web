@@ -59,8 +59,9 @@ export type AuditLogQuery = {
   limit?: number;
   action?: string;
   targetType?: string;
-  targetId?: number;
-  actorId?: number;
+  // Numbers, or the text of a filter read from the link.
+  targetId?: number | string;
+  actorId?: number | string;
 };
 
 // Builds a query string from the values set, leaving out the empty ones.
