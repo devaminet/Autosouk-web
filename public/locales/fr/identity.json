@@ -57,7 +57,9 @@
     "rejectedTitle": "Nous n'avons pas pu vous vérifier",
     "rejectedDescription": "Votre compte reste limité tant qu'une vidéo n'est pas validée. Enregistrez-la à nouveau avec une bonne lumière.",
     "reasonTitle": "Raison de l'administrateur",
-    "noAttempts": "Vous avez utilisé tous vos essais. Contactez le support pour vérifier votre identité."
+    "noAttempts": "Vous avez utilisé tous vos essais. Contactez le support pour vérifier votre identité.",
+    "whileYouWaitMechanic": "Envoyez vos documents dès maintenant : un administrateur les vérifie avec votre vidéo, pour que les acheteurs puissent vous réserver plus tôt.",
+    "sendDocuments": "Envoyer mes documents"
   },
   "banner": {
     "actionTitle": "Vérifiez votre identité",

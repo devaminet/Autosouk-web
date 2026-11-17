@@ -108,3 +108,9 @@ export const nextVerificationStep = (user: AuthUser): "phone" | "face" | null =>
 // Whether the user may sell, ask for inspections, inspect and review.
 export const isFullyVerified = (user: AuthUser): boolean =>
   user.role === "admin" || (user.phoneVerified && user.identityStatus === "approved");
+
+// The phone is verified and the face video sent, even if not reviewed yet.
+// Mechanics may send their documents from then on.
+export const hasSentFaceCheck = (user: AuthUser): boolean =>
+  user.role === "admin" ||
+  (user.phoneVerified && (user.identityStatus === "pending" || user.identityStatus === "approved"));

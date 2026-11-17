@@ -121,7 +121,9 @@ export const routes: RouteObject[] = [
         element: <RequireRole allowed="mechanic" />,
         children: [
           {
-            element: <RequireIdentity />,
+            // Mechanics send their documents once the face video is sent, so
+            // an admin reviews both together.
+            element: <RequireIdentity allowPending />,
             children: [{ path: paths.mechanicDocuments, element: <MechanicDocumentsPage /> }],
           },
         ],

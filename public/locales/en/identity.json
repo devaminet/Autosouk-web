@@ -57,7 +57,9 @@
     "rejectedTitle": "We couldn't verify you",
     "rejectedDescription": "Your account stays limited until a face video is approved. Record it again in good light.",
     "reasonTitle": "Reason from the reviewer",
-    "noAttempts": "You have used all your attempts. Contact support to verify your identity."
+    "noAttempts": "You have used all your attempts. Contact support to verify your identity.",
+    "whileYouWaitMechanic": "Send your documents now: an admin checks them with your video, so buyers can book you sooner.",
+    "sendDocuments": "Send my documents"
   },
   "banner": {
     "actionTitle": "Verify your identity",
