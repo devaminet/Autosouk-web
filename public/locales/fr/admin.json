@@ -234,7 +234,42 @@
       "history": "Historique",
       "noHistory": "Aucune action d'administrateur sur ce compte.",
       "openReview": "Ouvrir la vérification",
-      "mad": "{{price}} MAD"
+      "mad": "{{price}} MAD",
+      "actions": "Actions sur le compte",
+      "suspend": "Suspendre",
+      "reactivate": "Lever la suspension",
+      "delete": "Supprimer",
+      "deleteBlocked_one": "A {{count}} inspection : suspendez plutôt",
+      "deleteBlocked_many": "A {{count}} inspections : suspendez plutôt",
+      "deleteBlocked_other": "A {{count}} inspections : suspendez plutôt",
+      "suspendDialog": {
+        "title": "Suspendre {{name}} ?",
+        "description": "Le compte garde ses données. Vous pouvez lever la suspension à tout moment.",
+        "consequences": [
+          "Déconnecté de tous ses appareils maintenant, et ne peut plus se connecter",
+          "Les acheteurs ne voient plus ses annonces ni son atelier",
+          "Reçoit un e-mail avec votre motif, puis un autre si vous levez la suspension"
+        ],
+        "label": "Pourquoi suspendez-vous ce compte ?",
+        "helper": "Envoyé à l'utilisateur par e-mail, dans sa langue, et gardé dans le journal d'audit.",
+        "confirm": "Suspendre le compte"
+      },
+      "deleteDialog": {
+        "title": "Supprimer {{name}} ?",
+        "description": "C'est définitif. Pour garder les données, suspendez plutôt le compte.",
+        "consequences": [
+          "Les annonces, voitures, photos et favoris sont supprimés",
+          "Les inspections demandées par le compte sont supprimées, avec leurs rapports",
+          "Les vidéos du visage et les documents sont supprimés du stockage",
+          "Les acheteurs gardent les inspections des voitures du compte, avec leurs rapports"
+        ],
+        "label": "Pourquoi supprimez-vous ce compte ?",
+        "helper": "Gardé dans le journal d'audit, avec le nom et l'e-mail.",
+        "confirm": "Supprimer définitivement"
+      },
+      "deleted": "Le compte de {{name}} a été supprimé.",
+      "reactivated": "La suspension est levée. Nous avons écrit à {{name}}.",
+      "suspended": "Compte suspendu. Nous avons envoyé le motif à {{name}}."
     }
   }
 }

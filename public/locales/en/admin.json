@@ -230,7 +230,41 @@
       "history": "History",
       "noHistory": "No admin action on this account yet.",
       "openReview": "Open the review",
-      "mad": "{{price}} MAD"
+      "mad": "{{price}} MAD",
+      "actions": "Account actions",
+      "suspend": "Suspend",
+      "reactivate": "Lift the suspension",
+      "delete": "Delete",
+      "deleteBlocked_one": "Has {{count}} inspection: suspend instead",
+      "deleteBlocked_other": "Has {{count}} inspections: suspend instead",
+      "suspendDialog": {
+        "title": "Suspend {{name}}?",
+        "description": "The account keeps its data. You can lift the suspension at any time.",
+        "consequences": [
+          "Signed out of every device now, and can't sign in again",
+          "Buyers stop seeing the account's listings and workshop",
+          "Gets an email with your reason, and another one if you lift the suspension"
+        ],
+        "label": "Why are you suspending this account?",
+        "helper": "Sent to the user by email, in their language, and kept in the audit log.",
+        "confirm": "Suspend the account"
+      },
+      "deleteDialog": {
+        "title": "Delete {{name}}?",
+        "description": "This can't be undone. To keep the data, suspend the account instead.",
+        "consequences": [
+          "Listings, cars, photos and favourites are deleted",
+          "Inspections the account asked for are deleted, with their reports",
+          "Face videos and documents are deleted from storage",
+          "Buyers keep the inspections of the account's cars, with their reports"
+        ],
+        "label": "Why are you deleting this account?",
+        "helper": "Kept in the audit log, with the name and email.",
+        "confirm": "Delete for good"
+      },
+      "deleted": "{{name}}'s account was deleted.",
+      "reactivated": "The suspension is lifted. We emailed {{name}}.",
+      "suspended": "Account suspended. We emailed {{name}} the reason."
     }
   }
 }

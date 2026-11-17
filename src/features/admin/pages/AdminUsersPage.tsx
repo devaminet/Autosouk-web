@@ -1,4 +1,6 @@
 import { useTranslation } from "react-i18next";
+import { useLocation } from "react-router";
+import { z } from "zod";
 import { Alert } from "../../../components/Alert";
 import { Badge } from "../../../components/Badge";
 import { Button } from "../../../components/Button";
@@ -22,6 +24,9 @@ import { roles } from "../verificationsApi";
 
 const filterKeys = ["search", "role", "identityStatus", "status"] as const;
 
+// A message from the page that sent the admin here, such as after a deletion.
+const noticeSchema = z.object({ notice: z.string() });
+
 const faceTones = { not_submitted: "neutral", pending: "warning", approved: "success", rejected: "danger" } as const;
 
 function Check({ ok, label }: { ok: boolean; label: string }) {
@@ -41,6 +46,7 @@ export function AdminUsersPage() {
   const overview = useAdminOverview();
   const locale = getLocale();
   const totals = overview.data?.users;
+  const notice = noticeSchema.safeParse(useLocation().state);
 
   const statusHref = (status: string) => {
     const params = new URLSearchParams(hrefFor(1).slice(1));
@@ -147,6 +153,7 @@ export function AdminUsersPage() {
 
   return (
     <AdminPage description={t("users.list.description")} title={t("users.list.title")}>
+      <output className="empty:hidden">{notice.success && <Alert tone="success">{notice.data.notice}</Alert>}</output>
       <div className="flex flex-wrap items-end gap-12">
         <ListSearch
           label={t("users.list.search")}

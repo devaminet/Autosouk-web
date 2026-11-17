@@ -138,4 +138,101 @@ describe("admin users", () => {
     expect(history.getByText("Suspended account")).toBeInTheDocument();
     expect(screen.getByRole("link", { name: "Open the review" })).toHaveAttribute("href", "/admin/verifications/7");
   });
+
+  describe("account actions", () => {
+    const buyer: AdminUser = {
+      ...mechanic,
+      id: 13,
+      firstName: "Nadia",
+      lastName: "El Fassi",
+      role: "buyer",
+      identityStatus: "approved",
+      suspendedAt: null,
+      suspensionReason: null,
+      mechanic: null,
+      history: [],
+    };
+
+    const accountApi = (account: AdminUser) => {
+      const sent: { method: string; path: string; body: unknown }[] = [];
+      adminApi();
+      server.use(
+        http.get(`*/api/admin/users/${account.id}`, () => HttpResponse.json(account)),
+        http.post(`*/api/admin/users/${account.id}/suspend`, async ({ request }) => {
+          sent.push({ method: "POST", path: "suspend", body: await request.json() });
+          return HttpResponse.json({ ...account, suspendedAt: "2026-11-17T10:00:00.000Z", suspensionReason: "Fake listings" });
+        }),
+        http.post(`*/api/admin/users/${account.id}/reactivate`, () => {
+          sent.push({ method: "POST", path: "reactivate", body: null });
+          return HttpResponse.json({ ...account, suspendedAt: null, suspensionReason: null });
+        }),
+        http.delete(`*/api/admin/users/${account.id}`, async ({ request }) => {
+          sent.push({ method: "DELETE", path: "delete", body: await request.json() });
+          return HttpResponse.json({ deleted: true, userId: account.id });
+        }),
+      );
+      return sent;
+    };
+
+    it("suspends an account with a reason the user gets by email", async () => {
+      const user = userEvent.setup();
+      const sent = accountApi(buyer);
+      renderApp("/admin/users/13");
+
+      await user.click(await screen.findByRole("button", { name: "Suspend" }));
+      const dialog = within(screen.getByRole("dialog", { name: "Suspend Nadia El Fassi?" }));
+      expect(dialog.getByText("Gets an email with your reason, and another one if you lift the suspension")).toBeInTheDocument();
+      await user.type(dialog.getByLabelText("Why are you suspending this account?"), "Fake listings");
+      await user.click(dialog.getByRole("button", { name: "Suspend the account" }));
+
+      expect(await screen.findByText("Account suspended. We emailed Nadia the reason.")).toBeInTheDocument();
+      expect(sent).toEqual([{ method: "POST", path: "suspend", body: { reason: "Fake listings" } }]);
+      expect(screen.getByText("Reason: Fake listings")).toBeInTheDocument();
+      expect(screen.getByRole("button", { name: "Lift the suspension" })).toBeInTheDocument();
+    });
+
+    it("lifts a suspension", async () => {
+      const user = userEvent.setup();
+      const sent = accountApi({ ...buyer, suspendedAt: "2026-11-17T10:00:00.000Z", suspensionReason: "Fake listings" });
+      renderApp("/admin/users/13");
+
+      await user.click(await screen.findByRole("button", { name: "Lift the suspension" }));
+
+      expect(await screen.findByText("The suspension is lifted. We emailed Nadia.")).toBeInTheDocument();
+      expect(sent).toEqual([{ method: "POST", path: "reactivate", body: null }]);
+      expect(screen.getByRole("button", { name: "Suspend" })).toBeInTheDocument();
+    });
+
+    it("deletes an account and goes back to the list", async () => {
+      const user = userEvent.setup();
+      const sent = accountApi(buyer);
+      const router = renderApp("/admin/users/13");
+
+      await user.click(await screen.findByRole("button", { name: "Delete" }));
+      const dialog = within(screen.getByRole("dialog", { name: "Delete Nadia El Fassi?" }));
+      await user.type(dialog.getByLabelText("Why are you deleting this account?"), "Asked by email");
+      await user.click(dialog.getByRole("button", { name: "Delete for good" }));
+
+      expect(await screen.findByText("Nadia El Fassi's account was deleted.")).toBeInTheDocument();
+      expect(router.state.location.pathname).toBe("/admin/users");
+      expect(sent).toEqual([{ method: "DELETE", path: "delete", body: { reason: "Asked by email" } }]);
+    });
+
+    it("keeps a mechanic whose inspections buyers rely on", async () => {
+      accountApi(mechanic);
+      renderApp("/admin/users/7");
+
+      expect(await screen.findByRole("button", { name: "Delete" })).toBeDisabled();
+      expect(screen.getByText("Has 27 inspections: suspend instead")).toBeInTheDocument();
+    });
+
+    it("offers no action on the admin's own account", async () => {
+      accountApi({ ...buyer, id: testUser.id });
+      renderApp(`/admin/users/${testUser.id}`);
+
+      expect(await screen.findByRole("heading", { name: "Nadia El Fassi", level: 1 })).toBeInTheDocument();
+      expect(screen.queryByRole("button", { name: "Suspend" })).not.toBeInTheDocument();
+      expect(screen.queryByRole("button", { name: "Delete" })).not.toBeInTheDocument();
+    });
+  });
 });

@@ -1,7 +1,8 @@
 import { keepPreviousData, useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import { getAuditLog, getOverview } from "./api";
 import type { AuditLogQuery } from "./api";
-import { getUser, getUsers } from "./usersApi";
+import { deleteUser, getUser, getUsers, reactivateUser, suspendUser } from "./usersApi";
+import type { AdminUser } from "./usersApi";
 import type { UsersQuery } from "./usersApi";
 import { decideVerification, getVerification, getVerifications } from "./verificationsApi";
 
@@ -54,3 +55,34 @@ export const useUsers = (query: UsersQuery) =>
 
 export const useAdminUser = (userId: number | null) =>
   useQuery({ queryKey: adminKeys.user(userId ?? 0), queryFn: () => getUser(userId ?? 0), enabled: userId !== null });
+
+// After a change to an account: its page shows the new state, and the lists,
+// counts and audit log are fetched again.
+const useAccountChange = <Input,>(mutationFn: (input: Input) => Promise<AdminUser>) => {
+  const queryClient = useQueryClient();
+  return useMutation({
+    mutationFn,
+    onSuccess: (user) => {
+      queryClient.setQueryData(adminKeys.user(user.id), user);
+      void queryClient.invalidateQueries({
+        queryKey: adminKeys.all,
+        predicate: (query) => query.queryKey[1] !== "user",
+      });
+    },
+  });
+};
+
+export const useSuspendUser = () => useAccountChange(suspendUser);
+
+export const useReactivateUser = () => useAccountChange(reactivateUser);
+
+export const useDeleteUser = () => {
+  const queryClient = useQueryClient();
+  return useMutation({
+    mutationFn: deleteUser,
+    onSuccess: ({ userId }) => {
+      queryClient.removeQueries({ queryKey: adminKeys.user(userId) });
+      void queryClient.invalidateQueries({ queryKey: adminKeys.all });
+    },
+  });
+};

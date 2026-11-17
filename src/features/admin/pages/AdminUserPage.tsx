@@ -11,6 +11,7 @@ import { getLocale } from "../../../lib/i18n";
 import { isLocale, localeNames } from "../../../lib/locale";
 import { adminVerificationPath, paths } from "../../../lib/paths";
 import { actionLabel, actionTone, entryReason } from "../audit";
+import { AccountActions } from "../components/AccountActions";
 import { AdminPage } from "../components/AdminPage";
 import { useAdminUser } from "../hooks";
 import type { AdminUser } from "../usersApi";
@@ -236,6 +237,7 @@ export function AdminUserPage() {
           </ButtonLink>
         )}
       </section>
+      <AccountActions user={user} />
       <div className="grid items-start gap-16 lg:grid-cols-3">
         <div className="flex flex-col gap-16 lg:col-span-2">
           <Checks user={user} />

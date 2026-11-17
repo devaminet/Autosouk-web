@@ -92,3 +92,19 @@ export const userSchema = z.object({
 export type AdminUser = z.infer<typeof userSchema>;
 
 export const getUser = (userId: number) => request(`/api/admin/users/${userId}`, { schema: userSchema });
+
+// The user can't sign in, is signed out now and hidden from buyers. They get
+// an email with the reason.
+export const suspendUser = ({ userId, reason }: { userId: number; reason: string }) =>
+  request(`/api/admin/users/${userId}/suspend`, { method: "POST", body: { reason }, schema: userSchema });
+
+export const reactivateUser = (userId: number) =>
+  request(`/api/admin/users/${userId}/reactivate`, { method: "POST", schema: userSchema });
+
+// Deletes the account and what it owns. The reason goes to the audit log.
+export const deleteUser = ({ userId, reason }: { userId: number; reason: string }) =>
+  request(`/api/admin/users/${userId}`, {
+    method: "DELETE",
+    body: { reason },
+    schema: z.object({ deleted: z.boolean(), userId: z.number() }),
+  });
