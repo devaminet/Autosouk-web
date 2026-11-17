@@ -57,7 +57,9 @@
       "deleted": "حذف حساب"
     },
     "listing": {
-      "deleted": "حذف إعلان"
+      "deleted": "حذف إعلان",
+      "approved": "قبول إعلان",
+      "rejected": "رفض إعلان"
     },
     "identity": {
       "approved": "قبول التحقق من الوجه",

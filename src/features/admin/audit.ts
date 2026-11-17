@@ -36,15 +36,16 @@ const text = (entry: AuditEntry, key: string): string | null => {
   return typeof value === "string" ? value : null;
 };
 
-// What the entry kept about something now gone, such as a deleted account's
-// name and email, or a deleted listing's title.
+// What the entry kept about its target, such as a deleted account's name and
+// email, or a listing's title when it was decided on or deleted.
 export const entryKept = (t: TFunction, entry: AuditEntry, locale: string): string | null => {
   if (entry.action === "user.deleted") {
     const name = text(entry, "name");
     const email = text(entry, "email");
     return [name, email].filter(Boolean).join(" · ") || null;
   }
-  if (entry.action === "listing.deleted") {
+  // A deleted listing, or one approved or rejected and maybe renamed since.
+  if (entry.targetType === "listing") {
     return text(entry, "title");
   }
   const validUntil = text(entry, "validUntil");

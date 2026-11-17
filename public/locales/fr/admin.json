@@ -57,7 +57,9 @@
       "deleted": "Compte supprimé"
     },
     "listing": {
-      "deleted": "Annonce supprimée"
+      "deleted": "Annonce supprimée",
+      "approved": "Annonce approuvée",
+      "rejected": "Annonce refusée"
     },
     "identity": {
       "approved": "Vérification du visage approuvée",

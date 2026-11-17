@@ -36,6 +36,12 @@ const adminApi = () => {
             targetId: 40,
             details: { reason: "Asked by the user", name: "Omar Fassi", email: "omar@example.com", role: "buyer" },
           }),
+          entry(27, {
+            action: "listing.rejected",
+            targetType: "listing",
+            targetId: 4820,
+            details: { reason: "Blurry photos", title: "Peugeot 208 GT", sellerId: 12 },
+          }),
           entry(28, {
             action: "mechanic_document.approved",
             targetType: "mechanic_document",
@@ -57,7 +63,7 @@ describe("admin audit log", () => {
     renderApp("/admin/audit-log");
 
     const table = within(await screen.findByRole("table", { name: "Audit log" }));
-    const [, suspended, deleted, document] = table.getAllByRole("row");
+    const [, suspended, deleted, rejected, document] = table.getAllByRole("row");
     expect(suspended).toHaveTextContent("Suspended account");
     expect(suspended).toHaveTextContent("Reason: Fake listings");
     expect(within(suspended!).getByRole("link", { name: "User #12" })).toHaveAttribute("href", "/admin/users/12");
@@ -65,6 +71,9 @@ describe("admin audit log", () => {
     expect(deleted).toHaveTextContent("Omar Fassi · omar@example.com");
     expect(within(deleted!).queryByRole("link", { name: "User #40" })).not.toBeInTheDocument();
     expect(document).toHaveTextContent("Valid until Mar 14, 2031");
+    expect(rejected).toHaveTextContent("Rejected listing");
+    expect(rejected).toHaveTextContent("Peugeot 208 GT");
+    expect(within(rejected!).getByRole("link", { name: "Listing #4820" })).toHaveAttribute("href", "/listings/4820");
 
     const menu = within(screen.getByRole("navigation", { name: "Admin" }));
     expect(menu.getByRole("link", { name: "Audit log" })).toHaveAttribute("aria-current", "page");

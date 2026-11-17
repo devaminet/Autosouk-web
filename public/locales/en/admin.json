@@ -57,7 +57,9 @@
       "deleted": "Deleted account"
     },
     "listing": {
-      "deleted": "Deleted listing"
+      "deleted": "Deleted listing",
+      "approved": "Approved listing",
+      "rejected": "Rejected listing"
     },
     "identity": {
       "approved": "Approved face check",
