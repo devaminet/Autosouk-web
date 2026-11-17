@@ -75,5 +75,94 @@
     "identity_verification": "Vérification du visage n° {{id}}",
     "mechanic_document": "Document n° {{id}}",
     "other": "{{type}} n° {{id}}"
+  },
+  "verifications": {
+    "queue": {
+      "title": "Vérifications",
+      "description": "Tout ce que les utilisateurs envoient pour être vérifiés, décidé au même endroit : la vidéo du visage, et les documents des mécaniciens.",
+      "caption": "Personnes en attente de vérification",
+      "person": "Personne",
+      "role": "Rôle",
+      "waiting": "En attente",
+      "since": "Depuis",
+      "actions": "Actions",
+      "faceVideo": "Vidéo du visage",
+      "resent": "Renvoyé après un refus",
+      "review": "Vérifier",
+      "reviewNamed": "Vérifier {{name}}",
+      "empty": "Personne n'attend. Les nouvelles vidéos et les nouveaux documents apparaissent ici.",
+      "note": "Les plus anciens d'abord. Les mécaniciens peuvent envoyer leurs documents dès que leur vidéo est envoyée : vous décidez souvent des deux en même temps.",
+      "documents_one": "{{count}} document",
+      "documents_many": "{{count}} documents",
+      "documents_other": "{{count}} documents"
+    },
+    "review": {
+      "back": "Vérifications",
+      "waitingFace": "Vidéo du visage en attente",
+      "nothingWaiting": "Rien en attente",
+      "profile": "Qui l'a envoyé",
+      "email": "E-mail",
+      "phone": "Téléphone",
+      "city": "Ville",
+      "signedUp": "Inscription",
+      "emailsIn": "E-mails en",
+      "faceVideos": "Vidéos du visage",
+      "attempts": "{{rejected}} refusée(s) sur {{max}} autorisées",
+      "verified": "vérifié",
+      "notVerified": "non vérifié",
+      "suspended": "Ce compte est suspendu.",
+      "face": {
+        "title": "Vidéo du visage",
+        "sent": "Envoyée {{time}}",
+        "logged": "Son ouverture est enregistrée",
+        "linkValid": "Le lien dure 10 minutes. Rechargez la page s'il ne marche plus.",
+        "challenges": "Consignes demandées, dans l'ordre",
+        "challengesHint": "L'utilisateur les a vues une par une pendant l'enregistrement.",
+        "noVideo": "Aucune vidéo du visage en attente.",
+        "videoLabel": "Vidéo du visage de {{name}}"
+      },
+      "checklist": {
+        "title": "Avant d'approuver, vérifiez",
+        "live": "La même personne réelle du début à la fin, pas une photo ni un écran",
+        "challenges": "Chaque consigne est faite, dans l'ordre demandé",
+        "clear": "Le visage est net : bonne lumière, rien ne le cache"
+      },
+      "decision": {
+        "label": "Décision sur la vidéo du visage",
+        "approve": "Approuver",
+        "reject": "Refuser",
+        "reasonLabel": "Motif du refus de la vidéo",
+        "reasonHelper": "L'utilisateur le lit dans l'e-mail et sur sa page de vérification, et peut enregistrer à nouveau.",
+        "presetsLabel": "Partir de :",
+        "approveSubmit": "Approuver la vidéo",
+        "rejectSubmit": "Refuser la vidéo",
+        "footer": "Un e-mail informe l'utilisateur de votre décision. La vidéo est supprimée une fois la décision prise.",
+        "saved": "Décision enregistrée. Nous avons écrit à {{name}}."
+      },
+      "presetNames": {
+        "tooDark": "Trop sombre",
+        "faceHidden": "Visage caché",
+        "challengeMissed": "Consigne manquée",
+        "notLive": "Pas en direct"
+      },
+      "presets": {
+        "tooDark": "Nous voyons mal votre visage : il fait trop sombre. Enregistrez à nouveau face à une fenêtre ou une lampe.",
+        "faceHidden": "Quelque chose cache une partie de votre visage. Retirez lunettes, casquette ou masque, puis enregistrez à nouveau.",
+        "challengeMissed": "Vous n'avez pas fait toutes les consignes à l'écran. Suivez-les une par une, dans l'ordre.",
+        "notLive": "Cela ne ressemble pas à un enregistrement en direct. Filmez-vous vous-même, pas une photo ni un écran."
+      },
+      "documentsWaiting": "Les documents de ce mécanicien attendent aussi. Décidez-les pour l'instant dans Vérification des mécaniciens ; ils rejoindront cette page à la prochaine mise à jour.",
+      "openDocuments": "Ouvrir Vérification des mécaniciens",
+      "history": {
+        "title": "Vidéos précédentes",
+        "approved": "Approuvée",
+        "rejected": "Refusée",
+        "decided": "Décidée {{time}}",
+        "empty": "Aucune vidéo précédente."
+      },
+      "waitingDocuments_one": "{{count}} document en attente",
+      "waitingDocuments_many": "{{count}} documents en attente",
+      "waitingDocuments_other": "{{count}} documents en attente"
+    }
   }
 }

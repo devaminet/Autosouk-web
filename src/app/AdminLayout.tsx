@@ -23,6 +23,12 @@ type AdminLink = {
 const links: AdminLink[] = [
   { to: paths.adminOverview, label: "nav.adminOverview", icon: "grid", end: true },
   {
+    to: paths.adminVerifications,
+    label: "nav.adminVerifications",
+    icon: "scan-face",
+    waiting: (overview) => overview.queues.verifications,
+  },
+  {
     to: paths.adminMechanics,
     label: "nav.adminMechanics",
     icon: "wrench",

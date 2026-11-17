@@ -7,6 +7,7 @@ import { Icon } from "../../../components/Icon";
 import type { IconName } from "../../../components/Icon";
 import { formatDayTime, formatNumber } from "../../../lib/format";
 import { getLocale } from "../../../lib/i18n";
+import { paths } from "../../../lib/paths";
 import type { AuditEntry, Overview } from "../api";
 import { actionLabel, actionTone, entryReason, targetLabel } from "../audit";
 import { AdminPage } from "../components/AdminPage";
@@ -32,7 +33,7 @@ type Queue = { key: string; count: number; icon: IconName; to: string | null };
 function Queues({ overview }: { overview: Overview }) {
   const { t } = useTranslation("admin");
   const queues: Queue[] = [
-    { key: "verifications", count: overview.queues.verifications, icon: "scan-face", to: null },
+    { key: "verifications", count: overview.queues.verifications, icon: "scan-face", to: paths.adminVerifications },
     { key: "listings", count: overview.queues.listings, icon: "car", to: null },
   ];
 

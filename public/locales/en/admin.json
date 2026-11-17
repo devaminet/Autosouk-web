@@ -75,5 +75,92 @@
     "identity_verification": "Face check #{{id}}",
     "mechanic_document": "Document #{{id}}",
     "other": "{{type}} #{{id}}"
+  },
+  "verifications": {
+    "queue": {
+      "title": "Verifications",
+      "description": "Everything people sent to be verified, decided in one place: the face video, and a mechanic's documents.",
+      "caption": "People waiting for a check",
+      "person": "Person",
+      "role": "Role",
+      "waiting": "Waiting",
+      "since": "Since",
+      "actions": "Actions",
+      "faceVideo": "Face video",
+      "resent": "Sent again after a rejection",
+      "review": "Review",
+      "reviewNamed": "Review {{name}}",
+      "empty": "Nobody is waiting. New face videos and documents show up here.",
+      "note": "Longest waiting first. Mechanics can send their documents as soon as their face video is sent, so you usually decide both together.",
+      "documents_one": "{{count}} document",
+      "documents_other": "{{count}} documents"
+    },
+    "review": {
+      "back": "Verifications",
+      "waitingFace": "Face video waiting",
+      "nothingWaiting": "Nothing waiting",
+      "profile": "Who sent it",
+      "email": "Email",
+      "phone": "Phone",
+      "city": "City",
+      "signedUp": "Signed up",
+      "emailsIn": "Emails in",
+      "faceVideos": "Face videos",
+      "attempts": "{{rejected}} rejected of {{max}} allowed",
+      "verified": "verified",
+      "notVerified": "not verified",
+      "suspended": "This account is suspended.",
+      "face": {
+        "title": "Face video",
+        "sent": "Sent {{time}}",
+        "logged": "Opening it is logged",
+        "linkValid": "The link lasts 10 minutes. Reload the page if it stops.",
+        "challenges": "Challenges asked, in order",
+        "challengesHint": "The user saw them one by one while recording.",
+        "noVideo": "No face video is waiting.",
+        "videoLabel": "Face video of {{name}}"
+      },
+      "checklist": {
+        "title": "Before approving, check",
+        "live": "The same real person all along, not a photo or a screen",
+        "challenges": "Each challenge is done, in the order asked",
+        "clear": "The face is clear: good light, nothing covering it"
+      },
+      "decision": {
+        "label": "Decision on the face video",
+        "approve": "Approve",
+        "reject": "Reject",
+        "reasonLabel": "Reason for rejecting the face video",
+        "reasonHelper": "The user reads it in the email and on their face check page, and can record again.",
+        "presetsLabel": "Start from:",
+        "approveSubmit": "Approve face video",
+        "rejectSubmit": "Reject face video",
+        "footer": "One email tells the user what you decided. The video is deleted once you decide.",
+        "saved": "Decision saved. We emailed {{name}}."
+      },
+      "presetNames": {
+        "tooDark": "Too dark",
+        "faceHidden": "Face hidden",
+        "challengeMissed": "Challenge missed",
+        "notLive": "Not a live person"
+      },
+      "presets": {
+        "tooDark": "We can't see your face well: it's too dark. Record again facing a window or a lamp.",
+        "faceHidden": "Something hides part of your face. Remove glasses, a cap or a mask, and record again.",
+        "challengeMissed": "You didn't do every challenge on the screen. Follow each one, in order.",
+        "notLive": "This doesn't look like a live recording. Record yourself, not a photo or a screen."
+      },
+      "documentsWaiting": "This mechanic's documents are waiting too. Decide them in Mechanic checks for now; they join this page in the next update.",
+      "openDocuments": "Open Mechanic checks",
+      "history": {
+        "title": "Earlier face videos",
+        "approved": "Approved",
+        "rejected": "Rejected",
+        "decided": "Decided {{time}}",
+        "empty": "No earlier face video."
+      },
+      "waitingDocuments_one": "{{count}} document waiting",
+      "waitingDocuments_other": "{{count}} documents waiting"
+    }
   }
 }
