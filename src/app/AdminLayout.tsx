@@ -36,6 +36,7 @@ const links: AdminLink[] = [
     waiting: (overview) => overview.queues.listings,
   },
   { to: paths.adminWorkshops, label: "nav.adminWorkshops", icon: "wrench" },
+  { to: paths.adminInspections, label: "nav.adminInspections", icon: "file-check" },
   { to: paths.home, label: "nav.marketplace", icon: "home", end: true },
 ];
 

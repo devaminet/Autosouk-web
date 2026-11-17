@@ -265,7 +265,8 @@
       "deleted": "{{name}}'s account was deleted.",
       "reactivated": "The suspension is lifted. We emailed {{name}}.",
       "suspended": "Account suspended. We emailed {{name}} the reason.",
-      "seeListings": "See the listings"
+      "seeListings": "See the listings",
+      "seeInspections": "See the inspections"
     }
   },
   "listings": {
@@ -342,6 +343,39 @@
     "openNamed": "Open {{name}}",
     "empty": "No workshop matches these filters.",
     "range": "{{from}}–{{to}} of {{total}}",
-    "bookableNote": "Buyers can book a workshop once its owner's face check is approved, its documents are approved and still valid, and the account isn't suspended."
+    "bookableNote": "Buyers can book a workshop once its owner's face check is approved, its documents are approved and still valid, and the account isn't suspended.",
+    "inspectionsNamed": "Inspections of {{name}}: {{count}} done"
+  },
+  "inspections": {
+    "title": "Inspections",
+    "description": "Every inspection, from the request to the report.",
+    "caption": "Inspections",
+    "statusLabel": "Inspection status",
+    "all": "All",
+    "inspection": "Inspection",
+    "requested": "Requested: {{date}}",
+    "car": "Car",
+    "unknownCar": "Unknown car",
+    "carDeleted": "Car deleted",
+    "buyer": "Buyer",
+    "workshop": "Workshop",
+    "ofWorkshopNamed": "Inspections of {{name}}",
+    "status": "Status",
+    "result": "Result",
+    "score": "{{score}}/100",
+    "report": "Report",
+    "reportSent": "Sent",
+    "noReport": "Not yet",
+    "price": "Price",
+    "mad": "{{price}} MAD",
+    "empty": "No inspection matches these filters.",
+    "range": "{{from}}–{{to}} of {{total}}",
+    "buyerFilter": "Inspections requested by {{name}}",
+    "buyerFilterId": "Inspections requested by user #{{id}}",
+    "clearBuyer": "Show every buyer",
+    "workshopFilter": "Inspections of {{name}}",
+    "workshopFilterId": "Inspections of workshop #{{id}}",
+    "clearWorkshop": "Show every workshop",
+    "deletedNote": "When a listing or a seller is deleted, the car's inspections stay here with the car's name. Buyers keep their reports, and unfinished inspections are cancelled."
   }
 }

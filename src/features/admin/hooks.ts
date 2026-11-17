@@ -1,6 +1,8 @@
 import { keepPreviousData, useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import { getAuditLog, getOverview } from "./api";
 import type { AuditLogQuery } from "./api";
+import { getInspections } from "./inspectionsApi";
+import type { InspectionsQuery } from "./inspectionsApi";
 import { deleteListing, getListings } from "./listingsApi";
 import type { ListingsQuery } from "./listingsApi";
 import { deleteUser, getUser, getUsers, reactivateUser, suspendUser } from "./usersApi";
@@ -20,6 +22,7 @@ export const adminKeys = {
   user: (userId: number) => ["admin", "user", userId] as const,
   listings: (query: ListingsQuery) => ["admin", "listings", query] as const,
   workshops: (query: WorkshopsQuery) => ["admin", "workshops", query] as const,
+  inspections: (query: InspectionsQuery) => ["admin", "inspections", query] as const,
 };
 
 // Refreshed every minute, so the menu's counts follow what others decide.
@@ -106,3 +109,10 @@ export const useDeleteListing = () => {
 
 export const useAdminWorkshops = (query: WorkshopsQuery) =>
   useQuery({ queryKey: adminKeys.workshops(query), queryFn: () => getWorkshops(query), placeholderData: keepPreviousData });
+
+export const useAdminInspections = (query: InspectionsQuery) =>
+  useQuery({
+    queryKey: adminKeys.inspections(query),
+    queryFn: () => getInspections(query),
+    placeholderData: keepPreviousData,
+  });

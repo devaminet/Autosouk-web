@@ -9,7 +9,7 @@ import { Pagination } from "../../../components/Pagination";
 import { SelectField } from "../../../components/SelectField";
 import { formatDate, formatNumber } from "../../../lib/format";
 import { getLocale } from "../../../lib/i18n";
-import { adminUserPath, adminVerificationPath, mechanicPath } from "../../../lib/paths";
+import { adminUserPath, adminVerificationPath, mechanicPath, paths } from "../../../lib/paths";
 import { useCityOptions } from "../../auth/hooks";
 import { AdminPage } from "../components/AdminPage";
 import { AdminTable } from "../components/AdminTable";
@@ -105,7 +105,15 @@ export function AdminWorkshopsPage() {
     },
     {
       header: t("workshops.inspections"),
-      cell: (workshop) => <bdi dir="ltr">{formatNumber(workshop.completedInspections)}</bdi>,
+      cell: (workshop) => (
+        <Link
+          aria-label={t("workshops.inspectionsNamed", { name: workshop.name, count: workshop.completedInspections })}
+          className={linkClass}
+          to={`${paths.adminInspections}?mechanicId=${workshop.id}`}
+        >
+          <bdi dir="ltr">{formatNumber(workshop.completedInspections)}</bdi>
+        </Link>
+      ),
     },
     {
       header: t("workshops.price"),

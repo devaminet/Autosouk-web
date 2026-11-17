@@ -270,7 +270,8 @@
       "deleted": "Le compte de {{name}} a été supprimé.",
       "reactivated": "La suspension est levée. Nous avons écrit à {{name}}.",
       "suspended": "Compte suspendu. Nous avons envoyé le motif à {{name}}.",
-      "seeListings": "Voir les annonces"
+      "seeListings": "Voir les annonces",
+      "seeInspections": "Voir les inspections"
     }
   },
   "listings": {
@@ -348,6 +349,39 @@
     "openNamed": "Ouvrir {{name}}",
     "empty": "Aucun atelier ne correspond à ces filtres.",
     "range": "{{from}}–{{to}} sur {{total}}",
-    "bookableNote": "Les acheteurs peuvent réserver un atelier une fois la vérification du visage du propriétaire approuvée, ses documents approuvés et encore valides, et si le compte n'est pas suspendu."
+    "bookableNote": "Les acheteurs peuvent réserver un atelier une fois la vérification du visage du propriétaire approuvée, ses documents approuvés et encore valides, et si le compte n'est pas suspendu.",
+    "inspectionsNamed": "Inspections de {{name}} : {{count}} faites"
+  },
+  "inspections": {
+    "title": "Inspections",
+    "description": "Toutes les inspections, de la demande au rapport.",
+    "caption": "Inspections",
+    "statusLabel": "Statut de l'inspection",
+    "all": "Toutes",
+    "inspection": "Inspection",
+    "requested": "Demandée : {{date}}",
+    "car": "Voiture",
+    "unknownCar": "Voiture inconnue",
+    "carDeleted": "Voiture supprimée",
+    "buyer": "Acheteur",
+    "workshop": "Atelier",
+    "ofWorkshopNamed": "Inspections de {{name}}",
+    "status": "Statut",
+    "result": "Résultat",
+    "score": "{{score}}/100",
+    "report": "Rapport",
+    "reportSent": "Envoyé",
+    "noReport": "Pas encore",
+    "price": "Prix",
+    "mad": "{{price}} MAD",
+    "empty": "Aucune inspection ne correspond à ces filtres.",
+    "range": "{{from}}–{{to}} sur {{total}}",
+    "buyerFilter": "Inspections demandées par {{name}}",
+    "buyerFilterId": "Inspections demandées par l'utilisateur n° {{id}}",
+    "clearBuyer": "Afficher tous les acheteurs",
+    "workshopFilter": "Inspections de {{name}}",
+    "workshopFilterId": "Inspections de l'atelier n° {{id}}",
+    "clearWorkshop": "Afficher tous les ateliers",
+    "deletedNote": "Quand une annonce ou un vendeur est supprimé, les inspections de la voiture restent ici avec son nom. Les acheteurs gardent leurs rapports, et les inspections non terminées sont annulées."
   }
 }

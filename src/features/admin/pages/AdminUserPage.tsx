@@ -75,6 +75,9 @@ function Checks({ user }: { user: AdminUser }) {
   );
 }
 
+const moreLinkClass =
+  "w-fit rounded-xs type-label-s text-brand underline focus-visible:outline-2 focus-visible:outline-brand";
+
 function Activity({ user }: { user: AdminUser }) {
   const { t } = useTranslation(["admin", "enums"]);
   const listings = Object.entries(user.listings.byStatus).filter(([, count]) => count > 0);
@@ -99,11 +102,13 @@ function Activity({ user }: { user: AdminUser }) {
         </Row>
       </dl>
       {listings.length > 0 && (
-        <Link
-          className="w-fit rounded-xs type-label-s text-brand underline focus-visible:outline-2 focus-visible:outline-brand"
-          to={`${paths.adminListings}?sellerId=${user.id}`}
-        >
+        <Link className={moreLinkClass} to={`${paths.adminListings}?sellerId=${user.id}`}>
           {t("users.detail.seeListings")}
+        </Link>
+      )}
+      {user.inspectionsRequested > 0 && (
+        <Link className={moreLinkClass} to={`${paths.adminInspections}?buyerId=${user.id}`}>
+          {t("users.detail.seeInspections")}
         </Link>
       )}
     </Card>
@@ -136,6 +141,11 @@ function Workshop({ mechanic }: { mechanic: NonNullable<AdminUser["mechanic"]> }
           <bdi dir="ltr">{formatNumber(mechanic.inspections)}</bdi>
         </Row>
       </dl>
+      {mechanic.inspections > 0 && (
+        <Link className={moreLinkClass} to={`${paths.adminInspections}?mechanicId=${mechanic.id}`}>
+          {t("users.detail.seeInspections")}
+        </Link>
+      )}
     </Card>
   );
 }
