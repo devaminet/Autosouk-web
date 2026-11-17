@@ -74,7 +74,8 @@
       "report": "Open PDF",
       "reportLabel": "Open the report for {{car}}",
       "seller": "Seller:",
-      "completeReport": "Complete report"
+      "completeReport": "Complete report",
+      "carDeleted": "The seller deleted this car. The report stays available."
     },
     "rejectDialog": {
       "title": "Reject this request?",

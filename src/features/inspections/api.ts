@@ -54,9 +54,12 @@ const queuedInspectionSchema = z.object({
   overallScore: z.number().nullable(),
   // A link to the PDF once the report is done.
   reportPdfLink: z.string().nullable(),
+  // A car deleted after the request has no id, listing, photo or seller, only
+  // the name it had then.
   car: z.object({
-    id: z.number(),
-    year: z.number(),
+    id: z.number().nullable(),
+    removed: z.boolean().default(false),
+    year: z.number().nullable(),
     make: nameSchema,
     model: nameSchema,
     listingId: z.number().nullable(),
@@ -140,7 +143,8 @@ const inspectionSchema = z.object({
   id: z.number(),
   status: z.enum(inspectionStatuses),
   car: z.object({
-    year: z.number(),
+    removed: z.boolean().default(false),
+    year: z.number().nullable(),
     make: nameSchema,
     model: nameSchema,
     listing: z.object({ id: z.number(), title: z.string() }).nullable(),

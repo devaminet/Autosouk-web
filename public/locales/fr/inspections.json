@@ -75,7 +75,8 @@
       "report": "Ouvrir le PDF",
       "reportLabel": "Ouvrir le rapport de {{car}}",
       "seller": "Vendeur :",
-      "completeReport": "Remplir le rapport"
+      "completeReport": "Remplir le rapport",
+      "carDeleted": "Le vendeur a supprimé cette voiture. Le rapport reste disponible."
     },
     "rejectDialog": {
       "title": "Refuser cette demande ?",

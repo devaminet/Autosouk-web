@@ -82,7 +82,8 @@
       "report": "فتح ملف PDF",
       "reportLabel": "فتح تقرير {{car}}",
       "seller": "البائع:",
-      "completeReport": "إكمال التقرير"
+      "completeReport": "إكمال التقرير",
+      "carDeleted": "حذف البائع هذه السيارة. يبقى التقرير متاحًا."
     },
     "rejectDialog": {
       "title": "رفض هذا الطلب؟",
