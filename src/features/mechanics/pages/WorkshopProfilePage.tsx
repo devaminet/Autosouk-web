@@ -7,6 +7,7 @@ import { Icon } from "../../../components/Icon";
 import { PageTitle } from "../../../components/PageTitle";
 import { mechanicPath } from "../../../lib/paths";
 import { useSession } from "../../auth/hooks";
+import { DocumentsSection } from "../../documents/components/DocumentsSection";
 import type { Mechanic } from "../api";
 import { AcceptingRequestsCard } from "../components/AcceptingRequestsCard";
 import { GaragePhotos } from "../components/GaragePhotos";
@@ -52,6 +53,7 @@ function WorkshopEditor({ mechanic, userCityId }: WorkshopEditorProps) {
           </output>
         </div>
       </header>
+      <DocumentsSection />
       {mechanic && <AcceptingRequestsCard mechanic={mechanic} />}
       <WorkshopForm
         error={save.error}

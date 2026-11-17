@@ -64,3 +64,13 @@ export const formatDayTime = (value: string, locale: string, now: Date = new Dat
   }).format(moment);
   return `${dayLabel(startOfDay(moment), locale, now)} ${time}`;
 };
+
+// "Dec 31, 2026" in English, for a calendar date the API sends as YYYY-MM-DD.
+export const formatDate = (value: string, locale: string): string =>
+  new Intl.DateTimeFormat(locale, {
+    day: "numeric",
+    month: "short",
+    year: "numeric",
+    timeZone: "UTC",
+    numberingSystem: "latn",
+  }).format(new Date(`${value}T00:00:00Z`));

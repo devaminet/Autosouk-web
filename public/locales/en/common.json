@@ -25,7 +25,10 @@
     "workshop": "My workshop",
     "workshopShort": "Workshop",
     "mechanics": "Mechanics",
-    "mechanicsShort": "Garages"
+    "mechanicsShort": "Garages",
+    "admin": "Admin",
+    "adminMechanics": "Mechanic checks",
+    "marketplace": "Marketplace"
   },
   "noAccess": {
     "title": "You can't open this page",

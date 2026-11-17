@@ -12,6 +12,8 @@ import { SavedPage } from "../features/favorites/pages/SavedPage";
 import { RequireIdentity } from "../features/identity/components/RequireIdentity";
 import { IdentityCheckPage } from "../features/identity/pages/IdentityCheckPage";
 import { VerifyPhonePage } from "../features/identity/pages/VerifyPhonePage";
+import { AdminMechanicsPage } from "../features/documents/pages/AdminMechanicsPage";
+import { MechanicDocumentsPage } from "../features/documents/pages/MechanicDocumentsPage";
 import { InspectionQueuePage } from "../features/inspections/pages/InspectionQueuePage";
 import { InspectionReportPage } from "../features/inspections/pages/InspectionReportPage";
 import { MechanicPage } from "../features/mechanics/pages/MechanicPage";
@@ -28,6 +30,7 @@ import { PhotosPage } from "../features/listings/pages/PhotosPage";
 import { ReviewPage } from "../features/listings/pages/ReviewPage";
 import { SearchPage } from "../features/listings/pages/SearchPage";
 import { paths } from "../lib/paths";
+import { AdminLayout } from "./AdminLayout";
 import { AppLayout } from "./AppLayout";
 import { ErrorPage } from "./ErrorPage";
 import { NotFoundPage } from "./NotFoundPage";
@@ -102,6 +105,25 @@ export const routes: RouteObject[] = [
         children: [
           { path: paths.verifyPhone, element: <VerifyPhonePage /> },
           { path: paths.verifyIdentity, element: <IdentityCheckPage /> },
+        ],
+      },
+      {
+        element: <RequireRole allowed="admin" />,
+        children: [
+          {
+            element: <AdminLayout />,
+            children: [{ path: paths.adminMechanics, element: <AdminMechanicsPage /> }],
+          },
+        ],
+      },
+      {
+        // The mechanic's documents come after the face check, with the same header.
+        element: <RequireRole allowed="mechanic" />,
+        children: [
+          {
+            element: <RequireIdentity />,
+            children: [{ path: paths.mechanicDocuments, element: <MechanicDocumentsPage /> }],
+          },
         ],
       },
       // Email links can open these whether or not someone is signed in.

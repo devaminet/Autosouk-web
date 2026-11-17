@@ -1,5 +1,5 @@
 import { describe, expect, it } from "vitest";
-import { formatDay, formatDayTime, formatNumber, formatTimeAgo } from "./format";
+import { formatDate, formatDay, formatDayTime, formatNumber, formatTimeAgo } from "./format";
 
 const now = new Date(2026, 10, 5, 15, 30);
 
@@ -48,5 +48,15 @@ describe("formatTimeAgo", () => {
 describe("formatDayTime", () => {
   it("adds the time to the day", () => {
     expect(formatDayTime(new Date(2026, 10, 5, 18, 40).toISOString(), "en", now)).toBe("Today 18:40");
+  });
+});
+
+describe("formatDate", () => {
+  it("shows a calendar date the same in every time zone", () => {
+    expect(formatDate("2026-12-31", "en")).toBe("Dec 31, 2026");
+  });
+
+  it("uses Latin digits in Arabic", () => {
+    expect(formatDate("2026-12-31", "ar")).toMatch(/2026/u);
   });
 });
