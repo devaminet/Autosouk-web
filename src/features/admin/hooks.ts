@@ -3,7 +3,7 @@ import { getAuditLog, getOverview } from "./api";
 import type { AuditLogQuery } from "./api";
 import { getInspections } from "./inspectionsApi";
 import type { InspectionsQuery } from "./inspectionsApi";
-import { deleteListing, getListings } from "./listingsApi";
+import { approveListing, deleteListing, getListings, rejectListing } from "./listingsApi";
 import type { ListingsQuery } from "./listingsApi";
 import { deleteUser, getUser, getUsers, reactivateUser, suspendUser } from "./usersApi";
 import type { AdminUser } from "./usersApi";
@@ -99,13 +99,20 @@ export const useDeleteUser = () => {
 export const useAdminListings = (query: ListingsQuery) =>
   useQuery({ queryKey: adminKeys.listings(query), queryFn: () => getListings(query), placeholderData: keepPreviousData });
 
-export const useDeleteListing = () => {
+// Deleting, approving or rejecting a listing changes the lists and the counts.
+const useListingChange = <Input, Output>(mutationFn: (input: Input) => Promise<Output>) => {
   const queryClient = useQueryClient();
   return useMutation({
-    mutationFn: deleteListing,
+    mutationFn,
     onSuccess: () => queryClient.invalidateQueries({ queryKey: adminKeys.all }),
   });
 };
+
+export const useDeleteListing = () => useListingChange(deleteListing);
+
+export const useApproveListing = () => useListingChange(approveListing);
+
+export const useRejectListing = () => useListingChange(rejectListing);
 
 export const useAdminWorkshops = (query: WorkshopsQuery) =>
   useQuery({ queryKey: adminKeys.workshops(query), queryFn: () => getWorkshops(query), placeholderData: keepPreviousData });

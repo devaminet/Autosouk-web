@@ -271,7 +271,7 @@
   },
   "listings": {
     "title": "Listings",
-    "description": "Every listing in every status. Open one to see it as buyers do.",
+    "description": "Every listing in every status. Open a pending one to check its car and photos, then approve or reject it.",
     "caption": "Listings",
     "search": "Search",
     "searchPlaceholder": "A title, or a seller's name or email",
@@ -308,7 +308,25 @@
       "helper": "Kept in the audit log, with the title and seller.",
       "confirm": "Delete the listing"
     },
-    "deleted": "“{{title}}” was deleted."
+    "deleted": "“{{title}}” was deleted.",
+    "approve": "Approve",
+    "approveNamed": "Approve {{title}}",
+    "reject": "Reject",
+    "rejectNamed": "Reject {{title}}",
+    "approved": "“{{title}}” is approved and visible to buyers.",
+    "approveFailed": "“{{title}}” wasn't approved: {{message}}",
+    "rejected": "“{{title}}” was sent back to its seller.",
+    "rejectDialog": {
+      "title": "Reject “{{title}}”?",
+      "description": "The listing stays with its seller, hidden from buyers.",
+      "consequences": [
+        "The seller sees your reason on the listing",
+        "Once the seller edits it, it comes back here for review"
+      ],
+      "label": "What should the seller fix?",
+      "helper": "Shown to the seller as you write it.",
+      "confirm": "Reject the listing"
+    }
   },
   "workshops": {
     "title": "Workshops",

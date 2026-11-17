@@ -276,7 +276,7 @@
   },
   "listings": {
     "title": "Annonces",
-    "description": "Toutes les annonces, dans tous les états. Ouvrez-en une pour la voir comme les acheteurs.",
+    "description": "Toutes les annonces, quel que soit leur statut. Ouvrez une annonce en attente pour vérifier sa voiture et ses photos, puis approuvez-la ou refusez-la.",
     "caption": "Annonces",
     "search": "Rechercher",
     "searchPlaceholder": "Un titre, ou le nom ou l'e-mail d'un vendeur",
@@ -313,7 +313,25 @@
       "helper": "Gardé dans le journal d'audit, avec le titre et le vendeur.",
       "confirm": "Supprimer l'annonce"
     },
-    "deleted": "« {{title}} » a été supprimée."
+    "deleted": "« {{title}} » a été supprimée.",
+    "approve": "Approuver",
+    "approveNamed": "Approuver {{title}}",
+    "reject": "Refuser",
+    "rejectNamed": "Refuser {{title}}",
+    "approved": "« {{title}} » est approuvée et visible par les acheteurs.",
+    "approveFailed": "« {{title}} » n'a pas été approuvée : {{message}}",
+    "rejected": "« {{title}} » a été renvoyée à son vendeur.",
+    "rejectDialog": {
+      "title": "Refuser « {{title}} » ?",
+      "description": "L'annonce reste chez son vendeur, cachée aux acheteurs.",
+      "consequences": [
+        "Le vendeur voit votre motif sur l'annonce",
+        "Dès que le vendeur la modifie, elle revient ici pour être examinée"
+      ],
+      "label": "Que doit corriger le vendeur ?",
+      "helper": "Montré au vendeur tel que vous l'écrivez.",
+      "confirm": "Refuser l'annonce"
+    }
   },
   "workshops": {
     "title": "Ateliers",

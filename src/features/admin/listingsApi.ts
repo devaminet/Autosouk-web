@@ -53,3 +53,20 @@ export const deleteListing = ({ listingId, reason }: { listingId: number; reason
     body: { reason },
     schema: z.object({ deleted: z.boolean(), listingId: z.number() }),
   });
+
+// Publishes a pending listing. The API refuses one without a car or with too
+// few photos, and says why.
+export const approveListing = (listingId: number) =>
+  request(`/api/listings/${listingId}/approve`, {
+    method: "PATCH",
+    schema: z.object({ updatedRows: z.unknown() }),
+  });
+
+// Sends a pending listing back to its seller, who sees the reason. Editing it
+// puts it back in the queue.
+export const rejectListing = ({ listingId, reason }: { listingId: number; reason: string }) =>
+  request(`/api/listings/${listingId}/reject`, {
+    method: "PATCH",
+    body: { reason },
+    schema: z.object({ listing: z.object({ id: z.number() }) }),
+  });

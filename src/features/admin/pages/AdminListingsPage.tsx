@@ -17,7 +17,7 @@ import type { Column } from "../components/AdminTable";
 import { FilterTabs } from "../components/FilterTabs";
 import { ListSearch } from "../components/ListSearch";
 import { ReasonDialog } from "../components/ReasonDialog";
-import { useAdminListings, useAdminOverview, useDeleteListing } from "../hooks";
+import { useAdminListings, useAdminOverview, useApproveListing, useDeleteListing, useRejectListing } from "../hooks";
 import { useListParams } from "../listParams";
 import { listingStatuses } from "../listingsApi";
 import type { AdminListing } from "../listingsApi";
@@ -44,8 +44,12 @@ export function AdminListingsPage() {
   const listings = useAdminListings({ page, ...values });
   const overview = useAdminOverview();
   const remove = useDeleteListing();
+  const approve = useApproveListing();
+  const reject = useRejectListing();
   const [deleting, setDeleting] = useState<AdminListing | null>(null);
-  const [deleted, setDeleted] = useState<string | null>(null);
+  const [rejecting, setRejecting] = useState<AdminListing | null>(null);
+  // What the last action did, or why an approval failed.
+  const [notice, setNotice] = useState<{ tone: "success" | "danger"; text: string } | null>(null);
   const locale = getLocale();
   const counts = overview.data?.listings.byStatus;
 
@@ -130,14 +134,48 @@ export function AdminListingsPage() {
       header: t("listings.actions"),
       align: "end",
       cell: (listing) => (
-        <span className="flex justify-end gap-4">
+        <span className="flex flex-wrap justify-end gap-4">
+          {listing.status === "pending" && (
+            <>
+              <Button
+                aria-label={t("listings.approveNamed", { title: listing.title })}
+                isPending={approve.isPending && approve.variables === listing.id}
+                onClick={() => {
+                  setNotice(null);
+                  approve.mutate(listing.id, {
+                    onSuccess: () => setNotice({ tone: "success", text: t("listings.approved", { title: listing.title }) }),
+                    onError: (error) =>
+                      setNotice({
+                        tone: "danger",
+                        text: t("listings.approveFailed", { title: listing.title, message: error.message }),
+                      }),
+                  });
+                }}
+                size="s"
+                variant="primary"
+              >
+                <Icon name="check" size={16} />
+                {t("listings.approve")}
+              </Button>
+              <Button
+                aria-label={t("listings.rejectNamed", { title: listing.title })}
+                onClick={() => {
+                  setNotice(null);
+                  setRejecting(listing);
+                }}
+                size="s"
+              >
+                {t("listings.reject")}
+              </Button>
+            </>
+          )}
           <ButtonLink aria-label={t("listings.openNamed", { title: listing.title })} size="s" to={listingPath(listing.id)}>
             {t("listings.open")}
           </ButtonLink>
           <Button
             aria-label={t("listings.deleteNamed", { title: listing.title })}
             onClick={() => {
-              setDeleted(null);
+              setNotice(null);
               setDeleting(listing);
             }}
             size="s"
@@ -194,7 +232,7 @@ export function AdminListingsPage() {
 
   return (
     <AdminPage description={t("listings.description")} title={t("listings.title")}>
-      <output className="empty:hidden">{deleted && <Alert tone="success">{t("listings.deleted", { title: deleted })}</Alert>}</output>
+      <output className="empty:hidden">{notice && <Alert tone={notice.tone}>{notice.text}</Alert>}</output>
       <ListSearch
         label={t("listings.search")}
         onSearch={(search) => set({ search })}
@@ -253,13 +291,44 @@ export function AdminListingsPage() {
             {
               onSuccess: () => {
                 setDeleting(null);
-                setDeleted(title);
+                setNotice({ tone: "success", text: t("listings.deleted", { title }) });
               },
             },
           );
         }}
         open={deleting !== null}
         title={t("listings.deleteDialog.title", { title: deleting?.title ?? "" })}
+      />
+      <ReasonDialog
+        confirmIcon="x"
+        confirmLabel={t("listings.rejectDialog.confirm")}
+        consequences={lines(t("listings.rejectDialog.consequences", { returnObjects: true }))}
+        description={t("listings.rejectDialog.description")}
+        error={reject.error?.message ?? null}
+        helper={t("listings.rejectDialog.helper")}
+        isPending={reject.isPending}
+        label={t("listings.rejectDialog.label")}
+        onClose={() => {
+          setRejecting(null);
+          reject.reset();
+        }}
+        onConfirm={(reason) => {
+          if (!rejecting) {
+            return;
+          }
+          const title = rejecting.title;
+          reject.mutate(
+            { listingId: rejecting.id, reason },
+            {
+              onSuccess: () => {
+                setRejecting(null);
+                setNotice({ tone: "success", text: t("listings.rejected", { title }) });
+              },
+            },
+          );
+        }}
+        open={rejecting !== null}
+        title={t("listings.rejectDialog.title", { title: rejecting?.title ?? "" })}
       />
     </AdminPage>
   );
