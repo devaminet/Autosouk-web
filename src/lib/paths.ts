@@ -21,8 +21,6 @@ export const paths = {
   mechanic: "/mechanics/:mechanicId",
   // The documents a mechanic sends so buyers can book them. The API's emails link here.
   mechanicDocuments: "/mechanic/documents",
-  // Admins check mechanics' documents. The selected mechanic lives in the query string.
-  adminMechanics: "/admin/mechanics",
   // The admin dashboard. Lists keep their filters and page in the query string.
   adminOverview: "/admin",
   adminVerifications: "/admin/verifications",

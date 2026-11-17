@@ -15,7 +15,6 @@ import { VerifyPhonePage } from "../features/identity/pages/VerifyPhonePage";
 import { AdminOverviewPage } from "../features/admin/pages/AdminOverviewPage";
 import { AdminVerificationPage } from "../features/admin/pages/AdminVerificationPage";
 import { AdminVerificationsPage } from "../features/admin/pages/AdminVerificationsPage";
-import { AdminMechanicsPage } from "../features/documents/pages/AdminMechanicsPage";
 import { MechanicDocumentsPage } from "../features/documents/pages/MechanicDocumentsPage";
 import { InspectionQueuePage } from "../features/inspections/pages/InspectionQueuePage";
 import { InspectionReportPage } from "../features/inspections/pages/InspectionReportPage";
@@ -119,7 +118,6 @@ export const routes: RouteObject[] = [
               { path: paths.adminOverview, element: <AdminOverviewPage /> },
               { path: paths.adminVerifications, element: <AdminVerificationsPage /> },
               { path: paths.adminVerification, element: <AdminVerificationPage /> },
-              { path: paths.adminMechanics, element: <AdminMechanicsPage /> },
             ],
           },
         ],

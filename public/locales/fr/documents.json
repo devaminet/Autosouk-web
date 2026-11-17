@@ -89,25 +89,12 @@
     "start": "Envoyer vos documents"
   },
   "admin": {
-    "title": "Vérification des mécaniciens",
-    "queue": {
-      "title": "En attente de vérification",
-      "order": "Les plus anciens d'abord",
-      "empty": "Aucun mécanicien en attente. Les nouveaux documents apparaissent ici.",
-      "documents_one": "{{count}} document",
-      "documents_many": "{{count}} documents",
-      "documents_other": "{{count}} documents",
-      "resent": "Renvoyés"
-    },
     "viewer": {
       "label": "Document",
       "pick": "Choisissez un document pour l'afficher.",
       "logged": "Chaque ouverture est enregistrée",
       "newTab": "Ouvrir dans un nouvel onglet"
     },
-    "phoneVerified": "Téléphone vérifié",
-    "phoneNotVerified": "Téléphone non vérifié",
-    "faceCheck": "Vérification du visage : {{status}}",
     "documents": "Documents",
     "datesHint": "Indiquez la date de fin de chaque CIN et patente approuvée",
     "waiting": "En attente de votre décision",
@@ -132,18 +119,10 @@
     },
     "reasonFor": "Raison du refus de {{document}}",
     "reasonHelper": "Le mécanicien voit ce texte à côté du document.",
-    "checklist": "Avant d'approuver, vérifiez",
     "checks": {
-      "identity": "La CIN correspond au nom du compte et à la vérification du visage",
       "sameGarage": "Le RC, la patente et l'ICE nomment le même garage",
       "validToday": "Chaque document est valable aujourd'hui",
       "premises": "Le bail ou le titre de propriété couvre l'adresse du garage"
-    },
-    "footer": "Le mécanicien reçoit un e-mail. Les documents approuvés le restent, et les fichiers refusés sont supprimés.",
-    "approve": "Approuver le mécanicien",
-    "askAgain_one": "Redemander {{count}} document",
-    "askAgain_many": "Redemander {{count}} documents",
-    "askAgain_other": "Redemander {{count}} documents",
-    "saved": "Décision enregistrée. Nous avons écrit à {{name}}."
+    }
   }
 }

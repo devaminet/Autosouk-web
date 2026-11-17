@@ -3,14 +3,13 @@ import { useTranslation } from "react-i18next";
 import { useParams } from "react-router";
 import { Alert } from "../../../components/Alert";
 import { Badge } from "../../../components/Badge";
-import { ButtonLink } from "../../../components/ButtonLink";
 import { Icon } from "../../../components/Icon";
 import { formatDate, formatDayTime } from "../../../lib/format";
 import { getLocale } from "../../../lib/i18n";
 import { isLocale, localeNames } from "../../../lib/locale";
 import { paths } from "../../../lib/paths";
 import { AdminPage } from "../components/AdminPage";
-import { FaceCheckReview } from "../components/FaceCheckReview";
+import { ReviewForm } from "../components/ReviewForm";
 import { useDecideVerification, useVerification } from "../hooks";
 import type { Verification } from "../verificationsApi";
 
@@ -154,26 +153,11 @@ export function AdminVerificationPage() {
         {decide.isSuccess && <Alert tone="success">{t("verifications.review.decision.saved", { name: user.firstName })}</Alert>}
       </output>
       <Profile review={data} />
-      {pendingDocuments > 0 && (
-        <Alert
-          action={
-            <ButtonLink size="s" to={`${paths.adminMechanics}?mechanic=${user.id}`}>
-              {t("verifications.review.openDocuments")}
-            </ButtonLink>
-          }
-          tone="info"
-        >
-          {t("verifications.review.documentsWaiting")}
-        </Alert>
-      )}
       <div className="grid items-start gap-16 lg:grid-cols-3">
         <div className="lg:col-span-2">
-          {data.faceCheck ? (
-            // A fresh form for each check, so a decision doesn't carry over.
-            <FaceCheckReview
-              blocked={pendingDocuments > 0}
-              decide={decide}
-              faceCheck={data.faceCheck} key={data.faceCheck.id} review={data} />
+          {data.faceCheck || pendingDocuments > 0 ? (
+            // A fresh form for each review, so decisions don't carry over.
+            <ReviewForm decide={decide} key={data.faceCheck?.id ?? `documents-${user.id}`} review={data} />
           ) : (
             <p className="rounded-xl bg-surface p-24 type-body-m text-muted ring-1 ring-line ring-inset">
               {t("verifications.review.face.noVideo")}

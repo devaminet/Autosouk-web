@@ -28,12 +28,6 @@ const links: AdminLink[] = [
     icon: "scan-face",
     waiting: (overview) => overview.queues.verifications,
   },
-  {
-    to: paths.adminMechanics,
-    label: "nav.adminMechanics",
-    icon: "wrench",
-    waiting: (overview) => overview.queues.mechanicDocuments,
-  },
   { to: paths.home, label: "nav.marketplace", icon: "home", end: true },
 ];
 

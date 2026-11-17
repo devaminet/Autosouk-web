@@ -124,7 +124,8 @@
         "title": "Before approving, check",
         "live": "The same real person all along, not a photo or a screen",
         "challenges": "Each challenge is done, in the order asked",
-        "clear": "The face is clear: good light, nothing covering it"
+        "clear": "The face is clear: good light, nothing covering it",
+        "cinMatches": "The name and face on the CIN match the account and the face video"
       },
       "decision": {
         "label": "Decision on the face video",
@@ -133,10 +134,11 @@
         "reasonLabel": "Reason for rejecting the face video",
         "reasonHelper": "The user reads it in the email and on their face check page, and can record again.",
         "presetsLabel": "Start from:",
-        "approveSubmit": "Approve face video",
-        "rejectSubmit": "Reject face video",
-        "footer": "One email tells the user what you decided. The video is deleted once you decide.",
-        "saved": "Decision saved. We emailed {{name}}."
+        "saved": "Decision saved. We emailed {{name}}.",
+        "footerAll": "One email tells {{name}} what was approved and what to send again, with your reasons. The video and rejected files are deleted.",
+        "approveAll": "Approve everything",
+        "askAgain_one": "Save and ask for {{count}} item again",
+        "askAgain_other": "Save and ask for {{count}} items again"
       },
       "presetNames": {
         "tooDark": "Too dark",
@@ -150,8 +152,6 @@
         "challengeMissed": "You didn't do every challenge on the screen. Follow each one, in order.",
         "notLive": "This doesn't look like a live recording. Record yourself, not a photo or a screen."
       },
-      "documentsWaiting": "This mechanic's documents are waiting too. Decide them in Mechanic checks for now; they join this page in the next update.",
-      "openDocuments": "Open Mechanic checks",
       "history": {
         "title": "Earlier face videos",
         "approved": "Approved",
@@ -160,7 +160,9 @@
         "empty": "No earlier face video."
       },
       "waitingDocuments_one": "{{count}} document waiting",
-      "waitingDocuments_other": "{{count}} documents waiting"
+      "waitingDocuments_other": "{{count}} documents waiting",
+      "documentsNeeded_one": "{{count}} needed",
+      "documentsNeeded_other": "{{count}} needed"
     }
   }
 }

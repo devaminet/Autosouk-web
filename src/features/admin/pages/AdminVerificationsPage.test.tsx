@@ -123,7 +123,7 @@ describe("admin verifications", () => {
     expect(screen.getByText("Too dark")).toBeInTheDocument();
 
     await user.click(screen.getByRole("radio", { name: "Approve" }));
-    const approve = screen.getByRole("button", { name: "Approve face video" });
+    const approve = screen.getByRole("button", { name: "Approve everything" });
     expect(approve).toBeDisabled();
     for (const check of [
       "The same real person all along, not a photo or a screen",
@@ -146,7 +146,7 @@ describe("admin verifications", () => {
 
     await user.click(await screen.findByRole("radio", { name: "Reject" }));
     await user.click(screen.getByRole("button", { name: "Too dark" }));
-    await user.click(screen.getByRole("button", { name: "Reject face video" }));
+    await user.click(screen.getByRole("button", { name: "Save and ask for 1 item again" }));
 
     expect(await screen.findByText("Decision saved. We emailed Nadia.")).toBeInTheDocument();
     expect(decisions).toEqual([
@@ -159,11 +159,25 @@ describe("admin verifications", () => {
     ]);
   });
 
-  it("sends a mechanic's documents to Mechanic checks for now", async () => {
+  it("decides a mechanic's face video and documents together", async () => {
     const user = userEvent.setup();
-    adminApi({
+    const pendingDocument = (id: number, type: "cin_front" | "cin_back") => ({
+      id,
+      type,
+      status: "pending" as const,
+      contentType: "image/jpeg",
+      sizeBytes: 1000,
+      validUntil: null,
+      expired: false,
+      rejectionReason: null,
+      submittedAt: "2026-11-17T09:00:00.000Z",
+      reviewedAt: null,
+      createdAt: "2026-11-17T09:00:00.000Z",
+    });
+    const mechanic: Verification = {
       ...buyerReview,
       user: { ...buyerReview.user, id: 7, firstName: "Hamid", lastName: "Mansouri", role: "mechanic" },
+      mechanic: { id: 3, name: "Garage Atlas Auto", city: { name: "Casablanca", slug: "casablanca" } },
       documents: {
         kind: "solo",
         status: "pending",
@@ -171,29 +185,57 @@ describe("admin verifications", () => {
         validUntil: null,
         requiredTypes: ["cin_front", "cin_back"],
         expiringTypes: ["cin_front", "cin_back", "patente"],
+        documents: [pendingDocument(11, "cin_front"), pendingDocument(12, "cin_back")],
+      },
+    };
+    const decisions = adminApi(mechanic);
+    const links: string[] = [];
+    server.use(
+      http.get("*/api/mechanic-documents/documents/:id/link", ({ params }) => {
+        links.push(String(params.id));
+        return HttpResponse.json({ url: `http://storage.test/doc-${String(params.id)}.jpg`, contentType: "image/jpeg", expiresAt: "" });
+      }),
+    );
+    renderApp("/admin/verifications/7");
+
+    expect(await screen.findByText("2 documents waiting")).toBeInTheDocument();
+    expect(await screen.findByRole("img", { name: "CIN · front" })).toHaveAttribute("src", "http://storage.test/doc-11.jpg");
+    expect(links).toEqual(["11"]);
+
+    await user.click(within(screen.getByRole("group", { name: "Decision on the face video" })).getByRole("radio", { name: "Approve" }));
+    const front = within(screen.getByRole("group", { name: "Decision on CIN · front" }));
+    await user.click(front.getByRole("radio", { name: "Approve" }));
+    await user.type(front.getByLabelText("Valid until"), "2031-03-14");
+    const back = within(screen.getByRole("group", { name: "Decision on CIN · back" }));
+    await user.click(back.getByRole("radio", { name: "Reject" }));
+    await user.click(back.getByRole("button", { name: "Unreadable" }));
+
+    const save = screen.getByRole("button", { name: "Save and ask for 1 item again" });
+    expect(save).toBeDisabled();
+    for (const check of [
+      "The same real person all along, not a photo or a screen",
+      "Each challenge is done, in the order asked",
+      "The face is clear: good light, nothing covering it",
+      "The name and face on the CIN match the account and the face video",
+      "Every document is valid today",
+    ]) {
+      await user.click(screen.getByRole("checkbox", { name: check }));
+    }
+    await user.click(save);
+
+    expect(await screen.findByText("Decision saved. We emailed Hamid.")).toBeInTheDocument();
+    expect(decisions).toEqual([
+      {
+        faceCheck: { decision: "approved" },
         documents: [
+          { documentId: 11, decision: "approved", validUntil: "2031-03-14" },
           {
-            id: 11,
-            type: "cin_front",
-            status: "pending",
-            contentType: "image/jpeg",
-            sizeBytes: 1000,
-            validUntil: null,
-            expired: false,
-            rejectionReason: null,
-            submittedAt: "2026-11-17T09:00:00.000Z",
-            reviewedAt: null,
-            createdAt: "2026-11-17T09:00:00.000Z",
+            documentId: 12,
+            decision: "rejected",
+            reason: "We can't read this document. Upload a sharp photo or scan, without glare.",
           },
         ],
       },
-    });
-    renderApp("/admin/verifications/7");
-
-    expect(await screen.findByText("1 document waiting")).toBeInTheDocument();
-    expect(screen.getByRole("link", { name: "Open Mechanic checks" })).toHaveAttribute("href", "/admin/mechanics?mechanic=7");
-    await user.click(screen.getByRole("radio", { name: "Reject" }));
-    await user.type(screen.getByLabelText("Reason for rejecting the face video"), "Too dark");
-    expect(screen.getByRole("button", { name: "Reject face video" })).toBeDisabled();
+    ]);
   });
 });

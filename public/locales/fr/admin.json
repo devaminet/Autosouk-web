@@ -125,7 +125,8 @@
         "title": "Avant d'approuver, vérifiez",
         "live": "La même personne réelle du début à la fin, pas une photo ni un écran",
         "challenges": "Chaque consigne est faite, dans l'ordre demandé",
-        "clear": "Le visage est net : bonne lumière, rien ne le cache"
+        "clear": "Le visage est net : bonne lumière, rien ne le cache",
+        "cinMatches": "Le nom et le visage sur la CIN correspondent au compte et à la vidéo"
       },
       "decision": {
         "label": "Décision sur la vidéo du visage",
@@ -134,10 +135,12 @@
         "reasonLabel": "Motif du refus de la vidéo",
         "reasonHelper": "L'utilisateur le lit dans l'e-mail et sur sa page de vérification, et peut enregistrer à nouveau.",
         "presetsLabel": "Partir de :",
-        "approveSubmit": "Approuver la vidéo",
-        "rejectSubmit": "Refuser la vidéo",
-        "footer": "Un e-mail informe l'utilisateur de votre décision. La vidéo est supprimée une fois la décision prise.",
-        "saved": "Décision enregistrée. Nous avons écrit à {{name}}."
+        "saved": "Décision enregistrée. Nous avons écrit à {{name}}.",
+        "footerAll": "Un seul e-mail indique à {{name}} ce qui est approuvé et ce qu'il faut renvoyer, avec vos motifs. La vidéo et les fichiers refusés sont supprimés.",
+        "approveAll": "Tout approuver",
+        "askAgain_one": "Enregistrer et redemander {{count}} élément",
+        "askAgain_many": "Enregistrer et redemander {{count}} éléments",
+        "askAgain_other": "Enregistrer et redemander {{count}} éléments"
       },
       "presetNames": {
         "tooDark": "Trop sombre",
@@ -151,8 +154,6 @@
         "challengeMissed": "Vous n'avez pas fait toutes les consignes à l'écran. Suivez-les une par une, dans l'ordre.",
         "notLive": "Cela ne ressemble pas à un enregistrement en direct. Filmez-vous vous-même, pas une photo ni un écran."
       },
-      "documentsWaiting": "Les documents de ce mécanicien attendent aussi. Décidez-les pour l'instant dans Vérification des mécaniciens ; ils rejoindront cette page à la prochaine mise à jour.",
-      "openDocuments": "Ouvrir Vérification des mécaniciens",
       "history": {
         "title": "Vidéos précédentes",
         "approved": "Approuvée",
@@ -162,7 +163,10 @@
       },
       "waitingDocuments_one": "{{count}} document en attente",
       "waitingDocuments_many": "{{count}} documents en attente",
-      "waitingDocuments_other": "{{count}} documents en attente"
+      "waitingDocuments_other": "{{count}} documents en attente",
+      "documentsNeeded_one": "{{count}} demandé",
+      "documentsNeeded_many": "{{count}} demandés",
+      "documentsNeeded_other": "{{count}} demandés"
     }
   }
 }
