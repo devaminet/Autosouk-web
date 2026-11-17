@@ -25,7 +25,10 @@
     "workshop": "ورشتي",
     "workshopShort": "الورشة",
     "mechanics": "الميكانيكيون",
-    "mechanicsShort": "الورشات"
+    "mechanicsShort": "الورشات",
+    "admin": "الإدارة",
+    "adminMechanics": "التحقق من الميكانيكيين",
+    "marketplace": "السوق"
   },
   "noAccess": {
     "title": "لا يمكنك فتح هذه الصفحة",

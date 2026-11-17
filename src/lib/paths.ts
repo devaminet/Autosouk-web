@@ -19,6 +19,10 @@ export const paths = {
   mechanics: "/mechanics",
   // A workshop's public profile and reviews. Build links with mechanicPath.
   mechanic: "/mechanics/:mechanicId",
+  // The documents a mechanic sends so buyers can book them. The API's emails link here.
+  mechanicDocuments: "/mechanic/documents",
+  // Admins check mechanics' documents. The selected mechanic lives in the query string.
+  adminMechanics: "/admin/mechanics",
   // The mechanic's own workshop profile, which also sets it up.
   workshop: "/workshop",
   // The mechanic's inspection requests, by status. The status shown on small

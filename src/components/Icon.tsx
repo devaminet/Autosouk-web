@@ -72,6 +72,22 @@ const icons = {
       <path d="M12 15V3" />
     </>
   ),
+  "file-check": (
+    <>
+      <path d="M15 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7Z" />
+      <path d="M14 2v4a2 2 0 0 0 2 2h4" />
+      <path d="m9 15 2 2 4-4" />
+    </>
+  ),
+  "id-card": (
+    <>
+      <rect height="14" rx="2" width="20" x="2" y="5" />
+      <circle cx="8" cy="11" r="2" />
+      <path d="M5 16a3 3 0 0 1 6 0" />
+      <path d="M14 10h4" />
+      <path d="M14 14h4" />
+    </>
+  ),
   file: (
     <>
       <path d="M15 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7Z" />

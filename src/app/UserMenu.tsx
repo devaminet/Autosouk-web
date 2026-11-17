@@ -37,6 +37,16 @@ export function UserMenu({ user }: UserMenuProps) {
           <p className="px-12 py-8 type-label-m text-ink">
             {user.firstName} {user.lastName}
           </p>
+          {user.role === "admin" && (
+            <Link
+              className="flex min-h-control-s w-full items-center gap-8 rounded-sm px-12 type-label-m text-ink hover:bg-paper focus-visible:outline-2 focus-visible:outline-brand"
+              onClick={() => setOpen(false)}
+              to={paths.adminMechanics}
+            >
+              <Icon name="wrench" size={16} />
+              {t("nav.adminMechanics")}
+            </Link>
+          )}
           <Link
             className="flex min-h-control-s w-full items-center gap-8 rounded-sm px-12 type-label-m text-ink hover:bg-paper focus-visible:outline-2 focus-visible:outline-brand"
             onClick={() => setOpen(false)}

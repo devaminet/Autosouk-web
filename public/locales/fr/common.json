@@ -25,7 +25,10 @@
     "workshop": "Mon atelier",
     "workshopShort": "Atelier",
     "mechanics": "Mécaniciens",
-    "mechanicsShort": "Garages"
+    "mechanicsShort": "Garages",
+    "admin": "Administration",
+    "adminMechanics": "Vérification des mécaniciens",
+    "marketplace": "Marketplace"
   },
   "noAccess": {
     "title": "Vous ne pouvez pas ouvrir cette page",

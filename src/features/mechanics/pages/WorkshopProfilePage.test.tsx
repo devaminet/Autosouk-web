@@ -389,3 +389,42 @@ describe("WorkshopProfilePage", () => {
     expect(bodies).toHaveLength(1);
   });
 });
+
+describe("the workshop's documents", () => {
+  const serveDocuments = (status: string, validUntil: string | null) =>
+    server.use(
+      http.get("*/api/mechanic-documents/me", () =>
+        HttpResponse.json({
+          kind: "garage",
+          status,
+          bookable: status === "approved",
+          approvedAt: status === "approved" ? "2026-11-01T10:00:00.000Z" : null,
+          validUntil,
+          requiredTypes: [],
+          documents: [],
+        }),
+      ),
+    );
+
+  it("asks a new mechanic to send their documents", async () => {
+    signIn();
+    serveWorkshop(workshop());
+    renderApp("/workshop");
+
+    const section = within(await screen.findByRole("region", { name: "Verification documents" }));
+    expect(section.getByText("Send your documents so buyers can book you.")).toBeInTheDocument();
+    expect(section.getByRole("link", { name: "Send your documents" })).toHaveAttribute("href", "/mechanic/documents");
+  });
+
+  it("warns when a document ends within 30 days", async () => {
+    signIn();
+    serveWorkshop(workshop());
+    const inTenDays = new Date(Date.now() + 10 * 86_400_000).toISOString().slice(0, 10);
+    serveDocuments("approved", inTenDays);
+    renderApp("/workshop");
+
+    const section = within(await screen.findByRole("region", { name: "Verification documents" }));
+    expect(await section.findByText("A document expires in 10 days. Upload the new one.")).toBeInTheDocument();
+    expect(section.getByText("Verified mechanic")).toBeInTheDocument();
+  });
+});

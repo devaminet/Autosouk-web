@@ -1,0 +1,151 @@
+{
+  "step": "Documents du mécanicien",
+  "pageTitle": "Documents du mécanicien",
+  "retry": "Réessayer",
+  "privacy": "Seuls les administrateurs AutoSouk voient vos documents. Chaque consultation est enregistrée.",
+  "listLabel": "Vos documents",
+  "send": "Envoyer pour vérification",
+  "sendAgain": "Envoyer à nouveau",
+  "workshop": "Configurer votre atelier",
+  "switchToGarage": "J'ai plutôt un garage",
+  "switchToSolo": "Je travaille plutôt seul",
+  "kind": {
+    "title": "Comment travaillez-vous ?",
+    "description": "Nous vérifions chaque mécanicien avant que les acheteurs puissent le réserver. Indiquez comment vous travaillez, et nous demanderons les bons documents.",
+    "legend": "Votre façon de travailler",
+    "soloDescription": "Vous inspectez les voitures vous-même, chez le vendeur ou sur la route. Pas besoin d'atelier.",
+    "garageDescription": "Vous tenez un atelier. Les acheteurs voient son adresse, et vous pouvez y inspecter les voitures.",
+    "continue": "Continuer"
+  },
+  "notSubmitted": {
+    "soloTitle": "Envoyez votre CIN",
+    "soloDescription": "Les deux faces de votre carte nationale. Un administrateur vérifie que le nom correspond à votre compte.",
+    "garageTitle": "Les documents de votre garage",
+    "garageDescription": "Ils montrent que vous avez le droit d'exploiter le garage. Un administrateur les vérifie à la main, en général sous 2 jours ouvrés."
+  },
+  "pending": {
+    "title": "Nous vérifions vos documents",
+    "description": "Un administrateur les vérifie à la main, en général sous 2 jours ouvrés. Nous vous écrirons dès que c'est fait.",
+    "whileYouWait": "En attendant",
+    "whileYouWaitDescription": "Configurez votre atelier : photos, adresse et prix. Les acheteurs pourront vous réserver dès que vos documents seront approuvés."
+  },
+  "approved": {
+    "title": "Vous êtes un mécanicien vérifié",
+    "description": "Les acheteurs peuvent vous réserver jusqu'au {{date}}. Envoyez le nouveau document avant cette date.",
+    "descriptionNoDate": "Les acheteurs peuvent vous réserver."
+  },
+  "rejected": {
+    "title": "Un document est à corriger",
+    "description": "Les acheteurs ne peuvent pas vous réserver tant que chaque document n'est pas approuvé. Remplacez ceux ci-dessous et envoyez-les à nouveau."
+  },
+  "expired": {
+    "title": "Un document a expiré",
+    "description": "Les acheteurs ne peuvent pas vous réserver tant que vous n'envoyez pas un document valide approuvé par un administrateur."
+  },
+  "progress": {
+    "label": "Vos documents",
+    "count": "{{ready}} sur {{total}} prêts"
+  },
+  "tips": {
+    "readable": "Document entier, sans reflet ni flou : chaque numéro doit être lisible"
+  },
+  "tile": {
+    "formats": "JPG, PNG ou PDF · 10 Mo maximum",
+    "uploading": "Envoi…",
+    "ready": "Prêt à envoyer · {{size}}",
+    "readyNoSize": "Prêt à envoyer",
+    "inReview": "Un administrateur le vérifie",
+    "validUntil": "Valable jusqu'au {{date}}",
+    "noExpiry": "Sans date de fin",
+    "expiredOn": "Expiré le {{date}}",
+    "wrongType": "Choisissez un fichier JPG, PNG ou PDF.",
+    "tooLarge": "Ce fichier dépasse 10 Mo.",
+    "failed": "Le fichier n'est pas arrivé. Vérifiez votre connexion et envoyez-le à nouveau.",
+    "upload": "Envoyer",
+    "replace": "Remplacer",
+    "uploadNamed": "Envoyer {{document}}",
+    "replaceNamed": "Remplacer {{document}}",
+    "removeNamed": "Retirer {{document}}",
+    "states": {
+      "uploaded": "Prêt",
+      "pending": "En vérification",
+      "approved": "Approuvé",
+      "expired": "Expiré",
+      "rejected": "Refusé"
+    }
+  },
+  "section": {
+    "title": "Documents de vérification",
+    "notSubmitted": "Envoyez vos documents pour que les acheteurs puissent vous réserver.",
+    "pending": "Un administrateur vérifie vos documents.",
+    "approved": "Les acheteurs peuvent vous réserver.",
+    "approvedUntil": "Les acheteurs peuvent vous réserver jusqu'au {{date}}.",
+    "rejected": "Un document est à corriger avant que les acheteurs puissent vous réserver.",
+    "expired": "Un document a expiré : les acheteurs ne peuvent pas vous réserver.",
+    "expiresSoon_one": "Un document expire dans {{count}} jour. Envoyez le nouveau.",
+    "expiresSoon_many": "Un document expire dans {{count}} jours. Envoyez le nouveau.",
+    "expiresSoon_other": "Un document expire dans {{count}} jours. Envoyez le nouveau.",
+    "open": "Vos documents",
+    "start": "Envoyer vos documents"
+  },
+  "admin": {
+    "pageTitle": "Vérification des mécaniciens",
+    "overline": "Administration",
+    "title": "Vérification des mécaniciens",
+    "queue": {
+      "title": "En attente de vérification",
+      "order": "Les plus anciens d'abord",
+      "empty": "Aucun mécanicien en attente. Les nouveaux documents apparaissent ici.",
+      "documents_one": "{{count}} document",
+      "documents_many": "{{count}} documents",
+      "documents_other": "{{count}} documents",
+      "resent": "Renvoyés"
+    },
+    "viewer": {
+      "label": "Document",
+      "pick": "Choisissez un document pour l'afficher.",
+      "logged": "Chaque ouverture est enregistrée",
+      "newTab": "Ouvrir dans un nouvel onglet"
+    },
+    "phoneVerified": "Téléphone vérifié",
+    "phoneNotVerified": "Téléphone non vérifié",
+    "faceCheck": "Vérification du visage : {{status}}",
+    "documents": "Documents",
+    "datesHint": "Indiquez la date de fin de chaque CIN et patente approuvée",
+    "waiting": "En attente de votre décision",
+    "view": "Voir",
+    "viewNamed": "Voir {{document}}",
+    "decisionFor": "Décision sur {{document}}",
+    "approveOne": "Approuver",
+    "rejectOne": "Refuser",
+    "validUntil": "Valable jusqu'au",
+    "presetsLabel": "Partir de :",
+    "presetNames": {
+      "expired": "Expiré",
+      "unreadable": "Illisible",
+      "nameMismatch": "Nom différent",
+      "wrongDocument": "Mauvais document"
+    },
+    "presets": {
+      "expired": "Ce document a expiré. Envoyez un document valide.",
+      "unreadable": "Nous ne pouvons pas lire ce document. Envoyez une photo ou un scan net, sans reflet.",
+      "nameMismatch": "Le nom sur ce document ne correspond pas à votre compte ou à votre garage.",
+      "wrongDocument": "Ce n'est pas le document demandé. Envoyez le bon document."
+    },
+    "reasonFor": "Raison du refus de {{document}}",
+    "reasonHelper": "Le mécanicien voit ce texte à côté du document.",
+    "checklist": "Avant d'approuver, vérifiez",
+    "checks": {
+      "identity": "La CIN correspond au nom du compte et à la vérification du visage",
+      "sameGarage": "Le RC, la patente et l'ICE nomment le même garage",
+      "validToday": "Chaque document est valable aujourd'hui",
+      "premises": "Le bail ou le titre de propriété couvre l'adresse du garage"
+    },
+    "footer": "Le mécanicien reçoit un e-mail. Les documents approuvés le restent, et les fichiers refusés sont supprimés.",
+    "approve": "Approuver le mécanicien",
+    "askAgain_one": "Redemander {{count}} document",
+    "askAgain_many": "Redemander {{count}} documents",
+    "askAgain_other": "Redemander {{count}} documents",
+    "saved": "Décision enregistrée. Nous avons écrit à {{name}}."
+  }
+}

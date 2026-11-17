@@ -1,18 +1,21 @@
 import { http, HttpResponse } from "msw";
 import arAuth from "../../public/locales/ar/auth.json";
 import arCommon from "../../public/locales/ar/common.json";
+import arDocuments from "../../public/locales/ar/documents.json";
 import arIdentity from "../../public/locales/ar/identity.json";
 import arInspections from "../../public/locales/ar/inspections.json";
 import arListings from "../../public/locales/ar/listings.json";
 import arMechanics from "../../public/locales/ar/mechanics.json";
 import enAuth from "../../public/locales/en/auth.json";
 import enCommon from "../../public/locales/en/common.json";
+import enDocuments from "../../public/locales/en/documents.json";
 import enIdentity from "../../public/locales/en/identity.json";
 import enInspections from "../../public/locales/en/inspections.json";
 import enListings from "../../public/locales/en/listings.json";
 import enMechanics from "../../public/locales/en/mechanics.json";
 import frAuth from "../../public/locales/fr/auth.json";
 import frCommon from "../../public/locales/fr/common.json";
+import frDocuments from "../../public/locales/fr/documents.json";
 import frIdentity from "../../public/locales/fr/identity.json";
 import frInspections from "../../public/locales/fr/inspections.json";
 import frListings from "../../public/locales/fr/listings.json";
@@ -25,18 +28,21 @@ const translations: Record<string, unknown> = {
   "en/inspections": enInspections,
   "en/identity": enIdentity,
   "en/mechanics": enMechanics,
+  "en/documents": enDocuments,
   "fr/common": frCommon,
   "fr/auth": frAuth,
   "fr/listings": frListings,
   "fr/inspections": frInspections,
   "fr/identity": frIdentity,
   "fr/mechanics": frMechanics,
+  "fr/documents": frDocuments,
   "ar/common": arCommon,
   "ar/auth": arAuth,
   "ar/listings": arListings,
   "ar/inspections": arInspections,
   "ar/identity": arIdentity,
   "ar/mechanics": arMechanics,
+  "ar/documents": arDocuments,
 };
 
 const apiCatalogs: Record<string, unknown> = {
@@ -79,6 +85,22 @@ const apiCatalogs: Record<string, unknown> = {
       pending: "Being checked",
       approved: "Verified",
       rejected: "Not verified",
+    },
+    mechanic_kind: { solo: "Solo mechanic", garage: "Garage" },
+    mechanic_verification_status: {
+      not_submitted: "Not sent",
+      pending: "In review",
+      approved: "Verified mechanic",
+      rejected: "Needs a fix",
+      expired: "Expired",
+    },
+    mechanic_document_type: {
+      cin_front: "CIN · front",
+      cin_back: "CIN · back",
+      rc: "Registre de commerce (RC)",
+      patente: "Patente",
+      ice: "ICE certificate",
+      premises: "Lease or title deed",
     },
     inspection_verdict: {
       excellent: "Excellent condition",
@@ -210,6 +232,18 @@ export const defaultHandlers = [
     }),
   ),
   http.get("*/api/favorite_listings/ids", () => HttpResponse.json({ listingIds: [] })),
+  // A mechanic who hasn't sent documents yet.
+  http.get("*/api/mechanic-documents/me", () =>
+    HttpResponse.json({
+      kind: null,
+      status: "not_submitted",
+      bookable: false,
+      approvedAt: null,
+      validUntil: null,
+      requiredTypes: [],
+      documents: [],
+    }),
+  ),
   // No session by default: the API answers 400 when the cookie is missing.
   http.post("*/api/auth/refresh-token", () =>
     apiErrors(400, {
