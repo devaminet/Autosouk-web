@@ -28,6 +28,7 @@ const links: AdminLink[] = [
     icon: "scan-face",
     waiting: (overview) => overview.queues.verifications,
   },
+  { to: paths.adminUsers, label: "nav.adminUsers", icon: "users" },
   { to: paths.home, label: "nav.marketplace", icon: "home", end: true },
 ];
 

@@ -13,6 +13,8 @@ import { RequireIdentity } from "../features/identity/components/RequireIdentity
 import { IdentityCheckPage } from "../features/identity/pages/IdentityCheckPage";
 import { VerifyPhonePage } from "../features/identity/pages/VerifyPhonePage";
 import { AdminOverviewPage } from "../features/admin/pages/AdminOverviewPage";
+import { AdminUserPage } from "../features/admin/pages/AdminUserPage";
+import { AdminUsersPage } from "../features/admin/pages/AdminUsersPage";
 import { AdminVerificationPage } from "../features/admin/pages/AdminVerificationPage";
 import { AdminVerificationsPage } from "../features/admin/pages/AdminVerificationsPage";
 import { MechanicDocumentsPage } from "../features/documents/pages/MechanicDocumentsPage";
@@ -118,6 +120,8 @@ export const routes: RouteObject[] = [
               { path: paths.adminOverview, element: <AdminOverviewPage /> },
               { path: paths.adminVerifications, element: <AdminVerificationsPage /> },
               { path: paths.adminVerification, element: <AdminVerificationPage /> },
+              { path: paths.adminUsers, element: <AdminUsersPage /> },
+              { path: paths.adminUser, element: <AdminUserPage /> },
             ],
           },
         ],

@@ -7,7 +7,8 @@ import { Icon } from "../../../components/Icon";
 import { formatDate, formatDayTime } from "../../../lib/format";
 import { getLocale } from "../../../lib/i18n";
 import { isLocale, localeNames } from "../../../lib/locale";
-import { paths } from "../../../lib/paths";
+import { adminUserPath, paths } from "../../../lib/paths";
+import { TextLink } from "../../../components/TextLink";
 import { AdminPage } from "../components/AdminPage";
 import { ReviewForm } from "../components/ReviewForm";
 import { useDecideVerification, useVerification } from "../hooks";
@@ -60,6 +61,10 @@ function Profile({ review }: { review: Verification }) {
           {t("verifications.review.attempts", { rejected: review.attempts.rejected, max: review.attempts.max })}
         </Fact>
       </dl>
+      <TextLink className="mt-16 inline-flex items-center gap-4" size="s" to={adminUserPath(user.id)}>
+        <Icon name="user" size={14} />
+        {t("verifications.review.openProfile")}
+      </TextLink>
     </section>
   );
 }

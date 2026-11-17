@@ -1,6 +1,8 @@
-import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
+import { keepPreviousData, useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import { getAuditLog, getOverview } from "./api";
 import type { AuditLogQuery } from "./api";
+import { getUser, getUsers } from "./usersApi";
+import type { UsersQuery } from "./usersApi";
 import { decideVerification, getVerification, getVerifications } from "./verificationsApi";
 
 export const adminKeys = {
@@ -9,6 +11,8 @@ export const adminKeys = {
   auditLog: (query: AuditLogQuery) => ["admin", "audit-log", query] as const,
   verifications: ["admin", "verifications"] as const,
   verification: (userId: number) => ["admin", "verifications", userId] as const,
+  users: (query: UsersQuery) => ["admin", "users", query] as const,
+  user: (userId: number) => ["admin", "user", userId] as const,
 };
 
 // Refreshed every minute, so the menu's counts follow what others decide.
@@ -43,3 +47,10 @@ export const useDecideVerification = () => {
     },
   });
 };
+
+// The previous page stays on screen while the next one loads.
+export const useUsers = (query: UsersQuery) =>
+  useQuery({ queryKey: adminKeys.users(query), queryFn: () => getUsers(query), placeholderData: keepPreviousData });
+
+export const useAdminUser = (userId: number | null) =>
+  useQuery({ queryKey: adminKeys.user(userId ?? 0), queryFn: () => getUser(userId ?? 0), enabled: userId !== null });

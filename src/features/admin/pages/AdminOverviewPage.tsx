@@ -1,4 +1,5 @@
 import { useTranslation } from "react-i18next";
+import { Link } from "react-router";
 import { Alert } from "../../../components/Alert";
 import { Badge } from "../../../components/Badge";
 import { Button } from "../../../components/Button";
@@ -109,7 +110,13 @@ function Roles({ overview }: { overview: Overview }) {
       {overview.users.suspended > 0 && (
         <p className="flex items-center gap-8 rounded-md bg-danger-soft p-12 type-label-s text-danger">
           <Icon name="lock" size={16} />
-          {t("overview.roles.suspended", { count: overview.users.suspended })}
+          <span className="flex-1">{t("overview.roles.suspended", { count: overview.users.suspended })}</span>
+          <Link
+            className="rounded-xs underline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-brand"
+            to={`${paths.adminUsers}?status=suspended`}
+          >
+            {t("overview.roles.seeSuspended")}
+          </Link>
         </p>
       )}
     </section>
