@@ -88,8 +88,6 @@
     "start": "Send your documents"
   },
   "admin": {
-    "pageTitle": "Mechanic checks",
-    "overline": "Admin",
     "title": "Mechanic verification",
     "queue": {
       "title": "Waiting for review",

@@ -89,8 +89,6 @@
     "start": "Envoyer vos documents"
   },
   "admin": {
-    "pageTitle": "Vérification des mécaniciens",
-    "overline": "Administration",
     "title": "Vérification des mécaniciens",
     "queue": {
       "title": "En attente de vérification",

@@ -1,0 +1,11 @@
+{
+  "overline": "Admin",
+  "retry": "Try again",
+  "loading": "Loading…",
+  "empty": "Nothing here yet.",
+  "reason": {
+    "label": "Reason",
+    "counter": "{{count}} / {{max}}",
+    "cancel": "Cancel"
+  }
+}

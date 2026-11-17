@@ -28,7 +28,15 @@
     "mechanicsShort": "الورشات",
     "admin": "الإدارة",
     "adminMechanics": "التحقق من الميكانيكيين",
-    "marketplace": "السوق"
+    "marketplace": "السوق",
+    "adminOverview": "نظرة عامة",
+    "adminVerifications": "عمليات التحقق",
+    "adminUsers": "المستخدمون",
+    "adminListings": "الإعلانات",
+    "adminWorkshops": "الورشات",
+    "adminInspections": "الفحوصات",
+    "adminAuditLog": "سجل التدقيق",
+    "waiting": "{{count}} في الانتظار"
   },
   "noAccess": {
     "title": "لا يمكنك فتح هذه الصفحة",

@@ -28,7 +28,15 @@
     "mechanicsShort": "Garages",
     "admin": "Admin",
     "adminMechanics": "Mechanic checks",
-    "marketplace": "Marketplace"
+    "marketplace": "Marketplace",
+    "adminOverview": "Overview",
+    "adminVerifications": "Verifications",
+    "adminUsers": "Users",
+    "adminListings": "Listings",
+    "adminWorkshops": "Workshops",
+    "adminInspections": "Inspections",
+    "adminAuditLog": "Audit log",
+    "waiting": "{{count}} waiting"
   },
   "noAccess": {
     "title": "You can't open this page",

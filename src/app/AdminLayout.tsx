@@ -4,18 +4,53 @@ import { Icon } from "../components/Icon";
 import type { IconName } from "../components/Icon";
 import { LanguageMenu } from "../components/LanguageMenu";
 import { Logo } from "../components/Logo";
+import type { Overview } from "../features/admin/api";
+import { useAdminOverview } from "../features/admin/hooks";
 import { useLogout } from "../features/auth/hooks";
+import { formatNumber } from "../lib/format";
 import { paths } from "../lib/paths";
 
-const links: { to: string; label: string; icon: IconName; end?: boolean }[] = [
-  { to: paths.adminMechanics, label: "nav.adminMechanics", icon: "wrench" },
+type AdminLink = {
+  to: string;
+  label: string;
+  icon: IconName;
+  end?: boolean;
+  // How many items wait for an admin there, from the overview.
+  waiting?: (overview: Overview) => number;
+};
+
+// Each admin page joins the menu as it is built.
+const links: AdminLink[] = [
+  {
+    to: paths.adminMechanics,
+    label: "nav.adminMechanics",
+    icon: "wrench",
+    waiting: (overview) => overview.queues.mechanicDocuments,
+  },
   { to: paths.home, label: "nav.marketplace", icon: "home", end: true },
 ];
+
+// The number of items waiting, read out as such by screen readers.
+function Waiting({ count }: { count: number }) {
+  const { t } = useTranslation();
+  if (count === 0) {
+    return null;
+  }
+  return (
+    <span className="rounded-full bg-saffron px-8 type-label-s text-night">
+      <span aria-hidden="true">
+        <bdi dir="ltr">{formatNumber(count)}</bdi>
+      </span>
+      <span className="sr-only">{t("nav.waiting", { count })}</span>
+    </span>
+  );
+}
 
 // Admin pages: a dark side menu on wide screens, a bar on top on small ones.
 export function AdminLayout() {
   const { t } = useTranslation();
   const logout = useLogout();
+  const overview = useAdminOverview();
 
   return (
     <div className="flex min-h-dvh flex-col bg-paper md:flex-row">
@@ -40,7 +75,8 @@ export function AdminLayout() {
               to={link.to}
             >
               <Icon name={link.icon} size={18} />
-              {t(link.label)}
+              <span className="flex-1">{t(link.label)}</span>{" "}
+              <Waiting count={overview.data && link.waiting ? link.waiting(overview.data) : 0} />
             </NavLink>
           ))}
         </nav>

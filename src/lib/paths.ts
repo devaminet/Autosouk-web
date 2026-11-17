@@ -23,6 +23,18 @@ export const paths = {
   mechanicDocuments: "/mechanic/documents",
   // Admins check mechanics' documents. The selected mechanic lives in the query string.
   adminMechanics: "/admin/mechanics",
+  // The admin dashboard. Lists keep their filters and page in the query string.
+  adminOverview: "/admin",
+  adminVerifications: "/admin/verifications",
+  // One person's review. Build links with adminVerificationPath.
+  adminVerification: "/admin/verifications/:userId",
+  adminUsers: "/admin/users",
+  // One account. Build links with adminUserPath.
+  adminUser: "/admin/users/:userId",
+  adminListings: "/admin/listings",
+  adminWorkshops: "/admin/workshops",
+  adminInspections: "/admin/inspections",
+  adminAuditLog: "/admin/audit-log",
   // The mechanic's own workshop profile, which also sets it up.
   workshop: "/workshop",
   // The mechanic's inspection requests, by status. The status shown on small
@@ -58,3 +70,7 @@ export const partnerSignupPath = `${paths.register}?role=mechanic`;
 export const mechanicPath = (mechanicId: number): string => `/mechanics/${mechanicId}`;
 
 export const inspectionReportPath = (inspectionId: number): string => `/inspections/${inspectionId}/report`;
+
+export const adminVerificationPath = (userId: number): string => `/admin/verifications/${userId}`;
+
+export const adminUserPath = (userId: number): string => `/admin/users/${userId}`;

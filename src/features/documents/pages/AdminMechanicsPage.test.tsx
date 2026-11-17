@@ -3,7 +3,7 @@ import userEvent from "@testing-library/user-event";
 import { http, HttpResponse } from "msw";
 import { describe, expect, it } from "vitest";
 import { server } from "../../../test/bootstrap";
-import { testUser } from "../../../test/handlers";
+import { emptyOverview, testUser } from "../../../test/handlers";
 import { renderApp } from "../../../test/renderApp";
 import type { Review } from "../adminApi";
 import type { DocumentType } from "../api";
@@ -152,6 +152,19 @@ describe("admin mechanic checks", () => {
         ],
       },
     ]);
+  });
+
+  it("shows in the menu how many mechanics wait", async () => {
+    adminApi();
+    server.use(
+      http.get("*/api/admin/overview", () =>
+        HttpResponse.json({ ...emptyOverview, queues: { ...emptyOverview.queues, mechanicDocuments: 3 } }),
+      ),
+    );
+    renderApp("/admin/mechanics");
+
+    const menu = within(await screen.findByRole("navigation", { name: "Admin" }));
+    expect(await menu.findByRole("link", { name: "Mechanic checks 3 waiting" })).toHaveAttribute("aria-current", "page");
   });
 
   it("keeps the page for admins", async () => {

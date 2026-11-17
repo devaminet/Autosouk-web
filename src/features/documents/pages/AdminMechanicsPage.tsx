@@ -2,7 +2,7 @@ import { useTranslation } from "react-i18next";
 import { useSearchParams } from "react-router";
 import { Alert } from "../../../components/Alert";
 import { Button } from "../../../components/Button";
-import { PageTitle } from "../../../components/PageTitle";
+import { AdminPage } from "../../admin/components/AdminPage";
 import { ReviewPanel } from "../components/ReviewPanel";
 import { ReviewQueue } from "../components/ReviewQueue";
 import { useReview, useReviews } from "../hooks";
@@ -50,16 +50,11 @@ export function AdminMechanicsPage() {
   };
 
   return (
-    <div className="flex flex-col gap-24 px-20 py-24 md:px-40 md:py-40">
-      <PageTitle>{t("admin.pageTitle")}</PageTitle>
-      <header className="flex flex-col gap-4">
-        <p className="type-overline text-brand">{t("admin.overline")}</p>
-        <h1 className="type-h1 text-ink">{t("admin.title")}</h1>
-      </header>
+    <AdminPage title={t("admin.title")}>
       <div className="grid items-start gap-24 lg:grid-cols-3">
         <div className="min-w-0">{queue()}</div>
         <div className="min-w-0 lg:col-span-2">{panel()}</div>
       </div>
-    </div>
+    </AdminPage>
   );
 }

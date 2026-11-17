@@ -1,0 +1,11 @@
+{
+  "overline": "Admin",
+  "retry": "Réessayer",
+  "loading": "Chargement…",
+  "empty": "Rien ici pour l'instant.",
+  "reason": {
+    "label": "Motif",
+    "counter": "{{count}} / {{max}}",
+    "cancel": "Annuler"
+  }
+}
