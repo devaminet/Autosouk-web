@@ -29,6 +29,12 @@ const links: AdminLink[] = [
     waiting: (overview) => overview.queues.verifications,
   },
   { to: paths.adminUsers, label: "nav.adminUsers", icon: "users" },
+  {
+    to: paths.adminListings,
+    label: "nav.adminListings",
+    icon: "car",
+    waiting: (overview) => overview.queues.listings,
+  },
   { to: paths.home, label: "nav.marketplace", icon: "home", end: true },
 ];
 

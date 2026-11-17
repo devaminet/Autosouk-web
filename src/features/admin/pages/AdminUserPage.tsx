@@ -1,6 +1,6 @@
 import type { ReactNode } from "react";
 import { useTranslation } from "react-i18next";
-import { useParams } from "react-router";
+import { Link, useParams } from "react-router";
 import { Alert } from "../../../components/Alert";
 import { Badge } from "../../../components/Badge";
 import type { BadgeTone } from "../../../components/Badge";
@@ -98,6 +98,14 @@ function Activity({ user }: { user: AdminUser }) {
           <bdi dir="ltr">{formatNumber(user.inspectionsRequested)}</bdi>
         </Row>
       </dl>
+      {listings.length > 0 && (
+        <Link
+          className="w-fit rounded-xs type-label-s text-brand underline focus-visible:outline-2 focus-visible:outline-brand"
+          to={`${paths.adminListings}?sellerId=${user.id}`}
+        >
+          {t("users.detail.seeListings")}
+        </Link>
+      )}
     </Card>
   );
 }

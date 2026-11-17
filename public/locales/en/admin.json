@@ -264,7 +264,49 @@
       },
       "deleted": "{{name}}'s account was deleted.",
       "reactivated": "The suspension is lifted. We emailed {{name}}.",
-      "suspended": "Account suspended. We emailed {{name}} the reason."
+      "suspended": "Account suspended. We emailed {{name}} the reason.",
+      "seeListings": "See the listings"
     }
+  },
+  "listings": {
+    "title": "Listings",
+    "description": "Every listing in every status. Open one to see it as buyers do.",
+    "caption": "Listings",
+    "search": "Search",
+    "searchPlaceholder": "A title, or a seller's name or email",
+    "statusLabel": "Listing status",
+    "all": "All",
+    "listing": "Listing",
+    "status": "Status",
+    "seller": "Seller",
+    "price": "Price",
+    "created": "Created",
+    "actions": "Actions",
+    "noCar": "No car yet",
+    "sellerSuspended": "Seller suspended",
+    "open": "Open",
+    "openNamed": "Open {{title}}",
+    "delete": "Delete",
+    "deleteNamed": "Delete {{title}}",
+    "empty": "No listing matches these filters.",
+    "range": "{{from}}–{{to}} of {{total}}",
+    "mad": "{{price}} MAD",
+    "sellerFilter": "Listings of {{name}}",
+    "sellerFilterId": "Listings of seller #{{id}}",
+    "clearSeller": "Show every seller",
+    "hiddenNote": "Listings of a suspended seller stay here, and are hidden from buyers until the suspension is lifted.",
+    "deleteDialog": {
+      "title": "Delete “{{title}}”?",
+      "description": "This can't be undone.",
+      "consequences": [
+        "The listing, its car, photos and videos are deleted",
+        "Buyers keep the car's inspections and their reports",
+        "Inspections not finished yet are cancelled"
+      ],
+      "label": "Why are you deleting this listing?",
+      "helper": "Kept in the audit log, with the title and seller.",
+      "confirm": "Delete the listing"
+    },
+    "deleted": "“{{title}}” was deleted."
   }
 }

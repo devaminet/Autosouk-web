@@ -1,6 +1,8 @@
 import { keepPreviousData, useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import { getAuditLog, getOverview } from "./api";
 import type { AuditLogQuery } from "./api";
+import { deleteListing, getListings } from "./listingsApi";
+import type { ListingsQuery } from "./listingsApi";
 import { deleteUser, getUser, getUsers, reactivateUser, suspendUser } from "./usersApi";
 import type { AdminUser } from "./usersApi";
 import type { UsersQuery } from "./usersApi";
@@ -14,6 +16,7 @@ export const adminKeys = {
   verification: (userId: number) => ["admin", "verifications", userId] as const,
   users: (query: UsersQuery) => ["admin", "users", query] as const,
   user: (userId: number) => ["admin", "user", userId] as const,
+  listings: (query: ListingsQuery) => ["admin", "listings", query] as const,
 };
 
 // Refreshed every minute, so the menu's counts follow what others decide.
@@ -84,5 +87,16 @@ export const useDeleteUser = () => {
       queryClient.removeQueries({ queryKey: adminKeys.user(userId) });
       void queryClient.invalidateQueries({ queryKey: adminKeys.all });
     },
+  });
+};
+
+export const useAdminListings = (query: ListingsQuery) =>
+  useQuery({ queryKey: adminKeys.listings(query), queryFn: () => getListings(query), placeholderData: keepPreviousData });
+
+export const useDeleteListing = () => {
+  const queryClient = useQueryClient();
+  return useMutation({
+    mutationFn: deleteListing,
+    onSuccess: () => queryClient.invalidateQueries({ queryKey: adminKeys.all }),
   });
 };

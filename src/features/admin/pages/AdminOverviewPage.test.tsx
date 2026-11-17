@@ -75,7 +75,10 @@ describe("admin overview", () => {
     const menu = within(screen.getByRole("navigation", { name: "Admin" }));
     expect(menu.getByRole("link", { name: "Overview" })).toHaveAttribute("aria-current", "page");
     expect(await menu.findByRole("link", { name: "Verifications 4 waiting" })).toHaveAttribute("href", "/admin/verifications");
-    expect(queues.getByRole("link", { name: "Review" })).toHaveAttribute("href", "/admin/verifications");
+    expect(queues.getAllByRole("link", { name: "Review" }).map((link) => link.getAttribute("href"))).toEqual([
+      "/admin/verifications",
+      "/admin/listings?status=pending",
+    ]);
   });
 
   it("lists the latest admin actions, with their reasons", async () => {

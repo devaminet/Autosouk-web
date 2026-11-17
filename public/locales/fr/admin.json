@@ -269,7 +269,49 @@
       },
       "deleted": "Le compte de {{name}} a été supprimé.",
       "reactivated": "La suspension est levée. Nous avons écrit à {{name}}.",
-      "suspended": "Compte suspendu. Nous avons envoyé le motif à {{name}}."
+      "suspended": "Compte suspendu. Nous avons envoyé le motif à {{name}}.",
+      "seeListings": "Voir les annonces"
     }
+  },
+  "listings": {
+    "title": "Annonces",
+    "description": "Toutes les annonces, dans tous les états. Ouvrez-en une pour la voir comme les acheteurs.",
+    "caption": "Annonces",
+    "search": "Rechercher",
+    "searchPlaceholder": "Un titre, ou le nom ou l'e-mail d'un vendeur",
+    "statusLabel": "État de l'annonce",
+    "all": "Toutes",
+    "listing": "Annonce",
+    "status": "État",
+    "seller": "Vendeur",
+    "price": "Prix",
+    "created": "Créée",
+    "actions": "Actions",
+    "noCar": "Pas encore de voiture",
+    "sellerSuspended": "Vendeur suspendu",
+    "open": "Ouvrir",
+    "openNamed": "Ouvrir {{title}}",
+    "delete": "Supprimer",
+    "deleteNamed": "Supprimer {{title}}",
+    "empty": "Aucune annonce ne correspond à ces filtres.",
+    "range": "{{from}}–{{to}} sur {{total}}",
+    "mad": "{{price}} MAD",
+    "sellerFilter": "Annonces de {{name}}",
+    "sellerFilterId": "Annonces du vendeur n° {{id}}",
+    "clearSeller": "Voir tous les vendeurs",
+    "hiddenNote": "Les annonces d'un vendeur suspendu restent ici, et sont cachées aux acheteurs jusqu'à la levée de la suspension.",
+    "deleteDialog": {
+      "title": "Supprimer « {{title}} » ?",
+      "description": "C'est définitif.",
+      "consequences": [
+        "L'annonce, sa voiture, ses photos et vidéos sont supprimées",
+        "Les acheteurs gardent les inspections de la voiture et leurs rapports",
+        "Les inspections en cours sont annulées"
+      ],
+      "label": "Pourquoi supprimez-vous cette annonce ?",
+      "helper": "Gardé dans le journal d'audit, avec le titre et le vendeur.",
+      "confirm": "Supprimer l'annonce"
+    },
+    "deleted": "« {{title}} » a été supprimée."
   }
 }

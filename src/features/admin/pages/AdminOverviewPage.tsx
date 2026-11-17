@@ -35,7 +35,7 @@ function Queues({ overview }: { overview: Overview }) {
   const { t } = useTranslation("admin");
   const queues: Queue[] = [
     { key: "verifications", count: overview.queues.verifications, icon: "scan-face", to: paths.adminVerifications },
-    { key: "listings", count: overview.queues.listings, icon: "car", to: null },
+    { key: "listings", count: overview.queues.listings, icon: "car", to: `${paths.adminListings}?status=pending` },
   ];
 
   return (

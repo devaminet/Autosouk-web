@@ -12,6 +12,7 @@ import { SavedPage } from "../features/favorites/pages/SavedPage";
 import { RequireIdentity } from "../features/identity/components/RequireIdentity";
 import { IdentityCheckPage } from "../features/identity/pages/IdentityCheckPage";
 import { VerifyPhonePage } from "../features/identity/pages/VerifyPhonePage";
+import { AdminListingsPage } from "../features/admin/pages/AdminListingsPage";
 import { AdminOverviewPage } from "../features/admin/pages/AdminOverviewPage";
 import { AdminUserPage } from "../features/admin/pages/AdminUserPage";
 import { AdminUsersPage } from "../features/admin/pages/AdminUsersPage";
@@ -122,6 +123,7 @@ export const routes: RouteObject[] = [
               { path: paths.adminVerification, element: <AdminVerificationPage /> },
               { path: paths.adminUsers, element: <AdminUsersPage /> },
               { path: paths.adminUser, element: <AdminUserPage /> },
+              { path: paths.adminListings, element: <AdminListingsPage /> },
             ],
           },
         ],
